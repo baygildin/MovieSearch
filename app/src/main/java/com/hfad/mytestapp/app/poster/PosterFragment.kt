@@ -6,6 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.hfad.mytestapp.R
+import android.widget.Button
+import androidx.navigation.findNavController
 
 class PosterFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {

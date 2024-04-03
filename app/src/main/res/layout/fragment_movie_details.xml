@@ -15,11 +15,11 @@
         android:text="@string/details_screen" />
 
     <Button
-        android:id="@+id/next"
+        android:id="@+id/poster_to_maxSize_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="20sp"
         android:layout_marginTop="90sp"
-        android:text="@string/poster_to_maxSize" />
+        android:text="@string/poster_to_maxSize"
+        android:textSize="20sp" />
 
 </FrameLayout>

@@ -17,7 +17,6 @@ class MovieDetailsFragment : Fragment() {
         startButton.setOnClickListener {
             view.findNavController()
                 .navigate(R.id.action_movieDetailsFragment_to_posterFragment)
-
         }
         return view
     }

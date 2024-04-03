@@ -7,4 +7,6 @@
     <string name="next">Next</string>
     <string name="message_hint">Введите название фильма или сериала</string>
     <string name="poster_to_maxSize">Увеличить постер на весь экран</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

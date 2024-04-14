@@ -15,3 +15,8 @@ dependencyResolutionManagement {
 
 rootProject.name = "MyTestApp"
 include ':app'
+include ':feature:search'
+include ':feature:show_episodes'
+include ':feature:movie_details'
+include ':feature:poster'
+include ':network'

@@ -38,5 +38,13 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:text="@string/btn_episodes_list" />
+    <TextView
+        android:id="@+id/_searchText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginTop="50sp"
+        android:textSize="20sp"
+        android:text="" />
 </LinearLayout>
 

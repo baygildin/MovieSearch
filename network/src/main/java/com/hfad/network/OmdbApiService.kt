@@ -1,16 +1,17 @@
+package com.hfad.network
 
-import com.hfad.network.OmdbMovie
+import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-
+const val OMBD_API_KEY = "360c2147"
 interface OmdbApiService {
     @GET("/")
-    suspend fun searchByTitle(
-        @Query("t") title: String,
-        @Query("y") year: String? = null,
-        @Query("plot") plot: String? = null,
-        @Query("r") format: String? = null,
-        @Query("apikey") apiKey: String
-    ): OmdbMovie
+    fun search(@Query("s") searchText: String, @Query("apikey") ombd_api_key: String = OMBD_API_KEY): Call<Search>
+
+    @GET("/")
+    fun searchByTitle(@Query("t") searchText: String, @Query("apikey") ombd_api_key: String = OMBD_API_KEY): Call<Search>
+
+    @GET("/")
+    fun getMovie(@Query("i") movieId: String, @Query("apikey") ombd_api_key: String = OMBD_API_KEY): Call<Search>
 }

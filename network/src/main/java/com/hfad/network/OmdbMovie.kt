@@ -1,29 +1,56 @@
 package com.hfad.network
 
-data class OmdbMovie(
-    val Title: String,
-    val Year: String,
-    val Rated: String,
-    val Released: String,
-    val Runtime: String,
-    val Genre: String,
-    val Director: String,
-    val Writer: String,
-    val Actors: String,
-    val Plot: String,
-    val Language: String,
-    val Country: String,
-    val Awards: String,
-    val Poster: String,
-    val Ratings: List<OmdbRating>,
-    val Metascore: String,
-    val imdbRating: String,
-    val imdbVotes: String,
-    val imdbID: String,
-    val Type: String,
-    val DVD: String,
-    val BoxOffice: String,
-    val Production: String,
-    val Website: String,
-    val Response: String
+import com.google.gson.annotations.SerializedName
+
+data class Movie(
+    @SerializedName("Title" )
+    var Title : String?,
+    @SerializedName("Year" )
+    var Year : String?,
+    @SerializedName("Rated" )
+    var Rated : String?,
+    @SerializedName("Released" )
+    var Released : String?,
+    @SerializedName("Runtime" )
+    var Runtime : String?,
+    @SerializedName("Genre" )
+    var Genre : String?,
+    @SerializedName("Director" )
+    var Director : String?,
+    @SerializedName("Writer" )
+    var Writer : String?,
+    @SerializedName("Actors" )
+    var Actors : String?,
+    @SerializedName("Plot" )
+    var Plot : String?,
+    @SerializedName("Language" )
+    var Language : String?,
+    @SerializedName("Country" )
+    var Country : String?,
+    @SerializedName("Awards" )
+    var Awards : String?,
+    @SerializedName("Poster" )
+    var Poster : String?,
+    @SerializedName("Ratings" )
+    var Ratings : ArrayList<Ratings> = arrayListOf(),
+    @SerializedName("Metascore" )
+    var Metascore : String?,
+    @SerializedName("imdbRating" )
+    var imdbRating : String?,
+    @SerializedName("imdbVotes" )
+    var imdbVotes : String?,
+    @SerializedName("imdbID" )
+    var imdbID : String?,
+    @SerializedName("Type" )
+    var Type : String?,
+    @SerializedName("DVD" )
+    var DVD : String?,
+    @SerializedName("BoxOffice" )
+    var BoxOffice : String?,
+    @SerializedName("Production" )
+    var Production : String?,
+    @SerializedName("Website" )
+    var Website : String?,
+    @SerializedName("Response" )
+    var Response : String?
 )

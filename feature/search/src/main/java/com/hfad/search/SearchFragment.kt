@@ -44,6 +44,8 @@ class SearchFragment : Fragment() {
         }
 
         lifecycleScope.launch {
+            // Неправильно запускать поход в сеть из фрагмента,
+            // нужно это делать из ViewModel, но надеюсь ты понял суть
             omdbApi.searchByTitle("terminator")
         }
         return view

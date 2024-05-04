@@ -6,7 +6,11 @@ import com.hfad.mytestapp.R
 import android.content.Intent
 import android.os.Handler
 import android.os.Looper
-class MainActivity : AppCompatActivity() {
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
+
+@AndroidEntryPoint
+class MainActivity: AppCompatActivity() {
     private val SPLASH_DELAY: Long = 3000
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

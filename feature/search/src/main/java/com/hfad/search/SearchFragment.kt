@@ -9,12 +9,18 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.core.net.toUri
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavDeepLinkRequest
 import androidx.navigation.fragment.findNavController
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class SearchFragment : Fragment() {
     lateinit var viewModel: SearchViewModel
-
+    @Inject
+    lateinit var omdbApi: OmdbApi
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_search, container, false)
@@ -35,6 +41,10 @@ class SearchFragment : Fragment() {
                 .fromUri("android-app://com.hfad.show_episodes/ShowEpisodesFragment".toUri())
                 .build()
             findNavController().navigate(request)
+        }
+
+        lifecycleScope.launch {
+            omdbApi.searchByTitle("terminator")
         }
         return view
     }

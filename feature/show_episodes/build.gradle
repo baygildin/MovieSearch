@@ -8,7 +8,7 @@ android {
     namespace 'com.hfad.show_episodes'
     compileSdk 34
     buildFeatures {
-        viewBinding
+        viewBinding true
         dataBinding true
     }
 

@@ -6,6 +6,7 @@
     tools:context="com.hfad.movie_details.MovieDetailsFragment">
 
     <TextView
+        android:id="@+id/tv_details_screen"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
@@ -13,7 +14,7 @@
         android:layout_marginTop="50sp"
         android:text="@string/details_screen" />
     <Button
-        android:id="@+id/poster_to_maxSize_button"
+        android:id="@+id/btn_poster_to_maxSize"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="90sp"

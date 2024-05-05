@@ -1,16 +1,15 @@
 package com.hfad.show_episodes
 
-import androidx.fragment.app.viewModels
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.core.net.toUri
+import androidx.fragment.app.Fragment
 import androidx.navigation.NavDeepLinkRequest
 import androidx.navigation.fragment.findNavController
-import com.hfad.show_episodes.R
+
 
 
 class ShowEpisodesFragment : Fragment() {

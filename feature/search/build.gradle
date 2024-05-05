@@ -8,6 +8,11 @@ plugins {
 android {
     namespace 'com.hfad.search'
     compileSdk 34
+    buildFeatures {
+        viewBinding true
+        dataBinding true
+    }
+
 
     defaultConfig {
         minSdk 21

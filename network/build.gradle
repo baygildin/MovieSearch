@@ -9,6 +9,9 @@ plugins {
 android {
     namespace 'com.hfad.network'
     compileSdk 34
+    buildFeatures {
+        viewBinding true
+    }
 
     defaultConfig {
         minSdk 21

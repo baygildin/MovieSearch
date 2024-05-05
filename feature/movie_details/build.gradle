@@ -7,6 +7,10 @@ plugins {
 android {
     namespace 'com.hfad.movie_details'
     compileSdk 34
+    buildFeatures {
+        viewBinding true
+        dataBinding true
+    }
 
     defaultConfig {
         minSdk 21

@@ -2,9 +2,5 @@ package com.hfad.mytestapp
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp
-
-//@HiltAndroidApp
-class App: Application() {
-}
-
-
+@HiltAndroidApp
+class MyTestApp : Application()

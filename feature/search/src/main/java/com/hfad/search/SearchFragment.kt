@@ -1,27 +1,25 @@
 package com.hfad.search
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.TextView
 import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavDeepLinkRequest
 import androidx.navigation.fragment.findNavController
-import com.hfad.network.RetrofitClient
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
-
+@AndroidEntryPoint
 class SearchFragment : Fragment() {
     lateinit var viewModel: SearchViewModel
-
+    @Inject
+    lateinit var omdbApi: OmdbApi
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_search, container, false)
@@ -44,21 +42,37 @@ class SearchFragment : Fragment() {
             findNavController().navigate(request)
         }
 
-
-        val movieTitleTextView = view.findViewById<TextView>(R.id.movie_title_textview)
-
-        GlobalScope.launch(Dispatchers.IO) {
-            try {
-                val movie = RetrofitClient.service.getMovie()
-                withContext(Dispatchers.Main) {
-                    movieTitleTextView.text = movie.toString()
-                    Log.d("messatrh", "${movie.Title}")
-                }
-            } catch (e: Exception) {
-                Log.e("MainActivity", "Failed to get movie", e)
-            }
+        lifecycleScope.launch {
+            omdbApi.searchByTitle("terminator")
         }
+
+
+//        val movieTitleTextView = view.findViewById<TextView>(R.id.movie_title_textview)
+//
+//
+//
+//        viewModel.getMovie(
+//            onSuccess = { movieTitle ->
+//                movieTitleTextView.text = movieTitle
+//                Log.d("getmovieError", movieTitle)
+//            },
+//            onError = { errorMessage ->
+//                Log.e("getmovieError", errorMessage)
+//            }
+//        )
 
         return view
     }
 }
+
+//        GlobalScope.launch(Dispatchers.IO) {
+//            try {
+//                val movie = RetrofitClient.service.getMovie()
+//                withContext(Dispatchers.Main) {
+//                    movieTitleTextView.text = movie.toString()
+//                    Log.d("messatrh", "${movie.Title}")
+//                }
+//            } catch (e: Exception) {
+//                Log.e("MainActivity", "Failed to get movie", e)
+//            }
+//        }

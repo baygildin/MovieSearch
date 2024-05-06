@@ -2,14 +2,9 @@ package com.hfad.search
 
 
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import com.hfad.network.RetrofitClient
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class SearchViewModel : ViewModel() {
-    // TODO: Implement the ViewModel
+    var searchText = ""
 }
 //class SearchViewModel : ViewModel() {
 //    private val movieRepository = RetrofitClient.service

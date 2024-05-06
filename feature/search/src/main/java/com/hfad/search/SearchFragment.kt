@@ -1,6 +1,8 @@
 package com.hfad.search
-
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,29 +16,26 @@ import com.hfad.search.databinding.FragmentSearchBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import javax.inject.Inject
-
 @AndroidEntryPoint
 class SearchFragment : Fragment() {
     lateinit var viewModel: SearchViewModel
     @Inject
     lateinit var omdbApi: OmdbApi
-
     private var _binding: FragmentSearchBinding? = null
     private val binding
         get() = _binding ?: throw IllegalStateException("Binding in FragmentSearchBinding of SearchFragment must not be null")
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
 
-        //viewModel с провайдером потому что это начальная страница, и класс не будет имееть параметров.
+        //viewModel с провайдером потому что это начальная страница, и класс не будет имееть параметров. Наверное, в других будут параметры, поэтому юзай фактори
         viewModel = ViewModelProvider(this).get(SearchViewModel::class.java)
         _binding = FragmentSearchBinding.inflate(inflater, container, false)
-//        val view = inflater.inflate(R.layout.fragment_search, container, false)
         val view = binding.root
+
 
         with(binding)
         {
-            searchTextView.text = "ssssss"
+
             btnStartSearch.setOnClickListener {
                 val request = NavDeepLinkRequest.Builder
                     .fromUri("android-app://com.hfad.movie_details/movieDetailsFragment".toUri())
@@ -49,29 +48,30 @@ class SearchFragment : Fragment() {
                 findNavController().navigate(request)
             }
         }
+        binding.etMessage.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                // Обновите текст в viewModel.searchText при каждом изменении текста в EditText
+                viewModel.searchText = s.toString()
+            }
 
+            override fun afterTextChanged(s: Editable?) {}
+        })
 
-
-        lifecycleScope.launch {
-            omdbApi.searchByTitle("terminator")
+        binding.btnFullInfo.setOnClickListener {
+            binding.tvFullInfo.text = binding.etMessage.toString()
+            binding.tvFullInfo.text = viewModel.searchText
+            lifecycleScope.launch {
+                try {
+                    val result = omdbApi.searchByTitle(viewModel.searchText).toString()
+                    binding.searchTextView.text = result
+                    binding.tvFullInfo.text = result
+                } catch (e: Exception) {
+                    Log.e("getmovieError", "$e в строчке val result = omdbApi.searchByTitle")
+                }
+            }
         }
-
-
-//        val movieTitleTextView = view.findViewById<TextView>(R.id.movie_title_textview)
-//
-//
-//
-//        viewModel.getMovie(
-//            onSuccess = { movieTitle ->
-//                movieTitleTextView.text = movieTitle
-//                Log.d("getmovieError", movieTitle)
-//            },
-//            onError = { errorMessage ->
-//                Log.e("getmovieError", errorMessage)
-//            }
-//        )
-
         return view
     }
     override fun onDestroyView() {
@@ -79,16 +79,3 @@ class SearchFragment : Fragment() {
         _binding = null
     }
 }
-
-
-//        GlobalScope.launch(Dispatchers.IO) {
-//            try {
-//                val movie = RetrofitClient.service.getMovie()
-//                withContext(Dispatchers.Main) {
-//                    movieTitleTextView.text = movie.toString()
-//                    Log.d("messatrh", "${movie.Title}")
-//                }
-//            } catch (e: Exception) {
-//                Log.e("MainActivity", "Failed to get movie", e)
-//            }
-//        }

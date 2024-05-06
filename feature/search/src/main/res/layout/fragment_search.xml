@@ -19,7 +19,7 @@
         android:textSize="20sp"
         android:text="@string/welcome_text" />
     <EditText
-        android:id="@+id/message"
+        android:id="@+id/et_message"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="20sp"
@@ -39,6 +39,12 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:text="@string/btn_episodes_list" />
+    <Button
+        android:id="@+id/btn_full_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="получить во фрагменте полную инфу" />
     <TextView
         android:id="@+id/movie_title_textview"
         android:layout_width="wrap_content"
@@ -47,4 +53,11 @@
         android:layout_marginTop="50sp"
         android:textSize="20sp"
         android:text="" />
+    <TextView
+        android:id="@+id/tv_full_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginTop="140sp"
+        android:textSize="20sp"/>
 </LinearLayout>

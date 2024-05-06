@@ -32,9 +32,11 @@ class MovieDetailsFragment : Fragment() {
                     .build()
                 findNavController().navigate(request)
             }
+            tvDetailsScreen.text = viewModel.searchText
             tvFromSearchText.text = viewModel.searchText
 
         }
+        binding.tvDetailsScreen.text = viewModel.searchText
         return view
     }
 }

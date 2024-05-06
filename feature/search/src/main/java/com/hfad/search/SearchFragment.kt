@@ -52,7 +52,6 @@ class SearchFragment : Fragment() {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                // Обновите текст в viewModel.searchText при каждом изменении текста в EditText
                 viewModel.searchText = s.toString()
             }
 

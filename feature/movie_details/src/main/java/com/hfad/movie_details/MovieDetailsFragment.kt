@@ -21,6 +21,7 @@ class MovieDetailsFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
 
+
         viewModel = ViewModelProvider(this).get(SearchViewModel::class.java)
         _binding = FragmentMovieDetailsBinding.inflate(inflater, container, false)
         val view = binding.root

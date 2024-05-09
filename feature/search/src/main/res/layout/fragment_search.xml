@@ -10,58 +10,62 @@
     android:background="#1D1C25"
     tools:context="com.hfad.search.SearchFragment">
 
-
-    <TextView
-        android:id="@+id/search_text_view"
-        android:layout_width="314dp"
-        android:layout_height="33dp"
-        android:gravity="center"
-        android:layout_marginTop="20dp"
-        android:textSize="20sp"
-        android:textColor="#FAEFD9"
-        android:text="@string/welcome_text"
-        android:background="@android:color/transparent" />
-
-    <EditText
-        android:id="@+id/et_message"
-        android:layout_width="340dp"
-        android:layout_height="46dp"
-        android:textSize="20sp"
-        android:layout_marginTop="53dp"
-        android:hint="@string/message_hint"
-        android:gravity="center_vertical|center_horizontal"
-
-        android:background="#E4FFFF"
-        android:textColor="#2B3342" />
-
-<!--    <Button-->
-<!--        android:id="@+id/btn_start_search"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginTop="10dp"-->
-<!--        android:text="@string/start" />-->
-
-    <Button
-        android:id="@+id/btn_full_info"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="Поиск по названию" />
-
-    <TextView
-        android:id="@+id/tv_full_info"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:layout_marginTop="140sp"
-        android:textSize="20sp"/>
-    <LinearLayout
-        android:id="@+id/linearLayout"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginTop="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        />
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="true">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_horizontal">
+            <TextView
+                android:id="@+id/search_text_view"
+                android:layout_width="314dp"
+                android:layout_height="33dp"
+                android:gravity="center"
+                android:layout_marginTop="20dp"
+                android:textSize="20sp"
+                android:textColor="#FAEFD9"
+                android:text="@string/welcome_text"
+                android:background="@android:color/transparent" />
+
+            <EditText
+                android:id="@+id/et_message"
+                android:layout_width="340dp"
+                android:layout_height="46dp"
+                android:textSize="20sp"
+                android:layout_marginTop="53dp"
+                android:hint="@string/message_hint"
+                android:gravity="center_vertical|center_horizontal"
+
+                android:background="#E4FFFF"
+                android:textColor="#2B3342" />
+            <Button
+                android:id="@+id/btn_full_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Поиск по названию" />
+
+            <TextView
+                android:id="@+id/tv_full_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_marginTop="140sp"
+                android:textSize="20sp"/>
+            <LinearLayout
+                android:id="@+id/linearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                />
+        </LinearLayout>
+    </ScrollView>
+
 </LinearLayout>

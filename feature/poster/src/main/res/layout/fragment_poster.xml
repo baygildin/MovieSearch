@@ -10,7 +10,6 @@ android:layout_height="match_parent">
         android:layout_height="match_parent"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="-90dp"
-        android:src="@drawable/logo"
         app:zoomage_animateOnReset="true"
         app:zoomage_autoCenter="true"
         app:zoomage_autoResetMode="UNDER"
@@ -20,3 +19,4 @@ android:layout_height="match_parent">
         app:zoomage_translatable="true"
         app:zoomage_zoomable="true" />
 </RelativeLayout>
+<!--    android:src="@drawable/logo"-->

@@ -12,7 +12,7 @@
         tools:layout="@layout/fragment_search">
         <deepLink
             android:id="@+id/deepLinksearchFragment"
-            app:uri="android-app://com.hfad.poster/searchFragment" />
+            app:uri="android-app://com.hfad.search/searchFragment" />
     </fragment>
     <fragment
         android:id="@+id/movieDetailsFragment"

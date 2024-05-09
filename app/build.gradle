@@ -3,8 +3,8 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
     id("org.jetbrains.kotlin.plugin.serialization") version "1.9.10"
-    id 'androidx.navigation.safeargs.kotlin'
     id 'com.google.dagger.hilt.android'
+    id 'androidx.navigation.safeargs.kotlin'
 }
 
 android {
@@ -61,11 +61,12 @@ dependencies {
     implementation project(":feature:poster")
 
     def nav_version = "2.7.7"
-    implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
+
 
     def hilt_version = "2.48"
     implementation "com.google.dagger:hilt-android:$hilt_version"
     kapt "com.google.dagger:hilt-compiler:$hilt_version"
 }
+apply plugin: 'androidx.navigation.safeargs.kotlin'

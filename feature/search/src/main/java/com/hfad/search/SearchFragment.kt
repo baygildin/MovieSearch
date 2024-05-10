@@ -34,6 +34,9 @@ class SearchFragment : Fragment() {
         val view = binding.root
 
 
+
+
+
         binding.etMessage.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
@@ -44,16 +47,18 @@ class SearchFragment : Fragment() {
 
             override fun afterTextChanged(s: Editable?) {}
         })
-        viewModel.setMovieTitle(viewModel.searchText)
-        binding.btnFullInfo.setOnClickListener {
+
+
+
+        binding.btnSearch.setOnClickListener {
             lifecycleScope.launch {
                 try {
                     val result = omdbApi.searchBySearch(viewModel.searchText)
                     binding.linearLayout.removeAllViews()
                     result.Search.forEach { searchItem ->
                         val button = Button(requireContext())
-                        button.text = searchItem.Title
-
+                        button.text = """${searchItem.Title}
+                            |${searchItem.Year}""".trimMargin()
                         button.setOnClickListener {
                             viewModel.setMovieTitle(searchItem.imdbID)
 
@@ -73,6 +78,7 @@ class SearchFragment : Fragment() {
         }
         return view
     }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

@@ -9,24 +9,33 @@
     android:gravity="center_horizontal"
     android:background="#1D1C25"
     tools:context="com.hfad.movie_details.MovieDetailsFragment">
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:fillViewport="true">
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:gravity="center_horizontal">
-
             <ImageView
                 android:id="@+id/iv_poster"
                 android:layout_width="200dp"
                 android:layout_height="200dp"
                 android:layout_marginTop="30dp" />
+            <ImageButton
+                android:id="@+id/likeButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/like_button_plus"
+                android:onClick="onLikeButtonClicked"
+                android:background="#E4FFFF"
+                android:textColor="#2B3342"
+                android:textSize="15sp"
+                android:drawableEnd="@drawable/img_baseline_search"
+                android:layout_marginEnd="20dp"
+                android:layout_gravity="end" />
             <TextView
                 android:id="@+id/tv_details_screen"
                 android:layout_width="match_parent"
@@ -37,7 +46,6 @@
                 android:text="@string/details_screen"
                 android:textColor="#C0EACB"
                 android:textSize="20sp" />
-
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

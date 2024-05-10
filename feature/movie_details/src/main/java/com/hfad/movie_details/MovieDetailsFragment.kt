@@ -36,6 +36,7 @@ class MovieDetailsFragment : Fragment() {
                               savedInstanceState: Bundle?): View? {
         _binding = FragmentMovieDetailsBinding.inflate(inflater, container, false)
         val view = binding.root
+        Log.e("getmovieError1","${viewModel.searchText}")
         var chosenMovieId = ""
         viewModel.movieTitle.observe(viewLifecycleOwner) { title ->
             chosenMovieId = title

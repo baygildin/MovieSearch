@@ -2,8 +2,7 @@
     <string name="app_name">MyTestApp</string>
     <string name="welcome_text">Поиск фильмов и сериалов по названию</string>
     <string name="start">Начать поиск</string>
-    <string name="details_screen">Экран деталей:
-    постер и описание</string>
+    <string name="details_screen">К постеру и описанию</string>
     <string name="next">Next</string>
     <string name="message_hint">Введите название фильма или сериала</string>
     <string name="poster_to_maxSize">Увеличить постер на весь экран</string>

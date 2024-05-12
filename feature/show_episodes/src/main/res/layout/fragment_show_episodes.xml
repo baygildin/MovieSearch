@@ -1,27 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:background="#1D1C25"
     tools:context="com.hfad.show_episodes.ShowEpisodesFragment">
-    <TextView
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="true">
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@string/start" />
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_horizontal">
+            <Button
+                android:id="@+id/btn_details_screen"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#C0EACB"
+                android:layout_marginTop="5dp"
+                android:text="@string/details_screen"
+                android:textSize="15sp"
+                android:layout_gravity="center"
+                android:background="@drawable/border_background"/>
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="20dp"
-        android:src="@drawable/episodes_poster" />
+            <LinearLayout
+                android:id="@+id/seasonsContainer"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:visibility="visible"/>
+            <LinearLayout
+                android:id="@+id/episodesContainer"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:visibility="gone"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:id="@+id/tv_episode_Info"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:gravity="left"
+                android:lines="60"
+                android:text=""
+                android:textColor="#C0EACB"
+                android:textSize="20sp"
+                android:visibility="gone"/>
 
-    <Button
-        android:id="@+id/btn_details_screen"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/details_screen"/>
-</FrameLayout>
+
+
+
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>
 
 

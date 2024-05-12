@@ -5,8 +5,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.hfad.search.model.SearchBySearch
-import dagger.hilt.android.AndroidEntryPoint
-
 
 
 class SharedViewModel : ViewModel() {
@@ -14,10 +12,28 @@ class SharedViewModel : ViewModel() {
 
     var searchText =""
 
+    private val _chosenImbdId = MutableLiveData<String>()
+    val chosenImbdId: LiveData<String> = _chosenImbdId
+    fun setChosenImbdId(title: String) {
+        _chosenImbdId.value = title
+    }
+
+
+
     private val _movieTitle = MutableLiveData<String>()
     val movieTitle: LiveData<String> = _movieTitle
     fun setMovieTitle(title: String) {
         _movieTitle.value = title
     }
+
     lateinit var result: SearchBySearch
+
+
+
+
+    private val _btnBooleanFavourite = MutableLiveData<String>()
+    val btnBooleanFavourite: LiveData<String> = _btnBooleanFavourite
+    fun setBooleanFavourite(addedToFav: String) {
+        _btnBooleanFavourite.value = addedToFav
+    }
 }

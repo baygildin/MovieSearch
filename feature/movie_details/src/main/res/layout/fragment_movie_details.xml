@@ -24,25 +24,36 @@
                 android:layout_width="200dp"
                 android:layout_height="200dp"
                 android:layout_marginTop="30dp" />
-            <ImageButton
+            <Button
+                android:id="@+id/btn_show_episodes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#C0EACB"
+                android:layout_marginTop="5dp"
+                android:text="@string/show_episodes"
+                android:textSize="15sp"
+                android:layout_gravity="center"
+                android:visibility="gone"
+                android:background="@drawable/border_background" />
+
+            <Button
                 android:id="@+id/likeButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/like_button_plus"
-                android:onClick="onLikeButtonClicked"
-                android:background="#E4FFFF"
-                android:textColor="#2B3342"
+                android:textColor="#C0EACB"
+                android:layout_marginTop="5dp"
+                android:text="@string/add_to_favourite"
                 android:textSize="15sp"
-                android:drawableEnd="@drawable/img_baseline_search"
-                android:layout_marginEnd="20dp"
-                android:layout_gravity="end" />
+                android:layout_gravity="center"
+                android:background="@drawable/border_background"
+                android:onClick="onLikeButtonClicked" />
             <TextView
                 android:id="@+id/tv_details_screen"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:gravity="left"
-                android:lines="30"
+                android:lines="60"
                 android:text="@string/details_screen"
                 android:textColor="#C0EACB"
                 android:textSize="20sp" />

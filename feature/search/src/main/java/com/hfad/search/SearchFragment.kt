@@ -1,4 +1,5 @@
 package com.hfad.search
+import android.graphics.Color
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -57,6 +58,9 @@ class SearchFragment : Fragment() {
                     binding.linearLayout.removeAllViews()
                     result.Search.forEach { searchItem ->
                         val button = Button(requireContext())
+                        button.setBackgroundColor(Color.TRANSPARENT)
+
+                        button.setTextColor(Color.parseColor("#E0D9D9"))
                         button.text = """${searchItem.Title}
                             |${searchItem.Year}""".trimMargin()
                         button.setOnClickListener {

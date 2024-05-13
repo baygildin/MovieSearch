@@ -99,19 +99,12 @@ class MovieDetailsFragment : Fragment() {
                                 try {
                                     val existingFavourite = favouriteDB.getFavouriteByImdbId(chosenMovieId)
                                     if (existingFavourite != null) {
-                                        Log.e("Favorite", "0Failed to execute likeButton onClick handler: $")
                                         favouriteDB.removeFavourite(existingFavourite)
-                                        Log.e("Favorite", "1Failed to execute likeButton onClick handler: $")
                                         binding.likeButton.text = "Добавить в избранное"
-                                        Log.e("Favorite", "2Failed to execute likeButton onClick handler: $")
                                     } else {
-                                        Log.e("Favorite", "2.3Failed to execute likeButton onClick handler: $")
                                         val favouriteItem = FavouriteItem(null, chosenMovieId)
-                                        Log.e("Favorite", "3Failed to execute likeButton onClick handler: $")
                                         favouriteDB.addFavourite(favouriteItem)
-                                        Log.e("Favorite", "4Failed to execute likeButton onClick handler: $")
                                         binding.likeButton.text = "Убрать из избранного"
-                                        Log.e("Favorite", "5Failed to execute likeButton onClick handler: $")
                                     }
                                 } catch (e: Exception) {
                                     Log.e("Favorite", "6Failed to execute likeButton onClick handler: $e")

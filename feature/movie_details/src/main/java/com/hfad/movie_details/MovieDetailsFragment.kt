@@ -20,6 +20,7 @@ import com.hfad.search.OmdbApi
 import com.hfad.search.SharedViewModel
 import com.hfad.search.model.FavouriteDao
 import com.hfad.search.model.FavouriteDatabase
+import com.hfad.search.model.FavouriteItem
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -28,7 +29,7 @@ import javax.inject.Inject
 class MovieDetailsFragment : Fragment() {
     private val viewModel: SharedViewModel by activityViewModels()
     private var _binding: FragmentMovieDetailsBinding? = null
-    private lateinit var favouriteDao: FavouriteDao
+
 
     @Inject
     lateinit var omdbApi: OmdbApi
@@ -39,14 +40,11 @@ class MovieDetailsFragment : Fragment() {
                               savedInstanceState: Bundle?): View? {
         _binding = FragmentMovieDetailsBinding.inflate(inflater, container, false)
         val view = binding.root
-        viewModel.setBooleanFavourite(binding.likeButton.text.toString())
-        Log.e("getmovieError1","${viewModel.searchText}")
         var chosenMovieId = ""
-        favouriteDao = FavouriteDatabase.getDatabase(requireContext()).favouriteDao()
-
+        var favouriteDB: FavouriteDao
+        favouriteDB = FavouriteDatabase.getDatabase(requireContext()).favouriteDao()
         viewModel.movieTitle.observe(viewLifecycleOwner) { title ->
             chosenMovieId = title
-
             binding.tvDetailsScreen.text = chosenMovieId
             Log.e("getmovieError","chosenMovieId = title$chosenMovieId")
             lifecycleScope.launch {
@@ -65,7 +63,6 @@ class MovieDetailsFragment : Fragment() {
                     val awards = "Awards: "
                     val director = "Director: "
 
-
                     val text = SpannableStringBuilder()
                         .bold { append(title) }
                         .append(result.title+"\n")
@@ -82,18 +79,8 @@ class MovieDetailsFragment : Fragment() {
                         .bold { append(awards) }
                         .append(result.awards+"\n")
                     viewModel.setChosenImbdId(result.imdbID)
-
-//                    val existingFavouriteLiveData = favouriteDao.getFavouriteByImdbId(result.imdbID)
-//                    existingFavouriteLiveData.observe(viewLifecycleOwner) { existingFavourite ->
-//                        existingFavourite?.let {
-//                            // В этом блоке обрабатываем результат, когда он доступен
-//                            if (existingFavourite != null) {
-//                                binding.likeButton.text = "Уже в избранном"
-//                            }
-//                        }
-//                    }
-
-
+                    val existingFavourite = favouriteDB.getFavouriteByImdbId(chosenMovieId)
+                    if (existingFavourite != null) {binding.likeButton.text = "Убрать из избранного"}
                     with(binding) {
                         tvDetailsScreen.text = text
                         btnShowEpisodes.setOnClickListener { val request = NavDeepLinkRequest.Builder
@@ -108,46 +95,29 @@ class MovieDetailsFragment : Fragment() {
                             findNavController().navigate(request)
                         }
                         likeButton.setOnClickListener {
-                            if (viewModel.btnBooleanFavourite.value == "Добавить в избранное") {
-                                viewModel.setBooleanFavourite("Добавлено в избранное")
-                                binding.likeButton.text = "Добавлено в избранное"}
-                            else {binding.likeButton.text = "Добавить в избранное"
-                                viewModel.setBooleanFavourite("Добавлено в избранное")}
-//                            lifecycleScope.launch {
-//                                existingFavouriteLiveData.value?.let { existingFavourite ->
-//                                    if (existingFavourite != null) {
-//                                        favouriteDao.removeFavourite(existingFavourite)
-//                                        Log.d("Favorite", "Removed from favorites: $existingFavourite")
-//                                        binding.likeButton.text = "Добавить в избранное"
-//                                    } else {
-//                                        val favouriteItem = FavouriteItem(
-//                                            imdbId = result.imdbID
-//                                        )
-//                                        favouriteDao.addFavourite(favouriteItem)
-//                                        Log.d("Favorite", "Added to favorites: $favouriteItem")
-//                                        binding.likeButton.text = "Удалить из избранного"
-//                                    }
-//                                }
-//                            }
-                        }
-                        /*likeButton.setOnClickListener {
-
                             lifecycleScope.launch {
-
-                                if (existingFavourite != null) {
-                                    favouriteDao.removeFavourite(existingFavourite)
-                                    Log.d("Favorite", "Removed from favorites: $existingFavourite")
-                                    binding.likeButton.text = "Добавить в избранное"
-                                } else {
-                                    val favouriteItem = FavouriteItem(
-                                        imdbId = result.imdbID
-                                    )
-                                    favouriteDao.addFavourite(favouriteItem)
-                                    Log.d("Favorite", "Added to favorites: $favouriteItem")
-                                    binding.likeButton.text = "Удалить из избранного"
+                                try {
+                                    val existingFavourite = favouriteDB.getFavouriteByImdbId(chosenMovieId)
+                                    if (existingFavourite != null) {
+                                        Log.e("Favorite", "0Failed to execute likeButton onClick handler: $")
+                                        favouriteDB.removeFavourite(existingFavourite)
+                                        Log.e("Favorite", "1Failed to execute likeButton onClick handler: $")
+                                        binding.likeButton.text = "Добавить в избранное"
+                                        Log.e("Favorite", "2Failed to execute likeButton onClick handler: $")
+                                    } else {
+                                        Log.e("Favorite", "2.3Failed to execute likeButton onClick handler: $")
+                                        val favouriteItem = FavouriteItem(null, chosenMovieId)
+                                        Log.e("Favorite", "3Failed to execute likeButton onClick handler: $")
+                                        favouriteDB.addFavourite(favouriteItem)
+                                        Log.e("Favorite", "4Failed to execute likeButton onClick handler: $")
+                                        binding.likeButton.text = "Убрать из избранного"
+                                        Log.e("Favorite", "5Failed to execute likeButton onClick handler: $")
+                                    }
+                                } catch (e: Exception) {
+                                    Log.e("Favorite", "6Failed to execute likeButton onClick handler: $e")
                                 }
                             }
-                        }*/
+                        }
                     }
                     if (result.type=="series") binding.btnShowEpisodes.visibility= View.VISIBLE
 

@@ -1,12 +1,12 @@
 package com.hfad.search.model
 
-import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface FavouriteDao {
@@ -18,9 +18,9 @@ interface FavouriteDao {
     @Update
     suspend fun updateFavourite(item: FavouriteItem)
 
-    @Query("SELECT * FROM favorites")
-    fun getAllFavourites(): LiveData<List<FavouriteItem>>
+    @Query("SELECT * FROM favourites")
+    fun getAllFavourites(): Flow<List<FavouriteItem>>
 
-    @Query("SELECT * FROM favorites WHERE imdbId = :imdbId")
-    fun getFavouriteByImdbId(imdbId: String): LiveData<FavouriteItem>
+    @Query("SELECT * FROM favourites WHERE imdbId = :imdbId")
+    suspend fun getFavouriteByImdbId(imdbId: String): FavouriteItem?
 }

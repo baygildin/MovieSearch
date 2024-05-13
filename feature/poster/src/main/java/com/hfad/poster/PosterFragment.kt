@@ -33,12 +33,9 @@ class PosterFragment : Fragment() {
     ): View {
         _binding = FragmentPosterBinding.inflate(inflater, container, false)
         val view = binding.root
-
         var chosenMovieId = ""
         viewModel.movieTitle.observe(viewLifecycleOwner) { title ->
             chosenMovieId = title
-
-
             Log.e("getmovieError","poster fragment.. get image poster original")
             lifecycleScope.launch {
                 try {

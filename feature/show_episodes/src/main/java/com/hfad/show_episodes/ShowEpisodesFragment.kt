@@ -56,8 +56,6 @@ class ShowEpisodesFragment : Fragment() {
         _binding = FragmentShowEpisodesBinding.inflate(inflater, container, false)
         val view = binding.root
 
-        // Moved createEpisodeButton and createSeasonButton functions outside onCreateView
-
         binding.btnDetailsScreen.setOnClickListener {
             val request = NavDeepLinkRequest.Builder
                 .fromUri("android-app://com.hfad.movie_details/movieDetailsFragment".toUri())

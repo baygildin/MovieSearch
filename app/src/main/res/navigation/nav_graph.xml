@@ -7,25 +7,39 @@
 
     <fragment
         android:id="@+id/searchFragment"
-        android:name="com.hfad.mytestapp.app.search.SearchFragment"
+        android:name="com.hfad.search.SearchFragment"
         android:label="fragment_search"
-        tools:layout="@layout/fragment_search" >
-        <action
-            android:id="@+id/action_searchFragment_to_movieDetailsFragment"
-            app:destination="@id/movieDetailsFragment" />
+        tools:layout="@layout/fragment_search">
+        <deepLink
+            android:id="@+id/deepLinksearchFragment"
+            app:uri="android-app://com.hfad.poster/searchFragment" />
     </fragment>
     <fragment
         android:id="@+id/movieDetailsFragment"
-        android:name="com.hfad.mytestapp.app.movie_details.MovieDetailsFragment"
+        android:name="com.hfad.movie_details.MovieDetailsFragment"
         android:label="fragment_movie_details"
-        tools:layout="@layout/fragment_movie_details" >
-        <action
-            android:id="@+id/action_movieDetailsFragment_to_posterFragment"
-            app:destination="@id/posterFragment" />
+        tools:layout="@layout/fragment_movie_details">
+        <deepLink
+            android:id="@+id/deepLinkmovieDetailsFragment"
+            app:uri="android-app://com.hfad.movie_details/movieDetailsFragment" />
     </fragment>
     <fragment
         android:id="@+id/posterFragment"
-        android:name="com.hfad.mytestapp.app.poster.PosterFragment"
+        android:name="com.hfad.poster.PosterFragment"
         android:label="fragment_poster"
-        tools:layout="@layout/fragment_poster" />
+        tools:layout="@layout/fragment_poster">
+
+        <deepLink
+            android:id="@+id/deepLinkPosterFragment"
+            app:uri="android-app://com.hfad.poster/PosterFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/showEpisodesFragment"
+        android:name="com.hfad.show_episodes.ShowEpisodesFragment"
+        android:label="fragment_show_episodes"
+        tools:layout="@layout/fragment_show_episodes" >
+    <deepLink
+        android:id="@+id/deepLinkShowEpisodesFragment"
+        app:uri="android-app://com.hfad.show_episodes/ShowEpisodesFragment" />
+    </fragment>
 </navigation>

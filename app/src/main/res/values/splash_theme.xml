@@ -3,5 +3,6 @@
     <style name="Theme.MyTestApp.Splash" parent="Theme.SplashScreen">
         <item name="windowSplashScreenAnimatedIcon">@drawable/splash_inset</item>
         <item name="postSplashScreenTheme">@style/Theme.MyTestApp</item>
+
     </style>
 </resources>

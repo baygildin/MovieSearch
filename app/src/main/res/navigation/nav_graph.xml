@@ -5,6 +5,7 @@
     android:id="@+id/nav_graph.xml"
     app:startDestination="@id/searchFragment">
 
+    <include app:graph="@navigation/movie_details_nav_graph" />
     <fragment
         android:id="@+id/searchFragment"
         android:name="com.hfad.search.SearchFragment"
@@ -13,16 +14,16 @@
         <deepLink
             android:id="@+id/deepLinksearchFragment"
             app:uri="android-app://com.hfad.search/searchFragment" />
+        <action
+            android:id="@+id/navigateToMoveDetailsWithId"
+            app:destination="@id/movie_details_nav_graph.xml" >
+            <argument
+                android:name="id"
+                android:defaultValue="1"
+                app:argType="string" />
+        </action>
     </fragment>
-    <fragment
-        android:id="@+id/movieDetailsFragment"
-        android:name="com.hfad.movie_details.MovieDetailsFragment"
-        android:label="fragment_movie_details"
-        tools:layout="@layout/fragment_movie_details">
-        <deepLink
-            android:id="@+id/deepLinkmovieDetailsFragment"
-            app:uri="android-app://com.hfad.movie_details/movieDetailsFragment" />
-    </fragment>
+
     <fragment
         android:id="@+id/posterFragment"
         android:name="com.hfad.poster.PosterFragment"
@@ -37,9 +38,10 @@
         android:id="@+id/showEpisodesFragment"
         android:name="com.hfad.show_episodes.ShowEpisodesFragment"
         android:label="fragment_show_episodes"
-        tools:layout="@layout/fragment_show_episodes" >
-    <deepLink
-        android:id="@+id/deepLinkShowEpisodesFragment"
-        app:uri="android-app://com.hfad.show_episodes/ShowEpisodesFragment" />
+        tools:layout="@layout/fragment_show_episodes">
+        <deepLink
+            android:id="@+id/deepLinkShowEpisodesFragment"
+            app:uri="android-app://com.hfad.show_episodes/ShowEpisodesFragment" />
     </fragment>
+
 </navigation>

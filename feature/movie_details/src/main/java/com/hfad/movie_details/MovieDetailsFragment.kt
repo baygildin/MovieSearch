@@ -14,6 +14,8 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavDeepLinkRequest
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
+import androidx.navigation.navArgs
 import com.bumptech.glide.Glide
 import com.hfad.movie_details.databinding.FragmentMovieDetailsBinding
 import com.hfad.search.OmdbApi
@@ -30,6 +32,7 @@ class MovieDetailsFragment : Fragment() {
     private val viewModel: SharedViewModel by activityViewModels()
     private var _binding: FragmentMovieDetailsBinding? = null
 
+    private val args: MovieDetailsFragmentArgs by navArgs<MovieDetailsFragmentArgs>()
 
     @Inject
     lateinit var omdbApi: OmdbApi
@@ -43,8 +46,8 @@ class MovieDetailsFragment : Fragment() {
         var chosenMovieId = ""
         var favouriteDB: FavouriteDao
         favouriteDB = FavouriteDatabase.getDatabase(requireContext()).favouriteDao()
-        viewModel.movieTitle.observe(viewLifecycleOwner) { title ->
-            chosenMovieId = title
+        viewModel.movieTitle.observe(viewLifecycleOwner) { _ ->
+            chosenMovieId = args.id
             binding.tvDetailsScreen.text = chosenMovieId
             Log.e("getmovieError","chosenMovieId = title$chosenMovieId")
             lifecycleScope.launch {

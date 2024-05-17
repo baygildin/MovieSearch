@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavDeepLinkRequest
+import androidx.navigation.Navigator
 import androidx.navigation.fragment.findNavController
 import com.hfad.search.databinding.FragmentSearchBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -64,13 +65,15 @@ class SearchFragment : Fragment() {
                         button.text = """${searchItem.Title}
                             |${searchItem.Year}""".trimMargin()
                         button.setOnClickListener {
-                            viewModel.setMovieTitle(searchItem.imdbID)
+                            (activity as com.hfad.navigation.Navigator).navigateToMoveDetailsWithId(searchItem.imdbID)
+                            /*viewModel.setMovieTitle(searchItem.imdbID)
 
                             val request = NavDeepLinkRequest.Builder
-                                .fromUri("android-app://com.hfad.movie_details/movieDetailsFragment".toUri())
+                                .fromUri("android-app://com.hfad.movie_details/movieDetailsFragmen=${id}t".toUri())
                                 .build()
                             findNavController().navigate(request)
-                            Log.e("getmovieError","listenerOfBtnList")}
+                            Log.e("getmovieError","listenerOfBtnList")*/
+                        }
                         binding.linearLayout.addView(button)
                     }
                 } catch (e: Exception) {

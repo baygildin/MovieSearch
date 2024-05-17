@@ -17,6 +17,8 @@ import androidx.navigation.Navigator
 import androidx.navigation.fragment.findNavController
 import com.hfad.search.databinding.FragmentSearchBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -27,6 +29,7 @@ class SearchFragment : Fragment() {
     @Inject
     lateinit var omdbApi: OmdbApi
     private var _binding: FragmentSearchBinding? = null
+    private val searchJob: Job? = null
     private val binding
         get() = _binding ?: throw IllegalStateException("Binding in FragmentSearchBinding of SearchFragment must not be null")
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -43,47 +46,57 @@ class SearchFragment : Fragment() {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                searchJob?.cancel()
+                lifecycleScope.launch {
+                    delay(700)
+                    searchMediaWithTitle(s.toString())
+                }
                 viewModel.setMovieTitle(s.toString())
+                // Этот кобек onTextChanged вызывается при вводе каждого нового символа. Тут явно слишком часто вызывается
+                // метод setMovieTitle
                 viewModel.searchText = s.toString()
             }
 
             override fun afterTextChanged(s: Editable?) {}
         })
 
+        return view
+    }
 
+    private fun searchMediaWithTitle(title: String) {
+        // TODO Распилить этот огромный метод, который делает кучу всего
+        lifecycleScope.launch {
+            try {
+                // TODO  Избавиться  от использования api в фрагменте
+                val result = omdbApi.searchBySearch(title)
+                binding.linearLayout.removeAllViews()
+                result.Search.forEach { searchItem ->
+                    val button = Button(requireContext())
+                    button.setBackgroundColor(Color.TRANSPARENT)
 
-        binding.btnSearch.setOnClickListener {
-            lifecycleScope.launch {
-                try {
-                    val result = omdbApi.searchBySearch(viewModel.searchText)
-                    binding.linearLayout.removeAllViews()
-                    result.Search.forEach { searchItem ->
-                        val button = Button(requireContext())
-                        button.setBackgroundColor(Color.TRANSPARENT)
-
-                        button.setTextColor(Color.parseColor("#E0D9D9"))
-                        button.text = """${searchItem.Title}
-                            |${searchItem.Year}""".trimMargin()
-                        button.setOnClickListener {
-                            (activity as com.hfad.navigation.Navigator).navigateToMoveDetailsWithId(searchItem.imdbID)
-                            /*viewModel.setMovieTitle(searchItem.imdbID)
+                    button.setTextColor(Color.parseColor("#E0D9D9"))
+                    button.text = """${searchItem.Title}
+                                |${searchItem.Year}""".trimMargin()
+                    button.setOnClickListener {
+                        (activity as com.hfad.navigation.Navigator).navigateToMoveDetailsWithId(
+                            searchItem.imdbID
+                        )
+                        /*viewModel.setMovieTitle(searchItem.imdbID)
 
                             val request = NavDeepLinkRequest.Builder
                                 .fromUri("android-app://com.hfad.movie_details/movieDetailsFragmen=${id}t".toUri())
                                 .build()
                             findNavController().navigate(request)
                             Log.e("getmovieError","listenerOfBtnList")*/
-                        }
-                        binding.linearLayout.addView(button)
                     }
-                } catch (e: Exception) {
-                    Log.e("getmovieError", "$e в строчке val result = omdbApi.searchByTitle")
-                    // В случае ошибки отображаем сообщение об ошибке
-                    binding.tvFullInfo.text = "Error occurred: ${e.message}"
+                    binding.linearLayout.addView(button)
                 }
+            } catch (e: Exception) {
+                Log.e("getmovieError", "$e в строчке val result = omdbApi.searchByTitle")
+                // В случае ошибки отображаем сообщение об ошибке
+                binding.tvFullInfo.text = "Error occurred: ${e.message}"
             }
         }
-        return view
     }
 
     override fun onDestroyView() {

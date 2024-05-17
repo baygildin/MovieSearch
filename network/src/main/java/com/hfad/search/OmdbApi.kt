@@ -15,6 +15,7 @@ interface OmdbApi {
 
 
 
+    // TODO название очень странное, надо переименовать
     @GET("/")
     suspend fun searchBySearch(@Query("s") searchText: String): SearchBySearch
 

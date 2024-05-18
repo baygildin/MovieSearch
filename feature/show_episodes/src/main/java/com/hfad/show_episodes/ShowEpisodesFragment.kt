@@ -10,11 +10,9 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.core.text.bold
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import com.hfad.search.OmdbApi
-import com.hfad.search.SharedViewModel
 import com.hfad.show_episodes.databinding.FragmentShowEpisodesBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -23,7 +21,6 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class ShowEpisodesFragment : Fragment() {
 
-    private val viewModel: SharedViewModel by activityViewModels()
     private var _binding: FragmentShowEpisodesBinding? = null
     private val args: ShowEpisodesFragmentArgs by navArgs<ShowEpisodesFragmentArgs>()
     @Inject
@@ -36,27 +33,24 @@ class ShowEpisodesFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val chosenMovieId = args.id
-        viewModel.chosenImbdId.observe(viewLifecycleOwner) { id ->
+        lifecycleScope.launch {
+            try {
+                val seriesInfo = omdbApi.searchBySeason(chosenMovieId, "1")
+                val numberOfSeasons = seriesInfo.totalSeasons.toInt()
+                Log.e("cod43", "${seriesInfo.totalSeasons.toInt()}")
 
-            lifecycleScope.launch {
-                try {
-                    val seriesInfo = omdbApi.searchBySeason(chosenMovieId, "1")
-                    val numberOfSeasons = seriesInfo.totalSeasons.toInt()
-                    Log.e("cod43", "${seriesInfo.totalSeasons.toInt()}")
-
-                    for (seasonNumber in 1..numberOfSeasons) {
-                        val seasonButton = createSeasonButton(seriesInfo.title, seasonNumber)
-                        binding.seasonsContainer.addView(seasonButton)
-                    }
-                } catch (e: Exception) {
+                for (seasonNumber in 1..numberOfSeasons) {
+                    val seasonButton = createSeasonButton(seriesInfo.title, seasonNumber)
+                    binding.seasonsContainer.addView(seasonButton)
                 }
+            } catch (e: Exception) {
             }
         }
 
         _binding = FragmentShowEpisodesBinding.inflate(inflater, container, false)
         val view = binding.root
         binding.btnDetailsScreen.setOnClickListener {
-            (activity as com.hfad.navigation.Navigator).navigateShowEpisodesToMovieDetailsWithId(chosenMovieId)}
+            (activity as com.hfad.navigation.Navigator).navigateShowEpisodesToMediaDetailsWithId(chosenMovieId)}
 
         return view
     }

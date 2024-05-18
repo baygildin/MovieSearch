@@ -58,7 +58,7 @@ dependencies {
     implementation 'org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.0'
     implementation project(":feature:search")
     implementation project(":feature:show_episodes")
-    implementation project(":feature:movie_details")
+    implementation project(":feature:media_details")
     implementation project(":feature:poster")
     implementation project(":navigation")
 

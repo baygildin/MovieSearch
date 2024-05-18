@@ -11,12 +11,12 @@ import retrofit2.http.Query
 interface OmdbApi {
 
     @GET("/")
-    suspend fun searchByTitle(@Query("t") title: String): SearchResponseByTitle
+    suspend fun searchOnlyOneByTitle(@Query("t") title: String): SearchResponseByTitle
 
 
 
     @GET("/")
-    suspend fun searchBySearch(@Query("s") searchText: String): SearchBySearch
+    suspend fun searchByTitle(@Query("s") searchText: String): SearchBySearch
 
 
     @GET("/")

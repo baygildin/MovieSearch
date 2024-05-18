@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.findNavController
-import com.hfad.movie_details.MovieDetailsFragmentDirections
+import com.hfad.media_details.MediaDetailsFragmentDirections
 import com.hfad.poster.PosterFragmentDirections
 import com.hfad.search.SearchFragmentDirections
 import com.hfad.show_episodes.ShowEpisodesFragmentDirections
@@ -18,38 +18,38 @@ class MainActivity : AppCompatActivity(), com.hfad.navigation.Navigator {
         setContentView(R.layout.activity_main)
 
     }
-    override fun navigateSearchToMovieDetailsWithId(id: String) {
-        val action = SearchFragmentDirections.navigateSearchToMovieDetailsWithId(id)
+    override fun navigateSearchToMediaDetailsWithId(id: String) {
+        val action = SearchFragmentDirections.navigateSearchToMediaDetailsWithId(id)
         findNavController(R.id.nav_host_fragment).navigate(action)
     }
 
     override fun navigateShowEpisodesToSearchWithId(id: String){
-        val action = ShowEpisodesFragmentDirections.navigateShowEpisodesToMovieDetailsWithId(id)
+        val action = ShowEpisodesFragmentDirections.navigateShowEpisodesToMediaDetailsWithId(id)
         findNavController(R.id.nav_host_fragment).navigate(action)
     }
 
-    override fun navigateShowEpisodesToMovieDetailsWithId(id: String){
-        val action = ShowEpisodesFragmentDirections.navigateShowEpisodesToMovieDetailsWithId(id)
+    override fun navigateShowEpisodesToMediaDetailsWithId(id: String){
+        val action = ShowEpisodesFragmentDirections.navigateShowEpisodesToMediaDetailsWithId(id)
         findNavController(R.id.nav_host_fragment).navigate(action)
     }
 
-    override fun navigatePosterToMovieDetailsWithId(id: String){
-        val action = PosterFragmentDirections.navigatePosterToMovieDetailsWithId(id)
+    override fun navigatePosterToMediaDetailsWithId(id: String){
+        val action = PosterFragmentDirections.navigatePosterToMediaDetailsWithId(id)
         findNavController(R.id.nav_host_fragment).navigate(action)
     }
 
-    override fun navigateMovieDetailsToSearchWithId(id: String){
-        val action = MovieDetailsFragmentDirections.navigateMovieDetailsToSearchWithId(id)
+    override fun navigateMediaDetailsToSearchWithId(id: String){
+        val action = MediaDetailsFragmentDirections.navigateMediaDetailsToSearchWithId(id)
         findNavController(R.id.nav_host_fragment).navigate(action)
     }
 
-    override fun navigateMovieDetailsToPosterWithId(id: String){
-        val action = MovieDetailsFragmentDirections.navigateMovieDetailsToPosterWithId(id)
+    override fun navigateMediaDetailsToPosterWithId(id: String){
+        val action = MediaDetailsFragmentDirections.navigateMediaDetailsToPosterWithId(id)
         findNavController(R.id.nav_host_fragment).navigate(action)
     }
 
-    override fun navigateMovieDetailsToShowEpisodesWithId(id: String){
-        val action = MovieDetailsFragmentDirections.navigateMovieDetailsToShowEpisodesWithId(id)
+    override fun navigateMediaDetailsToShowEpisodesWithId(id: String){
+        val action = MediaDetailsFragmentDirections.navigateMediaDetailsToShowEpisodesWithId(id)
         findNavController(R.id.nav_host_fragment).navigate(action)
     }
 }

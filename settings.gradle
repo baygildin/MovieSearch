@@ -17,7 +17,8 @@ rootProject.name = "MyTestApp"
 include ':app'
 include ':feature:show_episodes'
 include ':feature:search'
-include ':feature:movie_details'
+include ':feature:media_details'
 include ':feature:poster'
 include ':network'
 include ':navigation'
+

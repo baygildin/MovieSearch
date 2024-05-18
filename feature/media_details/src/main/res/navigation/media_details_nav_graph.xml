@@ -3,13 +3,13 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/movie_details_nav_graph.xml"
-    app:startDestination="@id/movieDetailsFragment">
+    android:id="@+id/media_details_nav_graph.xml"
+    app:startDestination="@id/mediaDetailsFragment">
     <fragment
-        android:id="@+id/movieDetailsFragment"
-        android:name="com.hfad.movie_details.MovieDetailsFragment"
-        android:label="fragment_movie_details"
-        tools:layout="@layout/fragment_movie_details">
+        android:id="@+id/mediaDetailsFragment"
+        android:name="com.hfad.media_details.MediaDetailsFragment"
+        android:label="fragment_media_details"
+        tools:layout="@layout/fragment_media_details">
         <argument
             android:name="id"
             app:argType="string"

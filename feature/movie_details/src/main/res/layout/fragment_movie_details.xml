@@ -46,6 +46,10 @@
                 android:textSize="15sp"
                 android:layout_gravity="center"
                 android:background="@drawable/border_background" />
+            <ImageView
+                android:id="@+id/like_button_heart"
+                android:layout_width="20dp"
+                android:layout_height="20dp"/>
             <TextView
                 android:id="@+id/tv_details_screen"
                 android:layout_width="match_parent"

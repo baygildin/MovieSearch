@@ -60,6 +60,7 @@ dependencies {
     implementation project(":feature:show_episodes")
     implementation project(":feature:movie_details")
     implementation project(":feature:poster")
+    implementation project(":navigation")
 
     def nav_version = "2.7.7"
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"

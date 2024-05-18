@@ -21,4 +21,6 @@ class SharedViewModel : ViewModel() {
     }
     lateinit var result: SearchBySearch
 
+
+
 }

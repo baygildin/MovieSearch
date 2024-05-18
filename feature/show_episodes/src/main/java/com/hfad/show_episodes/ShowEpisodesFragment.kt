@@ -8,13 +8,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import androidx.core.net.toUri
 import androidx.core.text.bold
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.NavDeepLinkRequest
-import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.hfad.search.OmdbApi
 import com.hfad.search.SharedViewModel
 import com.hfad.show_episodes.databinding.FragmentShowEpisodesBinding
@@ -27,6 +25,7 @@ class ShowEpisodesFragment : Fragment() {
 
     private val viewModel: SharedViewModel by activityViewModels()
     private var _binding: FragmentShowEpisodesBinding? = null
+    private val args: ShowEpisodesFragmentArgs by navArgs<ShowEpisodesFragmentArgs>()
     @Inject
     lateinit var omdbApi: OmdbApi
     private val binding
@@ -36,8 +35,9 @@ class ShowEpisodesFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        val chosenMovieId = args.id
         viewModel.chosenImbdId.observe(viewLifecycleOwner) { id ->
-            val chosenMovieId = id
+
             lifecycleScope.launch {
                 try {
                     val seriesInfo = omdbApi.searchBySeason(chosenMovieId, "1")
@@ -55,13 +55,9 @@ class ShowEpisodesFragment : Fragment() {
 
         _binding = FragmentShowEpisodesBinding.inflate(inflater, container, false)
         val view = binding.root
-
         binding.btnDetailsScreen.setOnClickListener {
-            val request = NavDeepLinkRequest.Builder
-                .fromUri("android-app://com.hfad.movie_details/movieDetailsFragment".toUri())
-                .build()
-            findNavController().navigate(request)
-        }
+            (activity as com.hfad.navigation.Navigator).navigateShowEpisodesToMovieDetailsWithId(chosenMovieId)}
+
         return view
     }
 

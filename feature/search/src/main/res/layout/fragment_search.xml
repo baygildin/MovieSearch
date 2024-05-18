@@ -34,6 +34,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:paddingTop="15dp"
                 android:gravity="center">
 
 
@@ -46,8 +49,8 @@
                     android:imeOptions="actionDone"
                     android:hint="@string/message_hint"
                     android:gravity="center_vertical|center_horizontal"
-                    android:background="#E4FFFF"
-                    android:textColor="#2B3342" />
+                    android:textColor="#2B3342"
+                    android:background="@drawable/rounded_edittext"/>
 
                 <Button
                     android:id="@+id/btn_search"

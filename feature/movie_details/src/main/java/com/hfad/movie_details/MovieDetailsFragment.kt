@@ -7,13 +7,11 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.net.toUri
 import androidx.core.text.bold
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.NavDeepLinkRequest
-import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.hfad.movie_details.databinding.FragmentMovieDetailsBinding
 import com.hfad.search.OmdbApi
@@ -29,6 +27,7 @@ import javax.inject.Inject
 class MovieDetailsFragment : Fragment() {
     private val viewModel: SharedViewModel by activityViewModels()
     private var _binding: FragmentMovieDetailsBinding? = null
+    private val args: MovieDetailsFragmentArgs by navArgs<MovieDetailsFragmentArgs>()
 
 
     @Inject
@@ -40,17 +39,21 @@ class MovieDetailsFragment : Fragment() {
                               savedInstanceState: Bundle?): View? {
         _binding = FragmentMovieDetailsBinding.inflate(inflater, container, false)
         val view = binding.root
-        var chosenMovieId = ""
+        var chosenMovieId = args.id
         var favouriteDB: FavouriteDao
         favouriteDB = FavouriteDatabase.getDatabase(requireContext()).favouriteDao()
         viewModel.movieTitle.observe(viewLifecycleOwner) { title ->
-            chosenMovieId = title
+            Log.d("arrg", "${args.id}")
+
+
+
             binding.tvDetailsScreen.text = chosenMovieId
             Log.e("getmovieError","chosenMovieId = title$chosenMovieId")
             lifecycleScope.launch {
                 try {
                     Log.e("findError", "44 str")
                     val result = omdbApi.searchById(chosenMovieId)
+                    Log.e("findError", "${result.toString()}")
                     Log.e("cod43", "chosenmov in mov det frag $chosenMovieId")
                     Glide.with(requireContext())
                         .load(result.poster)
@@ -79,21 +82,18 @@ class MovieDetailsFragment : Fragment() {
                         .bold { append(awards) }
                         .append(result.awards+"\n")
                     viewModel.setChosenImbdId(result.imdbID)
+                    binding.likeButtonHeart.setImageResource(R.drawable.red_heart)
                     val existingFavourite = favouriteDB.getFavouriteByImdbId(chosenMovieId)
-                    if (existingFavourite != null) {binding.likeButton.text = "Убрать из избранного"}
+                    if (existingFavourite != null) {
+                        binding.likeButton.text = "Убрать из избранного"
+                        binding.likeButtonHeart.setImageResource(R.drawable.black_heart)
+                    }
                     with(binding) {
                         tvDetailsScreen.text = text
-                        btnShowEpisodes.setOnClickListener { val request = NavDeepLinkRequest.Builder
-                            .fromUri("android-app://com.hfad.show_episodes/ShowEpisodesFragment".toUri())
-                            .build()
-                            findNavController().navigate(request)
-                        }
+                        btnShowEpisodes.setOnClickListener {
+                            (activity as com.hfad.navigation.Navigator).navigateMovieDetailsToShowEpisodesWithId(chosenMovieId)}
                         ivPoster.setOnClickListener {
-                            val request = NavDeepLinkRequest.Builder
-                                .fromUri("android-app://com.hfad.poster/PosterFragment".toUri())
-                                .build()
-                            findNavController().navigate(request)
-                        }
+                            (activity as com.hfad.navigation.Navigator).navigateMovieDetailsToPosterWithId(chosenMovieId)}
                         likeButton.setOnClickListener {
                             lifecycleScope.launch {
                                 try {
@@ -101,10 +101,13 @@ class MovieDetailsFragment : Fragment() {
                                     if (existingFavourite != null) {
                                         favouriteDB.removeFavourite(existingFavourite)
                                         binding.likeButton.text = "Добавить в избранное"
+                                        binding.likeButtonHeart.setImageResource(R.drawable.red_heart)
                                     } else {
                                         val favouriteItem = FavouriteItem(null, chosenMovieId)
                                         favouriteDB.addFavourite(favouriteItem)
                                         binding.likeButton.text = "Убрать из избранного"
+                                        binding.likeButtonHeart.setImageResource(R.drawable.black_heart)
+
                                     }
                                 } catch (e: Exception) {
                                     Log.e("Favorite", "6Failed to execute likeButton onClick handler: $e")

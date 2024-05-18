@@ -7,7 +7,7 @@
     <string name="next">Next</string>
     <string name="show_episodes">Посмотреть серии</string>
     <string name="add_to_favourite">Добавить в избранное</string>
-    <string name="message_hint">Введите название фильма или сериала</string>
+    <string name="message_hint">Введите название</string>
     <string name="poster_to_maxSize">Увеличить постер на весь экран</string>
     <string name="title_actors_plot">"\n                    Title: %1$s\n                    Actors: %2$s\n                    Plot:\n                     %3$s\n                "</string>
 </resources>

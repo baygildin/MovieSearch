@@ -79,40 +79,8 @@ class SearchFragment : Fragment() {
             }
         }
     }
-
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
 }
-//        binding.btnSearch.setOnClickListener {
-//            lifecycleScope.launch {
-//                try { //в репозиторий положить
-//                    val result = omdbApi.searchByTitle(viewModel.searchText)
-//                    binding.linearLayout.removeAllViews()
-//                    result.Search.forEach { searchItem ->
-//                        val button = Button(requireContext())
-//                        button.setBackgroundColor(Color.TRANSPARENT)
-//
-//                        button.setTextColor(Color.parseColor("#E0D9D9"))
-//                        button.text = """${searchItem.Title}
-//                            |${searchItem.Year}""".trimMargin()
-//                        button.setOnClickListener {
-//                            (activity as com.hfad.navigation.Navigator).navigateSearchToMovieDetailsWithId(
-//                                searchItem.imdbID
-//                            )}
-//                        binding.linearLayout.addView(button)
-//                    }
-//                } catch (e: Exception) {
-//                    binding.tvFullInfo.text = "Error occurred: ${e.message}"
-//                }
-//            }
-//        }
-//        return view
-//    }
-//
-//    override fun onDestroyView() {
-//        super.onDestroyView()
-//        _binding = null
-//    }
-//}

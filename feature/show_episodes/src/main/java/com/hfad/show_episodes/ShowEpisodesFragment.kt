@@ -37,8 +37,6 @@ class ShowEpisodesFragment : Fragment() {
             try {
                 val seriesInfo = omdbApi.searchBySeason(chosenMovieId, "1")
                 val numberOfSeasons = seriesInfo.totalSeasons.toInt()
-                Log.e("cod43", "${seriesInfo.totalSeasons.toInt()}")
-
                 for (seasonNumber in 1..numberOfSeasons) {
                     val seasonButton = createSeasonButton(seriesInfo.title, seasonNumber)
                     binding.seasonsContainer.addView(seasonButton)
@@ -46,7 +44,6 @@ class ShowEpisodesFragment : Fragment() {
             } catch (e: Exception) {
             }
         }
-
         _binding = FragmentShowEpisodesBinding.inflate(inflater, container, false)
         val view = binding.root
         binding.btnDetailsScreen.setOnClickListener {
@@ -117,8 +114,6 @@ class ShowEpisodesFragment : Fragment() {
                 try {
                     val episodesInfo = omdbApi.searchBySeason(title, seasonNumber.toString())
                     val numberOfEpisodes = episodesInfo.episodes.size
-                    Log.e("cod43", "${episodesInfo.episodes.size}")
-
                     for (episodeNumber in 1..numberOfEpisodes) {
                         val episodeButton = createEpisodeButton(episodesInfo.title, seasonNumber, episodeNumber)
                         binding.episodesContainer.addView(episodeButton)

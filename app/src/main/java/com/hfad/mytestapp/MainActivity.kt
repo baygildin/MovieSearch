@@ -8,6 +8,11 @@ import com.hfad.media_details.MediaDetailsFragmentDirections
 import com.hfad.poster.PosterFragmentDirections
 import com.hfad.search.SearchFragmentDirections
 import com.hfad.show_episodes.ShowEpisodesFragmentDirections
+import com.hfad.show_episodes.ShowSeasonsFragmentDirections
+import com.hfad.show_episodes.ShowEpisodeFragmentDirections
+//import com.hfad.liked.LikedFragmentDirections
+
+
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -20,16 +25,6 @@ class MainActivity : AppCompatActivity(), com.hfad.navigation.Navigator {
     }
     override fun navigateSearchToMediaDetailsWithId(id: String) {
         val action = SearchFragmentDirections.navigateSearchToMediaDetailsWithId(id)
-        findNavController(R.id.nav_host_fragment).navigate(action)
-    }
-
-    override fun navigateShowEpisodesToSearchWithId(id: String){
-        val action = ShowEpisodesFragmentDirections.navigateShowEpisodesToMediaDetailsWithId(id)
-        findNavController(R.id.nav_host_fragment).navigate(action)
-    }
-
-    override fun navigateShowEpisodesToMediaDetailsWithId(id: String){
-        val action = ShowEpisodesFragmentDirections.navigateShowEpisodesToMediaDetailsWithId(id)
         findNavController(R.id.nav_host_fragment).navigate(action)
     }
 
@@ -48,8 +43,44 @@ class MainActivity : AppCompatActivity(), com.hfad.navigation.Navigator {
         findNavController(R.id.nav_host_fragment).navigate(action)
     }
 
-    override fun navigateMediaDetailsToShowEpisodesWithId(id: String){
-        val action = MediaDetailsFragmentDirections.navigateMediaDetailsToShowEpisodesWithId(id)
+    override fun navigateMediaDetailsToShowSeasonsWithId(id: String){
+        val action = MediaDetailsFragmentDirections.navigateMediaDetailsToShowSeasonsWithId(id)
+        findNavController(R.id.nav_host_fragment).navigate(action)
+    }
+    override fun navigateShowEpisodesToShowEpisode(title: String, seasonNumber: String, episodeNumber: String) {
+        val action =
+            ShowEpisodesFragmentDirections.navigateShowEpisodesToShowEpisode(title, seasonNumber, episodeNumber)
+        findNavController(R.id.nav_host_fragment).navigate(action)
+    }
+    override fun navigateShowSeasonsToShowEpisodes(title: String, seasonNumber: String) {
+        val action =
+            ShowSeasonsFragmentDirections.navigateShowSeasonsToShowEpisodes(title, seasonNumber)
+        findNavController(R.id.nav_host_fragment).navigate(action)
+    }
+
+
+//////////
+
+    override fun navigateShowSeasonsToLiked() {
+        val action =
+            ShowSeasonsFragmentDirections.navigateShowSeasonsToLiked()
+        findNavController(R.id.nav_host_fragment).navigate(action)
+
+    }
+    override fun navigateMediaDetailsToLiked(){
+        val action = MediaDetailsFragmentDirections.navigateMediaDetailsToLiked()
+        findNavController(R.id.nav_host_fragment).navigate(action)
+    }
+
+    override fun navigateShowEpisodeToLiked() {
+        val action =
+            ShowEpisodeFragmentDirections.navigateShowEpisodeToLiked()
+        findNavController(R.id.nav_host_fragment).navigate(action)
+    }
+
+    override fun navigateShowEpisodesToLiked() {
+        val action =
+            ShowEpisodesFragmentDirections.navigateShowEpisodesToLiked()
         findNavController(R.id.nav_host_fragment).navigate(action)
     }
 }

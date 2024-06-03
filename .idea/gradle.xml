@@ -10,7 +10,11 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/core" />
+            <option value="$PROJECT_DIR$/featur" />
+            <option value="$PROJECT_DIR$/featur/liked" />
             <option value="$PROJECT_DIR$/feature" />
+            <option value="$PROJECT_DIR$/feature/liked" />
             <option value="$PROJECT_DIR$/feature/media_details" />
             <option value="$PROJECT_DIR$/feature/poster" />
             <option value="$PROJECT_DIR$/feature/search" />

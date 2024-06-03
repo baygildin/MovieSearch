@@ -11,9 +11,11 @@
         android:label="fragment_show_episodes"
         tools:layout="@layout/fragment_show_episodes">
         <argument
-            android:name="id"
-            app:argType="string"
-            android:defaultValue="1" />
+            android:name="title"
+            app:argType="string" />
+        <argument
+            android:name="seasonNumber"
+            app:argType="string" />
     </fragment>
 </navigation>
 

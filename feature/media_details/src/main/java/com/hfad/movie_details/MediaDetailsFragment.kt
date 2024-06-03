@@ -8,15 +8,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.text.bold
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
+import com.hfad.core.BaseFragment
 import com.hfad.media_details.databinding.FragmentMediaDetailsBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MediaDetailsFragment : Fragment() {
+class MediaDetailsFragment : BaseFragment(R.layout.fragment_media_details) {
 
     private var _binding: FragmentMediaDetailsBinding? = null
     private val binding get() = _binding!!
@@ -65,7 +65,7 @@ class MediaDetailsFragment : Fragment() {
         }
 
         binding.btnShowEpisodes.setOnClickListener {
-            (activity as com.hfad.navigation.Navigator).navigateMediaDetailsToShowEpisodesWithId(
+            (activity as com.hfad.navigation.Navigator).navigateMediaDetailsToShowSeasonsWithId(
                 chosenMovieId
             )
         }

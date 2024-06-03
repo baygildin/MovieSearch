@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/liked_nav_graph.xml"
+    app:startDestination="@id/LikedFragment">
+    <fragment
+        android:id="@+id/LikedFragment"
+        android:name="com.hfad.liked.LikedFragment"
+        android:label="fragment_liked"
+        tools:layout="@layout/fragment_liked">
+    </fragment>
+</navigation>
+

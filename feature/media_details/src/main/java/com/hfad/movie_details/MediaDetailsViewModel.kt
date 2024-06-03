@@ -1,5 +1,6 @@
 package com.hfad.media_details
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -33,7 +34,7 @@ class MediaDetailsViewModel @Inject constructor(
                 val existingFavourite = favouriteDao.getFavouriteByImdbId(mediaId)
                 _isFavourite.value = existingFavourite != null
             } catch (e: Exception) {
-                // Handle error
+                Log.d("myError42", "in fun fetch media")
             }
         }
     }

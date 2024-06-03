@@ -22,3 +22,6 @@ include ':feature:poster'
 include ':network'
 include ':navigation'
 
+include ':core'
+include ':featur:liked'
+include ':feature:liked'

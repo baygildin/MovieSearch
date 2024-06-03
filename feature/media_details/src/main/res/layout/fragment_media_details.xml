@@ -9,6 +9,14 @@
     android:gravity="center_horizontal"
     android:background="#1D1C25"
     tools:context="com.hfad.media_details.MediaDetailsFragment">
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp"
+        app:popupTheme="@style/AppTheme.PopupOverlay"
+        style="@style/ToolbarStyle"/>
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"

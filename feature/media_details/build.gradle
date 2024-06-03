@@ -59,6 +59,7 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
     implementation project(":network")
     implementation project(":navigation")
+    implementation project(":core")
 
     def nav_version = "2.7.7"
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"

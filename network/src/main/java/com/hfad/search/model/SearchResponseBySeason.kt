@@ -27,3 +27,4 @@ data class Episode(
     @SerializedName("imdbRating")
     val imdbRating: String
 )
+

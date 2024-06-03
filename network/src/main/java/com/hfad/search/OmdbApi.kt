@@ -34,4 +34,10 @@ interface OmdbApi {
         @Query("t") title: String,
         @Query("Season") seasonNumber: String
     ): SearchResponseBySeason
+
+    @GET("/")
+    suspend fun searchSeasonByIdAndSeason(
+        @Query("i") id: String,
+        @Query("Season") seasonNumber: String
+    ): SearchResponseBySeason
 }

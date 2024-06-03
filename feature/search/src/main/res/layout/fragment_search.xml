@@ -52,20 +52,6 @@
                     android:textColor="#2B3342"
                     android:background="@drawable/rounded_edittext"/>
 
-<!--                <Button-->
-<!--                    android:id="@+id/btn_search"-->
-<!--                    android:layout_width="40dp"-->
-<!--                    android:layout_height="46dp"-->
-<!--                    android:background="#E4FFFF"-->
-<!--                    android:textColor="#E0D9D9"-->
-<!--                    android:textSize="15sp"-->
-<!--                    android:drawableEnd="@drawable/img_baseline_search"-->
-<!--                    android:paddingEnd="8dp"-->
-<!--                    android:gravity="center"-->
-<!--                    android:paddingStart="8dp"-->
-<!--                    android:paddingTop="12dp"-->
-<!--                    android:paddingBottom="12dp"-->
-<!--                    android:textAllCaps="false" />-->
             </LinearLayout>
             <TextView
                 android:id="@+id/tv_full_info"

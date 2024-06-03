@@ -8,6 +8,14 @@
     android:gravity="center_horizontal"
     android:background="#1D1C25"
     tools:context="com.hfad.show_episodes.ShowEpisodesFragment">
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp"
+        app:popupTheme="@style/AppTheme.PopupOverlay"
+        style="@style/ToolbarStyle"/>
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -15,48 +23,14 @@
         android:fillViewport="true">
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical"
             android:gravity="center_horizontal">
-            <Button
-                android:id="@+id/btn_details_screen"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="#C0EACB"
-                android:layout_marginTop="15dp"
-                android:text="@string/details_screen"
-                android:textSize="15sp"
-                android:layout_gravity="center"
-                android:background="@drawable/border_background"/>
-
-            <LinearLayout
-                android:id="@+id/seasonsContainer"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:visibility="visible"/>
             <LinearLayout
                 android:id="@+id/episodesContainer"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:visibility="gone"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:id="@+id/tv_episode_Info"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:gravity="left"
-                android:lines="60"
-                android:text=""
-                android:textColor="#C0EACB"
-                android:textSize="20sp"
-                android:visibility="gone"/>
-
-
-
-
-
+                android:orientation="vertical" />
         </LinearLayout>
     </ScrollView>
 

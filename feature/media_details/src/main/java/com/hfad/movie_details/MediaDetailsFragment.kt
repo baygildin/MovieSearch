@@ -77,7 +77,13 @@ class MediaDetailsFragment : BaseFragment(R.layout.fragment_media_details) {
         }
 
         binding.likeButtonHeart.setOnClickListener {
-            viewModel.toggleFavourite(chosenMovieId)
+            viewModel.mediaDetails.observe(viewLifecycleOwner) { result ->
+                viewModel.toggleFavourite(chosenMovieId, result.title)
+            }
+
+        }
+        binding.btnToFavourites.setOnClickListener {
+            (activity as com.hfad.navigation.Navigator).navigateMediaDetailsToLiked()
         }
 
         return view

@@ -10,7 +10,7 @@ import com.hfad.search.SearchFragmentDirections
 import com.hfad.show_episodes.ShowEpisodesFragmentDirections
 import com.hfad.show_episodes.ShowSeasonsFragmentDirections
 import com.hfad.show_episodes.ShowEpisodeFragmentDirections
-//import com.hfad.liked.LikedFragmentDirections
+import com.hfad.liked.LikedFragmentDirections
 
 
 import dagger.hilt.android.AndroidEntryPoint
@@ -67,10 +67,6 @@ class MainActivity : AppCompatActivity(), com.hfad.navigation.Navigator {
         findNavController(R.id.nav_host_fragment).navigate(action)
 
     }
-    override fun navigateMediaDetailsToLiked(){
-        val action = MediaDetailsFragmentDirections.navigateMediaDetailsToLiked()
-        findNavController(R.id.nav_host_fragment).navigate(action)
-    }
 
     override fun navigateShowEpisodeToLiked() {
         val action =
@@ -81,6 +77,17 @@ class MainActivity : AppCompatActivity(), com.hfad.navigation.Navigator {
     override fun navigateShowEpisodesToLiked() {
         val action =
             ShowEpisodesFragmentDirections.navigateShowEpisodesToLiked()
+        findNavController(R.id.nav_host_fragment).navigate(action)
+    }
+    override fun navigateMediaDetailsToLiked(){
+        val action =
+            MediaDetailsFragmentDirections.navigateMediaDetailsToLiked()
+        findNavController(R.id.nav_host_fragment).navigate(action)
+    }
+
+    override fun navigateLikedToMediaDetailsWithId(id: String) {
+        val action =
+            LikedFragmentDirections.navigateLikedToMediaDetailsWithId(id)
         findNavController(R.id.nav_host_fragment).navigate(action)
     }
 }

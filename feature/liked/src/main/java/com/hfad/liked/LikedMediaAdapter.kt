@@ -8,11 +8,18 @@ import androidx.recyclerview.widget.RecyclerView
 import com.hfad.search.model.FavouriteItem
 
 class LikedMediaAdapter(
-    var items: List<FavouriteItem>
+    var items: List<FavouriteItem>,
+    private val onItemClick: (FavouriteItem) -> Unit
 ) : RecyclerView.Adapter<LikedMediaAdapter.LikedMediaViewHolder>() {
 
     inner class LikedMediaViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val imdbIdTextView: TextView = view.findViewById(R.id.imdbIdTextView)
+
+        init {
+            view.setOnClickListener {
+                onItemClick(items[adapterPosition])
+            }
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LikedMediaViewHolder {
@@ -23,10 +30,15 @@ class LikedMediaAdapter(
 
     override fun onBindViewHolder(holder: LikedMediaViewHolder, position: Int) {
         val item = items[position]
-        holder.imdbIdTextView.text = item.imdbId
+        holder.imdbIdTextView.text = item.title
     }
 
     override fun getItemCount(): Int {
         return items.size
+    }
+
+    fun updateItems(newItems: List<FavouriteItem>) {
+        items = newItems
+        notifyDataSetChanged()
     }
 }

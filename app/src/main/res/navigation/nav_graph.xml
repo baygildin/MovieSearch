@@ -41,7 +41,8 @@
             app:uri="android-app://com.hfad.media_details/mediaDetailsFragment" />
         <action
             android:id="@+id/navigateMediaDetailsToLiked"
-            app:destination="@id/likedFragment"/>
+            app:destination="@id/likedFragment">
+        </action>
         <action
             android:id="@+id/navigateMediaDetailsToPosterWithId"
             app:destination="@id/posterFragment">
@@ -66,6 +67,7 @@
                 app:argType="string"
                 android:defaultValue="1"/>
         </action>
+
     </fragment>
 
     <fragment
@@ -176,11 +178,10 @@
 
     </fragment>
 
-
     <fragment
         android:id="@+id/likedFragment"
         android:name="com.hfad.liked.LikedFragment"
-        android:label="liked"
+        android:label="LikedFragment"
         tools:layout="@layout/fragment_liked">
         <deepLink
             android:id="@+id/deepLinkLikedFragment"
@@ -188,6 +189,14 @@
         <action
             android:id="@+id/action_favorites_to_likedFragment"
             app:destination="@id/likedFragment" />
+        <action
+            android:id="@+id/navigateLikedToMediaDetailsWithId"
+            app:destination="@id/mediaDetailsFragment">
+            <argument
+                android:name="id"
+                app:argType="string"
+                android:defaultValue="1"/>
+        </action>
     </fragment>
 
 </navigation>

@@ -1,4 +1,3 @@
-// LikedFragment.kt
 package com.hfad.liked
 
 import android.os.Bundle
@@ -28,13 +27,15 @@ class LikedFragment : BaseFragment(R.layout.fragment_liked) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val adapter = LikedMediaAdapter(emptyList())
+        val adapter = LikedMediaAdapter(emptyList()) { item ->
+            val id = item.imdbId
+            (activity as com.hfad.navigation.Navigator).navigateLikedToMediaDetailsWithId(id)
+        }
         binding.recyclerView.adapter = adapter
         binding.recyclerView.layoutManager = LinearLayoutManager(context)
 
         viewModel.favouriteItems.observe(viewLifecycleOwner, Observer { items ->
-            adapter.items = items
-            adapter.notifyDataSetChanged()
+            adapter.updateItems(items)
         })
     }
 }

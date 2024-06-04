@@ -13,6 +13,7 @@ interface Navigator {
     fun navigateMediaDetailsToLiked()
     fun navigateShowEpisodeToLiked()
     fun navigateShowEpisodesToLiked()
+    fun navigateLikedToMediaDetailsWithId(id: String)
 
 
 

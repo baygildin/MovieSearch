@@ -11,4 +11,6 @@ data class FavouriteItem(
     val id: Int? = null,
     @ColumnInfo(name = "imdbId")
     val imdbId: String,
+    @ColumnInfo(name = "title")
+    val title: String
 )

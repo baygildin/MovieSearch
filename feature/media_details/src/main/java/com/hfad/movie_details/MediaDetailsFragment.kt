@@ -82,10 +82,6 @@ class MediaDetailsFragment : BaseFragment(R.layout.fragment_media_details) {
             }
 
         }
-        binding.btnToFavourites.setOnClickListener {
-            (activity as com.hfad.navigation.Navigator).navigateMediaDetailsToLiked()
-        }
-
         return view
     }
 

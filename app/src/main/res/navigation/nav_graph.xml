@@ -165,7 +165,7 @@
             app:uri="android-app://com.hfad.poster/ShowEpisodeFragment" />
         <action
             android:id="@+id/navigateShowEpisodeToLiked"
-            app:destination="@id/LikedFragment"/>
+            app:destination="@id/likedFragment"/>
         <argument
             android:name="title"
             app:argType="string" />

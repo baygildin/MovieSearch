@@ -4,9 +4,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/liked_nav_graph.xml"
-    app:startDestination="@id/LikedFragment">
+    app:startDestination="@id/likedFragment">
     <fragment
-        android:id="@+id/LikedFragment"
+        android:id="@+id/likedFragment"
         android:name="com.hfad.liked.LikedFragment"
         android:label="fragment_liked"
         tools:layout="@layout/fragment_liked">

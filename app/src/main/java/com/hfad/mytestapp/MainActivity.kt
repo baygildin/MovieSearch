@@ -1,9 +1,11 @@
 package com.hfad.mytestapp
 
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.findNavController
+import com.hfad.core.MenuItemClickListener
 import com.hfad.media_details.MediaDetailsFragmentDirections
 import com.hfad.poster.PosterFragmentDirections
 import com.hfad.search.SearchFragmentDirections
@@ -16,7 +18,7 @@ import com.hfad.liked.LikedFragmentDirections
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity(), com.hfad.navigation.Navigator {
+class MainActivity : AppCompatActivity(), com.hfad.navigation.Navigator, MenuItemClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         installSplashScreen()
@@ -90,4 +92,21 @@ class MainActivity : AppCompatActivity(), com.hfad.navigation.Navigator {
             LikedFragmentDirections.navigateLikedToMediaDetailsWithId(id)
         findNavController(R.id.nav_host_fragment).navigate(action)
     }
+
+    override fun onMenuItemClicked(itemId: Int) {
+        when (itemId) {
+            R.id.action_favorites -> {
+                val currentFragment = supportFragmentManager.primaryNavigationFragment?.childFragmentManager?.fragments?.get(0)
+                val fragmentName = currentFragment?.javaClass?.simpleName
+                Log.d("MainActivity", "Favorites menu item clicked from fragment: $fragmentName")
+                when (fragmentName) {
+                    "MediaDetailsFragment" -> navigateMediaDetailsToLiked()
+                    "ShowEpisodeFragment" -> navigateShowEpisodeToLiked()
+                    "ShowEpisodesFragment" -> navigateShowEpisodesToLiked()
+                    "ShowSeasonsFragment" -> navigateShowSeasonsToLiked()
+                }
+            }
+        }
+    }
+
 }

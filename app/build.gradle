@@ -61,6 +61,7 @@ dependencies {
     implementation project(":feature:media_details")
     implementation project(":feature:poster")
     implementation project(':feature:liked')
+    implementation project(':core')
     implementation project(":navigation")
     implementation "androidx.lifecycle:lifecycle-runtime:2.6.1"
 

@@ -37,11 +37,16 @@ abstract class BaseFragment(layoutId: Int) : Fragment(layoutId) {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.action_favorites -> {
-//                val action = NavGraphDirections.actionFavoritesToLikedFragment()
-//                findNavController().navigate(action)
+                (activity as? MenuItemClickListener)?.onMenuItemClicked(item.itemId)
                 true
             }
             else -> super.onOptionsItemSelected(item)
         }
     }
+
+
+}
+
+interface MenuItemClickListener {
+    fun onMenuItemClicked(itemId: Int)
 }

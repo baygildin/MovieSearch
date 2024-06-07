@@ -23,7 +23,6 @@ class MainActivity : AppCompatActivity(), com.hfad.navigation.Navigator, MenuIte
         super.onCreate(savedInstanceState)
         installSplashScreen()
         setContentView(R.layout.activity_main)
-
     }
     override fun navigateSearchToMediaDetailsWithId(id: String) {
         val action = SearchFragmentDirections.navigateSearchToMediaDetailsWithId(id)
@@ -60,10 +59,7 @@ class MainActivity : AppCompatActivity(), com.hfad.navigation.Navigator, MenuIte
         findNavController(R.id.nav_host_fragment).navigate(action)
     }
 
-
-//////////
-
-    override fun navigateShowSeasonsToLiked() {
+     override fun navigateShowSeasonsToLiked() {
         val action =
             ShowSeasonsFragmentDirections.navigateShowSeasonsToLiked()
         findNavController(R.id.nav_host_fragment).navigate(action)

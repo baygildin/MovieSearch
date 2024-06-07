@@ -3,11 +3,9 @@ package com.hfad.media_details
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.text.SpannableStringBuilder
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.text.bold
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
@@ -37,23 +35,15 @@ class MediaDetailsFragment : BaseFragment(R.layout.fragment_media_details) {
                 .load(result.poster)
                 .into(binding.ivPoster)
 
-            val text = SpannableStringBuilder()
-                .bold { append("Title: ") }
-                .append(result.title + "\n")
-                .bold { append("IMDB rating: ") }
-                .append(result.imdbRating + "\n")
-                .bold { append("Year: ") }
-                .append(result.year + "\n")
-                .bold { append("Director: ") }
-                .append(result.director + "\n")
-                .bold { append("Actors: ") }
-                .append(result.actors + "\n")
-                .bold { append("Plot:\n") }
-                .append(result.plot + "\n")
-                .bold { append("Awards: ") }
-                .append(result.awards + "\n")
+            binding.tvMediaInfoBodyTitle.text=result.title
+            binding.tvMediaInfoBodyImdb.text=result.imdbRating
+            binding.tvMediaInfoBodyYear.text=result.year
+            binding.tvMediaInfoBodyDirector.text=result.director
+            binding.tvMediaInfoBodyActors.text=result.actors
+            binding.tvMediaInfoBodyPlot.text=result.plot
+            binding.tvMediaInfoBodyAwards.text=result.awards
+            binding.tvEpisodeInfoBodyGenre.text=result.genre
 
-            binding.tvDetailsScreen.text = text
             if (result.type == "series") binding.btnShowEpisodes.visibility = View.VISIBLE
         }
 

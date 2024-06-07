@@ -36,6 +36,7 @@ class ShowEpisodesFragment : BaseFragment(R.layout.fragment_show_episodes) {
         viewModel.episodes.observe(viewLifecycleOwner) { result ->
             result.fold(
                 onSuccess = { episodesInfo ->
+                    binding.episodesContainer.removeAllViews()
                     for (episode in 1..episodesInfo.episodes.size) {
                         val button = Button(requireContext()).apply {
                             text = "Episode $episode"

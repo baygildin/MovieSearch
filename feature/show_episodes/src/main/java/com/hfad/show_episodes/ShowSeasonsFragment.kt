@@ -36,6 +36,7 @@ class ShowSeasonsFragment : BaseFragment(R.layout.fragment_show_seasons) {
         viewModel.seasons.observe(viewLifecycleOwner) { result ->
             result.fold(
                 onSuccess = { seasons ->
+                    binding.seasonsContainer.removeAllViews()
                     for (season in 1..seasons.totalSeasons.toInt()) {
                         val button = Button(requireContext()).apply {
                             text = "Season $season"

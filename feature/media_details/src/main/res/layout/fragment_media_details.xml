@@ -51,7 +51,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tv_details_screen" />
+                    app:layout_constraintTop_toBottomOf="@id/tv_media_Info_title_title" />
 
                 <ImageView
                     android:id="@+id/like_button_heart"
@@ -65,16 +65,230 @@
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <TextView
-                android:id="@+id/tv_details_screen"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="left"
-                android:lines="60"
-                android:text="@string/details_screen"
-                android:textColor="#C0EACB"
-                android:textSize="20sp" />
+                android:orientation="vertical"
+                android:gravity="center_horizontal">
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="4dp">
+
+                    <TextView
+                        android:id="@+id/tv_media_Info_title_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Title: "
+                        android:textColor="#C0EACB"
+                        android:textStyle="bold"
+                        android:textSize="20sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tv_media_Info_body_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="This is the episode body."
+                        android:textColor="#C0EACB"
+                        android:textSize="20sp"
+                        app:layout_constraintStart_toEndOf="@id/tv_media_Info_title_title"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="4dp">
+
+                    <TextView
+                        android:id="@+id/tv_media_Info_title_imdb"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="IMDB rating: "
+                        android:textColor="#C0EACB"
+                        android:textStyle="bold"
+                        android:textSize="20sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tv_media_Info_body_imdb"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="This is the body_imdb."
+                        android:textColor="#C0EACB"
+                        android:textSize="20sp"
+                        app:layout_constraintStart_toEndOf="@id/tv_media_Info_title_imdb"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="4dp">
+
+                    <TextView
+                        android:id="@+id/tv_media_Info_title_year"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Year: "
+                        android:textColor="#C0EACB"
+                        android:textStyle="bold"
+                        android:textSize="20sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tv_media_Info_body_year"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="This is the episode body."
+                        android:textColor="#C0EACB"
+                        android:textSize="20sp"
+                        app:layout_constraintStart_toEndOf="@id/tv_media_Info_title_year"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="4dp">
+
+                    <TextView
+                        android:id="@+id/tv_media_Info_title_director"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Director: "
+                        android:textColor="#C0EACB"
+                        android:textStyle="bold"
+                        android:textSize="20sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tv_media_Info_body_director"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="This is the episode body."
+                        android:textColor="#C0EACB"
+                        android:textSize="20sp"
+                        app:layout_constraintStart_toEndOf="@id/tv_media_Info_title_director"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="4dp">
+
+                    <TextView
+                        android:id="@+id/tv_media_Info_title_actors"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Actors: "
+                        android:textColor="#C0EACB"
+                        android:textStyle="bold"
+                        android:textSize="20sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tv_media_Info_body_actors"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="This is the episode body."
+                        android:textColor="#C0EACB"
+                        android:textSize="20sp"
+                        app:layout_constraintStart_toEndOf="@id/tv_media_Info_title_actors"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="4dp">
+
+                    <TextView
+                        android:id="@+id/tv_media_Info_title_plot"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Plot: "
+                        android:textColor="#C0EACB"
+                        android:textStyle="bold"
+                        android:textSize="20sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tv_media_Info_body_plot"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="This is the episode body."
+                        android:textColor="#C0EACB"
+                        android:textSize="20sp"
+                        app:layout_constraintStart_toEndOf="@id/tv_media_Info_title_plot"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="4dp">
+
+                    <TextView
+                        android:id="@+id/tv_media_Info_title_awards"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Awards: "
+                        android:textColor="#C0EACB"
+                        android:textStyle="bold"
+                        android:textSize="20sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tv_media_Info_body_awards"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="This is the episode body."
+                        android:textColor="#C0EACB"
+                        android:textSize="20sp"
+                        app:layout_constraintStart_toEndOf="@id/tv_media_Info_title_awards"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="4dp">
+
+                    <TextView
+                        android:id="@+id/tv_episode_Info_title_genre"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Genre: "
+                        android:textColor="#C0EACB"
+                        android:textStyle="bold"
+                        android:textSize="20sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tv_episode_Info_body_genre"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        android:textColor="#C0EACB"
+                        android:textSize="20sp"
+                        app:layout_constraintStart_toEndOf="@id/tv_episode_Info_title_genre"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </LinearLayout>
+
+<!--            <TextView-->
+<!--                android:id="@+id/tv_details_screen"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:gravity="left"-->
+<!--                android:lines="60"-->
+<!--                android:text="@string/details_screen"-->
+<!--                android:textColor="#C0EACB"-->
+<!--                android:textSize="20sp" />-->
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

@@ -47,6 +47,7 @@ class SearchFragment : Fragment() {
                 onSuccess = { updateUI(it) },
                 onFailure = { showError(it) }
             )
+            Log.d("myerror42", "setupobservers")
         }
     }
 

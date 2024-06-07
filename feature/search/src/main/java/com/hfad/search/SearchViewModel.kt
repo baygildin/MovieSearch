@@ -1,5 +1,6 @@
 package com.hfad.search
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -24,6 +25,7 @@ class SearchViewModel @Inject constructor(
                 _searchResults.postValue(Result.success(result))
             } catch (e: Exception) {
                 _searchResults.postValue(Result.failure(e))
+                Log.d("myerror42", "searchMediaWithTitle")
             }
         }
     }

@@ -31,26 +31,47 @@ class ShowEpisodeFragment : BaseFragment(R.layout.fragment_show_episode) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val shimmerFrameLayout = binding.shimmerFrame
+        val realContent = binding.realContent
+        shimmerFrameLayout.startShimmer()
         viewModel.episode.observe(viewLifecycleOwner) { result ->
             result.fold(
                 onSuccess = { episode ->
-                    binding.tvEpisodeInfoBodyTitle.text=episode.title
-                    binding.tvEpisodeInfoBodyImdb.text=episode.imdbRating
-                    binding.tvEpisodeInfoBodyYear.text=episode.year
-                    binding.tvEpisodeInfoBodyDirector.text=episode.director
-                    binding.tvEpisodeInfoBodyActors.text=episode.actors
-                    binding.tvEpisodeInfoBodyPlot.text=episode.plot
+                    shimmerFrameLayout.stopShimmer()
+                    shimmerFrameLayout.animate()
+                        .alpha(0f)
+                        .setDuration(500)
+                        .withEndAction {
+                            shimmerFrameLayout.visibility = View.GONE
+                            realContent.apply {
+                                alpha = 0f
+                                visibility = View.VISIBLE
+                                animate()
+                                    .alpha(1f)
+                                    .setDuration(100)
+                                    .start()
+                            }
+                        }
+                        .start()
+                    binding.tvEpisodeInfoBodyTitle.text = episode.title
+                    binding.tvEpisodeInfoBodyImdb.text = episode.imdbRating
+                    binding.tvEpisodeInfoBodyYear.text = episode.year
+                    binding.tvEpisodeInfoBodyDirector.text = episode.director
+                    binding.tvEpisodeInfoBodyActors.text = episode.actors
+                    binding.tvEpisodeInfoBodyPlot.text = episode.plot
 
                     Glide.with(requireContext())
                         .load(episode.poster)
                         .into(binding.ivPoster)
                 },
                 onFailure = { error ->
+                    shimmerFrameLayout.stopShimmer()
+                    shimmerFrameLayout.visibility = View.GONE
                     Log.e("ShowEpisodeFragment", "Error fetching episode", error)
                 }
             )
-
         }
+
 
         val seasonNumber = args.seasonNumber.toIntOrNull()
         val episodeNumber = args.episodeNumber.toIntOrNull()
@@ -58,13 +79,16 @@ class ShowEpisodeFragment : BaseFragment(R.layout.fragment_show_episode) {
         if (seasonNumber != null && episodeNumber != null) {
             viewModel.fetchEpisode(args.title, seasonNumber, episodeNumber)
         } else {
-            Log.e("ShowEpisodeFragment", "Invalid season or episode number: ${args.seasonNumber}, ${args.episodeNumber}")
+            Log.e(
+                "ShowEpisodeFragment",
+                "Invalid season or episode number: ${args.seasonNumber}, ${args.episodeNumber}"
+            )
         }
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
+        override fun onDestroyView() {
+            super.onDestroyView()
+            _binding = null
+        }
 }
 

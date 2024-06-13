@@ -1,12 +1,14 @@
 package com.hfad.search
 
 import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.hfad.search.model.SearchBySearch
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -15,18 +17,24 @@ class SearchViewModel @Inject constructor(
     private val omdbApi: OmdbApi
 ) : ViewModel() {
 
-    private val _searchResults = MutableLiveData<Result<SearchBySearch>>()
-    val searchResults: LiveData<Result<SearchBySearch>> = _searchResults
+    private val _searchResults = MutableStateFlow<Result<SearchBySearch>?>(null)
+    val searchResults: StateFlow<Result<SearchBySearch>?> = _searchResults
 
     fun searchMediaWithTitle(title: String) {
         viewModelScope.launch {
-            try {
+            flow {
                 val result = omdbApi.searchByTitle(title)
-                _searchResults.postValue(Result.success(result))
-            } catch (e: Exception) {
-                _searchResults.postValue(Result.failure(e))
-                Log.d("myerror42", "searchMediaWithTitle")
+                emit(Result.success(result))
             }
+                .catch { e ->
+                    emit(Result.failure(e))
+                    Log.d("myerror42", "searchMediaWithTitle error", e)
+                }
+                .collect { result ->
+                    _searchResults.value = result
+                }
         }
     }
 }
+
+

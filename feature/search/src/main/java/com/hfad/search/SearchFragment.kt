@@ -42,12 +42,14 @@ class SearchFragment : Fragment() {
     }
 
     private fun setupObservers() {
-        searchViewModel.searchResults.observe(viewLifecycleOwner) { result ->
-            result.fold(
-                onSuccess = { updateUI(it) },
-                onFailure = { showError(it) }
-            )
-            Log.d("myerror42", "setupobservers")
+        lifecycleScope.launch {
+            searchViewModel.searchResults.collect { result ->
+                result?.fold(
+                    onSuccess = { updateUI(it) },
+                    onFailure = { showError(it) }
+                )
+                Log.d("myerror42", "setupobservers")
+            }
         }
     }
 

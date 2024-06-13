@@ -26,6 +26,67 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:gravity="center_horizontal">
+            <com.facebook.shimmer.ShimmerFrameLayout
+                android:id="@+id/shimmer_frame"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                app:shimmer_auto_start="true"
+                app:shimmer_duration="1000">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center_horizontal">
+
+                    <ImageView
+                        android:layout_width="200dp"
+                        android:layout_height="150dp"
+                        android:layout_marginTop="30dp"
+                        android:background="@color/placeholder" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp"
+                        android:layout_marginTop="63dp"
+                        android:background="@color/placeholder" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp"
+                        android:layout_marginTop="16dp"
+                        android:background="@color/placeholder" />
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp"
+                        android:layout_marginTop="16dp"
+                        android:background="@color/placeholder" />
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp"
+                        android:layout_marginTop="16dp"
+                        android:background="@color/placeholder" />
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp"
+                        android:layout_marginTop="16dp"
+                        android:background="@color/placeholder" />
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:layout_marginTop="16dp"
+                        android:background="@color/placeholder" />
+
+
+                </LinearLayout>
+            </com.facebook.shimmer.ShimmerFrameLayout>
+        <LinearLayout
+            android:id="@+id/real_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            android:visibility="gone">
             <ImageView
                 android:id="@+id/iv_poster"
                 android:layout_width="200dp"
@@ -166,27 +227,29 @@
                 android:layout_height="wrap_content"
                 android:padding="4dp">
 
-                <TextView
-                    android:id="@+id/tv_episode_Info_title_plot"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Plot: "
-                    android:textColor="#C0EACB"
-                    android:textStyle="bold"
-                    android:textSize="20sp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+            <TextView
+                android:id="@+id/tv_episode_Info_title_plot"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Plot: "
+                android:textColor="#C0EACB"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-                <TextView
-                    android:id="@+id/tv_episode_Info_body_plot"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text=""
-                    android:textColor="#C0EACB"
-                    android:textSize="20sp"
-                    app:layout_constraintStart_toEndOf="@id/tv_episode_Info_title_plot"
-                    app:layout_constraintTop_toTopOf="parent" />
+            <TextView
+                android:id="@+id/tv_episode_Info_body_plot"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textColor="#C0EACB"
+                android:textSize="20sp"
+                app:layout_constraintStart_toEndOf="@id/tv_episode_Info_title_plot"
+                app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

@@ -13,6 +13,7 @@ import com.hfad.core.BaseFragment
 import com.hfad.media_details.databinding.FragmentMediaDetailsBinding
 import dagger.hilt.android.AndroidEntryPoint
 
+
 @AndroidEntryPoint
 class MediaDetailsFragment : BaseFragment(R.layout.fragment_media_details) {
 
@@ -27,10 +28,32 @@ class MediaDetailsFragment : BaseFragment(R.layout.fragment_media_details) {
         _binding = FragmentMediaDetailsBinding.inflate(inflater, container, false)
         val view = binding.root
 
+        val shimmerFrameLayout = binding.shimmerFrame
+        val realContent = binding.realContent
         val chosenMovieId = args.id
+
         viewModel.fetchMediaDetails(chosenMovieId)
+        shimmerFrameLayout.startShimmer()
 
         viewModel.mediaDetails.observe(viewLifecycleOwner) { result ->
+            shimmerFrameLayout.stopShimmer()
+            shimmerFrameLayout.animate()
+                .alpha(0f)
+                .setDuration(500)
+                .withEndAction {
+                    shimmerFrameLayout.visibility = View.GONE
+                    realContent.apply {
+                        alpha = 0f
+                        visibility = View.VISIBLE
+                        animate()
+                            .alpha(1f)
+                            .setDuration(100)
+                            .start()
+                    }
+                }
+                .start()
+
+
             Glide.with(requireContext())
                 .load(result.poster)
                 .into(binding.ivPoster)

@@ -110,9 +110,10 @@ fun SearchFragmentContent(searchViewModel: SearchViewModel, navigateToDetails: (
                         searchViewModel.searchMediaWithTitle(it)
                     },
                     placeholder = { Text("Введите название",
-                        modifier = Modifier,
+                        modifier = Modifier.fillMaxWidth(),
                         fontSize = 20.sp,
                         textAlign = TextAlign.Center,
+                        style = TextStyle(textAlign = TextAlign.Center),
                         color = Color(0xFF8A8F99)) },
                     modifier = Modifier.fillMaxWidth(),
                     shape = RoundedCornerShape(10.dp),

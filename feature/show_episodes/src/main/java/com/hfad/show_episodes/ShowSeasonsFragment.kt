@@ -62,7 +62,7 @@ class ShowSeasonsFragment : BaseFragment(R.layout.fragment_show_seasons) {
                     }
                 },
                 onFailure = { error ->
-                    Log.e("myError42", "error in show seasons viewModel.seasons.observe(viewLifecycleOwner) { result ->")
+                    Log.e("myError42", "error in show seasons viewModel.seasons.observe(viewLifecycleOwner) { result ->$error")
                 }
             )
         }

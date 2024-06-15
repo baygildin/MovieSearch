@@ -52,7 +52,12 @@
                     android:textColor="#2B3342"
                     android:background="@drawable/rounded_edittext"/>
 
+
             </LinearLayout>
+            <androidx.compose.ui.platform.ComposeView
+                android:id="@+id/compose_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
             <TextView
                 android:id="@+id/tv_full_info"
                 android:layout_width="wrap_content"

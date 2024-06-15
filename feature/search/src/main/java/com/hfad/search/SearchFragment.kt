@@ -29,6 +29,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -172,7 +173,7 @@ fun SearchFragmentContent(searchViewModel: SearchViewModel, navigateToDetails: (
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text(text = "Movie Search",
-                    modifier = Modifier.padding(vertical = 10.dp),
+                    modifier = Modifier.padding(vertical = 15.dp),
                     color = Color(0xFFE0D9D9),
                     fontSize = 20.sp,
 
@@ -185,15 +186,22 @@ fun SearchFragmentContent(searchViewModel: SearchViewModel, navigateToDetails: (
                     },
                     placeholder = { Text("Введите название",
                         modifier = Modifier,
-                        color = Color(0xFF2B3342)) },
+                        fontSize = 20.sp,
+                        textAlign = TextAlign.End,
+                        color = Color(0xFF8A8F99)) },
                     modifier = Modifier.fillMaxWidth(),
-                    shape = RoundedCornerShape(5.dp),
+                    shape = RoundedCornerShape(10.dp),
+                    textStyle = TextStyle(
+                        color = Color(0xFF233543),
+                        fontSize = 20.sp,
+                        textAlign = TextAlign.Center
+                    ),
                     colors = TextFieldDefaults.textFieldColors(
                         textColor = Color(0xFF233543),
                         backgroundColor = Color(0xFFE4FFFF),
                         cursorColor = Color(0xFFE0D9D9),
-                        focusedIndicatorColor = Color(0xFFE0D9D9),
-                        unfocusedIndicatorColor = Color(0xFFE0D9D9)
+                        focusedIndicatorColor = Color.Transparent,
+                        unfocusedIndicatorColor = Color.Transparent
                     )
 
                 )
@@ -241,13 +249,3 @@ fun ResultsList(result: SearchBySearch, navigateToDetails: (String) -> Unit) {
         }
     }
 }
-
-//@Preview(showBackground = true)
-//@Composable
-//fun PreviewSearchFragmentContent() {
-//    MaterialTheme {
-//        Surface {
-//            SearchFragmentContent()
-//        }
-//    }
-//}

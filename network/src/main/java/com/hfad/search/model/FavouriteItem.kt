@@ -12,5 +12,7 @@ data class FavouriteItem(
     @ColumnInfo(name = "imdbId")
     val imdbId: String,
     @ColumnInfo(name = "title")
-    val title: String
+    val title: String,
+    @ColumnInfo(name = "year")
+    val year: String
 )

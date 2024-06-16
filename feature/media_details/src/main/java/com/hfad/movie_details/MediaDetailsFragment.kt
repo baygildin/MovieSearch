@@ -91,7 +91,7 @@ class MediaDetailsFragment : BaseFragment(R.layout.fragment_media_details) {
 
         binding.likeButtonHeart.setOnClickListener {
             viewModel.mediaDetails.observe(viewLifecycleOwner) { result ->
-                viewModel.toggleFavourite(chosenMovieId, result.title)
+                viewModel.toggleFavourite(chosenMovieId, result.title, result.year)
             }
 
         }

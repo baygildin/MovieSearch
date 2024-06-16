@@ -1,5 +1,6 @@
 package com.hfad.liked
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -30,7 +31,8 @@ class LikedMediaAdapter(
 
     override fun onBindViewHolder(holder: LikedMediaViewHolder, position: Int) {
         val item = items[position]
-        holder.imdbIdTextView.text = item.title
+        Log.d("myerror", "${item.year}")
+        holder.imdbIdTextView.text = if (item.year.isEmpty()) {"${item.title}"} else {"${item.title} (${item.year})"}
     }
 
     override fun getItemCount(): Int {

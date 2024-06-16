@@ -12,6 +12,7 @@ import com.bumptech.glide.Glide
 import com.hfad.core.BaseFragment
 import com.hfad.media_details.databinding.FragmentMediaDetailsBinding
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.concurrent.TimeUnit
 
 
 @AndroidEntryPoint
@@ -91,7 +92,10 @@ class MediaDetailsFragment : BaseFragment(R.layout.fragment_media_details) {
 
         binding.likeButtonHeart.setOnClickListener {
             viewModel.mediaDetails.observe(viewLifecycleOwner) { result ->
-                viewModel.toggleFavourite(chosenMovieId, result.title, result.year)
+                val unixTimeSeconds: Long =
+                    TimeUnit.MILLISECONDS.toSeconds(System.currentTimeMillis())
+                val unixTimeString = unixTimeSeconds.toString()
+                viewModel.toggleFavourite(chosenMovieId, result.title, result.year, unixTimeString)
             }
 
         }

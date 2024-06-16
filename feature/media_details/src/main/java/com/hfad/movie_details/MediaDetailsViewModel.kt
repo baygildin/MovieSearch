@@ -39,7 +39,7 @@ class MediaDetailsViewModel @Inject constructor(
         }
     }
 
-    fun toggleFavourite(mediaId: String, title: String, year: String) {
+    fun toggleFavourite(mediaId: String, title: String, year: String, dateadded: String) {
         viewModelScope.launch {
             try {
                 val existingFavourite = favouriteDao.getFavouriteByImdbId(mediaId)
@@ -47,7 +47,7 @@ class MediaDetailsViewModel @Inject constructor(
                     favouriteDao.removeFavourite(existingFavourite)
                     _isFavourite.value = false
                 } else {
-                    val favouriteItem = FavouriteItem(null, mediaId, title, year)
+                    val favouriteItem = FavouriteItem(null, mediaId, title, year, dateadded)
                     favouriteDao.addFavourite(favouriteItem)
                     _isFavourite.value = true
                 }

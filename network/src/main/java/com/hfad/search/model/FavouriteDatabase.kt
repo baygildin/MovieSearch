@@ -7,7 +7,7 @@ import androidx.room.RoomDatabase
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
 
-@Database(entities = [FavouriteItem::class], version = 3)
+@Database(entities = [FavouriteItem::class], version = 4)
 abstract class FavouriteDatabase : RoomDatabase() {
     abstract fun favouriteDao(): FavouriteDao
 
@@ -22,16 +22,16 @@ abstract class FavouriteDatabase : RoomDatabase() {
                     FavouriteDatabase::class.java,
                     "favourites.db"
                 )
-                    .addMigrations(MIGRATION_2_3)
+                    .addMigrations(MIGRATION_3_4)
                     .build()
                 INSTANCE = instance
                 instance
             }
         }
 
-        val MIGRATION_2_3 = object : Migration(2, 3) {
+        val MIGRATION_3_4 = object : Migration(3, 4) {
             override fun migrate(database: SupportSQLiteDatabase) {
-                database.execSQL("ALTER TABLE favourites ADD COLUMN year TEXT NOT NULL DEFAULT ''") //  После ADD COLUMN можно дорбавить новый столбец (название), еще нужно обновить favoriteDao
+                database.execSQL("ALTER TABLE favourites ADD COLUMN dateAdded TEXT NOT NULL DEFAULT ''") //  После ADD COLUMN можно дорбавить новый столбец (название), еще нужно обновить favoriteDao
             }
         }
     }

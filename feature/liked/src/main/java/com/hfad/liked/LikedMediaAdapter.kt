@@ -31,7 +31,7 @@ class LikedMediaAdapter(
 
     override fun onBindViewHolder(holder: LikedMediaViewHolder, position: Int) {
         val item = items[position]
-        Log.d("myerror", "${item.year}")
+        Log.d("myerrordate", "${item.dateAdded}")
         holder.imdbIdTextView.text = if (item.year.isEmpty()) {"${item.title}"} else {"${item.title} (${item.year})"}
     }
 

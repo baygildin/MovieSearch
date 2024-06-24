@@ -14,16 +14,3 @@ data class SearchSeasonByIdAndSeason(
     @SerializedName("totalSeasons")
     val totalSeasons: String
 )
-
-data class EpisodeByIdAndSeason(
-    @SerializedName("Episode")
-    val episode: String,
-    @SerializedName("Released")
-    val released: String,
-    @SerializedName("Title")
-    val title: String,
-    @SerializedName("imdbID")
-    val imdbID: String,
-    @SerializedName("imdbRating")
-    val imdbRating: String
-)

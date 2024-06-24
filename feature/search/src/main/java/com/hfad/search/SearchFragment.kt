@@ -20,8 +20,11 @@ import androidx.compose.material.TextField
 import androidx.compose.material.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -33,8 +36,11 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.hfad.search.databinding.FragmentSearchBinding
-import com.hfad.search.model.SearchBySearch
+import com.hfad.search.model.SearchByTitle
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class SearchFragment : Fragment() {
@@ -69,6 +75,7 @@ class SearchFragment : Fragment() {
         val view = binding.root
         return view
     }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
@@ -79,6 +86,8 @@ class SearchFragment : Fragment() {
 fun SearchFragmentContent(searchViewModel: SearchViewModel, navigateToDetails: (String) -> Unit) {
     val query = remember { mutableStateOf("") }
     val searchResults = searchViewModel.searchResults.collectAsState().value
+    var searchJob by remember { mutableStateOf<Job?>(null) }
+    val coroutineScope = rememberCoroutineScope()
 
     MaterialTheme(
         colors = MaterialTheme.colors.copy(
@@ -105,16 +114,23 @@ fun SearchFragmentContent(searchViewModel: SearchViewModel, navigateToDetails: (
                 )
                 TextField(
                     value = query.value,
-                    onValueChange = {
-                        query.value = it
-                        searchViewModel.searchMediaWithTitle(it)
+                    onValueChange = { newQuery ->
+                        query.value = newQuery
+                        searchJob?.cancel()
+                        searchJob = coroutineScope.launch {
+                            delay(700)
+                            searchViewModel.searchMediaWithTitle(newQuery)
+                        }
                     },
-                    placeholder = { Text("Введите название",
-                        modifier = Modifier.fillMaxWidth(),
-                        fontSize = 20.sp,
-                        textAlign = TextAlign.Center,
-                        style = TextStyle(textAlign = TextAlign.Center),
-                        color = Color(0xFF8A8F99)) },
+                    placeholder = {
+                        Text("Введите название",
+                            modifier = Modifier.fillMaxWidth(),
+                            fontSize = 20.sp,
+                            textAlign = TextAlign.Center,
+                            style = TextStyle(textAlign = TextAlign.Center),
+                            color = Color(0xFF8A8F99)
+                        )
+                    },
                     modifier = Modifier.fillMaxWidth(),
                     shape = RoundedCornerShape(10.dp),
                     textStyle = TextStyle(
@@ -129,7 +145,6 @@ fun SearchFragmentContent(searchViewModel: SearchViewModel, navigateToDetails: (
                         focusedIndicatorColor = Color.Transparent,
                         unfocusedIndicatorColor = Color.Transparent
                     )
-
                 )
 
                 Spacer(modifier = Modifier.height(16.dp))
@@ -148,14 +163,13 @@ fun SearchFragmentContent(searchViewModel: SearchViewModel, navigateToDetails: (
         }
     }
 }
+
 @Composable
-fun ResultsList(result: SearchBySearch, navigateToDetails: (String) -> Unit) {
+fun ResultsList(result: SearchByTitle, navigateToDetails: (String) -> Unit) {
     Column {
-        result.Search?.forEach { item ->
+        result.search?.forEach { item ->
             Button(
-                onClick = {
-                    navigateToDetails(item.imdbID)
-                },
+                onClick = { navigateToDetails(item.imdbID) },
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(vertical = 4.dp),
@@ -165,7 +179,7 @@ fun ResultsList(result: SearchBySearch, navigateToDetails: (String) -> Unit) {
                 )
             ) {
                 Text(
-                    text = "${item.Title} (${item.Year})",
+                    text = "${item.title} (${item.year})",
                     textAlign = TextAlign.Start,
                     fontSize = 16.sp,
                 )

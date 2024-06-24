@@ -47,6 +47,3 @@ abstract class BaseFragment(layoutId: Int) : Fragment(layoutId) {
 
 }
 
-interface MenuItemClickListener {
-    fun onMenuItemClicked(itemId: Int)
-}

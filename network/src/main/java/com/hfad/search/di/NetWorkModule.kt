@@ -16,7 +16,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
-
+const val OMBD_API_PATH = "https://www.omdbapi.com"
 @Module
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
@@ -30,7 +30,7 @@ object NetworkModule {
                     .addInterceptor(HttpLoggingInterceptor().apply { setLevel(HttpLoggingInterceptor.Level.BODY) })
                     .build()
             )
-            .baseUrl("https://www.omdbapi.com").build()
+            .baseUrl(OMBD_API_PATH).build()
     }
 
     @Singleton

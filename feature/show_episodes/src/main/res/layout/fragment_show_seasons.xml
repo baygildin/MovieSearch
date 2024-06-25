@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center_horizontal"
-    android:background="#1D1C25"
+    android:background="@color/background_color"
     tools:context=".ShowSeasonsFragment">
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"

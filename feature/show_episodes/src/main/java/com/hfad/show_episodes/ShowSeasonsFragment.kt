@@ -54,7 +54,7 @@ class ShowSeasonsFragment : BaseFragment(R.layout.fragment_show_seasons) {
                             topMargin = 15
                         }
                         button.layoutParams = layoutParams
-                        button.setTextColor(resources.getColor(R.color.c0eacb, null))
+                        button.setTextColor(resources.getColor(R.color.main_text_color, null))
                         button.textSize = 15f
                         button.gravity = Gravity.CENTER
                         button.setBackgroundResource(R.drawable.border_background)

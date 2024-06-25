@@ -35,7 +35,6 @@ class PosterFragment : Fragment() {
         Log.e("getmovieError","poster fragment.. get image poster original")
         lifecycleScope.launch {
             try {
-                Log.e("findError", "44 str")
                 val result = omdbApi.searchById(chosenMovieId)
                 Glide.with(requireContext())
                     .load(result.poster)
@@ -46,8 +45,6 @@ class PosterFragment : Fragment() {
 
 
         }
-        Log.e("findError", "41 str")
-
         return view
     }
 }

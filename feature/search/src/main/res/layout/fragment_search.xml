@@ -6,24 +6,10 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center_horizontal"
-    android:background="#1D1C25"
+    android:background="@color/background_color"
     tools:context="com.hfad.search.SearchFragment">
-
-    <ScrollView
+    <androidx.compose.ui.platform.ComposeView
+        android:id="@+id/compose_view"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:fillViewport="true">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="center_horizontal">
-            <androidx.compose.ui.platform.ComposeView
-                android:id="@+id/compose_view"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-        </LinearLayout>
-    </ScrollView>
-
+        android:layout_height="wrap_content"/>
 </LinearLayout>

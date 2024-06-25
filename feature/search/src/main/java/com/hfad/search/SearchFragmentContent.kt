@@ -1,14 +1,16 @@
 package com.hfad.search
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.material.TextField
 import androidx.compose.material.TextFieldDefaults
@@ -45,69 +47,71 @@ fun SearchFragmentContent(searchViewModel: SearchViewModel, navigateToDetails: (
             onPrimary = Color(0xFF1D1C25)
         )
     ) {
-        Surface(
-            color = Color(0xFF1D1C25),
-            modifier = Modifier.fillMaxSize()
+        val scrollState = rememberScrollState()
+        Column(
+            modifier = Modifier
+                .background(Color(0xFF1D1C25))
+                .verticalScroll(state = scrollState)
+                .fillMaxSize()
+                .padding(16.dp)
+                .fillMaxSize(),
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(16.dp),
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                Text(text = "Movie Search",
-                    modifier = Modifier.padding(vertical = 20.dp),
-                    color = Color(0xFFE0D9D9),
-                    fontSize = 20.sp,
-                )
-                TextField(
-                    value = query.value,
-                    onValueChange = { newQuery ->
-                        query.value = newQuery
-                        searchJob?.cancel()
-                        searchJob = coroutineScope.launch {
-                            delay(700)
-                            searchViewModel.searchMediaWithTitle(newQuery)
-                        }
-                    },
-                    placeholder = {
-                        Text("Введите название",
-                            modifier = Modifier.fillMaxWidth(),
-                            fontSize = 20.sp,
-                            textAlign = TextAlign.Center,
-                            style = TextStyle(textAlign = TextAlign.Center),
-                            color = Color(0xFF8A8F99)
-                        )
-                    },
-                    modifier = Modifier.fillMaxWidth(),
-                    shape = RoundedCornerShape(10.dp),
-                    textStyle = TextStyle(
-                        color = Color(0xFF233543),
+            Text(
+                text = "Movie Search",
+                modifier = Modifier.padding(vertical = 20.dp),
+                color = Color(0xFFE0D9D9),
+                fontSize = 20.sp,
+            )
+            TextField(
+                value = query.value,
+                onValueChange = { newQuery ->
+                    query.value = newQuery
+                    searchJob?.cancel()
+                    searchJob = coroutineScope.launch {
+                        delay(700)
+                        searchViewModel.searchMediaWithTitle(newQuery)
+                    }
+                },
+                placeholder = {
+                    Text(
+                        "Введите название",
+                        modifier = Modifier.fillMaxWidth(),
                         fontSize = 20.sp,
-                        textAlign = TextAlign.Center
-                    ),
-                    colors = TextFieldDefaults.textFieldColors(
-                        textColor = Color(0xFF233543),
-                        backgroundColor = Color(0xFFE4FFFF),
-                        cursorColor = Color(0xFFE0D9D9),
-                        focusedIndicatorColor = Color.Transparent,
-                        unfocusedIndicatorColor = Color.Transparent
+                        textAlign = TextAlign.Center,
+                        style = TextStyle(textAlign = TextAlign.Center),
+                        color = Color(0xFF8A8F99)
                     )
+                },
+                modifier = Modifier.fillMaxWidth(),
+                shape = RoundedCornerShape(10.dp),
+                textStyle = TextStyle(
+                    color = Color(0xFF233543),
+                    fontSize = 20.sp,
+                    textAlign = TextAlign.Center
+                ),
+                colors = TextFieldDefaults.textFieldColors(
+                    textColor = Color(0xFF233543),
+                    backgroundColor = Color(0xFFE4FFFF),
+                    cursorColor = Color(0xFFE0D9D9),
+                    focusedIndicatorColor = Color.Transparent,
+                    unfocusedIndicatorColor = Color.Transparent
                 )
+            )
 
-                Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(16.dp))
 
-                searchResults?.let {
-                    it.fold(
-                        onSuccess = { results ->
-                            ResultsList(results, navigateToDetails)
-                        },
-                        onFailure = { error ->
-                            Text("Error: ${error.message}", color = Color.Red)
-                        }
-                    )
-                }
+            searchResults?.let {
+                it.fold(
+                    onSuccess = { results ->
+                        ResultsList(results, navigateToDetails)
+                    },
+                    onFailure = { error ->
+                        Text("Error: ${error.message}", color = Color.Red)
+                    }
+                )
             }
         }
+
     }
 }

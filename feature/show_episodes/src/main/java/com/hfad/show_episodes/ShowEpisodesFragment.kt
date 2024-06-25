@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.hfad.core.BaseFragment
@@ -54,7 +53,7 @@ class ShowEpisodesFragment : BaseFragment(R.layout.fragment_show_episodes) {
                             topMargin = 15
                         }
                         button.layoutParams = layoutParams
-                        button.setTextColor(resources.getColor(R.color.c0eacb, null))
+                        button.setTextColor(resources.getColor(R.color.main_text_color, null))
                         button.textSize = 15f
                         button.gravity = Gravity.CENTER
                         button.setBackgroundResource(R.drawable.border_background)

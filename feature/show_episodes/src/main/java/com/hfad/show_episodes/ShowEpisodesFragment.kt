@@ -38,14 +38,13 @@ class ShowEpisodesFragment : BaseFragment(R.layout.fragment_show_episodes) {
                     binding.episodesContainer.removeAllViews()
                     for (episode in 1..episodesInfo.episodes.size) {
                         val button = Button(requireContext()).apply {
-                            text = "Episode $episode"
+                            text = "${getString(R.string.txt_episode_preffix)} $episode"
                             setOnClickListener {
                                 (activity as com.hfad.navigation.Navigator).navigateShowEpisodesToShowEpisode(
                                     episodesInfo.title, args.seasonNumber, episode.toString()
                                 )
                             }
                         }
-                        Log.d("nowornever", "showEpisodes ${episodesInfo.title}")
                         val layoutParams = ViewGroup.MarginLayoutParams(
                             ViewGroup.LayoutParams.MATCH_PARENT,
                             ViewGroup.LayoutParams.WRAP_CONTENT
@@ -66,7 +65,6 @@ class ShowEpisodesFragment : BaseFragment(R.layout.fragment_show_episodes) {
             )
         }
 
-        // Проверьте, что seasonNumber является числом перед вызовом toInt()
         val seasonNumber = args.seasonNumber.toIntOrNull()
 
         if (seasonNumber != null) {

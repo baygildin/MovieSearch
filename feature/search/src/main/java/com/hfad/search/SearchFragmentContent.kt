@@ -24,6 +24,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -31,6 +32,7 @@ import androidx.compose.ui.unit.sp
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+
 
 @Composable
 fun SearchFragmentContent(searchViewModel: SearchViewModel, navigateToDetails: (String) -> Unit) {
@@ -58,7 +60,7 @@ fun SearchFragmentContent(searchViewModel: SearchViewModel, navigateToDetails: (
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
-                text = "Movie Search",
+                text = stringResource(id = R.string.txt_app_title),
                 modifier = Modifier.padding(vertical = 20.dp),
                 color = Color(0xFFE0D9D9),
                 fontSize = 20.sp,
@@ -75,7 +77,7 @@ fun SearchFragmentContent(searchViewModel: SearchViewModel, navigateToDetails: (
                 },
                 placeholder = {
                     Text(
-                        "Введите название",
+                        stringResource(id = R.string.message_hint),
                         modifier = Modifier.fillMaxWidth(),
                         fontSize = 20.sp,
                         textAlign = TextAlign.Center,

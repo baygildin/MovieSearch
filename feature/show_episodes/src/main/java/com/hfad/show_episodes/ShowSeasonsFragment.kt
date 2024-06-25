@@ -39,7 +39,7 @@ class ShowSeasonsFragment : BaseFragment(R.layout.fragment_show_seasons) {
                     binding.seasonsContainer.removeAllViews()
                     for (season in 1..seasons.totalSeasons.toInt()) {
                         val button = Button(requireContext()).apply {
-                            text = "Season $season"
+                            text = "${getString(R.string.txt_episode_preffix)} $season"
                             setOnClickListener {
                                 (activity as com.hfad.navigation.Navigator).navigateShowSeasonsToShowEpisodes(
                                     seasons.title, season.toString()

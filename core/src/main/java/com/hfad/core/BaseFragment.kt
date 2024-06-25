@@ -17,7 +17,7 @@ abstract class BaseFragment(layoutId: Int) : Fragment(layoutId) {
 
         val toolbar: Toolbar = view.findViewById(R.id.toolbar)
         (activity as AppCompatActivity).setSupportActionBar(toolbar)
-        (activity as AppCompatActivity).supportActionBar?.title = "Movie Search"
+        (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.txt_app_title)
 
         toolbar.setNavigationIcon(R.drawable.arrow_back_nav)
         toolbar.setNavigationOnClickListener {

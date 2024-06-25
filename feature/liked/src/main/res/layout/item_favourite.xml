@@ -9,6 +9,6 @@
         android:id="@+id/imdbIdTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="#C0EACB"
+        android:textColor="@color/main_text_color"
         android:textSize="20sp"/>
 </LinearLayout>

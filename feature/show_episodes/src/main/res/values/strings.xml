@@ -1,8 +1,4 @@
 <resources>
-    <string name="app_name">Movie Search</string>
-    <string name="start">Начать поиск</string>
-    <string name="details_screen">К постеру и описанию</string>
-    <string name="next">Next</string>
-    <string name="message_hint">Введите название</string>
-    <string name="poster_to_maxSize">Увеличить постер на весь экран</string>
+    <string name="txt_season_preffix">Season</string>
+    <string name="txt_episode_preffix">Episode</string>
 </resources>

@@ -20,7 +20,6 @@ class ShowSeasonsViewModel @Inject constructor(
     val seasons: LiveData<Result<SearchResponseBySeason>> = _seasons
 
     fun fetchSeasons(id: String) {
-        Log.d("nowornever", "seasons vm ${id}")
         viewModelScope.launch {
             try {
                 val result = omdbApi.searchSeasonByIdAndSeason(id, "1")

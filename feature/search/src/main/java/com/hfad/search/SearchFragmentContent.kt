@@ -24,6 +24,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
@@ -43,16 +44,16 @@ fun SearchFragmentContent(searchViewModel: SearchViewModel, navigateToDetails: (
 
     MaterialTheme(
         colors = MaterialTheme.colors.copy(
-            background = Color(0xFF1D1C25),
-            onBackground = Color(0xFFFAEFD9),
-            primary = Color(0xFF1D1C25),
-            onPrimary = Color(0xFF1D1C25)
+            background = colorResource(id = R.color.background_color),
+            onBackground = colorResource(id = R.color.on_background_color),
+            primary = colorResource(id = R.color.primary_color),
+            onPrimary = colorResource(id = R.color.on_primary_color)
         )
     ) {
         val scrollState = rememberScrollState()
         Column(
             modifier = Modifier
-                .background(Color(0xFF1D1C25))
+                .background(colorResource(id = R.color.background_color))
                 .verticalScroll(state = scrollState)
                 .fillMaxSize()
                 .padding(16.dp)
@@ -62,7 +63,7 @@ fun SearchFragmentContent(searchViewModel: SearchViewModel, navigateToDetails: (
             Text(
                 text = stringResource(id = R.string.txt_app_title),
                 modifier = Modifier.padding(vertical = 20.dp),
-                color = Color(0xFFE0D9D9),
+                color = colorResource(id = R.color.text_color),//Color(0xFFE0D9D9)
                 fontSize = 20.sp,
             )
             TextField(
@@ -82,20 +83,20 @@ fun SearchFragmentContent(searchViewModel: SearchViewModel, navigateToDetails: (
                         fontSize = 20.sp,
                         textAlign = TextAlign.Center,
                         style = TextStyle(textAlign = TextAlign.Center),
-                        color = Color(0xFF8A8F99)
+                        color = colorResource(id = R.color.placeholder)
                     )
                 },
                 modifier = Modifier.fillMaxWidth(),
                 shape = RoundedCornerShape(10.dp),
                 textStyle = TextStyle(
-                    color = Color(0xFF233543),
+                    color = colorResource(id = R.color.text_field_text_color),
                     fontSize = 20.sp,
                     textAlign = TextAlign.Center
                 ),
                 colors = TextFieldDefaults.textFieldColors(
-                    textColor = Color(0xFF233543),
-                    backgroundColor = Color(0xFFE4FFFF),
-                    cursorColor = Color(0xFFE0D9D9),
+                    textColor = colorResource(id = R.color.text_field_text_color),
+                    backgroundColor = colorResource(id = R.color.text_field_background_color),
+                    cursorColor = colorResource(id = R.color.cursor_color),
                     focusedIndicatorColor = Color.Transparent,
                     unfocusedIndicatorColor = Color.Transparent
                 )

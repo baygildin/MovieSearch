@@ -8,14 +8,14 @@ plugins {
 }
 
 android {
-    namespace 'com.hfad.mytestapp'
+    namespace 'com.hfad.movie_search'
     compileSdk 34
     buildFeatures {
         viewBinding true
     }
 
     defaultConfig {
-        applicationId "com.hfad.mytestapp"
+        applicationId "com.hfad.movie_search"
         minSdk 26
         targetSdk 34
         versionCode 1

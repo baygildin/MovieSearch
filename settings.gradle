@@ -13,7 +13,7 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "MyTestApp"
+rootProject.name = "MovieSearch"
 include ':app'
 include ':feature:show_episodes'
 include ':feature:search'

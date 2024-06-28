@@ -41,7 +41,7 @@ class ShowEpisodesFragment : BaseFragment(R.layout.fragment_show_episodes) {
                             text = "${getString(R.string.txt_episode_preffix)} $episode"
                             setOnClickListener {
                                 (activity as com.hfad.navigation.Navigator).navigateShowEpisodesToShowEpisode(
-                                    episodesInfo.title, args.seasonNumber, episode.toString()
+                                    episodesInfo.title, args.seasonNumber.toString(), episode.toString()
                                 )
                             }
                         }
@@ -65,7 +65,7 @@ class ShowEpisodesFragment : BaseFragment(R.layout.fragment_show_episodes) {
             )
         }
 
-        val seasonNumber = args.seasonNumber.toIntOrNull()
+        val seasonNumber = args.seasonNumber.toString()
 
         if (seasonNumber != null) {
             viewModel.fetchEpisodes(args.title, seasonNumber)

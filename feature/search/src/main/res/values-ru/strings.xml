@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MyTestApp</string>
+    <string name="app_name">MovieSearch</string>
     <string name="txt_app_title">Movie Search</string>
     <string name="start">Начать поиск</string>
     <string name="details_screen">Экран деталей:постер и описание</string>

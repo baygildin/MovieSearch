@@ -1,10 +1,10 @@
 package com.hfad.show_episodes
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.hfad.search.OmdbApi
 import com.hfad.search.model.SearchResponseEpisodeFullInfo
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -12,20 +12,24 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ShowEpisodeViewModel @Inject constructor(
-    private val omdbApi: OmdbApi
+    private val repository: ShowEpisodeRepository
 ) : ViewModel() {
 
     private val _episode = MutableLiveData<Result<SearchResponseEpisodeFullInfo>>()
     val episode: LiveData<Result<SearchResponseEpisodeFullInfo>> = _episode
 
-    fun fetchEpisode(title: String, seasonNumber: Int, episodeNumber: Int) {
+    fun fetchEpisode(title: String, seasonNumber: String, episodeNumber: String) {
         viewModelScope.launch {
-            try {
-                val result = omdbApi.searchByEpisode(title, seasonNumber.toString(), episodeNumber.toString())
-                _episode.value = Result.success(result)
-            } catch (e: Exception) {
-                _episode.value = Result.failure(e)
+            val result = repository.getEpisodeByTitleAndSeasonAndEpisodeNumber(
+                title,
+                seasonNumber,
+                episodeNumber
+            )
+            _episode.value = result
+            result.onSuccess {
+                Log.d("myError42", "watch in fetchEpisode")
             }
+            result.onFailure { Log.d("myError42", "watch e in fetchEpisode") }
         }
     }
 }

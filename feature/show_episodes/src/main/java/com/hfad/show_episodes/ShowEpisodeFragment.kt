@@ -73,8 +73,8 @@ class ShowEpisodeFragment : BaseFragment(R.layout.fragment_show_episode) {
         }
 
 
-        val seasonNumber = args.seasonNumber.toIntOrNull()
-        val episodeNumber = args.episodeNumber.toIntOrNull()
+        val seasonNumber = args.seasonNumber
+        val episodeNumber = args.episodeNumber
 
         if (seasonNumber != null && episodeNumber != null) {
             viewModel.fetchEpisode(args.title, seasonNumber, episodeNumber)

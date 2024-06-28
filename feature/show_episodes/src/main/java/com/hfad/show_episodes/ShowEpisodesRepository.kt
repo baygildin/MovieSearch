@@ -1,0 +1,18 @@
+package com.hfad.show_episodes
+
+import com.hfad.search.OmdbApi
+import com.hfad.search.model.SearchResponseBySeason
+import javax.inject.Inject
+
+class ShowEpisodesRepository @Inject constructor(
+    val omdbApi: OmdbApi
+) {
+    suspend fun getEpisodesByTitleAndSeasonNumber(title: String, seasonNumber: String):Result<SearchResponseBySeason> {
+        return try {
+            val result = omdbApi.searchBySeason(title, seasonNumber.toString())
+            Result.success(result)
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
+}

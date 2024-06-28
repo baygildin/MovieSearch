@@ -1,4 +1,4 @@
-package com.hfad.mytestapp
+package com.hfad.movie_search
 
 import android.os.Bundle
 import android.util.Log

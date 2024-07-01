@@ -6,11 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.hfad.core.BaseFragment
 import com.hfad.show_episodes.databinding.FragmentShowEpisodeBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class ShowEpisodeFragment : BaseFragment(R.layout.fragment_show_episode) {
@@ -34,61 +36,64 @@ class ShowEpisodeFragment : BaseFragment(R.layout.fragment_show_episode) {
         val shimmerFrameLayout = binding.shimmerFrame
         val realContent = binding.realContent
         shimmerFrameLayout.startShimmer()
-        viewModel.episode.observe(viewLifecycleOwner) { result ->
-            result.fold(
-                onSuccess = { episode ->
-                    shimmerFrameLayout.stopShimmer()
-                    shimmerFrameLayout.animate()
-                        .alpha(0f)
-                        .setDuration(500)
-                        .withEndAction {
-                            shimmerFrameLayout.visibility = View.GONE
-                            realContent.apply {
-                                alpha = 0f
-                                visibility = View.VISIBLE
-                                animate()
-                                    .alpha(1f)
-                                    .setDuration(100)
-                                    .start()
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.episode.collect { result ->
+                result?.fold(
+                    onSuccess = { episode ->
+                        shimmerFrameLayout.stopShimmer()
+                        shimmerFrameLayout.animate()
+                            .alpha(0f)
+                            .setDuration(500)
+                            .withEndAction {
+                                shimmerFrameLayout.visibility = View.GONE
+                                realContent.apply {
+                                    alpha = 0f
+                                    visibility = View.VISIBLE
+                                    animate()
+                                        .alpha(1f)
+                                        .setDuration(100)
+                                        .start()
+                                }
                             }
-                        }
-                        .start()
-                    binding.tvEpisodeInfoBodyTitle.text = episode.title
-                    binding.tvEpisodeInfoBodyImdb.text = episode.imdbRating
-                    binding.tvEpisodeInfoBodyYear.text = episode.year
-                    binding.tvEpisodeInfoBodyDirector.text = episode.director
-                    binding.tvEpisodeInfoBodyActors.text = episode.actors
-                    binding.tvEpisodeInfoBodyPlot.text = episode.plot
+                            .start()
+                        binding.tvEpisodeInfoBodyTitle.text = episode.title
+                        binding.tvEpisodeInfoBodyImdb.text = episode.imdbRating
+                        binding.tvEpisodeInfoBodyYear.text = episode.year
+                        binding.tvEpisodeInfoBodyDirector.text = episode.director
+                        binding.tvEpisodeInfoBodyActors.text = episode.actors
+                        binding.tvEpisodeInfoBodyPlot.text = episode.plot
 
-                    Glide.with(requireContext())
-                        .load(episode.poster)
-                        .into(binding.ivPoster)
-                },
-                onFailure = { error ->
-                    shimmerFrameLayout.stopShimmer()
-                    shimmerFrameLayout.visibility = View.GONE
-                    Log.e("ShowEpisodeFragment", "Error fetching episode", error)
-                }
-            )
+                        Glide.with(requireContext())
+                            .load(episode.poster)
+                            .into(binding.ivPoster)
+                    },
+                    onFailure = { error ->
+                        shimmerFrameLayout.stopShimmer()
+                        shimmerFrameLayout.visibility = View.GONE
+                        Log.e("ShowEpisodeFragment", "Error fetching episode", error)
+
+                    }
+                )
+            }
         }
 
 
-        val seasonNumber = args.seasonNumber
-        val episodeNumber = args.episodeNumber
+            val seasonNumber = args.seasonNumber
+            val episodeNumber = args.episodeNumber
 
-        if (seasonNumber != null && episodeNumber != null) {
-            viewModel.fetchEpisode(args.title, seasonNumber, episodeNumber)
-        } else {
-            Log.e(
-                "ShowEpisodeFragment",
-                "Invalid season or episode number: ${args.seasonNumber}, ${args.episodeNumber}"
-            )
+            if (seasonNumber != null && episodeNumber != null) {
+                viewModel.fetchEpisode(args.title, seasonNumber, episodeNumber)
+            } else {
+                Log.e(
+                    "ShowEpisodeFragment",
+                    "Invalid season or episode number: ${args.seasonNumber}, ${args.episodeNumber}"
+                )
+            }
         }
-    }
 
         override fun onDestroyView() {
             super.onDestroyView()
             _binding = null
         }
-}
+    }
 

@@ -7,12 +7,10 @@ import javax.inject.Inject
 class ShowEpisodesRepository @Inject constructor(
     val omdbApi: OmdbApi
 ) {
-    suspend fun getEpisodesByTitleAndSeasonNumber(title: String, seasonNumber: String):Result<SearchResponseBySeason> {
-        return try {
-            val result = omdbApi.searchBySeason(title, seasonNumber.toString())
-            Result.success(result)
-        } catch (e: Exception) {
-            Result.failure(e)
-        }
+    suspend fun getEpisodesByTitleAndSeasonNumber(
+        title: String,
+        seasonNumber: String
+    ): SearchResponseBySeason {
+        return omdbApi.searchBySeason(title, seasonNumber.toString())
     }
 }

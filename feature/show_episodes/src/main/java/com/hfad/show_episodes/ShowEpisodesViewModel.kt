@@ -1,34 +1,39 @@
 package com.hfad.show_episodes
 
 import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.hfad.search.model.SearchResponseBySeason
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class ShowEpisodesViewModel @Inject constructor(
-    val repository: ShowEpisodesRepository
+    private val repository: ShowEpisodesRepository
 ) : ViewModel() {
 
-    private val _episodes = MutableLiveData<Result<SearchResponseBySeason>>()
-    val episodes: LiveData<Result<SearchResponseBySeason>> = _episodes
+    private val _episodes = MutableStateFlow<Result<SearchResponseBySeason>?>(null)
+    val episodes: StateFlow<Result<SearchResponseBySeason>?> = _episodes
 
     fun fetchEpisodes(title: String, seasonNumber: String) {
         viewModelScope.launch {
-            val result = repository.getEpisodesByTitleAndSeasonNumber(title, seasonNumber)
-            _episodes.value = result
-            result.onSuccess {
-                Log.d("myError42", "ok fetchEpisodes")
+            flow {
+                try {
+                    val result = repository.getEpisodesByTitleAndSeasonNumber(title, seasonNumber)
+                    emit(Result.success(result))
+                } catch (e: Exception) {
+                    emit(Result.failure<SearchResponseBySeason>(e))
+                    Log.e("MyError42", "$e in catch in fetchEpisode in showepisodeVM")
+                }
             }
-            result.onFailure {
-                Log.e("myError42", "e in fetchepisodes ")
-            }
+                .collect { result ->
+                    _episodes.value = result
+                }
         }
-
     }
 }
+

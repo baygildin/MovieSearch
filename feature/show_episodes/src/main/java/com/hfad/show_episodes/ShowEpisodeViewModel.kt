@@ -1,12 +1,13 @@
 package com.hfad.show_episodes
 
 import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.hfad.search.model.SearchResponseEpisodeFullInfo
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -15,21 +16,26 @@ class ShowEpisodeViewModel @Inject constructor(
     private val repository: ShowEpisodeRepository
 ) : ViewModel() {
 
-    private val _episode = MutableLiveData<Result<SearchResponseEpisodeFullInfo>>()
-    val episode: LiveData<Result<SearchResponseEpisodeFullInfo>> = _episode
+    private val _episode = MutableStateFlow<Result<SearchResponseEpisodeFullInfo>?>(null)
+    val episode: StateFlow<Result<SearchResponseEpisodeFullInfo>?> = _episode
 
     fun fetchEpisode(title: String, seasonNumber: String, episodeNumber: String) {
         viewModelScope.launch {
-            val result = repository.getEpisodeByTitleAndSeasonAndEpisodeNumber(
-                title,
-                seasonNumber,
-                episodeNumber
-            )
-            _episode.value = result
-            result.onSuccess {
-                Log.d("myError42", "watch in fetchEpisode")
+            flow {
+                try {
+                    val result = repository.getEpisodeByTitleAndSeasonAndEpisodeNumber(
+                        title,
+                        seasonNumber,
+                        episodeNumber
+                    )
+                    emit(Result.success(result))
+                } catch (e: Exception) {
+                    emit(Result.failure < SearchResponseEpisodeFullInfo>(e))
+                }
             }
-            result.onFailure { Log.d("myError42", "watch e in fetchEpisode") }
+                .collect { result ->
+                    _episode.value = result
+                }
         }
     }
 }

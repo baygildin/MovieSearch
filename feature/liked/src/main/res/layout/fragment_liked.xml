@@ -17,15 +17,15 @@
         android:elevation="4dp"
         app:popupTheme="@style/AppTheme.PopupOverlay"
         style="@style/ToolbarStyle"/>
-    <TextView
-        android:layout_width="match_parent"
+
+   <TextView
+        android:layout_width="271dp"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:gravity="center"
         android:text="@string/txt_liked"
         android:textColor="@color/main_text_color"
-        android:gravity="center"
-        android:textSize="24sp"
-        android:layout_marginBottom="10dp"/>
-
+        android:textSize="24sp" />
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"

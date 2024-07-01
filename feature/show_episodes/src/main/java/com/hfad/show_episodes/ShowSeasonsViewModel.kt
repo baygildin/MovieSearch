@@ -1,12 +1,12 @@
 package com.hfad.show_episodes
 
-import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.hfad.search.model.SearchResponseBySeason
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -16,19 +16,22 @@ class ShowSeasonsViewModel @Inject constructor(
     private val repository: ShowSeasonsRepository
 ) : ViewModel() {
 
-    private val _seasons = MutableLiveData<Result<SearchResponseBySeason>>()
-    val seasons: LiveData<Result<SearchResponseBySeason>> = _seasons
+    private val _seasons = MutableStateFlow<Result<SearchResponseBySeason>?>(null)
+    val seasons: StateFlow<Result<SearchResponseBySeason>?> = _seasons
 
     fun fetchSeasons(id: String) {
         viewModelScope.launch {
-            val result = repository.getSeasonsByIdAndSeasons(id)
-            _seasons.value = result
-            result.onSuccess {
-                Log.d("myError42", "watch in fetchSeasons")
+            flow {
+                try {
+                    val result = repository.getSeasonsByIdAndSeasons(id)
+                    emit(Result.success(result))
+                } catch (e: Exception) {
+                    emit(Result.failure < SearchResponseBySeason>(e))
+                }
             }
-            result.onFailure {
-                Log.e("myError", "fetchSeasons failure")
-            }
+                .collect { result ->
+                    _seasons.value = result
+                }
         }
     }
 }

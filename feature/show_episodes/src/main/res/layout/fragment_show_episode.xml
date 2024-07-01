@@ -242,13 +242,14 @@
 
             <TextView
                 android:id="@+id/tv_episode_Info_body_plot"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text=""
                 android:textColor="@color/main_text_color"
                 android:textSize="20sp"
                 app:layout_constraintStart_toEndOf="@id/tv_episode_Info_title_plot"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>
 

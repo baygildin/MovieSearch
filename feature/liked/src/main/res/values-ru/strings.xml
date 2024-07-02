@@ -1,3 +1,5 @@
 <resources>
     <string name="txt_liked">Избранные медиа</string>
+    <string name="toast_sorted_by_date">Отсортировано по дате добавления</string>
+    <string name="toast_sorted_by_title">Отсортировано по названию</string>
 </resources>

@@ -15,4 +15,6 @@ class LikedViewModel @Inject constructor(
 
     val favouriteItems: Flow<List<FavouriteItem>> = favouriteDao.getAllFavourites()
         .map { items -> items.sortedByDescending { it.dateAdded } }
+    val favouriteItemsByName: Flow<List<FavouriteItem>> = favouriteDao.getAllFavourites()
+        .map { items -> items.sortedBy{it.title}}
 }

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -16,6 +17,7 @@ import kotlinx.coroutines.launch
 class LikedFragment : BaseFragment(R.layout.fragment_liked) {
     private val viewModel: LikedViewModel by viewModels()
     private lateinit var binding: FragmentLikedBinding
+    private var isSortedByDate = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,6 +40,29 @@ class LikedFragment : BaseFragment(R.layout.fragment_liked) {
         viewLifecycleOwner.lifecycleScope.launch{
             viewModel.favouriteItems.collect{  items ->
                 adapter.updateItems(items)}
+        }
+        binding.btnSort.setOnClickListener {
+            if(isSortedByDate){
+                Toast.makeText(context, context?.getResources()?.getString(R.string.toast_sorted_by_date), Toast.LENGTH_SHORT).show()
+                binding.abcIcon.setImageResource(R.drawable.baseline_abc_24)
+                viewLifecycleOwner.lifecycleScope.launch {
+                    viewModel.favouriteItems.collect { items ->
+                        adapter.updateItems(items)
+                    }
+                }
+            }
+            else {
+                Toast.makeText(context, context?.getResources()?.getString(R.string.toast_sorted_by_title), Toast.LENGTH_SHORT).show()
+                binding.abcIcon.setImageResource(R.drawable.baseline_access_time_24)
+
+                viewLifecycleOwner.lifecycleScope.launch {
+                    viewModel.favouriteItemsByName.collect { items ->
+                        adapter.updateItems(items)
+                    }
+                }
+            }
+            isSortedByDate = !isSortedByDate
+
         }
     }
 }

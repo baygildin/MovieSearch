@@ -22,5 +22,5 @@ interface FavouriteDao {
     fun getAllFavourites(): Flow<List<FavouriteItem>>
 
     @Query("SELECT * FROM favourites WHERE imdbId = :imdbId")
-    suspend fun getFavouriteByImdbId(imdbId: String): FavouriteItem?
+    suspend fun getFavouriteByImdbId(imdbId: String): FavouriteItem
 }

@@ -1,59 +1,58 @@
 package com.hfad.media_details
 
-import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.hfad.search.OmdbApi
-import com.hfad.search.model.FavouriteDao
-import com.hfad.search.model.FavouriteItem
+import com.hfad.movie_details.MediaDetailsDbRepository
+import com.hfad.movie_details.MediaDetailsOmdbRepository
 import com.hfad.search.model.SearchResponseById
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class MediaDetailsViewModel @Inject constructor(
-    private val omdbApi: OmdbApi,
-    private val favouriteDao: FavouriteDao
+
+    private val dbRepository: MediaDetailsDbRepository,
+    private val omdbRepository: MediaDetailsOmdbRepository
+
 ) : ViewModel() {
 
-    private val _mediaDetails = MutableLiveData<SearchResponseById>()
-    val mediaDetails: LiveData<SearchResponseById> get() = _mediaDetails
+    private val _mediaDetails = MutableStateFlow<Result<SearchResponseById>?>(null)
+    val mediaDetails: StateFlow<Result<SearchResponseById>?> get() = _mediaDetails
 
-    private val _isFavourite = MutableLiveData<Boolean>()
-    val isFavourite: LiveData<Boolean> get() = _isFavourite
+    private val _isFavourite = MutableStateFlow(false)
+    val isFavourite: StateFlow<Boolean> get() = _isFavourite
+
 
     fun fetchMediaDetails(mediaId: String) {
         viewModelScope.launch {
-            try {
-                val result = omdbApi.searchById(mediaId)
-                _mediaDetails.value = result
-
-                val existingFavourite = favouriteDao.getFavouriteByImdbId(mediaId)
-                _isFavourite.value = existingFavourite != null
-            } catch (e: Exception) {
-                Log.d("myError42", "in fun fetch media")
+            flow {
+                try {
+                    val result = omdbRepository.getMediaInfoById(mediaId)
+                    _isFavourite.value = checkIsMediaFavorite(mediaId)
+                    emit(Result.success(result))
+                } catch (e: Exception) {
+                    emit(Result.failure<SearchResponseById>(e))
+                }
             }
+                .collect { result ->
+                    _mediaDetails.value = result
+                }
         }
+    }
+    private suspend fun checkIsMediaFavorite(mediaId: String): Boolean{
+        return dbRepository.checkIsMediaFavorite(mediaId)
+
     }
 
     fun toggleFavourite(mediaId: String, title: String, year: String, dateadded: String) {
         viewModelScope.launch {
-            try {
-                val existingFavourite = favouriteDao.getFavouriteByImdbId(mediaId)
-                if (existingFavourite != null) {
-                    favouriteDao.removeFavourite(existingFavourite)
-                    _isFavourite.value = false
-                } else {
-                    val favouriteItem = FavouriteItem(null, mediaId, title, year, dateadded)
-                    favouriteDao.addFavourite(favouriteItem)
-                    _isFavourite.value = true
-                }
-            } catch (e: Exception) {
-                Log.d("myError", "${e} in toggleFavourite")
-            }
+
+            _isFavourite.value = dbRepository.makeItFavorite(mediaId, title, year, dateadded)
+
         }
     }
 }

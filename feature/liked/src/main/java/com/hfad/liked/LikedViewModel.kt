@@ -12,6 +12,7 @@ import javax.inject.Inject
 class LikedViewModel @Inject constructor(
     private val favouriteDao: FavouriteDao
 ) : ViewModel() {
+    git add .
 
     val favouriteItems: Flow<List<FavouriteItem>> = favouriteDao.getAllFavourites()
         .map { items -> items.sortedByDescending { it.dateAdded } }

@@ -5,6 +5,8 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.findNavController
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 import com.hfad.core.MenuItemClickListener
 import com.hfad.media_details.MediaDetailsFragmentDirections
 import com.hfad.poster.PosterFragmentDirections

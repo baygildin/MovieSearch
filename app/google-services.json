@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "688788663441",
+    "project_id": "moviesearchandmatch-60fa6",
+    "storage_bucket": "moviesearchandmatch-60fa6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:688788663441:android:31edbed43e22b74e2ae330",
+        "android_client_info": {
+          "package_name": "com.hfad.movie_search"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDzqKuul1uCrurmDostq2KSpfsWo5iJ5wI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

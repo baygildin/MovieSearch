@@ -14,6 +14,7 @@ interface Navigator {
     fun navigateShowEpisodeToLiked()
     fun navigateShowEpisodesToLiked()
     fun navigateLikedToMediaDetailsWithId(id: String)
+    fun navigateSearchToLogin()
 
 
 

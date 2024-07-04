@@ -5,6 +5,8 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.hfad.core.MenuItemClickListener
@@ -21,13 +23,41 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity(), com.hfad.navigation.Navigator, MenuItemClickListener {
+    private lateinit var auth: FirebaseAuth
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         installSplashScreen()
         setContentView(R.layout.activity_main)
+        Log.d("firebaseEnter","1")
+        val auth = FirebaseAuth.getInstance()
+        Log.d("firebaseEnter","2")
+        if (auth.currentUser == null) {
+            Log.d("firebaseEnter","3")
+
+            val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+            val navController = navHostFragment.navController
+            navController.navigate(R.id.loginFragment)
+
+
+//            val action = SearchFragmentDirections.navigateSearchToLogin()
+//            findNavController(R.id.nav_host_fragment).navigate(action)
+
+
+
+            // Navigate to LoginFragment
+//            val navController = findNavController(R.id.nav_host_fragment)
+//            Log.d("firebaseEnter","4")
+//            navController.navigate(R.id.loginFragment)
+            Log.d("firebaseEnter","5")
+        }
     }
+
     override fun navigateSearchToMediaDetailsWithId(id: String) {
         val action = SearchFragmentDirections.navigateSearchToMediaDetailsWithId(id)
+        findNavController(R.id.nav_host_fragment).navigate(action)
+    }
+    override fun navigateSearchToLogin(){
+        val action = SearchFragmentDirections.navigateSearchToLogin()
         findNavController(R.id.nav_host_fragment).navigate(action)
     }
 

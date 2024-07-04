@@ -1,10 +1,15 @@
 package com.hfad.liked
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.hfad.core.BaseFragment
@@ -31,6 +36,24 @@ class FromFbLikedFragment : BaseFragment(R.layout.fragment_liked) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        onChangeListener(myRef)
 
+    }
+
+
+    private fun onChangeListener(dRef: DatabaseReference) {
+        dRef.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                binding.apply {
+                    txtFromFbDb.append("\n")
+                    Log.d("likedfragment", "text ${txtFromFbDb.toString()}")
+                    txtFromFbDb.append("salam ${snapshot.value.toString()}")
+                }
+
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+            }
+        })
     }
 }

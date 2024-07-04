@@ -1,7 +1,6 @@
 package com.hfad.liked
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,18 +11,19 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import com.hfad.core.BaseFragment
 import com.hfad.liked.databinding.FragmentFromFbLikedBinding
+import com.hfad.search.model.FavouriteItem
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class FromFbLikedFragment : BaseFragment(R.layout.fragment_liked) {
+class FromFbLikedFragment : BaseFragment(R.layout.fragment_from_fb_liked) {
     private val viewModel: FromFbLikedViewModel by viewModels()
     private lateinit var binding: FragmentFromFbLikedBinding
-    private var isSortedByDate = false
-
     val database = Firebase.database("https://moviesearchandmatch-60fa6-default-rtdb.europe-west1.firebasedatabase.app")
-    val myRef = database.getReference("message")
+    val myRef = database.getReference("DBbaigildinsamatgmailcom")
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -46,8 +46,19 @@ class FromFbLikedFragment : BaseFragment(R.layout.fragment_liked) {
             override fun onDataChange(snapshot: DataSnapshot) {
                 binding.apply {
                     txtFromFbDb.append("\n")
-                    Log.d("likedfragment", "text ${txtFromFbDb.toString()}")
-                    txtFromFbDb.append("salam ${snapshot.value.toString()}")
+//                    Log.d("FromFbLikedFragment", "text ${txtFromFbDb.toString()}")
+//                    txtFromFbDb.append("salam ${snapshot.value.toString()}")
+//                    txtFromFbDb.append("\n")
+
+
+                    val favouritesList: List<FavouriteItem> = parseFavouritesJson(snapshot.value.toString())
+                    println("JSON123: $snapshot")
+
+                    favouritesList.forEach{it ->
+                        txtFromFbDb.append(it.toString())
+                        txtFromFbDb.append("\n")
+                    }
+
                 }
 
             }
@@ -55,5 +66,12 @@ class FromFbLikedFragment : BaseFragment(R.layout.fragment_liked) {
             override fun onCancelled(error: DatabaseError) {
             }
         })
+    }
+
+    fun parseFavouritesJson(json: String): List<FavouriteItem> {
+        val gson = Gson()
+
+        val type = object : TypeToken<List<FavouriteItem>>() {}.type
+        return gson.fromJson(json, type)
     }
 }

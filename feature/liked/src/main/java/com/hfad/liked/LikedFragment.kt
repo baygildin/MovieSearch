@@ -28,7 +28,7 @@ class LikedFragment : BaseFragment(R.layout.fragment_liked) {
 
     val database =
         Firebase.database("https://moviesearchandmatch-60fa6-default-rtdb.europe-west1.firebasedatabase.app")
-    val myRef = database.getReference("message")
+    val myRef = database.getReference("DBbaigildinsamatgmailcom")
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -55,13 +55,16 @@ class LikedFragment : BaseFragment(R.layout.fragment_liked) {
 
             val json_liked_media_to_cloud = viewModel.getFavouritesJson()
             Log.d("likedfragment", " btn send to cloud text ${json_liked_media_to_cloud}")
-            myRef.setValue("new from liked fragment after sep ${json_liked_media_to_cloud}")
+            myRef.setValue("${json_liked_media_to_cloud}")
         }
 
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.favouriteItems.collect { items ->
                 adapter.updateItems(items)
             }
+        }
+        binding.btnReadFriendFavorites.setOnClickListener{
+            (activity as com.hfad.navigation.Navigator).navigateLikedToFromFbLiked()
         }
         binding.btnSort.setOnClickListener {
             if (isSortedByDate) {

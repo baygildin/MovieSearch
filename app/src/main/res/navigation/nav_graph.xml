@@ -12,7 +12,7 @@
     <include app:graph="@navigation/show_episode_nav_graph" />
     <include app:graph="@navigation/show_seasons_nav_graph" />
     <include app:graph="@navigation/liked_nav_graph" />
-    <include app:graph="@navigation/login_nav_graph" />
+    <include app:graph="@navigation/from_fb_liked_nav_graph" />
 
     <fragment
         android:id="@+id/searchFragment"
@@ -191,6 +191,9 @@
             android:id="@+id/deepLinkLikedFragment"
             app:uri="android-app://com.hfad.liked/LikedFragment" />
         <action
+            android:id="@+id/navigateLikedToFromFbLiked"
+            app:destination="@id/fromFbLikedFragment"/>
+        <action
             android:id="@+id/action_favorites_to_likedFragment"
             app:destination="@id/likedFragment" />
         <action
@@ -211,6 +214,17 @@
     <deepLink
         android:id="@+id/deepLinkLoginFragment"
         app:uri="android-app://com.hfad.movie_search/LoginFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/fromFbLikedFragment"
+        android:name="com.hfad.liked.FromFbLikedFragment"
+        android:label="FromFbLikedFragment"
+        tools:layout="@layout/fragment_from_fb_liked">
+        <deepLink
+            android:id="@+id/deepLinkFromFbLikedFragment"
+            app:uri="android-app://com.hfad.liked/FromFbLikedFragment" />
+
     </fragment>
 
 </navigation>

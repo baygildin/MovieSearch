@@ -194,6 +194,9 @@
             android:id="@+id/navigateLikedToFromFbLiked"
             app:destination="@id/fromFbLikedFragment"/>
         <action
+            android:id="@+id/navigateLikedToSearchFriend"
+            app:destination="@+id/searchFriendFragment"/>
+        <action
             android:id="@+id/action_favorites_to_likedFragment"
             app:destination="@id/likedFragment" />
         <action
@@ -226,6 +229,16 @@
             app:uri="android-app://com.hfad.liked/FromFbLikedFragment" />
 
     </fragment>
+    <fragment
+        android:id="@+id/searchFriendFragment"
+        android:name="com.hfad.liked.SearchFriendFragment"
+        android:label="SearchFriend"
+        tools:layout="@layout/fragment_search_friend">
+        <deepLink
+            android:id="@+id/deepLinkSearchFriendFragment"
+            app:uri="android-app://com.hfad.liked/SearchFriendFragment" />
+    </fragment>
+
 
 </navigation>
 

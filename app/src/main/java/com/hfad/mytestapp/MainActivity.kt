@@ -125,6 +125,10 @@ class MainActivity : AppCompatActivity(), com.hfad.navigation.Navigator, MenuIte
             LikedFragmentDirections.navigateLikedToFromFbLiked()
         findNavController(R.id.nav_host_fragment).navigate(action)
     }
+    override fun navigateLikedToSearchFriend(){
+        val action = LikedFragmentDirections.navigateLikedToSearchFriend()
+        findNavController(R.id.nav_host_fragment).navigate(action)
+    }
 
     override fun onMenuItemClicked(itemId: Int) {
         when (itemId) {

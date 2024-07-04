@@ -1,5 +1,4 @@
 package com.hfad.liked
-
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -17,7 +16,6 @@ import com.hfad.core.BaseFragment
 import com.hfad.liked.databinding.FragmentFromFbLikedBinding
 import com.hfad.search.model.FavouriteItem
 import dagger.hilt.android.AndroidEntryPoint
-
 @AndroidEntryPoint
 class FromFbLikedFragment : BaseFragment(R.layout.fragment_from_fb_liked) {
     private val viewModel: FromFbLikedViewModel by viewModels()
@@ -32,15 +30,10 @@ class FromFbLikedFragment : BaseFragment(R.layout.fragment_from_fb_liked) {
         binding = FragmentFromFbLikedBinding.inflate(inflater, container, false)
         return binding.root
     }
-
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         onChangeListener(myRef)
-
     }
-
-
     private fun onChangeListener(dRef: DatabaseReference) {
         dRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -49,8 +42,6 @@ class FromFbLikedFragment : BaseFragment(R.layout.fragment_from_fb_liked) {
 //                    Log.d("FromFbLikedFragment", "text ${txtFromFbDb.toString()}")
 //                    txtFromFbDb.append("salam ${snapshot.value.toString()}")
 //                    txtFromFbDb.append("\n")
-
-
                     val favouritesList: List<FavouriteItem> = parseFavouritesJson(snapshot.value.toString())
                     println("JSON123: $snapshot")
 
@@ -67,7 +58,6 @@ class FromFbLikedFragment : BaseFragment(R.layout.fragment_from_fb_liked) {
             }
         })
     }
-
     fun parseFavouritesJson(json: String): List<FavouriteItem> {
         val gson = Gson()
 

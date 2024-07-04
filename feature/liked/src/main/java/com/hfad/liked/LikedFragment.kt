@@ -47,6 +47,10 @@ class LikedFragment : BaseFragment(R.layout.fragment_liked) {
         }
         binding.recyclerView.adapter = adapter
         binding.recyclerView.layoutManager = LinearLayoutManager(context)
+        binding.btnSearchFriend.setOnClickListener {
+            (activity as com.hfad.navigation.Navigator).navigateLikedToSearchFriend()
+        }
+
         onChangeListener(myRef)
 
 

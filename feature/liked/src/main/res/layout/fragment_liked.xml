@@ -55,6 +55,8 @@
             android:text="@string/txt_liked"
             android:textColor="@color/main_text_color"
             android:textSize="24sp" />
+
+
         <ImageView
             android:id="@+id/btn_send_to_cloud"
             android:layout_width="24dp"
@@ -77,6 +79,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="text txt_from_fb_db"/>
+    <Button
+        android:id="@+id/btnSearchFriend"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Search Friend" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
@@ -84,4 +91,5 @@
         android:layout_height="match_parent"
         android:textColor="@color/main_text_color"
         android:textSize="18sp"/>
+
 </LinearLayout>

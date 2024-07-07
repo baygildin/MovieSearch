@@ -3,8 +3,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="16dp"
+    tools:context=".SearchFriendFragment">
+
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
@@ -38,4 +41,12 @@
         android:layout_height="wrap_content"
         android:text="Send Connection Request"
         android:visibility="gone" />
+
+
+
+    <TextView
+        android:id="@+id/tv_friendsFavouriteMediaList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="hello"/>
 </LinearLayout>

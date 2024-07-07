@@ -21,7 +21,7 @@ class FromFbLikedFragment : BaseFragment(R.layout.fragment_from_fb_liked) {
     private val viewModel: FromFbLikedViewModel by viewModels()
     private lateinit var binding: FragmentFromFbLikedBinding
     val database = Firebase.database("https://moviesearchandmatch-60fa6-default-rtdb.europe-west1.firebasedatabase.app")
-    val myRef = database.getReference("DBbaigildinsamatgmailcom")
+    val myRef = database.getReference("users")
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,9 +39,6 @@ class FromFbLikedFragment : BaseFragment(R.layout.fragment_from_fb_liked) {
             override fun onDataChange(snapshot: DataSnapshot) {
                 binding.apply {
                     txtFromFbDb.append("\n")
-//                    Log.d("FromFbLikedFragment", "text ${txtFromFbDb.toString()}")
-//                    txtFromFbDb.append("salam ${snapshot.value.toString()}")
-//                    txtFromFbDb.append("\n")
                     val favouritesList: List<FavouriteItem> = parseFavouritesJson(snapshot.value.toString())
                     println("JSON123: $snapshot")
 

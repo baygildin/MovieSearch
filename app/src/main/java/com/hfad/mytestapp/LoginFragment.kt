@@ -10,6 +10,8 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 import com.hfad.movie_search.databinding.FragmentLoginBinding
 
 class LoginFragment : Fragment() {
@@ -17,6 +19,8 @@ class LoginFragment : Fragment() {
 
     private lateinit var binding: FragmentLoginBinding
     private lateinit var auth: FirebaseAuth
+
+
 
 
     override fun onCreateView(
@@ -42,6 +46,10 @@ class LoginFragment : Fragment() {
 
         return binding.root
     }
+    private val database = Firebase.database("https://moviesearchandmatch-60fa6-default-rtdb.europe-west1.firebasedatabase.app")
+    private val emailToUidRef = database.getReference("emailToUid")
+    private val uidToEmailRef = database.getReference("uidToEmail")
+
 
 
     private fun createAccount(email: String, password: String) {
@@ -50,7 +58,13 @@ class LoginFragment : Fragment() {
                 if (task.isSuccessful) {
                     Log.d(TAG, "createUserWithEmail:success")
                     val user = auth.currentUser
+                    val auth = FirebaseAuth.getInstance()
+                    val userKey = auth.currentUser?.uid ?: ""
+                    saveEmailToUidMapping(email, userKey)
+                    saveUidToEmailMapping(userKey, email)
                     updateUI(user)
+
+
                 } else {
                     Log.w(TAG, "createUserWithEmail:failure", task.exception)
                     Toast.makeText(context, "Authentication failed.", Toast.LENGTH_SHORT).show()
@@ -86,4 +100,13 @@ class LoginFragment : Fragment() {
     companion object {
         private const val TAG = "LoginFragment"
     }
+    fun saveEmailToUidMapping(email: String, uid: String){
+        val emailKey = emailToValidFbKey(email)
+        emailToUidRef.child(emailKey).setValue(uid)
+    }
+    fun saveUidToEmailMapping(uid: String, email: String){
+        val emailKey = emailToValidFbKey(email)
+        uidToEmailRef.child(uid).setValue(emailKey)
+    }
+    fun emailToValidFbKey(str: String) = str.replace(".", "*")
 }

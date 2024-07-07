@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
@@ -28,7 +29,11 @@ class LikedFragment : BaseFragment(R.layout.fragment_liked) {
 
     val database =
         Firebase.database("https://moviesearchandmatch-60fa6-default-rtdb.europe-west1.firebasedatabase.app")
-    val myRef = database.getReference("DBbaigildinsamatgmailcom")
+
+    private val auth = FirebaseAuth.getInstance()
+    private val userKey = auth.currentUser?.uid ?: ""
+
+    val myRef = database.getReference("users").child(userKey)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -53,13 +58,12 @@ class LikedFragment : BaseFragment(R.layout.fragment_liked) {
 
         onChangeListener(myRef)
 
-
-
         binding.btnSendToCloud.setOnClickListener {
+            val jsonLikedMediaToCloud = viewModel.getFavouritesJson()
+            Log.d("likedfragment", "btn send to cloud text $jsonLikedMediaToCloud")
 
-            val json_liked_media_to_cloud = viewModel.getFavouritesJson()
-            Log.d("likedfragment", " btn send to cloud text ${json_liked_media_to_cloud}")
-            myRef.setValue("${json_liked_media_to_cloud}")
+            myRef.child("favourites").setValue(jsonLikedMediaToCloud)
+            myRef.child("email").setValue("baigildin.samat@gmail.com")
         }
 
         viewLifecycleOwner.lifecycleScope.launch {
@@ -67,7 +71,7 @@ class LikedFragment : BaseFragment(R.layout.fragment_liked) {
                 adapter.updateItems(items)
             }
         }
-        binding.btnReadFriendFavorites.setOnClickListener{
+        binding.btnReadFriendFavorites.setOnClickListener {
             (activity as com.hfad.navigation.Navigator).navigateLikedToFromFbLiked()
         }
         binding.btnSort.setOnClickListener {
@@ -102,34 +106,35 @@ class LikedFragment : BaseFragment(R.layout.fragment_liked) {
         }
     }
 
+
     private fun onChangeListener(dRef: DatabaseReference) {
         dRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 binding.apply {
                     txtFromFbDb.append("\n")
-                    Log.d("likedfragment", "text ${txtFromFbDb.toString()}")
-                    txtFromFbDb.append("salam ${snapshot.value.toString()}")
+                    txtFromFbDb.append("${snapshot.value.toString()}")
                 }
-
             }
 
             override fun onCancelled(error: DatabaseError) {
             }
         })
     }
+
     private fun singleOnChangeListener(dRef: DatabaseReference) {
-        dRef.addListenerForSingleValueEvent(object : ValueEventListener{
+        dRef.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 binding.apply {
                     txtFromFbDb.append("\n")
                     Log.d("likedfragment", "text ${txtFromFbDb.toString()}")
-                    txtFromFbDb.append("salam ${snapshot.value.toString()}")
+                    txtFromFbDb.append("${snapshot.value.toString()}")
                 }
-
             }
 
             override fun onCancelled(error: DatabaseError) {
             }
         })
     }
+
+    fun emailToValidFbKey(str: String) = str.replace(".", "*")
 }

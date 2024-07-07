@@ -1,5 +1,6 @@
 package com.hfad.liked
 
+import SearchFriendViewModel
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -15,7 +16,6 @@ class SearchFriendFragment : BaseFragment(R.layout.fragment_search_friend) {
     private val viewModel: SearchFriendViewModel by viewModels()
     private lateinit var binding: FragmentSearchFriendBinding
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -27,8 +27,9 @@ class SearchFriendFragment : BaseFragment(R.layout.fragment_search_friend) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Bind view elements to viewModel manually
         binding.searchFriendButton.setOnClickListener {
+            val email = binding.searchFriendEditText.text.toString()
+            viewModel.friendEmail.value = email
             viewModel.searchFriend()
         }
 
@@ -47,5 +48,9 @@ class SearchFriendFragment : BaseFragment(R.layout.fragment_search_friend) {
         binding.connectFriendButton.setOnClickListener {
             viewModel.sendConnectionRequest()
         }
+
+        viewModel.favouritesListString.observe(viewLifecycleOwner, Observer { favouritesListString ->
+            binding.tvFriendsFavouriteMediaList.text = favouritesListString
+        })
     }
 }

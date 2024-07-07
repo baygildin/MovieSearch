@@ -200,6 +200,9 @@
             android:id="@+id/action_favorites_to_likedFragment"
             app:destination="@id/likedFragment" />
         <action
+            android:id="@+id/action_Liked_to_FriendsListFragment"
+            app:destination="@id/friendsListFragment" />
+        <action
             android:id="@+id/navigateLikedToMediaDetailsWithId"
             app:destination="@id/mediaDetailsFragment">
             <argument
@@ -237,6 +240,16 @@
         <deepLink
             android:id="@+id/deepLinkSearchFriendFragment"
             app:uri="android-app://com.hfad.liked/SearchFriendFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/friendsListFragment"
+        android:name="com.hfad.liked.FriendsListFragment"
+        android:label="FriendsListFragment"
+        tools:layout="@layout/fragment_friends_list">
+    <deepLink
+        android:id="@+id/deepLinkFriendsListFragment"
+        app:uri="android-app://com.hfad.liked/FriendsListFragment" />
     </fragment>
 
 

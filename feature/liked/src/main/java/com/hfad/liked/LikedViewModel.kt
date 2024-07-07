@@ -30,12 +30,18 @@ class LikedViewModel @Inject constructor(
         Gson().toJson(favouritesList)
     }
 
-    fun convertFavouritesJsonToDataClass(): String = runBlocking {
-        val favouritesList = favouriteDao.getAllFavourites().first()
-        Log.d("mymy", "in VM  ${favouritesList}")
-        Gson().toJson(favouritesList)
-        TODO()
+    var doesUserAgreeToReplaceFromCloud = false
+    var doesUserAgreeToSendToCloud = false
+
+    fun updateRoomDatabaseFromJson(jsonData: String) = runBlocking {
+        val favouritesList = convertJsonToFavouritesList(jsonData)
+        favouriteDao.clearFavourites()
+        favouriteDao.insertAll(favouritesList)
     }
+    fun convertJsonToFavouritesList(jsonData: String): List<FavouriteItem> {
+        return Gson().fromJson(jsonData, Array<FavouriteItem>::class.java).toList()
+    }
+
 
 
 }

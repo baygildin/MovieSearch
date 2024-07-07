@@ -23,4 +23,11 @@ interface FavouriteDao {
 
     @Query("SELECT * FROM favourites WHERE imdbId = :imdbId")
     suspend fun getFavouriteByImdbId(imdbId: String): FavouriteItem
+
+
+    @Query("DELETE FROM favourites")
+    suspend fun clearFavourites()
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertAll(favourites: List<FavouriteItem>)
 }

@@ -55,15 +55,22 @@ class LikedFragment : BaseFragment(R.layout.fragment_liked) {
         binding.btnSearchFriend.setOnClickListener {
             (activity as com.hfad.navigation.Navigator).navigateLikedToSearchFriend()
         }
+        binding.btnShowFriends.setOnClickListener{
+            (activity as com.hfad.navigation.Navigator).navigateLikedToFriendsList()
+        }
 
         onChangeListener(myRef)
 
         binding.btnSendToCloud.setOnClickListener {
-            val jsonLikedMediaToCloud = viewModel.getFavouritesJson()
-            Log.d("likedfragment", "btn send to cloud text $jsonLikedMediaToCloud")
+            if (viewModel.doesUserAgreeToSendToCloud){
+                val jsonLikedMediaToCloud = viewModel.getFavouritesJson()
+                myRef.child("favourites").setValue(jsonLikedMediaToCloud)
+                myRef.child("email").setValue("baigildin.samat@gmail.com")
+            } else {
+                viewModel.doesUserAgreeToSendToCloud = true
+                Toast.makeText(context, context?.getResources()?.getString(R.string.toast_agree_to_send_to_cloud), Toast.LENGTH_LONG).show()
+            }
 
-            myRef.child("favourites").setValue(jsonLikedMediaToCloud)
-            myRef.child("email").setValue("baigildin.samat@gmail.com")
         }
 
         viewLifecycleOwner.lifecycleScope.launch {
@@ -71,8 +78,9 @@ class LikedFragment : BaseFragment(R.layout.fragment_liked) {
                 adapter.updateItems(items)
             }
         }
-        binding.btnReadFriendFavorites.setOnClickListener {
-            (activity as com.hfad.navigation.Navigator).navigateLikedToFromFbLiked()
+        binding.btnDownloadFromCloud.setOnClickListener {
+            fetchFavouritesFromCloud()
+
         }
         binding.btnSort.setOnClickListener {
             if (isSortedByDate) {
@@ -110,12 +118,8 @@ class LikedFragment : BaseFragment(R.layout.fragment_liked) {
     private fun onChangeListener(dRef: DatabaseReference) {
         dRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                binding.apply {
-                    txtFromFbDb.append("\n")
-                    txtFromFbDb.append("${snapshot.value.toString()}")
-                }
+                binding.txtFromFbDb.text = "${snapshot.value.toString()}"
             }
-
             override fun onCancelled(error: DatabaseError) {
             }
         })
@@ -135,6 +139,26 @@ class LikedFragment : BaseFragment(R.layout.fragment_liked) {
             }
         })
     }
+    private fun fetchFavouritesFromCloud() {
+        myRef.child("favourites").addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val jsonData = snapshot.value as String?
+                if (!jsonData.isNullOrEmpty()) {
+                    if (viewModel.doesUserAgreeToReplaceFromCloud){
+                        viewModel.updateRoomDatabaseFromJson(jsonData)
+                    }
+                    else Toast.makeText(
+                        context,
+                        context?.getResources()?.getString(R.string.toast_agry_to_replace_from_cloud),
+                        Toast.LENGTH_LONG
+                    ).show()
+                    viewModel.doesUserAgreeToReplaceFromCloud = true
+                }
+            }
+            override fun onCancelled(error: DatabaseError) {
+                Log.e("myError42", "$error in LikedFragment`s fetchFavouritesFromCloud")
+            }
+        })
+    }
 
-    fun emailToValidFbKey(str: String) = str.replace(".", "*")
 }

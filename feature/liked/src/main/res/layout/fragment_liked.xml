@@ -63,13 +63,13 @@
             android:layout_height="24dp"
             android:paddingRight="10dp"
 
-            android:src="@drawable/baseline_cloud_download_24" />
+            android:src="@drawable/outline_cloud_upload_24" />
 
         <ImageView
-            android:id="@+id/btn_read_friend_favorites"
+            android:id="@+id/btn_download_from_cloud"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:src="@drawable/baseline_connect_without_contact_24"/>
+            android:src="@drawable/outline_cloud_download_24"/>
 
 
 
@@ -84,6 +84,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Search Friend" />
+    <Button
+        android:id="@+id/btnShowFriends"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Show friends list" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"

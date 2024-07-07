@@ -17,6 +17,7 @@ interface Navigator {
     fun navigateSearchToLogin()
     fun navigateLikedToFromFbLiked()
     fun navigateLikedToSearchFriend()
+    fun navigateLikedToFriendsList()
 
 
 

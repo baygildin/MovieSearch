@@ -2,4 +2,6 @@
     <string name="txt_liked">Featured media</string>
     <string name="toast_sorted_by_date">Sorted by date added</string>
     <string name="toast_sorted_by_title">Sorted by title</string>
+    <string name="toast_agree_to_send_to_cloud">Click the button again if you agree to replace these favorite media in the cloud?</string>
+    <string name="toast_agry_to_replace_from_cloud">Do you agree to replacing your favorite media list from the cloud? Click the button again if you agree</string>
 </resources>

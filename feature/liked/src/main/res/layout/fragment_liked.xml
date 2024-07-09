@@ -74,11 +74,7 @@
 
 
     </LinearLayout>
-    <TextView
-        android:id="@+id/txt_from_fb_db"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="text txt_from_fb_db"/>
+
     <Button
         android:id="@+id/btnSearchFriend"
         android:layout_width="wrap_content"

@@ -13,7 +13,7 @@ import com.google.firebase.ktx.Firebase
 class FriendsListViewModel : ViewModel() {
 
     private val database = Firebase.database("https://moviesearchandmatch-60fa6-default-rtdb.europe-west1.firebasedatabase.app")
-    private val usersRef = database.getReference("users")
+    val usersRef = database.getReference("users")
 
     private val _friendsList = MutableLiveData<List<Friend>>()
     val friendsList: LiveData<List<Friend>> get() = _friendsList
@@ -31,9 +31,11 @@ class FriendsListViewModel : ViewModel() {
                 for (childSnapshot in snapshot.children) {
                     val friendKey = childSnapshot.key ?: continue
                     val approved = childSnapshot.getValue(Boolean::class.java) ?: false
-                    friends.add(Friend(friendKey, approved))
+                    getUserEmail(friendKey) { email ->
+                        friends.add(Friend(friendKey, email, approved))
+                        _friendsList.value = friends
+                    }
                 }
-                _friendsList.value = friends
             }
 
             override fun onCancelled(error: DatabaseError) {
@@ -47,9 +49,11 @@ class FriendsListViewModel : ViewModel() {
                 for (childSnapshot in snapshot.children) {
                     val friendKey = childSnapshot.key ?: continue
                     val approved = childSnapshot.getValue(Boolean::class.java) ?: false
-                    friends.add(Friend(friendKey, approved))
+                    getUserEmail(friendKey) { email ->
+                        friends.add(Friend(friendKey, email, approved))
+                        _approvedFriends.value = friends
+                    }
                 }
-                _approvedFriends.value = friends
             }
 
             override fun onCancelled(error: DatabaseError) {
@@ -58,5 +62,19 @@ class FriendsListViewModel : ViewModel() {
         })
     }
 
-    data class Friend(val email: String, val approved: Boolean)
+    private fun getUserEmail(userId: String, callback: (String) -> Unit) {
+        usersRef.child(userId).child("email").addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val email = snapshot.getValue(String::class.java) ?: ""
+                callback(email)
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Log.d("FriendsList", "Database error: $error")
+                callback("")
+            }
+        })
+    }
+
+    data class Friend(val id: String, val email: String, val approved: Boolean)
 }

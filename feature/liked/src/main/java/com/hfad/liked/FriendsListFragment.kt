@@ -1,6 +1,7 @@
 package com.hfad.liked
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -37,34 +38,21 @@ class FriendsListFragment : BaseFragment(R.layout.fragment_friends_list) {
         })
 
         viewModel.approvedFriends.observe(viewLifecycleOwner, Observer { approvedFriends ->
-            updateApprovedFriendsList(approvedFriends)
+            // Update UI if needed
         })
     }
 
     private fun updateFriendsList(friends: List<FriendsListViewModel.Friend>) {
-        binding.requestedFriendsContainer.removeAllViews()
-        for (friend in friends) {
-            val button = Button(context).apply {
-                text = friend.email
-                setOnClickListener {
-                    if (friend.approved) {
-                        // Navigate to friend's favourites
-                    } else {
-                        // Show message that friend is not approved
-                    }
-                }
-            }
-            binding.requestedFriendsContainer.addView(button)
-        }
-    }
-
-    private fun updateApprovedFriendsList(friends: List<FriendsListViewModel.Friend>) {
         binding.approvedFriendsContainer.removeAllViews()
         for (friend in friends) {
             val button = Button(context).apply {
-                text = friend.email
+                text = "${friend.email}"
                 setOnClickListener {
-                    // Navigate to friend's favourites
+                    if (friend.approved) {
+                        (activity as com.hfad.navigation.Navigator).navigateFriendsListFragmentToShowMediaOfFriendId(friend.id)
+                    } else {
+                        Log.d("MyError42", "updateFriendsList")
+                    }
                 }
             }
             binding.approvedFriendsContainer.addView(button)

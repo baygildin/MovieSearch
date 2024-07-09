@@ -49,6 +49,7 @@ class LoginFragment : Fragment() {
     private val database = Firebase.database("https://moviesearchandmatch-60fa6-default-rtdb.europe-west1.firebasedatabase.app")
     private val emailToUidRef = database.getReference("emailToUid")
     private val uidToEmailRef = database.getReference("uidToEmail")
+    private val usersRef = database.getReference("users")
 
 
 
@@ -62,6 +63,7 @@ class LoginFragment : Fragment() {
                     val userKey = auth.currentUser?.uid ?: ""
                     saveEmailToUidMapping(email, userKey)
                     saveUidToEmailMapping(userKey, email)
+                    saveEmailInUserNode(userKey, email)
                     updateUI(user)
 
 
@@ -105,8 +107,12 @@ class LoginFragment : Fragment() {
         emailToUidRef.child(emailKey).setValue(uid)
     }
     fun saveUidToEmailMapping(uid: String, email: String){
-        val emailKey = emailToValidFbKey(email)
+        val emailKey = email
         uidToEmailRef.child(uid).setValue(emailKey)
+    }
+    fun saveEmailInUserNode(uid: String, email: String){
+        usersRef.child(uid).child("email").setValue(email)
+
     }
     fun emailToValidFbKey(str: String) = str.replace(".", "*")
 }

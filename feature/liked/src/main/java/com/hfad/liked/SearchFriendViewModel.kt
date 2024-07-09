@@ -1,4 +1,4 @@
-
+package com.hfad.liked
 
 import android.util.Log
 import androidx.lifecycle.LiveData
@@ -7,7 +7,6 @@ import androidx.lifecycle.ViewModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
@@ -16,8 +15,7 @@ class SearchFriendViewModel : ViewModel() {
 
     private val database = Firebase.database("https://moviesearchandmatch-60fa6-default-rtdb.europe-west1.firebasedatabase.app")
     private val usersRef = database.getReference("users")
-    var registeredEmail: String = ""
-
+    private val emailToUidRef = database.getReference("emailToUid")
     var friendEmail = MutableLiveData<String>("")
     private val _friendInfo = MutableLiveData<String>("")
     val friendInfo: LiveData<String> get() = _friendInfo
@@ -30,83 +28,50 @@ class SearchFriendViewModel : ViewModel() {
     val favouritesListString: LiveData<String> get() = _favouritesListString
     private val auth = FirebaseAuth.getInstance()
     private val userKey = auth.currentUser?.uid ?: ""
-    var friendKey = ""
+    var friendUid = ""
 
-    init {
-        Log.d("UserKey", "UserKey: $userKey")
-        getUserEmail(userKey) { email ->
-            if (email != null) {
-                Log.d("UserEmail", "Email: $email")
-                registeredEmail = email
-            } else {
-                Log.d("UserEmail", "Failed to get email")
-            }
-        }
-    }
 
     fun searchFriend() {
-        val email = emailToValidFbKey(friendEmail.value ?: return)
-        friendKey = email
-        val userRef = usersRef.child(friendKey)
-        singleOnChangeListener(userRef)
-    }
-
-    fun sendConnectionRequest() {
         val email = friendEmail.value ?: return
-        val friendKey = emailToValidFbKey(email)
-        if (
-            usersRef.child(friendKey).child("friends").child("requested").child(userKey) !=null
-        ) {
-            _friendInfo.value = "A friend request has already been sent to $email"
-            isFriendAdded = true
-        } else {
-            usersRef.child(userKey).child("friends").child("approved").child(friendKey).setValue(true)
-            usersRef.child(friendKey).child("friends").child("requested").child(userKey).setValue(true)
-                .addOnCompleteListener { task ->
-                    if (task.isSuccessful) {
-                        isFriendAdded = true
-                        _friendInfo.value = "Friend request sent to $email"
-                    } else {
-                        isFriendAdded = false
-                        _friendInfo.value = "Failed to send friend request"
-                    }
-                }
-        }
-
-    }
-
-    private fun singleOnChangeListener(dRef: DatabaseReference) {
-        dRef.addListenerForSingleValueEvent(object : ValueEventListener {
+        emailToUidRef.child(emailToValidFbKey(email)).addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()) {
-                    val user = snapshot.value as Map<*, *>
-                    _friendInfo.value = "Friend found: ${user["email"]}"
-                    _isFriendFound.value = true
+                    friendUid = snapshot.getValue(String::class.java) ?: ""
+                    if (friendUid.isNotEmpty()) {
+                        _friendInfo.value = "Friend found with UID: $friendUid"
+                        _isFriendFound.value = true
+                    } else {
+                        _friendInfo.value = "No user found with email: $email"
+                        _isFriendFound.value = false
+                    }
                 } else {
-                    _friendInfo.value = "Friend not found"
+                    _friendInfo.value = "No user found with email: $email"
                     _isFriendFound.value = false
                 }
             }
 
             override fun onCancelled(error: DatabaseError) {
-                Log.d("deleteee", "Database error: $error")
+                Log.d("SearchFriend", "Database error: $error")
             }
         })
     }
 
-    fun emailToValidFbKey(str: String) = str.replace(".", "*")
+    fun sendConnectionRequest() {
+        if (friendUid.isEmpty()) return
 
-    fun getUserEmail(userKey: String, callback: (String?) -> Unit) {
-        val userRef = usersRef.child(userKey)
-        userRef.child("email").get().addOnCompleteListener { task ->
+        usersRef.child(friendUid).child("friends").child("requested").child(userKey).setValue(true).addOnCompleteListener { task ->
             if (task.isSuccessful) {
-                val email = task.result?.getValue(String::class.java)
-                callback(email)
+                usersRef.child(userKey).child("friends").child("approved").child(friendUid).setValue(true)
+                _friendInfo.value = "Friend request sent to ${friendEmail.value}"
+                isFriendAdded = true
             } else {
-                Log.d("getUserEmail", "Error getting email: ${task.exception?.message}")
-                callback(null)
+                _friendInfo.value = "Failed to send friend request"
+                isFriendAdded = false
             }
         }
     }
 
+    private fun emailToValidFbKey(email: String): String {
+        return email.replace(".", "*")
+    }
 }

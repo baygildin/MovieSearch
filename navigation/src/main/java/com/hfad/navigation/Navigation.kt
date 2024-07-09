@@ -8,7 +8,6 @@ interface Navigator {
     fun navigateMediaDetailsToShowSeasonsWithId(id: String)
     fun navigateShowEpisodesToShowEpisode(title: String, seasonNumber: String, episodeNumber: String)
     fun navigateShowSeasonsToShowEpisodes(title: String, seasonNumber: String)
-
     fun navigateShowSeasonsToLiked()
     fun navigateMediaDetailsToLiked()
     fun navigateShowEpisodeToLiked()
@@ -18,9 +17,8 @@ interface Navigator {
     fun navigateLikedToFromFbLiked()
     fun navigateLikedToSearchFriend()
     fun navigateLikedToFriendsList()
-
-
-
+    fun navigateFriendsListFragmentToShowMediaOfFriendId(friendEmail: String)
+    fun navigateShowMediaOfFriendToMediaDetailsWithId(id: String)
 
 
 }

@@ -10,6 +10,9 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.hfad.core.MenuItemClickListener
+import com.hfad.liked.FriendsListFragment
+import com.hfad.liked.FriendsListFragmentDirections
+import com.hfad.liked.ShowMediaOfFriendFragmentDirections
 import com.hfad.media_details.MediaDetailsFragmentDirections
 import com.hfad.poster.PosterFragmentDirections
 import com.hfad.search.SearchFragmentDirections
@@ -134,6 +137,18 @@ class MainActivity : AppCompatActivity(), com.hfad.navigation.Navigator, MenuIte
         val action = LikedFragmentDirections.actionLikedToFriendsListFragment()
         findNavController(R.id.nav_host_fragment).navigate(action)
     }
+    override fun navigateShowMediaOfFriendToMediaDetailsWithId(id: String){
+        val action = ShowMediaOfFriendFragmentDirections.navigateShowMediaOfFriendToMediaDetailsWithId(id)
+        findNavController(R.id.nav_host_fragment).navigate(action)
+    }
+
+    override fun navigateFriendsListFragmentToShowMediaOfFriendId(friendEmail: String){
+        val action = FriendsListFragmentDirections.navigateFriendsListFragmentToShowMediaOfFriendId(friendEmail)
+        findNavController(R.id.nav_host_fragment).navigate(action)
+    }
+
+
+
 
     override fun onMenuItemClicked(itemId: Int) {
         when (itemId) {

@@ -13,6 +13,9 @@
     <include app:graph="@navigation/show_seasons_nav_graph" />
     <include app:graph="@navigation/liked_nav_graph" />
     <include app:graph="@navigation/from_fb_liked_nav_graph" />
+    <include app:graph="@navigation/fragment_show_media_of_friend_nav_graph" />
+    <include app:graph="@navigation/fragment_friends_list_nav_graph" />
+
 
     <fragment
         android:id="@+id/searchFragment"
@@ -34,6 +37,7 @@
                 android:defaultValue="1"/>
         </action>
     </fragment>
+
 
     <fragment
         android:id="@+id/mediaDetailsFragment"
@@ -71,6 +75,10 @@
                 app:argType="string"
                 android:defaultValue="1"/>
         </action>
+        <argument
+            android:name="id"
+            android:defaultValue="1"
+            app:argType="string" />
 
     </fragment>
 
@@ -247,10 +255,41 @@
         android:name="com.hfad.liked.FriendsListFragment"
         android:label="FriendsListFragment"
         tools:layout="@layout/fragment_friends_list">
-    <deepLink
-        android:id="@+id/deepLinkFriendsListFragment"
-        app:uri="android-app://com.hfad.liked/FriendsListFragment" />
+        <deepLink
+            android:id="@+id/deepLinkFriendsListFragment"
+            app:uri="android-app://com.hfad.liked/FriendsListFragment" />
+        <action
+            android:id="@+id/navigateFriendsListFragmentToShowMediaOfFriendId"
+            app:destination="@id/showMediaOfFriendFragment">
+            <argument
+                android:name="friendEmail"
+                app:argType="string"
+                android:defaultValue="1"/>
+        </action>
     </fragment>
+    <fragment
+        android:id="@+id/showMediaOfFriendFragment"
+        android:name="com.hfad.liked.ShowMediaOfFriendFragment"
+        android:label="ShowMediaOfFriendFragment"
+        tools:layout="@layout/fragment_show_media_of_friend">
+        <deepLink
+            android:id="@+id/deepLinkShowMediaOfFriendFragment"
+            app:uri="android-app://com.hfad.liked/ShowMediaOfFriendFragment" />
+        <argument
+            android:name="friendEmail"
+            android:defaultValue="1"
+            app:argType="string" />
+        <action
+            android:id="@+id/navigateShowMediaOfFriendToMediaDetailsWithId"
+            app:destination="@id/mediaDetailsFragment">
+            <argument
+                android:name="id"
+                android:defaultValue="1"
+                app:argType="string" />
+        </action>
+    </fragment>
+
+
 
 
 </navigation>

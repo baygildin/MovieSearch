@@ -1,6 +1,5 @@
 package com.hfad.liked
 
-import SearchFriendViewModel
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -54,3 +53,4 @@ class SearchFriendFragment : BaseFragment(R.layout.fragment_search_friend) {
         })
     }
 }
+

@@ -71,20 +71,7 @@
             android:layout_height="24dp"
             android:src="@drawable/outline_cloud_download_24"/>
 
-
-
     </LinearLayout>
-
-    <Button
-        android:id="@+id/btnSearchFriend"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Search Friend" />
-    <Button
-        android:id="@+id/btnShowFriends"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Show friends list" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"

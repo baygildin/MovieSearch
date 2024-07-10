@@ -21,45 +21,64 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="0dp"
+        android:layout_weight="1">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Friends"
-                android:textStyle="bold"
-                android:textSize="24sp"
-                android:padding="8dp" />
-
             <LinearLayout
-                android:id="@+id/approvedFriendsContainer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="24sp"
-                android:paddingTop="10dp"
-                android:orientation="vertical" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Friend requests"
-                android:paddingTop="30dp"
-                android:textStyle="bold"
-                android:textSize="24sp"
-                android:padding="8dp" />
-
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Friends"
+                    android:textStyle="bold"
+                    android:textColor="@color/main_text_color"
+                    android:textSize="24sp"
+                    android:padding="8dp"/>
+            </LinearLayout>
             <LinearLayout
-                android:id="@+id/requestedFriendsContainer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="10dp"
-                android:textSize="24sp"
-                android:orientation="vertical" />
-
+                android:orientation="horizontal">
+                <LinearLayout
+                    android:id="@+id/approvedFriendsContainer"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"/>
+                <LinearLayout
+                    android:id="@+id/approvedFriendsDeleteContainer"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"/>
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="end|bottom"
+        android:padding="16dp">
+        <ImageButton
+            android:id="@+id/friendRequestsTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/background_color"
+            android:src="@drawable/outline_group_add_24"
+            android:padding="8dp"/>
+        <ImageButton
+            android:id="@+id/btnSearchFriend"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/background_color"
+            android:src="@drawable/outline_person_search_24"
+            android:padding="8dp"/>
+    </LinearLayout>
 </LinearLayout>

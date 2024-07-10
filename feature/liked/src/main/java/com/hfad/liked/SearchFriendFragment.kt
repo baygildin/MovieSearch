@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.hfad.core.BaseFragment
@@ -29,7 +30,11 @@ class SearchFriendFragment : BaseFragment(R.layout.fragment_search_friend) {
         binding.searchFriendButton.setOnClickListener {
             val email = binding.searchFriendEditText.text.toString()
             viewModel.friendEmail.value = email
-            viewModel.searchFriend()
+            if (email.isNullOrEmpty()) {
+                Toast.makeText(context, context?.getResources()?.getString(R.string.toast_empty_edit_text_value), Toast.LENGTH_LONG).show()
+
+            }
+            else viewModel.searchFriend()
         }
 
         viewModel.friendEmail.observe(viewLifecycleOwner, Observer { email ->

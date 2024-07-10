@@ -10,48 +10,35 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 
-class FriendsListViewModel : ViewModel() {
+class FriendRequestsViewModel : ViewModel() {
 
     private val database = Firebase.database("https://moviesearchandmatch-60fa6-default-rtdb.europe-west1.firebasedatabase.app")
-    val usersRef = database.getReference("users")
+    private val usersRef = database.getReference("users")
 
-    private val _approvedFriends = MutableLiveData<List<Friend>>()
-    val approvedFriends: LiveData<List<Friend>> get() = _approvedFriends
+    private val _friendRequests = MutableLiveData<List<Friend>>()
+    val friendRequests: LiveData<List<Friend>> get() = _friendRequests
 
-    fun loadFriends(userKey: String) {
-        val approvedFriendsRef = usersRef.child(userKey).child("friends").child("approved")
+    fun loadFriendRequests(userKey: String) {
+        val requestedFriendsRef = usersRef.child(userKey).child("friends").child("requested")
 
-        approvedFriendsRef.addListenerForSingleValueEvent(object : ValueEventListener {
+        requestedFriendsRef.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 val friends = mutableListOf<Friend>()
                 for (childSnapshot in snapshot.children) {
                     val friendKey = childSnapshot.key ?: continue
                     val approved = childSnapshot.getValue(Boolean::class.java) ?: false
-                    if (approved){
-                        getUserEmail(friendKey) { email ->
-                            friends.add(Friend(friendKey, email, approved))
-
-                            _approvedFriends.value = friends
-                        }
+                    getUserEmail(friendKey) { email ->
+                        friends.add(Friend(friendKey, email, approved))
+                        _friendRequests.value = friends
+                        Log.d("sdsdsd", "${friends.toString()}")
                     }
                 }
             }
 
             override fun onCancelled(error: DatabaseError) {
-                Log.d("FriendsList", "Database error: $error")
+                Log.d("FriendRequests", "Database error: $error")
             }
         })
-    }
-
-    fun deleteFriend(userKey: String, friendKey: String) {
-        usersRef.child(userKey).child("friends").child("approved").child(friendKey).removeValue()
-            .addOnSuccessListener {
-                Log.d("FriendsList", "Friend deleted successfully")
-                loadFriends(userKey) // Reload friends list to reflect changes
-            }
-            .addOnFailureListener {
-                Log.d("FriendsList", "Failed to delete friend: ${it.message}")
-            }
     }
 
     private fun getUserEmail(userId: String, callback: (String) -> Unit) {
@@ -62,7 +49,7 @@ class FriendsListViewModel : ViewModel() {
             }
 
             override fun onCancelled(error: DatabaseError) {
-                Log.d("FriendsList", "Database error: $error")
+                Log.d("FriendRequests", "Database error: $error")
                 callback("")
             }
         })

@@ -1,7 +1,7 @@
 package com.hfad.liked
 
+import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -33,29 +33,39 @@ class FriendsListFragment : BaseFragment(R.layout.fragment_friends_list) {
 
         viewModel.loadFriends(userKey)
 
-        viewModel.friendsList.observe(viewLifecycleOwner, Observer { friends ->
-            updateFriendsList(friends)
-        })
-
         viewModel.approvedFriends.observe(viewLifecycleOwner, Observer { approvedFriends ->
-            // Update UI if needed
+            updateFriendsList(approvedFriends)
         })
+        binding.friendRequestsTextView.setOnClickListener{
+            (activity as com.hfad.navigation.Navigator).navigateFriendsListFragmentToFriendRequestsFragment()
+        }
+        binding.btnSearchFriend.setOnClickListener {
+            (activity as com.hfad.navigation.Navigator).navigateFriendListToSearchFriend()
+        }
     }
 
     private fun updateFriendsList(friends: List<FriendsListViewModel.Friend>) {
         binding.approvedFriendsContainer.removeAllViews()
+        binding.approvedFriendsDeleteContainer.removeAllViews()
         for (friend in friends) {
-            val button = Button(context).apply {
-                text = "${friend.email}"
+            val friendButton = Button(context).apply {
+                setTextColor(resources.getColor(R.color.main_text_color))
+                setBackgroundColor(Color.TRANSPARENT)
+                text = friend.email
                 setOnClickListener {
-                    if (friend.approved) {
-                        (activity as com.hfad.navigation.Navigator).navigateFriendsListFragmentToShowMediaOfFriendId(friend.id)
-                    } else {
-                        Log.d("MyError42", "updateFriendsList")
-                    }
+                    (activity as com.hfad.navigation.Navigator).navigateFriendsListFragmentToShowMediaOfFriendId(friend.id)
                 }
             }
-            binding.approvedFriendsContainer.addView(button)
+            val deleteButton = Button(context).apply {
+                setTextColor(resources.getColor(R.color.main_text_color))
+                setBackgroundColor(Color.TRANSPARENT)
+                text = "Unfriend"
+                setOnClickListener {
+                    viewModel.deleteFriend(userKey, friend.id)
+                }
+            }
+            binding.approvedFriendsContainer.addView(friendButton)
+            binding.approvedFriendsDeleteContainer.addView(deleteButton)
         }
     }
 }

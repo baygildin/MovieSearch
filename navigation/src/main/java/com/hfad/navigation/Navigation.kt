@@ -24,9 +24,6 @@ interface Navigator {
     fun navigateLikedToFriendsList()
     fun navigateFriendsListFragmentToShowMediaOfFriendId(friendEmail: String)
     fun navigateShowMediaOfFriendToMediaDetailsWithId(id: String)
-
-
-
     fun actionsearchFriendtoFriendsListFragment()
     fun action_from_fb_to_FriendsListFragment()
     fun action_Login_to_FriendsListFragment()
@@ -40,6 +37,8 @@ interface Navigator {
     fun action_fromFb_to_likedFragment()
     fun action_login_to_likedFragment()
     fun actionFriendListToLikedFragment()
+    fun navigateFriendsListFragmentToFriendRequestsFragment()
+    fun navigateFriendListToSearchFriend()
 
 
 }

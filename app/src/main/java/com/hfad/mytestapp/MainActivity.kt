@@ -216,6 +216,14 @@ class MainActivity : AppCompatActivity(), com.hfad.navigation.Navigator, MenuIte
         val action = FriendsListFragmentDirections.actionFriendListToLikedFragment()
         findNavController(R.id.nav_host_fragment).navigate(action)
     }
+    override fun navigateFriendsListFragmentToFriendRequestsFragment(){
+        val action = FriendsListFragmentDirections.navigateFriendsListFragmentToFriendRequestsFragment()
+        findNavController(R.id.nav_host_fragment).navigate(action)
+    }
+    override fun navigateFriendListToSearchFriend(){
+        val action = FriendsListFragmentDirections.navigateFriendListToSearchFriend()
+        findNavController(R.id.nav_host_fragment).navigate(action)
+    }
 
 
     override fun onMenuItemClicked(itemId: Int) {

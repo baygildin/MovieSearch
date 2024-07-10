@@ -52,19 +52,14 @@ class LikedFragment : BaseFragment(R.layout.fragment_liked) {
         }
         binding.recyclerView.adapter = adapter
         binding.recyclerView.layoutManager = LinearLayoutManager(context)
-        binding.btnSearchFriend.setOnClickListener {
-            (activity as com.hfad.navigation.Navigator).navigateLikedToSearchFriend()
-        }
-        binding.btnShowFriends.setOnClickListener{
-            (activity as com.hfad.navigation.Navigator).navigateLikedToFriendsList()
-        }
-
 
 
         binding.btnSendToCloud.setOnClickListener {
             if (viewModel.doesUserAgreeToSendToCloud){
                 val jsonLikedMediaToCloud = viewModel.getFavouritesJson()
                 myRef.child("favourites").setValue(jsonLikedMediaToCloud)
+                if (viewModel.doesUserAgreeToSendToCloud) {Toast.makeText(context, context?.getResources()?.getString(R.string.toast_sent_to_cloud), Toast.LENGTH_SHORT).show()
+                }
             } else {
                 viewModel.doesUserAgreeToSendToCloud = true
                 Toast.makeText(context, context?.getResources()?.getString(R.string.toast_agree_to_send_to_cloud), Toast.LENGTH_LONG).show()

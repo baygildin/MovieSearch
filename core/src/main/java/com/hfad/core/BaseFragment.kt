@@ -36,14 +36,11 @@ abstract class BaseFragment(layoutId: Int) : Fragment(layoutId) {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
-            R.id.action_favorites -> {
+            R.id.action_favorites, R.id.action_friends -> {
                 (activity as? MenuItemClickListener)?.onMenuItemClicked(item.itemId)
                 true
             }
             else -> super.onOptionsItemSelected(item)
         }
     }
-
-
 }
-

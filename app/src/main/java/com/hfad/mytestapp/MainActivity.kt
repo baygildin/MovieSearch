@@ -20,9 +20,11 @@ import com.hfad.show_episodes.ShowEpisodesFragmentDirections
 import com.hfad.show_episodes.ShowSeasonsFragmentDirections
 import com.hfad.show_episodes.ShowEpisodeFragmentDirections
 import com.hfad.liked.LikedFragmentDirections
-
-
 import dagger.hilt.android.AndroidEntryPoint
+import com.hfad.liked.FromFbLikedFragment
+import com.hfad.liked.FromFbLikedFragmentDirections
+import com.hfad.liked.SearchFriendFragment
+import com.hfad.liked.SearchFriendFragmentDirections
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity(), com.hfad.navigation.Navigator, MenuItemClickListener {
@@ -31,27 +33,12 @@ class MainActivity : AppCompatActivity(), com.hfad.navigation.Navigator, MenuIte
         super.onCreate(savedInstanceState)
         installSplashScreen()
         setContentView(R.layout.activity_main)
-        Log.d("firebaseEnter","1")
         val auth = FirebaseAuth.getInstance()
-        Log.d("firebaseEnter","2")
         if (auth.currentUser == null) {
-            Log.d("firebaseEnter","3")
-
-            val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+            val navHostFragment =
+                supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
             val navController = navHostFragment.navController
             navController.navigate(R.id.loginFragment)
-
-
-//            val action = SearchFragmentDirections.navigateSearchToLogin()
-//            findNavController(R.id.nav_host_fragment).navigate(action)
-
-
-
-            // Navigate to LoginFragment
-//            val navController = findNavController(R.id.nav_host_fragment)
-//            Log.d("firebaseEnter","4")
-//            navController.navigate(R.id.loginFragment)
-            Log.d("firebaseEnter","5")
         }
     }
 
@@ -59,42 +46,53 @@ class MainActivity : AppCompatActivity(), com.hfad.navigation.Navigator, MenuIte
         val action = SearchFragmentDirections.navigateSearchToMediaDetailsWithId(id)
         findNavController(R.id.nav_host_fragment).navigate(action)
     }
-    override fun navigateSearchToLogin(){
+
+    override fun navigateSearchToLogin() {
         val action = SearchFragmentDirections.navigateSearchToLogin()
         findNavController(R.id.nav_host_fragment).navigate(action)
     }
 
-    override fun navigatePosterToMediaDetailsWithId(id: String){
+    override fun navigatePosterToMediaDetailsWithId(id: String) {
         val action = PosterFragmentDirections.navigatePosterToMediaDetailsWithId(id)
         findNavController(R.id.nav_host_fragment).navigate(action)
     }
 
-    override fun navigateMediaDetailsToSearchWithId(id: String){
+    override fun navigateMediaDetailsToSearchWithId(id: String) {
         val action = MediaDetailsFragmentDirections.navigateMediaDetailsToSearchWithId(id)
         findNavController(R.id.nav_host_fragment).navigate(action)
     }
 
-    override fun navigateMediaDetailsToPosterWithId(id: String){
+    override fun navigateMediaDetailsToPosterWithId(id: String) {
         val action = MediaDetailsFragmentDirections.navigateMediaDetailsToPosterWithId(id)
         findNavController(R.id.nav_host_fragment).navigate(action)
     }
 
-    override fun navigateMediaDetailsToShowSeasonsWithId(id: String){
+    override fun navigateMediaDetailsToShowSeasonsWithId(id: String) {
         val action = MediaDetailsFragmentDirections.navigateMediaDetailsToShowSeasonsWithId(id)
         findNavController(R.id.nav_host_fragment).navigate(action)
     }
-    override fun navigateShowEpisodesToShowEpisode(title: String, seasonNumber: String, episodeNumber: String) {
+
+    override fun navigateShowEpisodesToShowEpisode(
+        title: String,
+        seasonNumber: String,
+        episodeNumber: String
+    ) {
         val action =
-            ShowEpisodesFragmentDirections.navigateShowEpisodesToShowEpisode(title, seasonNumber, episodeNumber)
+            ShowEpisodesFragmentDirections.navigateShowEpisodesToShowEpisode(
+                title,
+                seasonNumber,
+                episodeNumber
+            )
         findNavController(R.id.nav_host_fragment).navigate(action)
     }
+
     override fun navigateShowSeasonsToShowEpisodes(title: String, seasonNumber: String) {
         val action =
             ShowSeasonsFragmentDirections.navigateShowSeasonsToShowEpisodes(title, seasonNumber)
         findNavController(R.id.nav_host_fragment).navigate(action)
     }
 
-     override fun navigateShowSeasonsToLiked() {
+    override fun navigateShowSeasonsToLiked() {
         val action =
             ShowSeasonsFragmentDirections.navigateShowSeasonsToLiked()
         findNavController(R.id.nav_host_fragment).navigate(action)
@@ -112,7 +110,8 @@ class MainActivity : AppCompatActivity(), com.hfad.navigation.Navigator, MenuIte
             ShowEpisodesFragmentDirections.navigateShowEpisodesToLiked()
         findNavController(R.id.nav_host_fragment).navigate(action)
     }
-    override fun navigateMediaDetailsToLiked(){
+
+    override fun navigateMediaDetailsToLiked() {
         val action =
             MediaDetailsFragmentDirections.navigateMediaDetailsToLiked()
         findNavController(R.id.nav_host_fragment).navigate(action)
@@ -123,12 +122,14 @@ class MainActivity : AppCompatActivity(), com.hfad.navigation.Navigator, MenuIte
             LikedFragmentDirections.navigateLikedToMediaDetailsWithId(id)
         findNavController(R.id.nav_host_fragment).navigate(action)
     }
-    override fun navigateLikedToFromFbLiked(){
+
+    override fun navigateLikedToFromFbLiked() {
         val action =
             LikedFragmentDirections.navigateLikedToFromFbLiked()
         findNavController(R.id.nav_host_fragment).navigate(action)
     }
-    override fun navigateLikedToSearchFriend(){
+
+    override fun navigateLikedToSearchFriend() {
         val action = LikedFragmentDirections.navigateLikedToSearchFriend()
         findNavController(R.id.nav_host_fragment).navigate(action)
     }
@@ -137,23 +138,112 @@ class MainActivity : AppCompatActivity(), com.hfad.navigation.Navigator, MenuIte
         val action = LikedFragmentDirections.actionLikedToFriendsListFragment()
         findNavController(R.id.nav_host_fragment).navigate(action)
     }
-    override fun navigateShowMediaOfFriendToMediaDetailsWithId(id: String){
-        val action = ShowMediaOfFriendFragmentDirections.navigateShowMediaOfFriendToMediaDetailsWithId(id)
+
+    override fun navigateShowMediaOfFriendToMediaDetailsWithId(id: String) {
+        val action =
+            ShowMediaOfFriendFragmentDirections.navigateShowMediaOfFriendToMediaDetailsWithId(id)
+        findNavController(R.id.nav_host_fragment).navigate(action)
+
+    }
+    override fun actionsearchFriendtoFriendsListFragment() {
+        val action = SearchFriendFragmentDirections.actionsearchFriendtoFriendsListFragment()
         findNavController(R.id.nav_host_fragment).navigate(action)
     }
 
-    override fun navigateFriendsListFragmentToShowMediaOfFriendId(friendEmail: String){
-        val action = FriendsListFragmentDirections.navigateFriendsListFragmentToShowMediaOfFriendId(friendEmail)
+
+    override fun navigateFriendsListFragmentToShowMediaOfFriendId(friendEmail: String) {
+        val action = FriendsListFragmentDirections.navigateFriendsListFragmentToShowMediaOfFriendId(
+            friendEmail
+        )
         findNavController(R.id.nav_host_fragment).navigate(action)
     }
 
+    override fun action_from_fb_to_FriendsListFragment() {
+        val action = FromFbLikedFragmentDirections.actionFromFbToFriendsListFragment()
+        findNavController(R.id.nav_host_fragment).navigate(action)
+    }
 
+    override fun action_Login_to_FriendsListFragment() {
+        val action = LoginFragmentDirections.actionLogintoFriendsListFragment()
+        findNavController(R.id.nav_host_fragment).navigate(action)
+    }
+
+    override fun action_Liked_to_FriendsListFragment() {
+        val action = LikedFragmentDirections.actionLikedToFriendsListFragment()
+        findNavController(R.id.nav_host_fragment).navigate(action)
+    }
+
+    override fun action_Show_Episode_to_FriendsListFragment() {
+        val action = ShowEpisodeFragmentDirections.actionShowEpisodetoFriendsListFragment()
+        findNavController(R.id.nav_host_fragment).navigate(action)
+    }
+
+    override fun action_Show_episodes_to_FriendsListFragment() {
+        val action = ShowEpisodesFragmentDirections.actionShowepisodestoFriendsListFragment()
+        findNavController(R.id.nav_host_fragment).navigate(action)
+    }
+
+    override fun action_Show_seasons_to_FriendsListFragment() {
+        val action = ShowSeasonsFragmentDirections.actionShowSeasonsToFriendsListFragment()
+        findNavController(R.id.nav_host_fragment).navigate(action)
+    }
+
+    override fun action_media_details_to_FriendsListFragment() {
+        val action = MediaDetailsFragmentDirections.actionMediaDetailsToFriendsListFragment()
+        findNavController(R.id.nav_host_fragment).navigate(action)
+    }
+
+    override fun action_showMediaOfFriend_to_likedFragment() {
+        val action = ShowMediaOfFriendFragmentDirections.actionShowMediaOfFriendToLikedFragment()
+        findNavController(R.id.nav_host_fragment).navigate(action)
+    }
+
+    override fun action_searchFriend_to_likedFragment() {
+        val action = SearchFriendFragmentDirections.actionSearchFriendToLikedFragment()
+        findNavController(R.id.nav_host_fragment).navigate(action)
+    }
+
+    override fun action_fromFb_to_likedFragment() {
+        val action = FromFbLikedFragmentDirections.actionFromFbToLikedFragment()
+        findNavController(R.id.nav_host_fragment).navigate(action)
+    }
+
+    override fun action_login_to_likedFragment() {
+        val action = LoginFragmentDirections.actionLoginToLikedFragment()
+        findNavController(R.id.nav_host_fragment).navigate(action)
+    }
+    override fun actionFriendListToLikedFragment() {
+        val action = FriendsListFragmentDirections.actionFriendListToLikedFragment()
+        findNavController(R.id.nav_host_fragment).navigate(action)
+    }
 
 
     override fun onMenuItemClicked(itemId: Int) {
         when (itemId) {
+            R.id.action_friends -> {
+                val currentFragment =
+                    supportFragmentManager.primaryNavigationFragment?.childFragmentManager?.fragments?.get(
+                        0
+                    )
+                val fragmentName = currentFragment?.javaClass?.simpleName
+                Log.d("MainActivity", "Favorites menu item clicked from fragment: $fragmentName")
+                when (fragmentName) {
+                    "SearchFriendFragment" -> actionsearchFriendtoFriendsListFragment()
+                    "FromFbLikedFragment" -> action_from_fb_to_FriendsListFragment()
+                    "LoginFragment" -> action_Login_to_FriendsListFragment()
+                    "LikedFragment" -> action_Liked_to_FriendsListFragment()
+                    "ShowEpisodeFragment" -> action_Show_Episode_to_FriendsListFragment()
+                    "ShowEpisodesFragment" -> action_Show_episodes_to_FriendsListFragment()
+                    "ShowSeasonsFragment" -> action_Show_seasons_to_FriendsListFragment()
+                    "MediaDetailsFragment" -> action_media_details_to_FriendsListFragment()
+
+                }
+            }
             R.id.action_favorites -> {
-                val currentFragment = supportFragmentManager.primaryNavigationFragment?.childFragmentManager?.fragments?.get(0)
+                val currentFragment =
+                    supportFragmentManager.primaryNavigationFragment?.childFragmentManager?.fragments?.get(
+                        0
+                    )
                 val fragmentName = currentFragment?.javaClass?.simpleName
                 Log.d("MainActivity", "Favorites menu item clicked from fragment: $fragmentName")
                 when (fragmentName) {
@@ -161,9 +251,14 @@ class MainActivity : AppCompatActivity(), com.hfad.navigation.Navigator, MenuIte
                     "ShowEpisodeFragment" -> navigateShowEpisodeToLiked()
                     "ShowEpisodesFragment" -> navigateShowEpisodesToLiked()
                     "ShowSeasonsFragment" -> navigateShowSeasonsToLiked()
+                    "ShowMediaOfFriendFragment" -> action_showMediaOfFriend_to_likedFragment()
+                    "SearchFriendFragment" -> action_searchFriend_to_likedFragment()
+                    "FromFbLikedFragment" -> action_fromFb_to_likedFragment()
+                    "LoginFragment" -> action_login_to_likedFragment()
                 }
             }
+
+
         }
     }
-
 }

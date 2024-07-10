@@ -5,15 +5,15 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.hfad.core.BaseFragment
 import com.hfad.liked.databinding.FragmentShowMediaOfFriendBinding
 import kotlinx.coroutines.launch
 
-class ShowMediaOfFriendFragment : Fragment() {
+class ShowMediaOfFriendFragment : BaseFragment(R.layout.fragment_show_media_of_friend) {
     private lateinit var binding: FragmentShowMediaOfFriendBinding
     private val viewModel: ShowMediaOfFriendViewModel by viewModels()
     private val args: ShowMediaOfFriendFragmentArgs by navArgs()

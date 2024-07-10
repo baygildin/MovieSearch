@@ -6,6 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.LinearLayout
+import android.widget.TextView
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.google.firebase.auth.FirebaseAuth
@@ -41,15 +43,25 @@ class FriendRequestsFragment : BaseFragment(R.layout.fragment_friend_requests) {
     private fun updateFriendRequestsList(friends: List<FriendRequestsViewModel.Friend>) {
         binding.friendRequestsContainer.removeAllViews()
         for (friend in friends) {
-            val friendButton = Button(context).apply {
-                setTextColor(resources.getColor(R.color.main_text_color))
-                setBackgroundColor(Color.TRANSPARENT)
-                text = friend.email
-                setOnClickListener {
-                    // Handle friend request click
-                }
+            val itemView = layoutInflater.inflate(R.layout.item_friend_request, null)
+            val friendEmailTextView = itemView.findViewById<TextView>(R.id.tvFriendEmail)
+            val addFriendButton = itemView.findViewById<Button>(R.id.btnAddFriend)
+
+            friendEmailTextView.text = friend.email
+            addFriendButton.setOnClickListener {
+                addFriend(friend)
             }
-            binding.friendRequestsContainer.addView(friendButton)
+
+            binding.friendRequestsContainer.addView(itemView)
+        }
+    }
+
+    private fun addFriend(friend: FriendRequestsViewModel.Friend) {
+        val userRef = viewModel.usersRef.child(userKey).child("friends")
+
+        // Move friend from "requested" to "approved"
+        userRef.child("requested").child(friend.id).removeValue().addOnCompleteListener {
+            userRef.child("approved").child(friend.id).setValue(true)
         }
     }
 }

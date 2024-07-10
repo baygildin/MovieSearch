@@ -12,8 +12,8 @@ import com.google.firebase.ktx.Firebase
 
 class FriendRequestsViewModel : ViewModel() {
 
-    private val database = Firebase.database("https://moviesearchandmatch-60fa6-default-rtdb.europe-west1.firebasedatabase.app")
-    private val usersRef = database.getReference("users")
+    val database = Firebase.database("https://moviesearchandmatch-60fa6-default-rtdb.europe-west1.firebasedatabase.app")
+    val usersRef = database.getReference("users")
 
     private val _friendRequests = MutableLiveData<List<Friend>>()
     val friendRequests: LiveData<List<Friend>> get() = _friendRequests
@@ -53,6 +53,13 @@ class FriendRequestsViewModel : ViewModel() {
                 callback("")
             }
         })
+    }
+
+    fun approveFriend(userKey: String, friendId: String) {
+        val userRef = usersRef.child(userKey).child("friends")
+        userRef.child("requested").child(friendId).removeValue().addOnCompleteListener {
+            userRef.child("approved").child(friendId).setValue(true)
+        }
     }
 
     data class Friend(val id: String, val email: String, val approved: Boolean)

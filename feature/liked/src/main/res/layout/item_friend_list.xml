@@ -6,7 +6,7 @@
     android:padding="8dp">
 
     <TextView
-        android:id="@+id/tvFriendEmail"
+        android:id="@+id/tvEmailOfFriend"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
@@ -18,7 +18,7 @@
         android:id="@+id/btnAddFriend"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Add friend"
+        android:text="Unfriend"
         android:textColor="@color/main_text_color"
         android:background="@drawable/button_border"/>
 </LinearLayout>

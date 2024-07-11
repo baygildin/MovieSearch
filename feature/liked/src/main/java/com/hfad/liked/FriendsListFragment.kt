@@ -1,11 +1,11 @@
 package com.hfad.liked
 
-import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.TextView
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.google.firebase.auth.FirebaseAuth
@@ -48,24 +48,20 @@ class FriendsListFragment : BaseFragment(R.layout.fragment_friends_list) {
         binding.approvedFriendsContainer.removeAllViews()
         binding.approvedFriendsDeleteContainer.removeAllViews()
         for (friend in friends) {
-            val friendButton = Button(context).apply {
-                setTextColor(resources.getColor(R.color.main_text_color))
-                setBackgroundColor(Color.TRANSPARENT)
-                text = friend.email
-                setOnClickListener {
-                    (activity as com.hfad.navigation.Navigator).navigateFriendsListFragmentToShowMediaOfFriendId(friend.id)
-                }
+            val itemView = layoutInflater.inflate(R.layout.item_friend_list, null)
+            val friendButton = itemView.findViewById<TextView>(R.id.tvEmailOfFriend)
+            val deleteButton = itemView.findViewById<Button>(R.id.btnAddFriend)
+
+            friendButton.text = friend.email
+            deleteButton.text = "Unfriend"
+            deleteButton.setOnClickListener {
+                viewModel.deleteFriend(userKey, friend.id)
             }
-            val deleteButton = Button(context).apply {
-                setTextColor(resources.getColor(R.color.main_text_color))
-                setBackgroundColor(Color.TRANSPARENT)
-                text = "Unfriend"
-                setOnClickListener {
-                    viewModel.deleteFriend(userKey, friend.id)
-                }
+            friendButton.setOnClickListener {
+                (activity as com.hfad.navigation.Navigator).navigateFriendsListFragmentToShowMediaOfFriendId(friend.id)
             }
-            binding.approvedFriendsContainer.addView(friendButton)
-            binding.approvedFriendsDeleteContainer.addView(deleteButton)
+
+            binding.approvedFriendsContainer.addView(itemView)
         }
     }
 }

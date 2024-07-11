@@ -1,12 +1,10 @@
 package com.hfad.liked
 
-import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -51,14 +49,12 @@ class FriendRequestsFragment : BaseFragment(R.layout.fragment_friend_requests) {
             addFriendButton.setOnClickListener {
                 addFriend(friend)
             }
-
             binding.friendRequestsContainer.addView(itemView)
         }
     }
 
     private fun addFriend(friend: FriendRequestsViewModel.Friend) {
         val userRef = viewModel.usersRef.child(userKey).child("friends")
-
         // Move friend from "requested" to "approved"
         userRef.child("requested").child(friend.id).removeValue().addOnCompleteListener {
             userRef.child("approved").child(friend.id).setValue(true)

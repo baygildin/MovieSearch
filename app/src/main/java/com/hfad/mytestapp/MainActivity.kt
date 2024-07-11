@@ -10,6 +10,8 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.hfad.core.MenuItemClickListener
+import com.hfad.liked.FriendRequestsFragment
+import com.hfad.liked.FriendRequestsFragmentDirections
 import com.hfad.liked.FriendsListFragment
 import com.hfad.liked.FriendsListFragmentDirections
 import com.hfad.liked.ShowMediaOfFriendFragmentDirections
@@ -224,6 +226,14 @@ class MainActivity : AppCompatActivity(), com.hfad.navigation.Navigator, MenuIte
         val action = FriendsListFragmentDirections.navigateFriendListToSearchFriend()
         findNavController(R.id.nav_host_fragment).navigate(action)
     }
+    override fun actionFriendRequestsToFriendsListFragment(){
+        val action = FriendRequestsFragmentDirections.actionFriendRequestsToFriendsListFragment()
+        findNavController(R.id.nav_host_fragment).navigate(action)
+    }
+    override fun actionFriendListFragmentToLikedFragment(){
+        val action = FriendsListFragmentDirections.actionFriendListFragmentToLikedFragment()
+        findNavController(R.id.nav_host_fragment).navigate(action)
+    }
 
 
     override fun onMenuItemClicked(itemId: Int) {
@@ -244,6 +254,7 @@ class MainActivity : AppCompatActivity(), com.hfad.navigation.Navigator, MenuIte
                     "ShowEpisodesFragment" -> action_Show_episodes_to_FriendsListFragment()
                     "ShowSeasonsFragment" -> action_Show_seasons_to_FriendsListFragment()
                     "MediaDetailsFragment" -> action_media_details_to_FriendsListFragment()
+                    "FriendRequestsFragment" -> actionFriendRequestsToFriendsListFragment()
 
                 }
             }
@@ -263,6 +274,7 @@ class MainActivity : AppCompatActivity(), com.hfad.navigation.Navigator, MenuIte
                     "SearchFriendFragment" -> action_searchFriend_to_likedFragment()
                     "FromFbLikedFragment" -> action_fromFb_to_likedFragment()
                     "LoginFragment" -> action_login_to_likedFragment()
+                    "FriendListFragment" -> actionFriendListFragmentToLikedFragment()
                 }
             }
 

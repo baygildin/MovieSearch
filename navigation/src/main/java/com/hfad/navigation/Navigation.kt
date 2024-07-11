@@ -39,6 +39,8 @@ interface Navigator {
     fun actionFriendListToLikedFragment()
     fun navigateFriendsListFragmentToFriendRequestsFragment()
     fun navigateFriendListToSearchFriend()
+    fun actionFriendRequestsToFriendsListFragment()
+    fun actionFriendListFragmentToLikedFragment()
 
 
 }

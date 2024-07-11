@@ -292,6 +292,9 @@
             android:id="@+id/actionFriendListToLikedFragment"
             app:destination="@id/likedFragment" />
         <action
+            android:id="@+id/actionFriendListFragmentToLikedFragment"
+            app:destination="@id/likedFragment" />
+        <action
             android:id="@+id/navigateFriendListToSearchFriend"
             app:destination="@id/searchFriendFragment"/>
         <action
@@ -339,7 +342,11 @@
         android:name="com.hfad.liked.FriendRequestsFragment"
         android:label="Friend Requests"
         tools:layout="@layout/fragment_friend_requests">
+        <action
+            android:id="@+id/actionFriendRequestsToFriendsListFragment"
+            app:destination="@id/friendsListFragment" />
     </fragment>
+
 
 
 

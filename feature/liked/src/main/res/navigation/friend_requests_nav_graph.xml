@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/friend_requests_nav_graph.xml"
+    app:startDestination="@id/friendRequestsFragment">
+    <fragment
+        android:id="@+id/friendRequestsFragment"
+        android:name="com.hfad.liked.FriendRequestsFragment"
+        android:label="fragment_friend_requests"
+        tools:layout="@layout/fragment_friend_requests">
+    </fragment>
+</navigation>

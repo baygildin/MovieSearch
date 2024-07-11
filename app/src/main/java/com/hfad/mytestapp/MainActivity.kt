@@ -234,6 +234,10 @@ class MainActivity : AppCompatActivity(), com.hfad.navigation.Navigator, MenuIte
         val action = FriendsListFragmentDirections.actionFriendListFragmentToLikedFragment()
         findNavController(R.id.nav_host_fragment).navigate(action)
     }
+    override fun actionFriendRequestsToLikedFragment(){
+        val action = FriendRequestsFragmentDirections.actionFriendRequestsToLikedFragment()
+        findNavController(R.id.nav_host_fragment).navigate(action)
+    }
 
 
     override fun onMenuItemClicked(itemId: Int) {
@@ -255,6 +259,7 @@ class MainActivity : AppCompatActivity(), com.hfad.navigation.Navigator, MenuIte
                     "ShowSeasonsFragment" -> action_Show_seasons_to_FriendsListFragment()
                     "MediaDetailsFragment" -> action_media_details_to_FriendsListFragment()
                     "FriendRequestsFragment" -> actionFriendRequestsToFriendsListFragment()
+                    "FriendRequestsFragment" -> actionFriendRequestsToLikedFragment()
 
                 }
             }

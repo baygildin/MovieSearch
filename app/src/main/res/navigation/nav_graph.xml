@@ -15,6 +15,7 @@
     <include app:graph="@navigation/from_fb_liked_nav_graph" />
     <include app:graph="@navigation/fragment_show_media_of_friend_nav_graph" />
     <include app:graph="@navigation/fragment_friends_list_nav_graph" />
+    <include app:graph="@navigation/friend_requests_nav_graph" />
 
 
     <fragment
@@ -345,6 +346,9 @@
         <action
             android:id="@+id/actionFriendRequestsToFriendsListFragment"
             app:destination="@id/friendsListFragment" />
+        <action
+            android:id="@+id/actionFriendRequestsToLikedFragment"
+            app:destination="@id/likedFragment" />
     </fragment>
 
 

@@ -46,7 +46,6 @@ class FriendsListFragment : BaseFragment(R.layout.fragment_friends_list) {
 
     private fun updateFriendsList(friends: List<FriendsListViewModel.Friend>) {
         binding.approvedFriendsContainer.removeAllViews()
-        binding.approvedFriendsDeleteContainer.removeAllViews()
         for (friend in friends) {
             val itemView = layoutInflater.inflate(R.layout.item_friend_list, null)
             val friendButton = itemView.findViewById<TextView>(R.id.tvEmailOfFriend)

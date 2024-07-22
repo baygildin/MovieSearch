@@ -32,8 +32,8 @@ class SearchFriendViewModel : ViewModel() {
 
 
     fun searchFriend() {
-        val email = friendEmail.value ?: return
-        emailToUidRef.child(emailToValidFbKey(email)).addListenerForSingleValueEvent(object : ValueEventListener {
+        val email = friendEmail.value?: return
+        emailToUidRef.child(emailToValidFbKey(email.lowercase())).addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()) {
                     friendUid = snapshot.getValue(String::class.java) ?: ""

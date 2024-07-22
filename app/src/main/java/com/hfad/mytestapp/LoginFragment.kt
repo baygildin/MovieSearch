@@ -54,7 +54,7 @@ class LoginFragment : Fragment() {
 
 
     private fun createAccount(email: String, password: String) {
-        auth.createUserWithEmailAndPassword(email, password)
+        auth.createUserWithEmailAndPassword(email.lowercase(), password)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     Log.d(TAG, "createUserWithEmail:success")
@@ -76,7 +76,7 @@ class LoginFragment : Fragment() {
     }
 
     private fun signIn(email: String, password: String) {
-        auth.signInWithEmailAndPassword(email, password)
+        auth.signInWithEmailAndPassword(email.lowercase(), password)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     Log.d(TAG, "signInWithEmail:success")
@@ -103,15 +103,15 @@ class LoginFragment : Fragment() {
         private const val TAG = "LoginFragment"
     }
     fun saveEmailToUidMapping(email: String, uid: String){
-        val emailKey = emailToValidFbKey(email)
+        val emailKey = emailToValidFbKey(email.lowercase())
         emailToUidRef.child(emailKey).setValue(uid)
     }
     fun saveUidToEmailMapping(uid: String, email: String){
-        val emailKey = email
+        val emailKey = email.lowercase()
         uidToEmailRef.child(uid).setValue(emailKey)
     }
     fun saveEmailInUserNode(uid: String, email: String){
-        usersRef.child(uid).child("email").setValue(email)
+        usersRef.child(uid).child("email").setValue(email.lowercase())
 
     }
     fun emailToValidFbKey(str: String) = str.replace(".", "*")

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/media_details_nav_graph.xml"
+    app:startDestination="@id/mediaDetailsFragment">
+    <fragment
+        android:id="@+id/mediaDetailsFragment"
+        android:name="com.hfad.media_details.MediaDetailsFragment"
+        android:label="fragment_media_details"
+        tools:layout="@layout/fragment_media_details">
+        <argument
+            android:name="id"
+            app:argType="string"
+            android:defaultValue="1" />
+    </fragment>
+</navigation>

@@ -2,8 +2,16 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/nav_graph.xml"
+    android:id="@+id/nav_graph"
     app:startDestination="@id/searchFragment">
+
+    <include app:graph="@navigation/media_details_nav_graph" />
+    <include app:graph="@navigation/search_nav_graph" />
+    <include app:graph="@navigation/show_episodes_nav_graph" />
+    <include app:graph="@navigation/poster_nav_graph" />
+    <include app:graph="@navigation/show_episode_nav_graph" />
+    <include app:graph="@navigation/show_seasons_nav_graph" />
+    <include app:graph="@navigation/liked_nav_graph" />
 
     <fragment
         android:id="@+id/searchFragment"
@@ -12,34 +20,184 @@
         tools:layout="@layout/fragment_search">
         <deepLink
             android:id="@+id/deepLinksearchFragment"
-            app:uri="android-app://com.hfad.poster/searchFragment" />
+            app:uri="android-app://com.hfad.search/searchFragment" />
+        <action
+            android:id="@+id/navigateSearchToMediaDetailsWithId"
+            app:destination="@id/mediaDetailsFragment">
+            <argument
+                android:name="id"
+                app:argType="string"
+                android:defaultValue="1"/>
+        </action>
     </fragment>
+
     <fragment
-        android:id="@+id/movieDetailsFragment"
-        android:name="com.hfad.movie_details.MovieDetailsFragment"
-        android:label="fragment_movie_details"
-        tools:layout="@layout/fragment_movie_details">
+        android:id="@+id/mediaDetailsFragment"
+        android:name="com.hfad.media_details.MediaDetailsFragment"
+        android:label="fragment_media_details"
+        tools:layout="@layout/fragment_media_details">
         <deepLink
-            android:id="@+id/deepLinkmovieDetailsFragment"
-            app:uri="android-app://com.hfad.movie_details/movieDetailsFragment" />
+            android:id="@+id/deepLinkmediaDetailsFragment"
+            app:uri="android-app://com.hfad.media_details/mediaDetailsFragment" />
+        <action
+            android:id="@+id/navigateMediaDetailsToLiked"
+            app:destination="@id/likedFragment">
+        </action>
+        <action
+            android:id="@+id/navigateMediaDetailsToPosterWithId"
+            app:destination="@id/posterFragment">
+            <argument
+                android:name="id"
+                app:argType="string"
+                android:defaultValue="1"/>
+        </action>
+        <action
+            android:id="@+id/navigateMediaDetailsToShowSeasonsWithId"
+            app:destination="@id/showSeasonsFragment">
+            <argument
+                android:name="id"
+                app:argType="string"
+                android:defaultValue="1"/>
+        </action>
+        <action
+            android:id="@+id/navigateMediaDetailsToSearchWithId"
+            app:destination="@id/searchFragment">
+            <argument
+                android:name="id"
+                app:argType="string"
+                android:defaultValue="1"/>
+        </action>
+
     </fragment>
+
     <fragment
         android:id="@+id/posterFragment"
         android:name="com.hfad.poster.PosterFragment"
         android:label="fragment_poster"
         tools:layout="@layout/fragment_poster">
-
         <deepLink
             android:id="@+id/deepLinkPosterFragment"
             app:uri="android-app://com.hfad.poster/PosterFragment" />
+        <action
+            android:id="@+id/navigatePosterToMediaDetailsWithId"
+            app:destination="@id/mediaDetailsFragment">
+            <argument
+                android:name="id"
+                app:argType="string"
+                android:defaultValue="1"/>
+        </action>
     </fragment>
+
+    <fragment
+        android:id="@+id/showSeasonsFragment"
+        android:name="com.hfad.show_episodes.ShowSeasonsFragment"
+        android:label="Show Seasons"
+        tools:layout="@layout/fragment_show_seasons">
+        <deepLink
+            android:id="@+id/deepLinkShowSeasonFragment"
+            app:uri="android-app://com.hfad.poster/ShowSeasonFragment" />
+        <argument
+            android:name="id"
+            app:argType="string"
+            android:defaultValue="1"/>
+        <action
+            android:id="@+id/navigateShowSeasonsToLiked"
+            app:destination="@id/likedFragment"/>
+        <action
+            android:id="@+id/navigateShowSeasonsToShowEpisodes"
+            app:destination="@id/showEpisodesFragment">
+            <argument
+                android:name="title"
+                app:argType="string"
+                android:defaultValue="1"/>
+            <argument
+                android:name="seasonNumber"
+                app:argType="string"
+                android:defaultValue="1"/>
+        </action>
+
+    </fragment>
+
     <fragment
         android:id="@+id/showEpisodesFragment"
         android:name="com.hfad.show_episodes.ShowEpisodesFragment"
-        android:label="fragment_show_episodes"
-        tools:layout="@layout/fragment_show_episodes" >
-    <deepLink
-        android:id="@+id/deepLinkShowEpisodesFragment"
-        app:uri="android-app://com.hfad.show_episodes/ShowEpisodesFragment" />
+        android:label="Show Episodes"
+        tools:layout="@layout/fragment_show_episodes">
+        <deepLink
+            android:id="@+id/deepLinkShowEpisodesFragment"
+            app:uri="android-app://com.hfad.poster/ShowEpisodesFragment" />
+        <argument
+            android:name="title"
+            app:argType="string"
+            android:defaultValue="1"/>
+        <argument
+            android:name="seasonNumber"
+            app:argType="string"
+            android:defaultValue="1"/>
+        <action
+            android:id="@+id/navigateShowEpisodesToLiked"
+            app:destination="@id/likedFragment"/>
+        <action
+            android:id="@+id/navigateShowEpisodesToShowEpisode"
+            app:destination="@id/showEpisodeFragment">
+            <argument
+                android:name="title"
+                app:argType="string"
+                android:defaultValue="1"/>
+            <argument
+                android:name="seasonNumber"
+                app:argType="string"
+                android:defaultValue="1"/>
+            <argument
+                android:name="episodeNumber"
+                app:argType="string"
+                android:defaultValue="1"/>
+        </action>
     </fragment>
+
+    <fragment
+        android:id="@+id/showEpisodeFragment"
+        android:name="com.hfad.show_episodes.ShowEpisodeFragment"
+        android:label="show_episode"
+        tools:layout="@layout/fragment_show_episode">
+        <deepLink
+            android:id="@+id/deepLinkShowEpisodeFragment"
+            app:uri="android-app://com.hfad.poster/ShowEpisodeFragment" />
+        <action
+            android:id="@+id/navigateShowEpisodeToLiked"
+            app:destination="@id/likedFragment"/>
+        <argument
+            android:name="title"
+            app:argType="string" />
+        <argument
+            android:name="seasonNumber"
+            app:argType="string" />
+        <argument
+            android:name="episodeNumber"
+            app:argType="string" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/likedFragment"
+        android:name="com.hfad.liked.LikedFragment"
+        android:label="LikedFragment"
+        tools:layout="@layout/fragment_liked">
+        <deepLink
+            android:id="@+id/deepLinkLikedFragment"
+            app:uri="android-app://com.hfad.liked/LikedFragment" />
+        <action
+            android:id="@+id/action_favorites_to_likedFragment"
+            app:destination="@id/likedFragment" />
+        <action
+            android:id="@+id/navigateLikedToMediaDetailsWithId"
+            app:destination="@id/mediaDetailsFragment">
+            <argument
+                android:name="id"
+                app:argType="string"
+                android:defaultValue="1"/>
+        </action>
+    </fragment>
+
 </navigation>
+

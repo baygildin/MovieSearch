@@ -1,0 +1,4 @@
+<resources>
+    <string name="welcome_text">Movie Search</string>
+    <string name="show_episodes">Показать сезоны</string>
+</resources>

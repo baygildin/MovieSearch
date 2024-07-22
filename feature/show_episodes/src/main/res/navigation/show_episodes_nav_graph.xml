@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/show_episodes_nav_graph.xml"
+    app:startDestination="@id/showEpisodesFragment">
+    <fragment
+        android:id="@+id/showEpisodesFragment"
+        android:name="com.hfad.show_episodes.ShowEpisodesFragment"
+        android:label="fragment_show_episodes"
+        tools:layout="@layout/fragment_show_episodes">
+        <argument
+            android:name="title"
+            app:argType="string" />
+        <argument
+            android:name="seasonNumber"
+            app:argType="string" />
+    </fragment>
+</navigation>
+

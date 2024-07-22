@@ -1,33 +1,90 @@
 package com.hfad.show_episodes
 
-import androidx.fragment.app.viewModels
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Log
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import androidx.core.net.toUri
-import androidx.navigation.NavDeepLinkRequest
-import androidx.navigation.fragment.findNavController
-import com.hfad.show_episodes.R
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.navArgs
+import com.hfad.core.BaseFragment
+import com.hfad.show_episodes.databinding.FragmentShowEpisodesBinding
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 
-class ShowEpisodesFragment : Fragment() {
+@AndroidEntryPoint
+class ShowEpisodesFragment : BaseFragment(R.layout.fragment_show_episodes) {
+
+    private var _binding: FragmentShowEpisodesBinding? = null
+    private val binding get() = _binding!!
+    private val viewModel: ShowEpisodesViewModel by viewModels()
+    private val args: ShowEpisodesFragmentArgs by navArgs()
 
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.fragment_show_episodes, container, false)
-        val moveToDetailsScreenButton = view.findViewById<Button>(R.id.btn_details_screen)
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        _binding = FragmentShowEpisodesBinding.inflate(inflater, container, false)
+        return binding.root
+    }
 
-        moveToDetailsScreenButton.setOnClickListener {
-            val request = NavDeepLinkRequest.Builder
-                .fromUri("android-app://com.hfad.movie_details/movieDetailsFragment".toUri())
-                .build()
-            findNavController().navigate(request)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.episodes.collect { result ->
+                result?.fold(
+                    onSuccess = { episodesInfo ->
+                        binding.episodesContainer.removeAllViews()
+                        for (episode in 1..episodesInfo.episodes.size) {
+                            val button = Button(requireContext()).apply {
+                                text = "${getString(R.string.txt_episode_preffix)} $episode"
+                                setOnClickListener {
+                                    (activity as com.hfad.navigation.Navigator).navigateShowEpisodesToShowEpisode(
+                                        episodesInfo.title,
+                                        args.seasonNumber.toString(),
+                                        episode.toString()
+                                    )
+                                }
+                            }
+
+                            val layoutParams = ViewGroup.MarginLayoutParams(
+                                ViewGroup.LayoutParams.MATCH_PARENT,
+                                ViewGroup.LayoutParams.WRAP_CONTENT
+                            ).apply {
+                                topMargin = 15
+                            }
+                            button.layoutParams = layoutParams
+                            button.setTextColor(resources.getColor(R.color.main_text_color, null))
+                            button.textSize = 15f
+                            button.gravity = Gravity.CENTER
+                            button.setBackgroundResource(R.drawable.border_background)
+                            binding.episodesContainer.addView(button)
+                        }
+                    },
+                    onFailure = { error ->
+                        Log.e("ShowEpisodesFragment", "Error fetching episodes", error)
+                    }
+                )
+            }
         }
-        return view
 
+        val seasonNumber = args.seasonNumber.toString()
+
+        if (seasonNumber.isNotEmpty()) {
+            viewModel.fetchEpisodes(args.title, seasonNumber)
+        } else {
+            Log.e("ShowEpisodesFragment", "Invalid season number: ${args.seasonNumber}")
+        }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

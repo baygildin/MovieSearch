@@ -1,0 +1,4 @@
+<resources>
+    <string name="txt_season_preffix">Сезон</string>
+    <string name="txt_episode_preffix">Эпизод</string>
+</resources>

@@ -1,0 +1,5 @@
+<resources>
+    <string name="txt_liked">Featured media</string>
+    <string name="toast_sorted_by_date">Sorted by date added</string>
+    <string name="toast_sorted_by_title">Sorted by title</string>
+</resources>

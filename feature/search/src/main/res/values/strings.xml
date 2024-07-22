@@ -1,12 +1,10 @@
 <resources>
-    <string name="app_name">MyTestApp</string>
-    <string name="welcome_text">Поиск фильмов и сериалов по названию</string>
-    <string name="start">Начать поиск</string>
-    <string name="details_screen">Экран деталей:
-    постер и описание</string>
+    <string name="app_name">MovieSearch</string>
+    <string name="txt_app_title">Movie Search</string>
+    <string name="start">Start Search</string>
+    <string name="details_screen">Details Screen: Poster and Description</string>
     <string name="next">Next</string>
-    <string name="message_hint">Введите название фильма или сериала</string>
-    <string name="poster_to_maxSize">Увеличить постер на весь экран</string>
-    <string name="btn_episodes_list">Посмотреть список серий</string>
-
+    <string name="message_hint">Enter title</string>
+    <string name="poster_to_maxSize">Enlarge poster to full screen</string>
+    <string name="btn_episodes_list">View list of episodes</string>
 </resources>

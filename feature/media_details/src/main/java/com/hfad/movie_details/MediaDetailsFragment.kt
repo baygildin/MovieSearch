@@ -2,7 +2,12 @@ package com.hfad.media_details
 
 
 import android.annotation.SuppressLint
+import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.drawable.Drawable
+import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -11,12 +16,13 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.target.CustomTarget
+import com.bumptech.glide.request.transition.Transition
 import com.hfad.core.BaseFragment
 import com.hfad.media_details.databinding.FragmentMediaDetailsBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import java.util.concurrent.TimeUnit
-
 
 @AndroidEntryPoint
 class MediaDetailsFragment : BaseFragment(R.layout.fragment_media_details) {
@@ -36,6 +42,7 @@ class MediaDetailsFragment : BaseFragment(R.layout.fragment_media_details) {
         val shimmerFrameLayout = binding.shimmerFrame
         val realContent = binding.realContent
         val chosenMovieId = args.id
+        var poster = ""
         viewModel.fetchMediaDetails(chosenMovieId)
         shimmerFrameLayout.startShimmer()
 
@@ -71,7 +78,7 @@ class MediaDetailsFragment : BaseFragment(R.layout.fragment_media_details) {
                         binding.tvMediaInfoBodyPlot.text = it.plot
                         binding.tvMediaInfoBodyAwards.text = it.awards
                         binding.tvEpisodeInfoBodyGenre.text = it.genre
-
+                        poster = it.poster
                         if (it.type == "series") binding.btnShowEpisodes.visibility =
                             View.VISIBLE
                     },
@@ -90,6 +97,36 @@ class MediaDetailsFragment : BaseFragment(R.layout.fragment_media_details) {
                     else R.drawable.heart_black
                 )
             }
+        }
+        binding.btnShareMedia.setOnClickListener {
+            val text = "${binding.tvMediaInfoBodyTitle.text} ${binding.tvMediaInfoBodyYear.text}\n${binding.tvMediaInfoBodyPlot.text}"
+            val imageUrl = poster
+
+            Glide.with(requireContext())
+                .asBitmap()
+                .load(imageUrl)
+                .into(object : CustomTarget<Bitmap>() {
+                    override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
+                        val imagePath = MediaStore.Images.Media.insertImage(
+                            requireContext().contentResolver, resource, "Title", null
+                        )
+                        val imageUri = Uri.parse(imagePath)
+
+                        val shareIntent = Intent().apply {
+                            action = Intent.ACTION_SEND
+                            type = "*/*"
+                            putExtra(Intent.EXTRA_TEXT, text)
+                            putExtra(Intent.EXTRA_STREAM, imageUri)
+                            addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                        }
+
+                        Log.d("ShareIntent", "Text: $text\nImage URL: $imageUrl")
+                        startActivity(Intent.createChooser(shareIntent, "Share via"))
+                    }
+
+                    override fun onLoadCleared(placeholder: Drawable?) {
+                    }
+                })
         }
 
         binding.btnShowEpisodes.setOnClickListener {

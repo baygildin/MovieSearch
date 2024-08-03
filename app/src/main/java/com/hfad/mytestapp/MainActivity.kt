@@ -35,13 +35,7 @@ class MainActivity : AppCompatActivity(), com.hfad.navigation.Navigator, MenuIte
         super.onCreate(savedInstanceState)
         installSplashScreen()
         setContentView(R.layout.activity_main)
-        val auth = FirebaseAuth.getInstance()
-        if (auth.currentUser == null) {
-            val navHostFragment =
-                supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
-            val navController = navHostFragment.navController
-            navController.navigate(R.id.loginFragment)
-        }
+        auth = FirebaseAuth.getInstance()
     }
 
     override fun navigateSearchToMediaDetailsWithId(id: String) {
@@ -239,6 +233,40 @@ class MainActivity : AppCompatActivity(), com.hfad.navigation.Navigator, MenuIte
         findNavController(R.id.nav_host_fragment).navigate(action)
     }
 
+    override fun actionSearchFriendFragmentToLoginFragment(){
+        val action = SearchFriendFragmentDirections.actionSearchFriendFragmentToLoginFragment()
+        findNavController(R.id.nav_host_fragment).navigate(action)
+    }
+
+    override fun navigateLikedToLogin(){
+        val action = LikedFragmentDirections.navigateLikedToLogin()
+        findNavController(R.id.nav_host_fragment).navigate(action)
+    }
+
+    override fun actionShowEpisodeFragmentToLoginFragment(){
+        val action = ShowEpisodeFragmentDirections.actionShowEpisodeFragmentToLoginFragment()
+        findNavController(R.id.nav_host_fragment).navigate(action)
+    }
+    override fun actionShowEpisodesFragmentToLoginFragment(){
+        val action = ShowEpisodesFragmentDirections.actionShowEpisodesFragmentToLoginFragment()
+        findNavController(R.id.nav_host_fragment).navigate(action)
+    }
+    override fun actionShowSeasonsFragmentToLoginFragment(){
+        val action = ShowSeasonsFragmentDirections.actionShowSeasonsFragmentToLoginFragment()
+        findNavController(R.id.nav_host_fragment).navigate(action)
+    }
+    override fun actionMediaDetailsFragmentToLoginFragment(){
+        val action = MediaDetailsFragmentDirections.actionMediaDetailsFragmentToLoginFragment()
+        findNavController(R.id.nav_host_fragment).navigate(action)
+    }
+    override fun actionFriendRequestsFragmentToLoginFragment(){
+        val action = FriendRequestsFragmentDirections.actionFriendRequestsFragmentToLoginFragment()
+        findNavController(R.id.nav_host_fragment).navigate(action)
+    }
+
+
+
+
 
     override fun onMenuItemClicked(itemId: Int) {
         when (itemId) {
@@ -249,18 +277,32 @@ class MainActivity : AppCompatActivity(), com.hfad.navigation.Navigator, MenuIte
                     )
                 val fragmentName = currentFragment?.javaClass?.simpleName
                 Log.d("MainActivity", "Favorites menu item clicked from fragment: $fragmentName")
-                when (fragmentName) {
-                    "SearchFriendFragment" -> actionsearchFriendtoFriendsListFragment()
-                    "FromFbLikedFragment" -> action_from_fb_to_FriendsListFragment()
-                    "LoginFragment" -> action_Login_to_FriendsListFragment()
-                    "LikedFragment" -> action_Liked_to_FriendsListFragment()
-                    "ShowEpisodeFragment" -> action_Show_Episode_to_FriendsListFragment()
-                    "ShowEpisodesFragment" -> action_Show_episodes_to_FriendsListFragment()
-                    "ShowSeasonsFragment" -> action_Show_seasons_to_FriendsListFragment()
-                    "MediaDetailsFragment" -> action_media_details_to_FriendsListFragment()
-                    "FriendRequestsFragment" -> actionFriendRequestsToFriendsListFragment()
-                    "FriendRequestsFragment" -> actionFriendRequestsToLikedFragment()
 
+                if (auth.currentUser==null) {
+                    when (fragmentName) {
+                        "SearchFriendFragment" -> actionSearchFriendFragmentToLoginFragment()
+                        "LikedFragment" -> navigateLikedToLogin()
+                        "ShowEpisodeFragment" -> actionShowEpisodeFragmentToLoginFragment()
+                        "ShowEpisodesFragment" -> actionShowEpisodesFragmentToLoginFragment()
+                        "ShowSeasonsFragment" -> actionShowSeasonsFragmentToLoginFragment()
+                        "MediaDetailsFragment" -> actionMediaDetailsFragmentToLoginFragment()
+                        "FriendRequestsFragment" -> actionFriendRequestsFragmentToLoginFragment()
+                    }
+                }
+
+                else {
+                    when (fragmentName) {
+                        "SearchFriendFragment" -> actionsearchFriendtoFriendsListFragment()
+                        "LoginFragment" -> action_Login_to_FriendsListFragment()
+                        "LikedFragment" -> action_Liked_to_FriendsListFragment()
+                        "ShowEpisodeFragment" -> action_Show_Episode_to_FriendsListFragment()
+                        "ShowEpisodesFragment" -> action_Show_episodes_to_FriendsListFragment()
+                        "ShowSeasonsFragment" -> action_Show_seasons_to_FriendsListFragment()
+                        "MediaDetailsFragment" -> action_media_details_to_FriendsListFragment()
+                        //"FriendRequestsFragment" -> actionFriendRequestsToFriendsListFragment()
+                        "FriendRequestsFragment" -> actionFriendRequestsToLikedFragment()
+
+                    }
                 }
             }
             R.id.action_favorites -> {

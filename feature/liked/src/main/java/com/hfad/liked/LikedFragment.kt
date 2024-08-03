@@ -55,23 +55,27 @@ class LikedFragment : BaseFragment(R.layout.fragment_liked) {
 
 
         binding.btnSendToCloud.setOnClickListener {
-            if (viewModel.doesUserAgreeToSendToCloud){
-                val jsonLikedMediaToCloud = viewModel.getFavouritesJson()
-                myRef.child("favourites").setValue(jsonLikedMediaToCloud)
-                if (viewModel.doesUserAgreeToSendToCloud) {Toast.makeText(context, context?.getResources()?.getString(R.string.toast_sent_to_cloud), Toast.LENGTH_SHORT).show()
-                }
-            } else {
-                viewModel.doesUserAgreeToSendToCloud = true
-                Toast.makeText(context, context?.getResources()?.getString(R.string.toast_agree_to_send_to_cloud), Toast.LENGTH_LONG).show()
+            if (auth.currentUser==null) {
+                (activity as com.hfad.navigation.Navigator).navigateLikedToLogin()
             }
-        }
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.favouriteItems.collect { items ->
-                adapter.updateItems(items)
+            else {
+                if (viewModel.doesUserAgreeToSendToCloud){
+                    val jsonLikedMediaToCloud = viewModel.getFavouritesJson()
+                    myRef.child("favourites").setValue(jsonLikedMediaToCloud)
+                    if (viewModel.doesUserAgreeToSendToCloud) {Toast.makeText(context, context?.getResources()?.getString(R.string.toast_sent_to_cloud), Toast.LENGTH_SHORT).show()
+                    }
+                } else {
+                    viewModel.doesUserAgreeToSendToCloud = true
+                    Toast.makeText(context, context?.getResources()?.getString(R.string.toast_agree_to_send_to_cloud), Toast.LENGTH_LONG).show()
+                }
             }
         }
         binding.btnDownloadFromCloud.setOnClickListener {
-            fetchFavouritesFromCloud()
+            if (auth.currentUser == null) {
+                (activity as com.hfad.navigation.Navigator).navigateLikedToLogin()
+            } else {
+                fetchFavouritesFromCloud()
+            }
 
         }
         binding.btnSort.setOnClickListener {
@@ -103,6 +107,11 @@ class LikedFragment : BaseFragment(R.layout.fragment_liked) {
             }
             isSortedByDate = !isSortedByDate
 
+        }
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.favouriteItems.collect { items ->
+                adapter.updateItems(items)
+            }
         }
     }
 

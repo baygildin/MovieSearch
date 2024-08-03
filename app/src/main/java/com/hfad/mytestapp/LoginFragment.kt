@@ -15,33 +15,34 @@ import com.google.firebase.ktx.Firebase
 import com.hfad.movie_search.databinding.FragmentLoginBinding
 
 class LoginFragment : Fragment() {
-
-
     private lateinit var binding: FragmentLoginBinding
     private lateinit var auth: FirebaseAuth
-
-
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        Log.d("firebaseEnter","LoginFragment1")
         binding = FragmentLoginBinding.inflate(inflater, container, false)
         auth = FirebaseAuth.getInstance()
-        Log.d("firebaseEnter","LoginFragment4")
-
         binding.loginButton.setOnClickListener {
             val email = binding.emailEditText.text.toString()
             val password = binding.passwordEditText.text.toString()
-            signIn(email, password)
+            if (checkIsTextBlank(email, password)) {
+                Toast.makeText(context, "Email and password must not be empty", Toast.LENGTH_SHORT).show()
+            }
+            else {
+                signIn(email, password)
+            }
         }
-
         binding.registerButton.setOnClickListener {
             val email = binding.emailEditText.text.toString()
             val password = binding.passwordEditText.text.toString()
-            createAccount(email, password)
+            if (checkIsTextBlank(email, password)) {
+                Toast.makeText(context, "Email and password must not be empty", Toast.LENGTH_SHORT).show()
+            }
+            else {
+                createAccount(email, password)
+            }
         }
 
         return binding.root
@@ -92,7 +93,6 @@ class LoginFragment : Fragment() {
 
     private fun updateUI(user: FirebaseUser?) {
         if (user != null) {
-            // Navigate to the main activity
             val intent = Intent(activity, MainActivity::class.java)
             startActivity(intent)
             activity?.finish()
@@ -112,7 +112,13 @@ class LoginFragment : Fragment() {
     }
     fun saveEmailInUserNode(uid: String, email: String){
         usersRef.child(uid).child("email").setValue(email.lowercase())
-
     }
     fun emailToValidFbKey(str: String) = str.replace(".", "*")
+
+    private fun checkIsTextBlank(text1: String?, text2: String?): Boolean{
+        if (text1.isNullOrBlank() || text2.isNullOrBlank()) {
+            return true
+        }
+        else return false
+    }
 }

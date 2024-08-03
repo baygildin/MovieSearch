@@ -62,5 +62,10 @@ dependencies {
     implementation "com.google.dagger:hilt-android:$hilt_version"
     kapt "com.google.dagger:hilt-compiler:$hilt_version"
     implementation 'com.facebook.shimmer:shimmer:0.5.0'
+
+    implementation platform('com.google.firebase:firebase-bom:33.1.1')
+    implementation 'com.google.firebase:firebase-database'
+    implementation 'com.google.firebase:firebase-auth-ktx'
+
 }
 apply plugin: 'androidx.navigation.safeargs.kotlin'

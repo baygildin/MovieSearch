@@ -15,6 +15,7 @@ abstract class BaseFragment(layoutId: Int) : Fragment(layoutId) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
         val toolbar: Toolbar = view.findViewById(R.id.toolbar)
         (activity as AppCompatActivity).setSupportActionBar(toolbar)
         (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.txt_app_title)
@@ -43,4 +44,5 @@ abstract class BaseFragment(layoutId: Int) : Fragment(layoutId) {
             else -> super.onOptionsItemSelected(item)
         }
     }
+
 }

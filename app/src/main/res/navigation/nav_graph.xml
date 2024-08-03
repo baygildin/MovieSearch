@@ -56,6 +56,9 @@
             android:id="@+id/actionMediaDetailsToFriendsListFragment"
             app:destination="@id/friendsListFragment" />
         <action
+            android:id="@+id/actionMediaDetailsFragmentToLoginFragment"
+            app:destination="@id/loginFragment" />
+        <action
             android:id="@+id/navigateMediaDetailsToPosterWithId"
             app:destination="@id/posterFragment">
             <argument
@@ -119,6 +122,10 @@
         <action
             android:id="@+id/navigateShowSeasonsToLiked"
             app:destination="@id/likedFragment"/>
+
+        <action
+            android:id="@+id/actionShowSeasonsFragmentToLoginFragment"
+            app:destination="@id/loginFragment"/>
         <action
             android:id="@+id/actionShowSeasonsToFriendsListFragment"
             app:destination="@id/friendsListFragment" />
@@ -160,6 +167,9 @@
             android:id="@+id/navigateShowEpisodesToLiked"
             app:destination="@id/likedFragment"/>
         <action
+            android:id="@+id/actionShowEpisodesFragmentToLoginFragment"
+            app:destination="@id/loginFragment" />
+        <action
             android:id="@+id/navigateShowEpisodesToShowEpisode"
             app:destination="@id/showEpisodeFragment">
             <argument
@@ -188,6 +198,9 @@
         <action
             android:id="@+id/navigateShowEpisodeToLiked"
             app:destination="@id/likedFragment"/>
+        <action
+            android:id="@+id/actionShowEpisodeFragmentToLoginFragment"
+            app:destination="@id/loginFragment" />
         <action
             android:id="@+id/actionShowEpisodetoFriendsListFragment"
             app:destination="@id/friendsListFragment" />
@@ -223,6 +236,10 @@
         <action
             android:id="@+id/actionLikedToFriendsListFragment"
             app:destination="@id/friendsListFragment" />
+
+        <action
+            android:id="@+id/navigateLikedToLogin"
+            app:destination="@id/loginFragment"/>
         <action
             android:id="@+id/navigateLikedToMediaDetailsWithId"
             app:destination="@id/mediaDetailsFragment">
@@ -276,6 +293,9 @@
         <action
             android:id="@+id/actionsearchFriendtoFriendsListFragment"
             app:destination="@id/friendsListFragment" />
+        <action
+            android:id="@+id/actionSearchFriendFragmentToLoginFragment"
+            app:destination="@id/loginFragment" />
         <deepLink
             android:id="@+id/deepLinkSearchFriendFragment"
             app:uri="android-app://com.hfad.liked/SearchFriendFragment" />
@@ -346,6 +366,9 @@
         <action
             android:id="@+id/actionFriendRequestsToFriendsListFragment"
             app:destination="@id/friendsListFragment" />
+        <action
+            android:id="@+id/actionFriendRequestsFragmentToLoginFragment"
+            app:destination="@id/loginFragment" />
         <action
             android:id="@+id/actionFriendRequestsToLikedFragment"
             app:destination="@id/likedFragment" />

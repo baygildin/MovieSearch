@@ -1,42 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- fragment_login.xml -->
-
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
-    android:orientation="vertical"
-    android:padding="16dp"
-
-
-    android:gravity="center_horizontal"
-
+    android:background="@color/background_color"
     tools:context="com.hfad.movie_search.LoginFragment">
-    <!--    android:background="@color/background_color"-->
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp"
+        app:popupTheme="@style/AppTheme.PopupOverlay"
+        style="@style/ToolbarStyle"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
     <EditText
         android:id="@+id/email_edit_text"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="Email" />
+        android:layout_marginTop="32dp"
+        android:hint="Email"
+        android:paddingTop="20dp"
+        android:textColor="@color/main_text_color"
+        android:textColorHint="@color/main_text_color"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintWidth_percent="0.8"/>
 
     <EditText
         android:id="@+id/password_edit_text"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:hint="Password"
-        android:inputType="textPassword" />
+        android:inputType="textPassword"
+        android:paddingTop="20dp"
+        android:textColor="@color/main_text_color"
+        android:textColorHint="@color/main_text_color"
+        app:layout_constraintTop_toBottomOf="@+id/email_edit_text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintWidth_percent="0.8"/>
 
     <Button
         android:id="@+id/login_button"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Login" />
+        android:layout_marginTop="32dp"
+        android:background="@drawable/button_border"
+        android:gravity="center"
+        android:text="Login"
+        android:textColor="@color/main_text_color"
+        app:layout_constraintTop_toBottomOf="@+id/password_edit_text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintWidth_percent="0.4"/>
 
     <Button
         android:id="@+id/register_button"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Register" />
-</LinearLayout>
+        android:layout_marginTop="16dp"
+        android:background="@drawable/button_border"
+        android:gravity="center"
+        android:text="Register"
+        android:textColor="@color/main_text_color"
+        app:layout_constraintTop_toBottomOf="@+id/login_button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintWidth_percent="0.4"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

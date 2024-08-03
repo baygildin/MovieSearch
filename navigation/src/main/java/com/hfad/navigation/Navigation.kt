@@ -43,5 +43,13 @@ interface Navigator {
     fun actionFriendListFragmentToLikedFragment()
     fun actionFriendRequestsToLikedFragment()
 
+    fun navigateLikedToLogin()
+    fun actionSearchFriendFragmentToLoginFragment()
+    fun actionShowEpisodeFragmentToLoginFragment()
+    fun actionShowEpisodesFragmentToLoginFragment()
+    fun actionShowSeasonsFragmentToLoginFragment()
+    fun actionMediaDetailsFragmentToLoginFragment()
+    fun actionFriendRequestsFragmentToLoginFragment()
+
 
 }

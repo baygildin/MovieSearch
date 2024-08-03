@@ -20,6 +20,7 @@ class FriendsListFragment : BaseFragment(R.layout.fragment_friends_list) {
     private val auth = FirebaseAuth.getInstance()
     private val userKey = auth.currentUser?.uid ?: ""
 
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

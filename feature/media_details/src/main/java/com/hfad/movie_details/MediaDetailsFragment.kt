@@ -39,6 +39,7 @@ class MediaDetailsFragment : BaseFragment(R.layout.fragment_media_details) {
     ): View? {
         _binding = FragmentMediaDetailsBinding.inflate(inflater, container, false)
         val view = binding.root
+
         val shimmerFrameLayout = binding.shimmerFrame
         val realContent = binding.realContent
         val chosenMovieId = args.id
@@ -101,7 +102,6 @@ class MediaDetailsFragment : BaseFragment(R.layout.fragment_media_details) {
         binding.btnShareMedia.setOnClickListener {
             val text = "${binding.tvMediaInfoBodyTitle.text} ${binding.tvMediaInfoBodyYear.text}\n${binding.tvMediaInfoBodyPlot.text}"
             val imageUrl = poster
-
             Glide.with(requireContext())
                 .asBitmap()
                 .load(imageUrl)

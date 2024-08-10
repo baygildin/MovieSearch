@@ -1,6 +1,7 @@
 package com.hfad.liked
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -53,6 +54,7 @@ class FriendsListFragment : BaseFragment(R.layout.fragment_friends_list) {
             val deleteButton = itemView.findViewById<Button>(R.id.btnAddFriend)
 
             friendButton.text = friend.email
+            Log.d("dasds", "${friend.email}")
             deleteButton.text = "Unfriend"
             deleteButton.setOnClickListener {
                 viewModel.deleteFriend(userKey, friend.id)

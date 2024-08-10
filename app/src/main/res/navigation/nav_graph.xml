@@ -12,7 +12,6 @@
     <include app:graph="@navigation/show_episode_nav_graph" />
     <include app:graph="@navigation/show_seasons_nav_graph" />
     <include app:graph="@navigation/liked_nav_graph" />
-    <include app:graph="@navigation/from_fb_liked_nav_graph" />
     <include app:graph="@navigation/fragment_show_media_of_friend_nav_graph" />
     <include app:graph="@navigation/fragment_friends_list_nav_graph" />
     <include app:graph="@navigation/friend_requests_nav_graph" />
@@ -28,14 +27,14 @@
             app:uri="android-app://com.hfad.search/searchFragment" />
         <action
             android:id="@+id/navigateSearchToLogin"
-            app:destination="@id/loginFragment"/>
+            app:destination="@id/loginFragment" />
         <action
             android:id="@+id/navigateSearchToMediaDetailsWithId"
             app:destination="@id/mediaDetailsFragment">
             <argument
                 android:name="id"
-                app:argType="string"
-                android:defaultValue="1"/>
+                android:defaultValue="1"
+                app:argType="string" />
         </action>
     </fragment>
 
@@ -50,8 +49,7 @@
             app:uri="android-app://com.hfad.media_details/mediaDetailsFragment" />
         <action
             android:id="@+id/navigateMediaDetailsToLiked"
-            app:destination="@id/likedFragment">
-        </action>
+            app:destination="@id/likedFragment"></action>
         <action
             android:id="@+id/actionMediaDetailsToFriendsListFragment"
             app:destination="@id/friendsListFragment" />
@@ -63,24 +61,24 @@
             app:destination="@id/posterFragment">
             <argument
                 android:name="id"
-                app:argType="string"
-                android:defaultValue="1"/>
+                android:defaultValue="1"
+                app:argType="string" />
         </action>
         <action
             android:id="@+id/navigateMediaDetailsToShowSeasonsWithId"
             app:destination="@id/showSeasonsFragment">
             <argument
                 android:name="id"
-                app:argType="string"
-                android:defaultValue="1"/>
+                android:defaultValue="1"
+                app:argType="string" />
         </action>
         <action
             android:id="@+id/navigateMediaDetailsToSearchWithId"
             app:destination="@id/searchFragment">
             <argument
                 android:name="id"
-                app:argType="string"
-                android:defaultValue="1"/>
+                android:defaultValue="1"
+                app:argType="string" />
         </action>
         <argument
             android:name="id"
@@ -102,8 +100,8 @@
             app:destination="@id/mediaDetailsFragment">
             <argument
                 android:name="id"
-                app:argType="string"
-                android:defaultValue="1"/>
+                android:defaultValue="1"
+                app:argType="string" />
         </action>
     </fragment>
 
@@ -117,15 +115,15 @@
             app:uri="android-app://com.hfad.poster/ShowSeasonFragment" />
         <argument
             android:name="id"
-            app:argType="string"
-            android:defaultValue="1"/>
+            android:defaultValue="1"
+            app:argType="string" />
         <action
             android:id="@+id/navigateShowSeasonsToLiked"
-            app:destination="@id/likedFragment"/>
+            app:destination="@id/likedFragment" />
 
         <action
             android:id="@+id/actionShowSeasonsFragmentToLoginFragment"
-            app:destination="@id/loginFragment"/>
+            app:destination="@id/loginFragment" />
         <action
             android:id="@+id/actionShowSeasonsToFriendsListFragment"
             app:destination="@id/friendsListFragment" />
@@ -134,12 +132,12 @@
             app:destination="@id/showEpisodesFragment">
             <argument
                 android:name="title"
-                app:argType="string"
-                android:defaultValue="1"/>
+                android:defaultValue="1"
+                app:argType="string" />
             <argument
                 android:name="seasonNumber"
-                app:argType="string"
-                android:defaultValue="1"/>
+                android:defaultValue="1"
+                app:argType="string" />
         </action>
 
     </fragment>
@@ -154,18 +152,18 @@
             app:uri="android-app://com.hfad.poster/ShowEpisodesFragment" />
         <argument
             android:name="title"
-            app:argType="string"
-            android:defaultValue="1"/>
+            android:defaultValue="1"
+            app:argType="string" />
         <argument
             android:name="seasonNumber"
-            app:argType="string"
-            android:defaultValue="1"/>
+            android:defaultValue="1"
+            app:argType="string" />
         <action
             android:id="@+id/actionShowepisodestoFriendsListFragment"
             app:destination="@id/friendsListFragment" />
         <action
             android:id="@+id/navigateShowEpisodesToLiked"
-            app:destination="@id/likedFragment"/>
+            app:destination="@id/likedFragment" />
         <action
             android:id="@+id/actionShowEpisodesFragmentToLoginFragment"
             app:destination="@id/loginFragment" />
@@ -174,16 +172,16 @@
             app:destination="@id/showEpisodeFragment">
             <argument
                 android:name="title"
-                app:argType="string"
-                android:defaultValue="1"/>
+                android:defaultValue="1"
+                app:argType="string" />
             <argument
                 android:name="seasonNumber"
-                app:argType="string"
-                android:defaultValue="1"/>
+                android:defaultValue="1"
+                app:argType="string" />
             <argument
                 android:name="episodeNumber"
-                app:argType="string"
-                android:defaultValue="1"/>
+                android:defaultValue="1"
+                app:argType="string" />
         </action>
     </fragment>
 
@@ -197,7 +195,7 @@
             app:uri="android-app://com.hfad.poster/ShowEpisodeFragment" />
         <action
             android:id="@+id/navigateShowEpisodeToLiked"
-            app:destination="@id/likedFragment"/>
+            app:destination="@id/likedFragment" />
         <action
             android:id="@+id/actionShowEpisodeFragmentToLoginFragment"
             app:destination="@id/loginFragment" />
@@ -225,11 +223,8 @@
             android:id="@+id/deepLinkLikedFragment"
             app:uri="android-app://com.hfad.liked/LikedFragment" />
         <action
-            android:id="@+id/navigateLikedToFromFbLiked"
-            app:destination="@id/fromFbLikedFragment"/>
-        <action
             android:id="@+id/navigateLikedToSearchFriend"
-            app:destination="@+id/searchFriendFragment"/>
+            app:destination="@+id/searchFriendFragment" />
         <action
             android:id="@+id/action_favorites_to_likedFragment"
             app:destination="@id/likedFragment" />
@@ -239,14 +234,14 @@
 
         <action
             android:id="@+id/navigateLikedToLogin"
-            app:destination="@id/loginFragment"/>
+            app:destination="@id/loginFragment" />
         <action
             android:id="@+id/navigateLikedToMediaDetailsWithId"
             app:destination="@id/mediaDetailsFragment">
             <argument
                 android:name="id"
-                app:argType="string"
-                android:defaultValue="1"/>
+                android:defaultValue="1"
+                app:argType="string" />
         </action>
     </fragment>
 
@@ -255,32 +250,16 @@
         android:name="com.hfad.movie_search.LoginFragment"
         android:label="LoginFragment"
         tools:layout="@layout/fragment_login">
-    <deepLink
-        android:id="@+id/deepLinkLoginFragment"
-        app:uri="android-app://com.hfad.movie_search/LoginFragment" />
-    </fragment>
-    <action
-        android:id="@+id/actionLoginToLikedFragment"
-        app:destination="@id/likedFragment" />
-    <action
-        android:id="@+id/actionLogintoFriendsListFragment"
-        app:destination="@id/friendsListFragment" />
+        <deepLink
+            android:id="@+id/deepLinkLoginFragment"
+            app:uri="android-app://com.hfad.movie_search/LoginFragment" />
 
-    <fragment
-        android:id="@+id/fromFbLikedFragment"
-        android:name="com.hfad.liked.FromFbLikedFragment"
-        android:label="FromFbLikedFragment"
-        tools:layout="@layout/fragment_from_fb_liked">
         <action
-            android:id="@+id/actionFromFbToLikedFragment"
+            android:id="@+id/actionLoginToLikedFragment"
             app:destination="@id/likedFragment" />
         <action
-            android:id="@+id/actionFromFbToFriendsListFragment"
+            android:id="@+id/actionLogintoFriendsListFragment"
             app:destination="@id/friendsListFragment" />
-        <deepLink
-            android:id="@+id/deepLinkFromFbLikedFragment"
-            app:uri="android-app://com.hfad.liked/FromFbLikedFragment" />
-
     </fragment>
     <fragment
         android:id="@+id/searchFriendFragment"
@@ -317,7 +296,7 @@
             app:destination="@id/likedFragment" />
         <action
             android:id="@+id/navigateFriendListToSearchFriend"
-            app:destination="@id/searchFriendFragment"/>
+            app:destination="@id/searchFriendFragment" />
         <action
             android:id="@+id/navigateFriendsListFragmentToFriendRequestsFragment"
             app:destination="@id/friendRequestsFragment" />
@@ -326,8 +305,8 @@
             app:destination="@id/showMediaOfFriendFragment">
             <argument
                 android:name="friendEmail"
-                app:argType="string"
-                android:defaultValue="1"/>
+                android:defaultValue="1"
+                app:argType="string" />
         </action>
     </fragment>
     <fragment
@@ -373,9 +352,6 @@
             android:id="@+id/actionFriendRequestsToLikedFragment"
             app:destination="@id/likedFragment" />
     </fragment>
-
-
-
 
 
 </navigation>

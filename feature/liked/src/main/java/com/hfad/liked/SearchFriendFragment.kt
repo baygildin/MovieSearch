@@ -28,7 +28,7 @@ class SearchFriendFragment : BaseFragment(R.layout.fragment_search_friend) {
         super.onViewCreated(view, savedInstanceState)
 
         binding.searchFriendButton.setOnClickListener {
-            val email = binding.searchFriendEditText.text.toString()
+            val email = binding.searchFriendEditText.text.toString().lowercase()
             viewModel.friendEmail.value = email
             if (email.isNullOrEmpty()) {
                 Toast.makeText(context, context?.getResources()?.getString(R.string.toast_empty_edit_text_value), Toast.LENGTH_LONG).show()
@@ -57,5 +57,6 @@ class SearchFriendFragment : BaseFragment(R.layout.fragment_search_friend) {
             binding.tvFriendsFavouriteMediaList.text = favouritesListString
         })
     }
+    fun emailToValidFbKey(str: String) = str.replace(".", "*")
 }
 

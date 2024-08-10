@@ -23,8 +23,6 @@ import com.hfad.show_episodes.ShowSeasonsFragmentDirections
 import com.hfad.show_episodes.ShowEpisodeFragmentDirections
 import com.hfad.liked.LikedFragmentDirections
 import dagger.hilt.android.AndroidEntryPoint
-import com.hfad.liked.FromFbLikedFragment
-import com.hfad.liked.FromFbLikedFragmentDirections
 import com.hfad.liked.SearchFriendFragment
 import com.hfad.liked.SearchFriendFragmentDirections
 
@@ -119,12 +117,6 @@ class MainActivity : AppCompatActivity(), com.hfad.navigation.Navigator, MenuIte
         findNavController(R.id.nav_host_fragment).navigate(action)
     }
 
-    override fun navigateLikedToFromFbLiked() {
-        val action =
-            LikedFragmentDirections.navigateLikedToFromFbLiked()
-        findNavController(R.id.nav_host_fragment).navigate(action)
-    }
-
     override fun navigateLikedToSearchFriend() {
         val action = LikedFragmentDirections.navigateLikedToSearchFriend()
         findNavController(R.id.nav_host_fragment).navigate(action)
@@ -151,11 +143,6 @@ class MainActivity : AppCompatActivity(), com.hfad.navigation.Navigator, MenuIte
         val action = FriendsListFragmentDirections.navigateFriendsListFragmentToShowMediaOfFriendId(
             friendEmail
         )
-        findNavController(R.id.nav_host_fragment).navigate(action)
-    }
-
-    override fun action_from_fb_to_FriendsListFragment() {
-        val action = FromFbLikedFragmentDirections.actionFromFbToFriendsListFragment()
         findNavController(R.id.nav_host_fragment).navigate(action)
     }
 
@@ -196,11 +183,6 @@ class MainActivity : AppCompatActivity(), com.hfad.navigation.Navigator, MenuIte
 
     override fun action_searchFriend_to_likedFragment() {
         val action = SearchFriendFragmentDirections.actionSearchFriendToLikedFragment()
-        findNavController(R.id.nav_host_fragment).navigate(action)
-    }
-
-    override fun action_fromFb_to_likedFragment() {
-        val action = FromFbLikedFragmentDirections.actionFromFbToLikedFragment()
         findNavController(R.id.nav_host_fragment).navigate(action)
     }
 
@@ -319,7 +301,6 @@ class MainActivity : AppCompatActivity(), com.hfad.navigation.Navigator, MenuIte
                     "ShowSeasonsFragment" -> navigateShowSeasonsToLiked()
                     "ShowMediaOfFriendFragment" -> action_showMediaOfFriend_to_likedFragment()
                     "SearchFriendFragment" -> action_searchFriend_to_likedFragment()
-                    "FromFbLikedFragment" -> action_fromFb_to_likedFragment()
                     "LoginFragment" -> action_login_to_likedFragment()
                     "FriendListFragment" -> actionFriendListFragmentToLikedFragment()
                 }

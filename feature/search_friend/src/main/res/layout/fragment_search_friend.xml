@@ -22,6 +22,7 @@
         android:id="@+id/searchFriendEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
         android:paddingTop="40dp"
         android:hint="Enter friend's email"
         android:textColorHint="@color/main_text_color"
@@ -31,14 +32,15 @@
     <Button
         android:id="@+id/searchFriendButton"
         android:layout_width="wrap_content"
-        android:paddingTop="10dp"
+        android:layout_marginTop="10dp"
         android:layout_height="wrap_content"
         android:textColor="@color/main_text_color"
-        android:text="Search Friend"
-        android:background="@drawable/button_border"/>
+        android:background="@drawable/button_border"
+        android:text="Search Friend"/>
 
     <TextView
         android:id="@+id/friendInfoTextView"
+        android:layout_marginTop="30dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="@color/main_text_color"/>
@@ -46,9 +48,11 @@
     <Button
         android:id="@+id/connectFriendButton"
         android:layout_width="wrap_content"
+        android:layout_marginTop="10dp"
         android:layout_height="wrap_content"
-        android:text="Send Connection Request"
         android:textColor="@color/main_text_color"
+        android:background="@drawable/button_border"
+        android:text="Send Connection Request"
         android:visibility="gone" />
 
     <TextView

@@ -14,6 +14,7 @@ class FriendsListViewModel : ViewModel() {
 
     private val database = Firebase.database("https://moviesearchandmatch-60fa6-default-rtdb.europe-west1.firebasedatabase.app")
     val usersRef = database.getReference("users")
+    val emailsRef = database.getReference("uidToEmail")
 
     private val _approvedFriends = MutableLiveData<List<Friend>>()
     val approvedFriends: LiveData<List<Friend>> get() = _approvedFriends
@@ -30,6 +31,7 @@ class FriendsListViewModel : ViewModel() {
                     if (approved){
                         getUserEmail(friendKey) { email ->
                             friends.add(Friend(friendKey, email, approved))
+                            Log.d("dasdsVM", "${email}")
 
                             _approvedFriends.value = friends
                         }
@@ -55,9 +57,10 @@ class FriendsListViewModel : ViewModel() {
     }
 
     private fun getUserEmail(userId: String, callback: (String) -> Unit) {
-        usersRef.child(userId).child("email").addListenerForSingleValueEvent(object : ValueEventListener {
+        emailsRef.child(userId).addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 val email = snapshot.getValue(String::class.java) ?: ""
+                Log.d("FriendsList", "Fetched email for userId $userId: $email")
                 callback(email)
             }
 

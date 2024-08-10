@@ -38,7 +38,7 @@ class SearchFriendViewModel : ViewModel() {
                 if (snapshot.exists()) {
                     friendUid = snapshot.getValue(String::class.java) ?: ""
                     if (friendUid.isNotEmpty()) {
-                        _friendInfo.value = "Friend found with UID: $friendUid"
+                        _friendInfo.value = "Friend found with email: $email"
                         _isFriendFound.value = true
                     } else {
                         _friendInfo.value = "No user found with email: $email"

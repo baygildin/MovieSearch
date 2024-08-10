@@ -10,11 +10,11 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.hfad.core.MenuItemClickListener
-import com.hfad.liked.FriendRequestsFragment
-import com.hfad.liked.FriendRequestsFragmentDirections
-import com.hfad.liked.FriendsListFragment
-import com.hfad.liked.FriendsListFragmentDirections
-import com.hfad.liked.ShowMediaOfFriendFragmentDirections
+import com.hfad.friend_requests.FriendRequestsFragment
+import com.hfad.friend_requests.FriendRequestsFragmentDirections
+import com.hfad.friends_list.FriendsListFragment
+import com.hfad.friends_list.FriendsListFragmentDirections
+import com.hfad.show_media_of_friend.ShowMediaOfFriendFragmentDirections
 import com.hfad.media_details.MediaDetailsFragmentDirections
 import com.hfad.poster.PosterFragmentDirections
 import com.hfad.search.SearchFragmentDirections
@@ -23,8 +23,8 @@ import com.hfad.show_episodes.ShowSeasonsFragmentDirections
 import com.hfad.show_episodes.ShowEpisodeFragmentDirections
 import com.hfad.liked.LikedFragmentDirections
 import dagger.hilt.android.AndroidEntryPoint
-import com.hfad.liked.SearchFriendFragment
-import com.hfad.liked.SearchFriendFragmentDirections
+import com.hfad.search_friend.SearchFriendFragment
+import com.hfad.search_friend.SearchFriendFragmentDirections
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity(), com.hfad.navigation.Navigator, MenuItemClickListener {

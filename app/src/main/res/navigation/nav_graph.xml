@@ -15,6 +15,7 @@
     <include app:graph="@navigation/fragment_show_media_of_friend_nav_graph" />
     <include app:graph="@navigation/fragment_friends_list_nav_graph" />
     <include app:graph="@navigation/friend_requests_nav_graph" />
+    <include app:graph="@navigation/search_friend_nav_graph" />
 
 
     <fragment
@@ -263,7 +264,7 @@
     </fragment>
     <fragment
         android:id="@+id/searchFriendFragment"
-        android:name="com.hfad.liked.SearchFriendFragment"
+        android:name="com.hfad.search_friend.SearchFriendFragment"
         android:label="SearchFriend"
         tools:layout="@layout/fragment_search_friend">
         <action
@@ -282,7 +283,7 @@
 
     <fragment
         android:id="@+id/friendsListFragment"
-        android:name="com.hfad.liked.FriendsListFragment"
+        android:name="com.hfad.friends_list.FriendsListFragment"
         android:label="FriendsListFragment"
         tools:layout="@layout/fragment_friends_list">
         <deepLink
@@ -311,7 +312,7 @@
     </fragment>
     <fragment
         android:id="@+id/showMediaOfFriendFragment"
-        android:name="com.hfad.liked.ShowMediaOfFriendFragment"
+        android:name="com.hfad.show_media_of_friend.ShowMediaOfFriendFragment"
         android:label="ShowMediaOfFriendFragment"
         tools:layout="@layout/fragment_show_media_of_friend">
         <action
@@ -339,7 +340,7 @@
 
     <fragment
         android:id="@+id/friendRequestsFragment"
-        android:name="com.hfad.liked.FriendRequestsFragment"
+        android:name="com.hfad.friend_requests.FriendRequestsFragment"
         android:label="Friend Requests"
         tools:layout="@layout/fragment_friend_requests">
         <action

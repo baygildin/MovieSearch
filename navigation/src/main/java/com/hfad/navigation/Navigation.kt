@@ -20,7 +20,7 @@ interface Navigator {
     fun navigateSearchToLogin()
     fun navigateLikedToSearchFriend()
     fun navigateLikedToFriendsList()
-    fun navigateFriendsListFragmentToShowMediaOfFriendId(friendEmail: String)
+    fun navigateFriendsListFragmentToShowMediaOfFriendId(userId: String)
     fun navigateShowMediaOfFriendToMediaDetailsWithId(id: String)
     fun actionsearchFriendtoFriendsListFragment()
     fun action_Login_to_FriendsListFragment()
@@ -45,6 +45,7 @@ interface Navigator {
     fun actionShowSeasonsFragmentToLoginFragment()
     fun actionMediaDetailsFragmentToLoginFragment()
     fun actionFriendRequestsFragmentToLoginFragment()
+    fun navigateFriendRequestToShowMediaOfFriendId(userId: String)
 
 
 }

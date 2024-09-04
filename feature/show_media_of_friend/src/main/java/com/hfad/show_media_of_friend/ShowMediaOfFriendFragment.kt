@@ -11,8 +11,9 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.hfad.core.BaseFragment
 import com.hfad.show_media_of_friend.databinding.FragmentShowMediaOfFriendBinding
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-
+@AndroidEntryPoint
 class ShowMediaOfFriendFragment : BaseFragment(R.layout.fragment_show_media_of_friend) {
     private lateinit var binding: FragmentShowMediaOfFriendBinding
     private val viewModel: ShowMediaOfFriendViewModel by viewModels()
@@ -29,25 +30,20 @@ class ShowMediaOfFriendFragment : BaseFragment(R.layout.fragment_show_media_of_f
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Log.d("Meefef", "dssdd")
         val adapter = ShowMediaOfFriendAdapter(emptyList()) { item ->
-            Log.d("Meefef", "${item.toString()}")
-
             val id = item.imdbId
-            Log.d("Meefef", "${id}")
-
-            (activity as com.hfad.navigation.Navigator).navigateShowMediaOfFriendToMediaDetailsWithId(id)
+            (activity as com.hfad.navigation.Navigator).navigateShowMediaOfFriendToMediaDetailsWithId(
+                id
+            )
         }
-        binding.recyclerView.adapter =adapter
+        binding.recyclerView.adapter = adapter
         binding.recyclerView.layoutManager = LinearLayoutManager(context)
         viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.fetchMediaOfFriend(args.friendEmail)
-            viewModel.favouriteItems.collect{items ->
+            Log.d("28.02.24", "${args.userId}")
+            viewModel.fetchMediaOfFriend(args.userId)
+            viewModel.favouriteItems.collect { items ->
                 adapter.updateItems(items)
             }
         }
-
-
     }
-
 }

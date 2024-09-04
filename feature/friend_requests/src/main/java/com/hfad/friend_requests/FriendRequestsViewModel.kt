@@ -1,68 +1,83 @@
 package com.hfad.friend_requests
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
-import com.google.firebase.database.ktx.database
-import com.google.firebase.ktx.Firebase
+import com.hfad.search.firebase.FirebaseRepository
+import com.hfad.search.model.Friend
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.SharedFlow
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class FriendRequestsViewModel : ViewModel() {
-
-    val database = Firebase.database("https://moviesearchandmatch-60fa6-default-rtdb.europe-west1.firebasedatabase.app")
-    val usersRef = database.getReference("users")
-    val emailsRef = database.getReference("uidToEmail")
+@HiltViewModel
+class FriendRequestsViewModel @Inject constructor(
+    private val firebaseRepository: FirebaseRepository
+) : ViewModel() {
 
     private val _friendRequests = MutableLiveData<List<Friend>>()
     val friendRequests: LiveData<List<Friend>> get() = _friendRequests
 
+    private val _operationStatus = MutableSharedFlow<String>()
+    val operationStatus: SharedFlow<String> get() = _operationStatus
+
     fun loadFriendRequests(userKey: String) {
-        val requestedFriendsRef = usersRef.child(userKey).child("friends").child("requested")
+        val requestedFriendsRef =
+            firebaseRepository.usersRef.child(userKey).child("friends").child("requested")
 
         requestedFriendsRef.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 val friends = mutableListOf<Friend>()
                 for (childSnapshot in snapshot.children) {
                     val friendKey = childSnapshot.key ?: continue
-                    val approved = childSnapshot.getValue(Boolean::class.java) ?: false
-                    getUserEmail(friendKey) { email ->
-                        friends.add(Friend(friendKey, email, approved))
+                    firebaseRepository.getUserEmail(friendKey, onSuccess = { email ->
+                        friends.add(Friend(friendKey, email, approved = false))
                         _friendRequests.value = friends
-                        Log.d("sdsdsd", "${friends.toString()}")
-                    }
+                    }, onFailure = {
+                        viewModelScope.launch {
+                            _operationStatus.emit("Error fetching email: ${it.message}")
+                        }
+                    })
                 }
             }
 
             override fun onCancelled(error: DatabaseError) {
-                Log.d("FriendRequests", "Database error: $error")
-            }
-        })
-    }
-
-    private fun getUserEmail(userId: String, callback: (String) -> Unit) {
-        emailsRef.child(userId).addListenerForSingleValueEvent(object :
-            ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                val email = snapshot.getValue(String::class.java) ?: ""
-                callback(email)
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-                Log.d("FriendRequests", "Database error: $error")
-                callback("")
+                viewModelScope.launch {
+                    _operationStatus.emit(
+                        "Database error: ${error.message}"
+                    )
+                }
             }
         })
     }
 
     fun approveFriend(userKey: String, friendId: String) {
-        val userRef = usersRef.child(userKey).child("friends")
-        userRef.child("requested").child(friendId).removeValue().addOnCompleteListener {
-            userRef.child("approved").child(friendId).setValue(true)
+        val userRef = firebaseRepository.usersRef.child(userKey).child("friends")
+        userRef.child("requested").child(friendId).removeValue().addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                userRef.child("approved").child(friendId).setValue(true)
+                    .addOnCompleteListener { approvalTask ->
+                        if (approvalTask.isSuccessful) {
+                            _friendRequests.value = _friendRequests.value?.filterNot { it.id == friendId }
+                            viewModelScope.launch {
+                                _operationStatus.emit("Friend request approved successfully")
+                            }
+                        } else {
+                            viewModelScope.launch {
+                                _operationStatus.emit("Error approving friend: ${approvalTask.exception?.message}")
+                            }
+                        }
+                    }
+            } else {
+                viewModelScope.launch {
+                    _operationStatus.emit("Error removing friend request: ${task.exception?.message}")
+                }
+            }
         }
     }
-
-    data class Friend(val id: String, val email: String, val approved: Boolean)
 }

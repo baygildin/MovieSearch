@@ -11,7 +11,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.hfad.poster.databinding.FragmentPosterBinding
-import com.hfad.search.OmdbApi
+import com.hfad.search.network.OmdbApi
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import javax.inject.Inject

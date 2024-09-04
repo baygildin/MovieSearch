@@ -1,4 +1,4 @@
-package com.hfad.search
+package com.hfad.search.network
 
 import okhttp3.HttpUrl
 import okhttp3.Interceptor

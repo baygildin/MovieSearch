@@ -1,8 +1,8 @@
 package com.hfad.search.di
 
 import android.content.Context
-import com.hfad.search.ApiKeyInterceptor
-import com.hfad.search.OmdbApi
+import com.hfad.search.network.ApiKeyInterceptor
+import com.hfad.search.network.OmdbApi
 import com.hfad.search.model.FavouriteDao
 import com.hfad.search.model.FavouriteDatabase
 import dagger.Module

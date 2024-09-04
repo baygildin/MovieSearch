@@ -1,7 +1,6 @@
 package com.hfad.friends_list
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +11,7 @@ import androidx.lifecycle.Observer
 import com.google.firebase.auth.FirebaseAuth
 import com.hfad.core.BaseFragment
 import com.hfad.friends_list.databinding.FragmentFriendsListBinding
+import com.hfad.search.model.Friend
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -46,7 +46,7 @@ class FriendsListFragment : BaseFragment(R.layout.fragment_friends_list) {
         }
     }
 
-    private fun updateFriendsList(friends: List<FriendsListViewModel.Friend>) {
+    private fun updateFriendsList(friends: List<Friend>) {
         binding.approvedFriendsContainer.removeAllViews()
         for (friend in friends) {
             val itemView = layoutInflater.inflate(R.layout.item_friend_list, null)
@@ -54,7 +54,6 @@ class FriendsListFragment : BaseFragment(R.layout.fragment_friends_list) {
             val deleteButton = itemView.findViewById<Button>(R.id.btnAddFriend)
 
             friendButton.text = friend.email
-            Log.d("dasds", "эмайл ${friend.email}   юзеркей $userKey, friend$$friend, френдID${friend.id}")
             deleteButton.text = "Unfriend"
             deleteButton.setOnClickListener {
                 viewModel.deleteFriend(userKey, friend.id)

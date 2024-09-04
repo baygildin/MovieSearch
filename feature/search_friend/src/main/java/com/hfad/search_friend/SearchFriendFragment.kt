@@ -57,6 +57,6 @@ class SearchFriendFragment : BaseFragment(R.layout.fragment_search_friend) {
             binding.tvFriendsFavouriteMediaList.text = favouritesListString
         })
     }
-    fun emailToValidFbKey(str: String) = str.replace(".", "*")
+
 }
 

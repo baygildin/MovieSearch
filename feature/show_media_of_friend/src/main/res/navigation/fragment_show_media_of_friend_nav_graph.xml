@@ -11,7 +11,7 @@
         android:label="fragment_show_media_of_friend"
         tools:layout="@layout/fragment_show_media_of_friend">
         <argument
-            android:name="friendEmail"
+            android:name="userId"
             app:argType="string"
             android:defaultValue="1" />
     </fragment>

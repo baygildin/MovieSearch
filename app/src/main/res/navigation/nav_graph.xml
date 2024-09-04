@@ -305,7 +305,7 @@
             android:id="@+id/navigateFriendsListFragmentToShowMediaOfFriendId"
             app:destination="@id/showMediaOfFriendFragment">
             <argument
-                android:name="friendEmail"
+                android:name="userId"
                 android:defaultValue="1"
                 app:argType="string" />
         </action>
@@ -352,6 +352,15 @@
         <action
             android:id="@+id/actionFriendRequestsToLikedFragment"
             app:destination="@id/likedFragment" />
+        <action
+            android:id="@+id/actionFriendRequestToShowMediaOfFriendId"
+            app:destination="@id/showMediaOfFriendFragment">
+            <argument
+                android:name="userId"
+                android:defaultValue="1"
+                app:argType="string" />
+        </action>
+
     </fragment>
 
 

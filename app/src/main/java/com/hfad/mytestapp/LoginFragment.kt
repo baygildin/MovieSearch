@@ -65,7 +65,7 @@ class LoginFragment : Fragment() {
                     val user = auth.currentUser
                     val auth = FirebaseAuth.getInstance()
                     val userKey = auth.currentUser?.uid ?: ""
-                    saveEmailToUidMapping(emailToValidFbKey(email), userKey)
+                    saveEmailToUidMapping(email.replace(".", "*").lowercase(), userKey)
                     saveUidToEmailMapping(userKey, email)
                     saveEmailInUserNode(userKey, email)
                     updateUI(user)
@@ -107,7 +107,7 @@ class LoginFragment : Fragment() {
     }
 
     fun saveEmailToUidMapping(email: String, uid: String){
-        val emailKey = emailToValidFbKey(email.lowercase())
+        val emailKey = email.replace(".", "*").lowercase()
         emailToUidRef.child(emailKey).addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (!snapshot.exists()) {
@@ -138,19 +138,9 @@ class LoginFragment : Fragment() {
             }
         })
     }
-
-    //    fun saveEmailToUidMapping(email: String, uid: String){
-//        val emailKey = emailToValidFbKey(email.lowercase())
-//        emailToUidRef.child(emailKey).setValue(uid)
-//    }
-//    fun saveUidToEmailMapping(uid: String, email: String){
-//        val emailKey = email.lowercase()
-//        uidToEmailRef.child(uid).setValue(emailKey)
-//    }
     fun saveEmailInUserNode(uid: String, email: String){
         usersRef.child(uid).child("email").setValue(email.lowercase())
     }
-    fun emailToValidFbKey(str: String) = str.replace(".", "*").lowercase()
 
     private fun checkIsTextBlank(text1: String?, text2: String?): Boolean{
         if (text1.isNullOrBlank() || text2.isNullOrBlank()) {

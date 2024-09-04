@@ -10,11 +10,6 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.ValueEventListener
-import com.google.firebase.database.ktx.database
-import com.google.firebase.ktx.Firebase
 import com.hfad.core.BaseFragment
 import com.hfad.liked.databinding.FragmentLikedBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -26,13 +21,6 @@ class LikedFragment : BaseFragment(R.layout.fragment_liked) {
     private lateinit var binding: FragmentLikedBinding
     private var isSortedByDate = false
 
-    val database =
-        Firebase.database("https://moviesearchandmatch-60fa6-default-rtdb.europe-west1.firebasedatabase.app")
-
-    private val auth = FirebaseAuth.getInstance()
-    private val userKey = auth.currentUser?.uid ?: ""
-
-    val myRef = database.getReference("users").child(userKey)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -55,34 +43,60 @@ class LikedFragment : BaseFragment(R.layout.fragment_liked) {
 
 
         binding.btnSendToCloud.setOnClickListener {
-            if (auth.currentUser==null) {
+            if (FirebaseAuth.getInstance().currentUser == null) {
                 (activity as com.hfad.navigation.Navigator).navigateLikedToLogin()
-            }
-            else {
-                if (viewModel.doesUserAgreeToSendToCloud){
-                    val jsonLikedMediaToCloud = viewModel.getFavouritesJson()
-                    myRef.child("favourites").setValue(jsonLikedMediaToCloud)
-                    if (viewModel.doesUserAgreeToSendToCloud) {Toast.makeText(context, context?.getResources()?.getString(R.string.toast_sent_to_cloud), Toast.LENGTH_SHORT).show()
+            } else {
+                if (viewModel.doesUserAgreeToSendToCloud) {
+                    viewLifecycleOwner.lifecycleScope.launch {
+                        val jsonLikedMediaToCloud = viewModel.getFavouritesJson()
+                        viewModel.saveFavouritesToClouds(jsonLikedMediaToCloud)
+                        if (viewModel.doesUserAgreeToSendToCloud) {
+                            Toast.makeText(
+                                context,
+                                context?.getResources()?.getString(R.string.toast_sent_to_cloud),
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
                     }
                 } else {
                     viewModel.doesUserAgreeToSendToCloud = true
-                    Toast.makeText(context, context?.getResources()?.getString(R.string.toast_agree_to_send_to_cloud), Toast.LENGTH_LONG).show()
+                    Toast.makeText(
+                        context,
+                        context?.getResources()?.getString(R.string.toast_agree_to_send_to_cloud),
+                        Toast.LENGTH_LONG
+                    ).show()
                 }
             }
         }
         binding.btnDownloadFromCloud.setOnClickListener {
-            if (auth.currentUser == null) {
+            if (FirebaseAuth.getInstance().currentUser == null) {
                 (activity as com.hfad.navigation.Navigator).navigateLikedToLogin()
             } else {
-                fetchFavouritesFromCloud()
+                viewModel.fetchFavouritesFromCloud(onSucces = { jsonData ->
+                    if (jsonData.isNotEmpty()) {
+                        if (viewModel.doesUserAgreeToReplaceFromCloud) {
+                            viewLifecycleOwner.lifecycleScope.launch {
+                                viewModel.updateRoomDatabaseFromJson(jsonData)
+                            }
+                        } else {
+                            Toast.makeText(
+                                context, getString(R.string.toast_agree_to_replace_from_cloud),
+                                Toast.LENGTH_LONG
+                            ).show()
+                            viewModel.doesUserAgreeToReplaceFromCloud = true
+                        }
+                    }
+                }, onFailure = { error ->
+                    Log.e("LikedFragment", "Error fetching favourites:${error.message}")
+                }
+                )
             }
 
         }
         binding.btnSort.setOnClickListener {
             if (isSortedByDate) {
                 Toast.makeText(
-                    context,
-                    context?.getResources()?.getString(R.string.toast_sorted_by_date),
+                    context, getString(R.string.toast_sorted_by_date),
                     Toast.LENGTH_SHORT
                 ).show()
                 binding.abcIcon.setImageResource(R.drawable.baseline_abc_24)
@@ -93,8 +107,7 @@ class LikedFragment : BaseFragment(R.layout.fragment_liked) {
                 }
             } else {
                 Toast.makeText(
-                    context,
-                    context?.getResources()?.getString(R.string.toast_sorted_by_title),
+                    context, getString(R.string.toast_sorted_by_title),
                     Toast.LENGTH_SHORT
                 ).show()
                 binding.abcIcon.setImageResource(R.drawable.baseline_access_time_24)
@@ -113,27 +126,5 @@ class LikedFragment : BaseFragment(R.layout.fragment_liked) {
                 adapter.updateItems(items)
             }
         }
-    }
-
-    private fun fetchFavouritesFromCloud() {
-        myRef.child("favourites").addListenerForSingleValueEvent(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                val jsonData = snapshot.value as String?
-                if (!jsonData.isNullOrEmpty()) {
-                    if (viewModel.doesUserAgreeToReplaceFromCloud){
-                        viewModel.updateRoomDatabaseFromJson(jsonData)
-                    }
-                    else Toast.makeText(
-                        context,
-                        context?.getResources()?.getString(R.string.toast_agry_to_replace_from_cloud),
-                        Toast.LENGTH_LONG
-                    ).show()
-                    viewModel.doesUserAgreeToReplaceFromCloud = true
-                }
-            }
-            override fun onCancelled(error: DatabaseError) {
-                Log.e("myError42", "$error in LikedFragment`s fetchFavouritesFromCloud")
-            }
-        })
     }
 }

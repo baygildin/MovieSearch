@@ -139,9 +139,9 @@ class MainActivity : AppCompatActivity(), com.hfad.navigation.Navigator, MenuIte
     }
 
 
-    override fun navigateFriendsListFragmentToShowMediaOfFriendId(friendEmail: String) {
+    override fun navigateFriendsListFragmentToShowMediaOfFriendId(userId: String) {
         val action = FriendsListFragmentDirections.navigateFriendsListFragmentToShowMediaOfFriendId(
-            friendEmail
+            userId
         )
         findNavController(R.id.nav_host_fragment).navigate(action)
     }
@@ -243,6 +243,10 @@ class MainActivity : AppCompatActivity(), com.hfad.navigation.Navigator, MenuIte
     }
     override fun actionFriendRequestsFragmentToLoginFragment(){
         val action = FriendRequestsFragmentDirections.actionFriendRequestsFragmentToLoginFragment()
+        findNavController(R.id.nav_host_fragment).navigate(action)
+    }
+    override fun navigateFriendRequestToShowMediaOfFriendId(userId: String) {
+        val action = FriendRequestsFragmentDirections.actionFriendRequestToShowMediaOfFriendId(userId)
         findNavController(R.id.nav_host_fragment).navigate(action)
     }
 

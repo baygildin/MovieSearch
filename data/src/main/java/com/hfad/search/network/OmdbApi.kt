@@ -1,4 +1,4 @@
-package com.hfad.search
+package com.hfad.search.network
 
 import com.hfad.search.model.ExtendedSearchResponseByTitle
 import com.hfad.search.model.SearchByTitle

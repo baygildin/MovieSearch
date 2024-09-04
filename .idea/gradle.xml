@@ -11,6 +11,7 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/core" />
+            <option value="$PROJECT_DIR$/data" />
             <option value="$PROJECT_DIR$/featur" />
             <option value="$PROJECT_DIR$/featur/liked" />
             <option value="$PROJECT_DIR$/feature" />
@@ -26,7 +27,6 @@
             <option value="$PROJECT_DIR$/feature/show_episodes" />
             <option value="$PROJECT_DIR$/feature/show_media_of_friend" />
             <option value="$PROJECT_DIR$/navigation" />
-            <option value="$PROJECT_DIR$/network" />
           </set>
         </option>
         <option name="resolveExternalAnnotations" value="false" />

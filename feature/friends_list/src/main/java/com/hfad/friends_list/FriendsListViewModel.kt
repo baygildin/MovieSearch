@@ -7,20 +7,21 @@ import androidx.lifecycle.ViewModel
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
-import com.google.firebase.database.ktx.database
-import com.google.firebase.ktx.Firebase
+import com.hfad.search.firebase.FirebaseRepository
+import com.hfad.search.model.Friend
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class FriendsListViewModel : ViewModel() {
-
-    private val database = Firebase.database("https://moviesearchandmatch-60fa6-default-rtdb.europe-west1.firebasedatabase.app")
-    val usersRef = database.getReference("users")
-    val emailsRef = database.getReference("uidToEmail")
-
+@HiltViewModel
+class FriendsListViewModel @Inject constructor(
+    private val firebaseRepository: FirebaseRepository
+): ViewModel() {
+    
     private val _approvedFriends = MutableLiveData<List<Friend>>()
     val approvedFriends: LiveData<List<Friend>> get() = _approvedFriends
 
     fun loadFriends(userKey: String) {
-        val approvedFriendsRef = usersRef.child(userKey).child("friends").child("approved")
+        val approvedFriendsRef = firebaseRepository.usersRef.child(userKey).child("friends").child("approved")
 
         approvedFriendsRef.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -32,7 +33,6 @@ class FriendsListViewModel : ViewModel() {
                         getUserEmail(friendKey) { email ->
                             friends.add(Friend(friendKey, email, approved))
                             Log.d("dasdsVM", "${email}")
-
                             _approvedFriends.value = friends
                         }
                     }
@@ -46,10 +46,10 @@ class FriendsListViewModel : ViewModel() {
     }
 
     fun deleteFriend(userKey: String, friendKey: String) {
-        usersRef.child(userKey).child("friends").child("approved").child(friendKey).removeValue()
+        firebaseRepository.usersRef.child(userKey).child("friends").child("approved").child(friendKey).removeValue()
             .addOnSuccessListener {
                 Log.d("FriendsList", "Friend deleted successfully")
-                loadFriends(userKey) // Reload friends list to reflect changes
+                loadFriends(userKey)
             }
             .addOnFailureListener {
                 Log.d("FriendsList", "Failed to delete friend: ${it.message}")
@@ -57,7 +57,7 @@ class FriendsListViewModel : ViewModel() {
     }
 
     private fun getUserEmail(userId: String, callback: (String) -> Unit) {
-        emailsRef.child(userId).addListenerForSingleValueEvent(object : ValueEventListener {
+        firebaseRepository.emailsRef.child(userId).addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 val email = snapshot.getValue(String::class.java) ?: ""
                 Log.d("FriendsList", "Fetched email for userId $userId: $email")
@@ -70,6 +70,4 @@ class FriendsListViewModel : ViewModel() {
             }
         })
     }
-
-    data class Friend(val id: String, val email: String, val approved: Boolean)
 }

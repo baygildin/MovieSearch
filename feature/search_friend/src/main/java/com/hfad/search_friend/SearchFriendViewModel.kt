@@ -35,7 +35,7 @@ class SearchFriendViewModel @Inject constructor(
 
     fun searchFriend() {
         val email = friendEmail.value ?: return
-        firebaseRepository.emailToUidRef.child(encodeEmail(email.lowercase()))
+        firebaseRepository.uidsRef.child(encodeEmail(email.lowercase()))
             .addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     if (snapshot.exists()) {

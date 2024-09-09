@@ -9,6 +9,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import com.hfad.search.utils.encodeEmail
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -84,7 +85,7 @@ class FirebaseRepository @Inject constructor() {
 
 
     fun saveEmailToUidMapping(email: String, uid: String) {
-        val emailKey = email.replace(".", "*").lowercase()
+        val emailKey = encodeEmail(email)
         uidsRef.child(emailKey).addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (!snapshot.exists()) {
@@ -132,7 +133,7 @@ class FirebaseRepository @Inject constructor() {
                     val userUid = auth.uid
                     if (userUid != null) {
                         saveEmailToUidMapping(
-                            email.replace(".", "*").lowercase(),
+                            encodeEmail(email),
                             userUid
                         )
                         saveUidToEmailMapping(userUid, email)
@@ -163,4 +164,15 @@ class FirebaseRepository @Inject constructor() {
                 }
             }
     }
+    fun resetPassword(email: String, onSuccess: () -> Unit, onFailure: (String) -> Unit) {
+        FirebaseAuth.getInstance().sendPasswordResetEmail(email)
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    onSuccess()
+                } else {
+                    onFailure(task.exception?.message ?: "Error sending reset email")
+                }
+            }
+    }
+
 }

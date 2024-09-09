@@ -41,5 +41,13 @@ class LoginViewModel @Inject constructor(
                 _toastMessage.value = errorMessage
             })
     }
+
+    fun resetPassword(email: String) {
+        firebaseRepository.resetPassword(email, {
+            _toastMessage.value = "Password reset email sent"
+        }, { errorMessage ->
+            _toastMessage.value = errorMessage
+        })
+    }
 }
 

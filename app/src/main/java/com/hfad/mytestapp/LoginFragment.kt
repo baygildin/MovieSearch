@@ -50,6 +50,17 @@ class LoginFragment : Fragment() {
                 viewModel.createAccount(email, password)
             }
         }
+
+        binding.resetPasswordButton.setOnClickListener {
+            val email = binding.emailEditText.text.toString().lowercase()
+            if (email.isEmpty()) {
+                Toast.makeText(context, "Please enter your email to reset password", Toast.LENGTH_SHORT).show()
+            } else {
+                viewModel.resetPassword(email)
+            }
+        }
+
+
         observeViewModel()
 
         return binding.root

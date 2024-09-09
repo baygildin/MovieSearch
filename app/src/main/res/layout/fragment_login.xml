@@ -80,4 +80,19 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintWidth_percent="0.4"/>
+
+    <Button
+        android:id="@+id/reset_password_button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/button_border"
+        android:gravity="center"
+        android:text="Forgot Password?"
+        android:textColor="@color/main_text_color"
+        app:layout_constraintTop_toBottomOf="@+id/register_button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintWidth_percent="0.4"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

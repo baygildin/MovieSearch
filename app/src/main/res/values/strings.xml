@@ -1,0 +1,4 @@
+<resources>
+    <string name="toast_login_btn_email_password_empty">Email and password must not be empty</string>
+    <string name="toast_enter_email_to_reset_password">Please enter your email to reset password</string>
+</resources>

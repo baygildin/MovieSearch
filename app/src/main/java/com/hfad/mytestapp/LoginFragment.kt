@@ -34,8 +34,8 @@ class LoginFragment : Fragment() {
             val email = binding.emailEditText.text.toString().lowercase()
             val password = binding.passwordEditText.text.toString()
             if (checkIsTextBlank(email, password)) {
-                Toast.makeText(context, "Email and password must not be empty", Toast.LENGTH_SHORT)
-                    .show()
+                Toast.makeText(context, context?.getResources()?.getString(R.string.toast_login_btn_email_password_empty), Toast.LENGTH_SHORT).show()
+
             } else {
                 viewModel.signIn(email, password)
             }
@@ -44,7 +44,7 @@ class LoginFragment : Fragment() {
             val email = binding.emailEditText.text.toString().lowercase()
             val password = binding.passwordEditText.text.toString()
             if (checkIsTextBlank(email, password)) {
-                Toast.makeText(context, "Email and password must not be empty", Toast.LENGTH_SHORT)
+                Toast.makeText(context, context?.getResources()?.getString(R.string.toast_login_btn_email_password_empty), Toast.LENGTH_SHORT)
                     .show()
             } else {
                 viewModel.createAccount(email, password)
@@ -54,7 +54,7 @@ class LoginFragment : Fragment() {
         binding.resetPasswordButton.setOnClickListener {
             val email = binding.emailEditText.text.toString().lowercase()
             if (email.isEmpty()) {
-                Toast.makeText(context, "Please enter your email to reset password", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context,  context?.getResources()?.getString(R.string.toast_enter_email_to_reset_password), Toast.LENGTH_SHORT).show()
             } else {
                 viewModel.resetPassword(email)
             }

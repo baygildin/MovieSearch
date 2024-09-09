@@ -1,0 +1,4 @@
+<resources>
+    <string name="toast_enter_email_to_reset_password">Пожалуйста, введите свой адрес электронной почты для сброса пароля</string>
+    <string name="toast_login_btn_email_password_empty">Поля записи электронной почты и пароля не должны быть пустыми</string>
+</resources>

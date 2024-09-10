@@ -9,10 +9,12 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
 import com.google.firebase.auth.FirebaseUser
 import com.hfad.movie_search.databinding.FragmentLoginBinding
 import com.hfad.mytestapp.LoginViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class LoginFragment : Fragment() {
@@ -66,10 +68,13 @@ class LoginFragment : Fragment() {
         return binding.root
     }
 
+
     private fun observeViewModel() {
-        viewModel.loginStatus.observe(viewLifecycleOwner, Observer { user ->
-            updateUI(user)
-        })
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.loginStatus.collect{ user ->
+                updateUI(user)
+            }
+        }
         viewModel.toastMessage.observe(viewLifecycleOwner, Observer { message ->
             Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
         })

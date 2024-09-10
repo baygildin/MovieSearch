@@ -6,14 +6,16 @@ import androidx.lifecycle.ViewModel
 import com.google.firebase.auth.FirebaseUser
 import com.hfad.search.firebase.FirebaseRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import javax.inject.Inject
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(
     private val firebaseRepository: FirebaseRepository
 ) : ViewModel() {
-    private val _loginStatus = MutableLiveData<FirebaseUser?>()
-    val loginStatus: LiveData<FirebaseUser?> get() = _loginStatus
+    private val _loginStatus = MutableStateFlow<FirebaseUser?>(null)
+    val loginStatus: StateFlow<FirebaseUser?> get() = _loginStatus
 
     private val _toastMessage = MutableLiveData<String>()
     val toastMessage: LiveData<String> get() = _toastMessage

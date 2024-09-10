@@ -39,8 +39,10 @@ class FriendRequestsFragment : BaseFragment(R.layout.fragment_friend_requests) {
 
         viewModel.loadFriendRequests(userKey)
 
-        viewModel.friendRequests.observe(viewLifecycleOwner) { friendRequests ->
-            updateFriendRequestsList(friendRequests)
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.friendRequests.collect { request ->
+                updateFriendRequestsList(request)
+            }
         }
 
 

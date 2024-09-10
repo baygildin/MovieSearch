@@ -1,7 +1,6 @@
 package com.hfad.friend_requests
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
+
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.database.DataSnapshot
@@ -11,7 +10,9 @@ import com.hfad.search.firebase.FirebaseRepository
 import com.hfad.search.model.Friend
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -20,8 +21,8 @@ class FriendRequestsViewModel @Inject constructor(
     private val firebaseRepository: FirebaseRepository
 ) : ViewModel() {
 
-    private val _friendRequests = MutableLiveData<List<Friend>>()
-    val friendRequests: LiveData<List<Friend>> get() = _friendRequests
+    private val _friendRequests = MutableStateFlow<List<Friend>>(emptyList())
+    val friendRequests: StateFlow<List<Friend>> get() = _friendRequests
 
     private val _operationStatus = MutableSharedFlow<String>()
     val operationStatus: SharedFlow<String> get() = _operationStatus
@@ -63,7 +64,7 @@ class FriendRequestsViewModel @Inject constructor(
                 userRef.child("approved").child(friendId).setValue(true)
                     .addOnCompleteListener { approvalTask ->
                         if (approvalTask.isSuccessful) {
-                            _friendRequests.value = _friendRequests.value?.filterNot { it.id == friendId }
+                            _friendRequests.value = _friendRequests.value.filterNot { it.id == friendId }
                             viewModelScope.launch {
                                 _operationStatus.emit("Friend request approved successfully")
                             }

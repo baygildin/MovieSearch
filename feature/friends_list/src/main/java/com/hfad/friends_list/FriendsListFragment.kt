@@ -7,12 +7,13 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
 import com.google.firebase.auth.FirebaseAuth
 import com.hfad.core.BaseFragment
 import com.hfad.friends_list.databinding.FragmentFriendsListBinding
 import com.hfad.search.model.Friend
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class FriendsListFragment : BaseFragment(R.layout.fragment_friends_list) {
@@ -35,9 +36,11 @@ class FriendsListFragment : BaseFragment(R.layout.fragment_friends_list) {
 
         viewModel.loadFriends(userKey)
 
-        viewModel.approvedFriends.observe(viewLifecycleOwner, Observer { approvedFriends ->
-            updateFriendsList(approvedFriends)
-        })
+        viewLifecycleOwner.lifecycleScope.launch{
+            viewModel.approvedFriends.collect{ approvedFriends ->
+                updateFriendsList(approvedFriends)
+            }
+        }
         binding.friendRequestsTextView.setOnClickListener{
             (activity as com.hfad.navigation.Navigator).navigateFriendsListFragmentToFriendRequestsFragment()
         }

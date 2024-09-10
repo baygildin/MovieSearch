@@ -1,8 +1,6 @@
 package com.hfad.search_friend
 
 import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -12,6 +10,8 @@ import com.hfad.search.firebase.FirebaseRepository
 import com.hfad.search.model.FriendRequestsInfo
 import com.hfad.search.utils.encodeEmail
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import javax.inject.Inject
 
 
@@ -19,16 +19,16 @@ import javax.inject.Inject
 class SearchFriendViewModel @Inject constructor(
     private val firebaseRepository: FirebaseRepository
 ): ViewModel() {
-    var friendEmail = MutableLiveData<String>()
-    private val _friendInfo = MutableLiveData<FriendRequestsInfo>()
-    val friendInfo: LiveData<FriendRequestsInfo> get() = _friendInfo
+    var friendEmail = MutableStateFlow<String>("")
+    private val _friendInfo = MutableStateFlow<FriendRequestsInfo>(FriendRequestsInfo("Error", ""))
+    val friendInfo: StateFlow<FriendRequestsInfo> get() = _friendInfo
     var isFriendAdded = false
 
-    private val _isFriendFound = MutableLiveData<Boolean>(false)
-    val isFriendFound: LiveData<Boolean> get() = _isFriendFound
+    private val _isFriendFound = MutableStateFlow<Boolean>(false)
+    val isFriendFound: StateFlow<Boolean> get() = _isFriendFound
 
-    private val _favouritesListString = MutableLiveData<String>("")
-    val favouritesListString: LiveData<String> get() = _favouritesListString
+    private val _favouritesListString = MutableStateFlow<String>("")
+    val favouritesListString: StateFlow<String> get() = _favouritesListString
     private val auth = FirebaseAuth.getInstance()
     private val userKey = auth.currentUser?.uid ?: ""
     var friendUid = ""
@@ -44,7 +44,7 @@ class SearchFriendViewModel @Inject constructor(
 
 
     fun searchFriend() {
-        val email = friendEmail.value ?: return
+        val email = friendEmail.value
         firebaseRepository.uidsRef.child(encodeEmail(email.lowercase()))
             .addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
@@ -80,14 +80,14 @@ class SearchFriendViewModel @Inject constructor(
             .addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     if (snapshot.exists()) {
-                        _friendInfo.value = FriendRequestsInfo(FRIEND_REQUEST_ALREADY_SENT, friendEmail.value ?: "")
+                        _friendInfo.value = FriendRequestsInfo(FRIEND_REQUEST_ALREADY_SENT, friendEmail.value)
                     } else {
                         firebaseRepository.usersRef.child(friendUid).child("friends").child("requested").child(userKey)
                             .setValue(true).addOnCompleteListener { task ->
                                 if (task.isSuccessful) {
                                     firebaseRepository.usersRef.child(userKey).child("friends").child("approved")
                                         .child(friendUid).setValue(true)
-                                    _friendInfo.value = FriendRequestsInfo(FRIEND_REQUEST_SENT, friendEmail.value ?: "")
+                                    _friendInfo.value = FriendRequestsInfo(FRIEND_REQUEST_SENT, friendEmail.value)
                                     isFriendAdded = true
                                 } else {
                                     _friendInfo.value = FriendRequestsInfo(FAILED_TO_SEND_FRIEND_REQUEST, "")

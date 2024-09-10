@@ -32,7 +32,6 @@ class FriendsListViewModel @Inject constructor(
                     if (approved){
                         getUserEmail(friendKey) { email ->
                             friends.add(Friend(friendKey, email, approved))
-                            Log.d("dasdsVM", "${email}")
                             _approvedFriends.value = friends
                         }
                     }

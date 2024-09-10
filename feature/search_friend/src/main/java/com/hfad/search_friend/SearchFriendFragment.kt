@@ -31,10 +31,13 @@ class SearchFriendFragment : BaseFragment(R.layout.fragment_search_friend) {
             val email = binding.searchFriendEditText.text.toString().lowercase()
             viewModel.friendEmail.value = email
             if (email.isNullOrEmpty()) {
-                Toast.makeText(context, context?.getResources()?.getString(R.string.toast_empty_edit_text_value), Toast.LENGTH_LONG).show()
+                Toast.makeText(
+                    context,
+                    getString(R.string.toast_empty_edit_text_value),
+                    Toast.LENGTH_LONG
+                ).show()
 
-            }
-            else viewModel.searchFriend()
+            } else viewModel.searchFriend()
         }
 
         viewModel.friendEmail.observe(viewLifecycleOwner, Observer { email ->
@@ -42,7 +45,17 @@ class SearchFriendFragment : BaseFragment(R.layout.fragment_search_friend) {
         })
 
         viewModel.friendInfo.observe(viewLifecycleOwner, Observer { info ->
-            binding.friendInfoTextView.text = info
+            binding.friendInfoTextView.text =
+                when (info.status) {
+                    SearchFriendViewModel.FRIEND_FOUND -> getString(R.string.friend_found_with_email) + info.message
+                    SearchFriendViewModel.NO_USER_FOUND -> getString(R.string.no_user_found_with_email) + info.message
+                    SearchFriendViewModel.CANNOT_ADD_YOURSELF -> getString(R.string.cannot_add_yourself)
+                    SearchFriendViewModel.FRIEND_REQUEST_SENT -> getString(R.string.friend_request_sent) + info.message
+                    SearchFriendViewModel.FRIEND_REQUEST_ALREADY_SENT -> getString(R.string.friend_request_already_sent) + info.message
+                    SearchFriendViewModel.FAILED_TO_SEND_FRIEND_REQUEST -> getString(R.string.failed_to_send_friend_request)
+                    else -> info.status + info.message
+                }
+
         })
 
         viewModel.isFriendFound.observe(viewLifecycleOwner, Observer { isFound ->
@@ -53,9 +66,11 @@ class SearchFriendFragment : BaseFragment(R.layout.fragment_search_friend) {
             viewModel.sendConnectionRequest()
         }
 
-        viewModel.favouritesListString.observe(viewLifecycleOwner, Observer { favouritesListString ->
-            binding.tvFriendsFavouriteMediaList.text = favouritesListString
-        })
+        viewModel.favouritesListString.observe(
+            viewLifecycleOwner,
+            Observer { favouritesListString ->
+                binding.tvFriendsFavouriteMediaList.text = favouritesListString
+            })
     }
 
 }

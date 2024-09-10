@@ -54,7 +54,7 @@ class FriendsListFragment : BaseFragment(R.layout.fragment_friends_list) {
             val deleteButton = itemView.findViewById<Button>(R.id.btnAddFriend)
 
             friendButton.text = friend.email
-            deleteButton.text = "Unfriend"
+            deleteButton.text = getString(R.string.btn_unfriend)
             deleteButton.setOnClickListener {
                 viewModel.deleteFriend(userKey, friend.id)
             }

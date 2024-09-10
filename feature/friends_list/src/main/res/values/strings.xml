@@ -6,4 +6,6 @@
     <string name="toast_agry_to_replace_from_cloud">Do you agree to replacing your favorite media list from the cloud? Click the button again if you agree</string>
     <string name="toast_sent_to_cloud">Data has been sent to the cloud</string>
     <string name="toast_empty_edit_text_value">Please enter your friend\'s email</string>
+    <string name="btn_unfriend">Unfriend</string>
+
 </resources>

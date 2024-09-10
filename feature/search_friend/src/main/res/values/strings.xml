@@ -6,4 +6,11 @@
     <string name="toast_agry_to_replace_from_cloud">Do you agree to replacing your favorite media list from the cloud? Click the button again if you agree</string>
     <string name="toast_sent_to_cloud">Data has been sent to the cloud</string>
     <string name="toast_empty_edit_text_value">Please enter your friend\'s email</string>
+
+    <string name="friend_found_with_email">Friend found with email: </string>
+    <string name="no_user_found_with_email">No user found with email: </string>
+    <string name="cannot_add_yourself">You cannot add yourself as a friend</string>
+    <string name="friend_request_already_sent">Friend request has already been sent to </string>
+    <string name="friend_request_sent">Friend request sent to </string>
+    <string name="failed_to_send_friend_request">Failed to send friend request</string>
 </resources>

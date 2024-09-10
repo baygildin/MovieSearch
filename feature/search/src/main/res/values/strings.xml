@@ -7,4 +7,6 @@
     <string name="message_hint">Enter title</string>
     <string name="poster_to_maxSize">Enlarge poster to full screen</string>
     <string name="btn_episodes_list">View list of episodes</string>
+    <string name="toast_only_eng_chars">Please enter only English characters</string>
+
 </resources>

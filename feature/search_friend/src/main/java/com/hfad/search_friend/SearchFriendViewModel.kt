@@ -20,7 +20,7 @@ class SearchFriendViewModel @Inject constructor(
     private val firebaseRepository: FirebaseRepository
 ): ViewModel() {
     var friendEmail = MutableStateFlow<String>("")
-    private val _friendInfo = MutableStateFlow<FriendRequestsInfo>(FriendRequestsInfo("Error", ""))
+    private val _friendInfo = MutableStateFlow<FriendRequestsInfo>(FriendRequestsInfo("", ""))
     val friendInfo: StateFlow<FriendRequestsInfo> get() = _friendInfo
     var isFriendAdded = false
 

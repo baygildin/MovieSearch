@@ -13,4 +13,11 @@
     <string name="friend_request_already_sent">Friend request has already been sent to </string>
     <string name="friend_request_sent">Friend request sent to </string>
     <string name="failed_to_send_friend_request">Failed to send friend request</string>
+
+
+    <string name="hint_enter_email">Enter friend\'s email</string>
+    <string name="search_friend_button">Search Friend</string>
+    <string name="send_connection_request_button">Send Connection Request</string>
+    <string name="tv_hello">hello</string>
+
 </resources>

@@ -33,7 +33,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="8dp"
-                android:text="Friend`s favourite media"
+                android:text="@string/txt_friend_fav_media"
                 android:textSize="24sp"
                 android:textStyle="bold" />
 

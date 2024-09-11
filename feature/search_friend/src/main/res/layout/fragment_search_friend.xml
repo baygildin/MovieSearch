@@ -24,7 +24,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:paddingTop="40dp"
-        android:hint="Enter friend's email"
+        android:hint="@string/hint_enter_email"
         android:textColorHint="@color/main_text_color"
         android:textColor="@color/main_text_color"
         android:inputType="textEmailAddress" />
@@ -36,7 +36,7 @@
         android:layout_height="wrap_content"
         android:textColor="@color/main_text_color"
         android:background="@drawable/button_border"
-        android:text="Search Friend"/>
+        android:text="@string/search_friend_button"/>
 
     <TextView
         android:id="@+id/friendInfoTextView"
@@ -52,13 +52,13 @@
         android:layout_height="wrap_content"
         android:textColor="@color/main_text_color"
         android:background="@drawable/button_border"
-        android:text="Send Connection Request"
+        android:text="@string/send_connection_request_button"
         android:visibility="gone" />
 
     <TextView
         android:id="@+id/tv_friendsFavouriteMediaList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="hello"
+        android:text="@string/tv_hello"
         android:textColor="@color/main_text_color"/>
 </LinearLayout>

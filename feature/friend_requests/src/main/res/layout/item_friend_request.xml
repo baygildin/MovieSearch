@@ -18,7 +18,7 @@
         android:id="@+id/btnAddFriend"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Add friend"
+        android:text="@string/add_friend_button"
         android:textColor="@color/main_text_color"
         android:background="@drawable/button_border"/>
 </LinearLayout>

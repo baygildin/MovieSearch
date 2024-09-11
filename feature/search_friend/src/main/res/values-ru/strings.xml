@@ -13,4 +13,9 @@
     <string name="friend_request_already_sent">Запрос на добавление в друзья уже был отправлен: </string>
     <string name="friend_request_sent">Запрос на добавление в друзья отправлен: </string>
     <string name="failed_to_send_friend_request">Не удалось отправить запрос на добавление в друзья</string>
+
+    <string name="hint_enter_email">Введите email друга</string>
+    <string name="search_friend_button">Поиск друга</string>
+    <string name="send_connection_request_button">Отправить запрос на добавление в друзья</string>
+    <string name="tv_hello">привет</string>
 </resources>

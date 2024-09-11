@@ -22,7 +22,7 @@
         android:id="@+id/btnAddFriend"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Unfriend"
+        android:text="@string/btn_unfriend"
         android:textColor="@color/main_text_color"
         android:background="@drawable/button_border"
         android:gravity="end"/>

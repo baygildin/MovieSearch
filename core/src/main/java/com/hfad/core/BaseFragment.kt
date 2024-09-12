@@ -6,17 +6,19 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import com.hfad.core.databinding.FragmentExampleBinding
 
 abstract class BaseFragment(layoutId: Int) : Fragment(layoutId) {
 
+    private var _binding: FragmentExampleBinding? = null
+    private val binding get() = _binding!!
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-
-        val toolbar: Toolbar = view.findViewById(R.id.toolbar)
+        _binding = FragmentExampleBinding.bind(view)
+        val toolbar = binding.toolbar
         (activity as AppCompatActivity).setSupportActionBar(toolbar)
         (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.txt_app_title)
 
@@ -41,8 +43,14 @@ abstract class BaseFragment(layoutId: Int) : Fragment(layoutId) {
                 (activity as? MenuItemClickListener)?.onMenuItemClicked(item.itemId)
                 true
             }
+
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
 }

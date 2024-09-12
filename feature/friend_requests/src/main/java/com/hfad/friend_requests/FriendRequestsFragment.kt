@@ -1,12 +1,9 @@
 package com.hfad.friend_requests
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -15,6 +12,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import com.google.firebase.auth.FirebaseAuth
 import com.hfad.core.BaseFragment
 import com.hfad.friend_requests.databinding.FragmentFriendRequestsBinding
+import com.hfad.friend_requests.databinding.ItemFriendRequestBinding
 import com.hfad.search.model.Friend
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -22,7 +20,8 @@ import kotlinx.coroutines.launch
 @AndroidEntryPoint
 class FriendRequestsFragment : BaseFragment(R.layout.fragment_friend_requests) {
     private val viewModel: FriendRequestsViewModel by viewModels()
-    private lateinit var binding: FragmentFriendRequestsBinding
+    private var _binding: FragmentFriendRequestsBinding? = null
+    private val binding get() =  _binding!!
     private val auth = FirebaseAuth.getInstance()
     private val userKey = auth.currentUser?.uid ?: ""
 
@@ -30,7 +29,7 @@ class FriendRequestsFragment : BaseFragment(R.layout.fragment_friend_requests) {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentFriendRequestsBinding.inflate(inflater, container, false)
+        _binding = FragmentFriendRequestsBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -54,29 +53,29 @@ class FriendRequestsFragment : BaseFragment(R.layout.fragment_friend_requests) {
             }
         }
     }
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 
     private fun updateFriendRequestsList(friends: List<Friend>) {
         binding.friendRequestsContainer.removeAllViews()
         for (friend in friends) {
-            val itemView = layoutInflater.inflate(R.layout.item_friend_request, null)
-            val friendEmailTextView = itemView.findViewById<TextView>(R.id.tvFriendEmail)
-            val addFriendButton = itemView.findViewById<Button>(R.id.btnAddFriend)
-            val rejectFriendButton = itemView.findViewById<Button>(R.id.btnRejectFriend)
+            val itemBinding = ItemFriendRequestBinding.inflate(layoutInflater, binding.friendRequestsContainer, false)
 
-            friendEmailTextView.text = friend.email
-            addFriendButton.setOnClickListener {
-                viewModel.approveFriend(userKey, friend.id)
-            }
-            rejectFriendButton.setOnClickListener {
-                viewModel.rejectFriend(userKey, friend.id)
-            }
-            friendEmailTextView.setOnClickListener {
-                Log.d("28.02.24", "${friend.email}    ${friend.id}")
+            itemBinding.tvFriendEmail.text =  friend.email
+            itemBinding.tvFriendEmail.setOnClickListener{
                 (activity as com.hfad.navigation.Navigator).navigateFriendRequestToShowMediaOfFriendId(
                     friend.id
                 )
             }
-            binding.friendRequestsContainer.addView(itemView)
+            itemBinding.btnAddFriend.setOnClickListener{
+                viewModel.approveFriend(userKey, friend.id)
+            }
+            itemBinding.btnRejectFriend.setOnClickListener{
+                viewModel.rejectFriend(userKey, friend.id)
+            }
+            binding.friendRequestsContainer.addView(itemBinding.root)
         }
     }
 }

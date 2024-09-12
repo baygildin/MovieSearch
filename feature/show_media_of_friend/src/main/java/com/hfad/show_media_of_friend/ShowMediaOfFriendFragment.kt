@@ -15,7 +15,8 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 @AndroidEntryPoint
 class ShowMediaOfFriendFragment : BaseFragment(R.layout.fragment_show_media_of_friend) {
-    private lateinit var binding: FragmentShowMediaOfFriendBinding
+    private var _binding: FragmentShowMediaOfFriendBinding? = null
+    private val binding get() = _binding!!
     private val viewModel: ShowMediaOfFriendViewModel by viewModels()
     private val args: ShowMediaOfFriendFragmentArgs by navArgs()
 
@@ -24,7 +25,7 @@ class ShowMediaOfFriendFragment : BaseFragment(R.layout.fragment_show_media_of_f
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentShowMediaOfFriendBinding.inflate(inflater, container, false)
+        _binding = FragmentShowMediaOfFriendBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -45,5 +46,10 @@ class ShowMediaOfFriendFragment : BaseFragment(R.layout.fragment_show_media_of_f
                 adapter.updateItems(items)
             }
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

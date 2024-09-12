@@ -18,7 +18,8 @@ import kotlinx.coroutines.launch
 @AndroidEntryPoint
 class LikedFragment : BaseFragment(R.layout.fragment_liked) {
     private val viewModel: LikedViewModel by viewModels()
-    private lateinit var binding: FragmentLikedBinding
+    private var _binding: FragmentLikedBinding? = null
+    private val binding get() = _binding!!
     private var isSortedByDate = false
 
 
@@ -26,7 +27,7 @@ class LikedFragment : BaseFragment(R.layout.fragment_liked) {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentLikedBinding.inflate(inflater, container, false)
+        _binding = FragmentLikedBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -127,4 +128,10 @@ class LikedFragment : BaseFragment(R.layout.fragment_liked) {
             }
         }
     }
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
+
 }

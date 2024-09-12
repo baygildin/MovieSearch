@@ -7,7 +7,7 @@
     <string name="toast_sent_to_cloud">Data has been sent to the cloud</string>
     <string name="toast_empty_edit_text_value">Please enter your friend\'s email</string>
     <string name="message_friend_request_approved">Friend request approved successfully</string>
-
     <string name="friend_requests_title">Friend Requests</string>
     <string name="add_friend_button">Add friend</string>
+    <string name="reject_friend_button">Reject request</string>
 </resources>

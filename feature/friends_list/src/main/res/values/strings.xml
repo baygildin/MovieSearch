@@ -8,6 +8,4 @@
     <string name="toast_empty_edit_text_value">Please enter your friend\'s email</string>
     <string name="btn_unfriend">Unfriend</string>
     <string name="friends_list_title">Friends</string>
-
-
 </resources>

@@ -61,10 +61,14 @@ class FriendRequestsFragment : BaseFragment(R.layout.fragment_friend_requests) {
             val itemView = layoutInflater.inflate(R.layout.item_friend_request, null)
             val friendEmailTextView = itemView.findViewById<TextView>(R.id.tvFriendEmail)
             val addFriendButton = itemView.findViewById<Button>(R.id.btnAddFriend)
+            val rejectFriendButton = itemView.findViewById<Button>(R.id.btnRejectFriend)
 
             friendEmailTextView.text = friend.email
             addFriendButton.setOnClickListener {
                 viewModel.approveFriend(userKey, friend.id)
+            }
+            rejectFriendButton.setOnClickListener {
+                viewModel.rejectFriend(userKey, friend.id)
             }
             friendEmailTextView.setOnClickListener {
                 Log.d("28.02.24", "${friend.email}    ${friend.id}")

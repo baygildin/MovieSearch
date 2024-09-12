@@ -33,7 +33,9 @@ class FriendsListViewModel @Inject constructor(
                     if (approved) {
                         getUserEmail(friendKey) { email ->
                             friends.add(Friend(friendKey, email, approved))
-                            _approvedFriends.value = friends
+                            if (friends.size == snapshot.childrenCount.toInt()) {
+                                _approvedFriends.value = friends
+                            }
                         }
                     }
                 }

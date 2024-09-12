@@ -1,6 +1,7 @@
 package com.hfad.friend_requests
 
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.database.DataSnapshot
@@ -55,6 +56,23 @@ class FriendRequestsViewModel @Inject constructor(
                 }
             }
         })
+    }
+    fun rejectFriend(userKey: String, friendId: String) {
+        val userRef = firebaseRepository.usersRef.child(userKey).child("friends")
+        val friendRef = firebaseRepository.usersRef.child(friendId).child("friends")
+        userRef.child("requested").child(friendId).removeValue().addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                friendRef.child("approved").child(userKey).removeValue().addOnCompleteListener { task2 ->
+                    if (task2.isSuccessful) {
+                        Log.d("FriendRequest", "Request rejected successfully")
+                    } else {
+                        Log.e("FriendRequest", "Error rejecting request: ${task2.exception?.message}")
+                    }
+                }
+            } else {
+                Log.e("FriendRequest", "Error rejecting request: ${task.exception?.message}")
+            }
+        }
     }
 
     fun approveFriend(userKey: String, friendId: String) {

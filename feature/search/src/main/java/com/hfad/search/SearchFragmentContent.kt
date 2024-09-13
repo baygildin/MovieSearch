@@ -73,7 +73,7 @@ fun SearchFragmentContent(searchViewModel: SearchViewModel, navigateToDetails: (
             TextField(
                 value = query.value,
                 onValueChange = { newQuery ->
-                    if (newQuery.matches(Regex("^[a-zA-Z0-9]*$"))) {
+                    if (newQuery.matches(Regex("^[a-zA-Z0-9 ':!?&.-]*$"))) {
                         query.value = newQuery
                         searchJob?.cancel()
                         searchJob = coroutineScope.launch {

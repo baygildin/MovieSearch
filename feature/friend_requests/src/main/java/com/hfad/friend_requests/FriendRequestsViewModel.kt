@@ -29,17 +29,21 @@ class FriendRequestsViewModel @Inject constructor(
     val operationStatus: SharedFlow<String> get() = _operationStatus
 
     fun loadFriendRequests(userKey: String) {
-        val requestedFriendsRef =
-            firebaseRepository.usersRef.child(userKey).child("friends").child("requested")
+        val requestedFriendsRef = firebaseRepository.usersRef.child(userKey).child("friends").child("requested")
 
         requestedFriendsRef.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 val friends = mutableListOf<Friend>()
+                val totalChildren = snapshot.childrenCount.toInt()
+                var processedChildren = 0
                 for (childSnapshot in snapshot.children) {
                     val friendKey = childSnapshot.key ?: continue
                     firebaseRepository.getUserEmail(friendKey, onSuccess = { email ->
                         friends.add(Friend(friendKey, email, approved = false))
-                        _friendRequests.value = friends
+                        processedChildren++
+                        if (processedChildren == totalChildren) {
+                            _friendRequests.value = friends
+                        }
                     }, onFailure = {
                         viewModelScope.launch {
                             _operationStatus.emit("Error fetching email: ${it.message}")
@@ -50,9 +54,7 @@ class FriendRequestsViewModel @Inject constructor(
 
             override fun onCancelled(error: DatabaseError) {
                 viewModelScope.launch {
-                    _operationStatus.emit(
-                        "Database error: ${error.message}"
-                    )
+                    _operationStatus.emit("Database error: ${error.message}")
                 }
             }
         })
@@ -65,6 +67,7 @@ class FriendRequestsViewModel @Inject constructor(
                 friendRef.child("approved").child(userKey).removeValue().addOnCompleteListener { task2 ->
                     if (task2.isSuccessful) {
                         Log.d("FriendRequest", "Request rejected successfully")
+                        loadFriendRequests(userKey)
                     } else {
                         Log.e("FriendRequest", "Error rejecting request: ${task2.exception?.message}")
                     }

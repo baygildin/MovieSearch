@@ -57,6 +57,15 @@ class FriendsListViewModel @Inject constructor(
             .addOnFailureListener {
                 Log.d("FriendsList", "Failed to delete friend: ${it.message}")
             }
+        firebaseRepository.usersRef.child(friendKey).child("friends").child("approved")
+            .child(userKey).removeValue()
+            .addOnSuccessListener {
+                Log.d("FriendsList", "User was deleted from Friend`s friendlist successfully")
+                loadFriends(userKey)
+            }
+            .addOnFailureListener {
+                Log.d("FriendsList", "Failed to delete user from friend`s friendlist: ${it.message}")
+            }
     }
 
     private fun getUserEmail(userId: String, callback: (String) -> Unit) {

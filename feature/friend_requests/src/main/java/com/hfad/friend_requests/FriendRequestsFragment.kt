@@ -53,6 +53,10 @@ class FriendRequestsFragment : BaseFragment(R.layout.fragment_friend_requests) {
             }
         }
     }
+    override fun onResume() {
+        super.onResume()
+        viewModel.loadFriendRequests(userKey)
+    }
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

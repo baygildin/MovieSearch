@@ -43,7 +43,8 @@ class MediaDetailsViewModel @Inject constructor(
                 }
         }
     }
-    private suspend fun checkIsMediaFavorite(mediaId: String): Boolean{
+
+    private suspend fun checkIsMediaFavorite(mediaId: String): Boolean {
         return dbRepository.checkIsMediaFavorite(mediaId)
 
     }

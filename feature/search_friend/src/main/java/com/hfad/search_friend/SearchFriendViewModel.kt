@@ -7,7 +7,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import com.hfad.search.firebase.FirebaseRepository
-import com.hfad.search.model.FriendRequestsInfo
+import com.hfad.search.model.viewmodelInfoMessage
 import com.hfad.search.utils.encodeEmail
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -20,8 +20,8 @@ class SearchFriendViewModel @Inject constructor(
     private val firebaseRepository: FirebaseRepository
 ): ViewModel() {
     var friendEmail = MutableStateFlow<String>("")
-    private val _friendInfo = MutableStateFlow<FriendRequestsInfo>(FriendRequestsInfo("", ""))
-    val friendInfo: StateFlow<FriendRequestsInfo> get() = _friendInfo
+    private val _friendInfo = MutableStateFlow<viewmodelInfoMessage>(viewmodelInfoMessage("", ""))
+    val friendInfo: StateFlow<viewmodelInfoMessage> get() = _friendInfo
     var isFriendAdded = false
 
     private val _isFriendFound = MutableStateFlow<Boolean>(false)
@@ -51,14 +51,14 @@ class SearchFriendViewModel @Inject constructor(
                     if (snapshot.exists()) {
                         friendUid = snapshot.getValue(String::class.java) ?: ""
                         if (friendUid.isNotEmpty()) {
-                            _friendInfo.value = FriendRequestsInfo(FRIEND_FOUND, email)
+                            _friendInfo.value = viewmodelInfoMessage(FRIEND_FOUND, email)
                             _isFriendFound.value = true
                         } else {
-                            _friendInfo.value = FriendRequestsInfo(NO_USER_FOUND, email)
+                            _friendInfo.value = viewmodelInfoMessage(NO_USER_FOUND, email)
                             _isFriendFound.value = false
                         }
                     } else {
-                        _friendInfo.value = FriendRequestsInfo(NO_USER_FOUND, email)
+                        _friendInfo.value = viewmodelInfoMessage(NO_USER_FOUND, email)
                         _isFriendFound.value = false
                     }
                 }
@@ -72,7 +72,7 @@ class SearchFriendViewModel @Inject constructor(
     fun sendConnectionRequest() {
         if (friendUid.isEmpty()) return
         if (friendUid == userKey) {
-            _friendInfo.value = FriendRequestsInfo(CANNOT_ADD_YOURSELF, "")
+            _friendInfo.value = viewmodelInfoMessage(CANNOT_ADD_YOURSELF, "")
             return
         }
 
@@ -80,17 +80,17 @@ class SearchFriendViewModel @Inject constructor(
             .addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     if (snapshot.exists()) {
-                        _friendInfo.value = FriendRequestsInfo(FRIEND_REQUEST_ALREADY_SENT, friendEmail.value)
+                        _friendInfo.value = viewmodelInfoMessage(FRIEND_REQUEST_ALREADY_SENT, friendEmail.value)
                     } else {
                         firebaseRepository.usersRef.child(friendUid).child("friends").child("requested").child(userKey)
                             .setValue(true).addOnCompleteListener { task ->
                                 if (task.isSuccessful) {
                                     firebaseRepository.usersRef.child(userKey).child("friends").child("approved")
                                         .child(friendUid).setValue(true)
-                                    _friendInfo.value = FriendRequestsInfo(FRIEND_REQUEST_SENT, friendEmail.value)
+                                    _friendInfo.value = viewmodelInfoMessage(FRIEND_REQUEST_SENT, friendEmail.value)
                                     isFriendAdded = true
                                 } else {
-                                    _friendInfo.value = FriendRequestsInfo(FAILED_TO_SEND_FRIEND_REQUEST, "")
+                                    _friendInfo.value = viewmodelInfoMessage(FAILED_TO_SEND_FRIEND_REQUEST, "")
                                     isFriendAdded = false
                                 }
                             }

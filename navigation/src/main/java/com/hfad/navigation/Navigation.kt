@@ -46,6 +46,7 @@ interface Navigator {
     fun actionMediaDetailsFragmentToLoginFragment()
     fun actionFriendRequestsFragmentToLoginFragment()
     fun navigateFriendRequestToShowMediaOfFriendId(userId: String)
+    fun navigateFriendsListFragmentToSearchFragment()
 
 
 }

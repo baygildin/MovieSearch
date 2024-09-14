@@ -8,4 +8,5 @@
     <string name="toast_empty_edit_text_value">Пожалуйста, введите адрес электронной почты вашего друга</string>
     <string name="btn_unfriend">Удалить из друзей</string>
     <string name="friends_list_title">Друзья</string>
+    <string name="toast_user_log_out">Пользователь успешно вышел</string>
 </resources>

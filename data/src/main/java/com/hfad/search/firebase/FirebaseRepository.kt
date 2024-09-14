@@ -22,6 +22,7 @@ class FirebaseRepository @Inject constructor() {
     val usersRef = database.getReference("users")
     val emailsRef = database.getReference("uidToEmail")
     val uidsRef = database.getReference("emailToUid")
+    private val userKey = auth.currentUser?.uid ?: ""
 
 
     companion object {
@@ -32,7 +33,6 @@ class FirebaseRepository @Inject constructor() {
     fun saveFavouritesToCloud(
         favouritesJson: String, onSuccess: () -> Unit, onFailure: (Exception) -> Unit
     ) {
-        val userKey = auth.currentUser?.uid ?: return
         val userRef = usersRef.child(userKey)
 
         userRef.child("favourites").setValue(favouritesJson).addOnSuccessListener {
@@ -119,6 +119,9 @@ class FirebaseRepository @Inject constructor() {
 
     fun getCurrentUser(): FirebaseUser? {
         return auth.currentUser
+    }
+    fun signOut(){
+        auth.signOut()
     }
 
     fun createUser(

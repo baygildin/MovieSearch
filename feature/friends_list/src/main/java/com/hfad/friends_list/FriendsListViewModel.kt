@@ -2,6 +2,7 @@ package com.hfad.friends_list
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
@@ -19,8 +20,10 @@ class FriendsListViewModel @Inject constructor(
 
     private val _approvedFriends = MutableStateFlow<List<Friend>>(emptyList())
     val approvedFriends: StateFlow<List<Friend>> get() = _approvedFriends
+    private val auth = FirebaseAuth.getInstance()
+    private val userKey = auth.currentUser?.uid ?: ""
 
-    fun loadFriends(userKey: String) {
+    fun loadFriends() {
         val approvedFriendsRef =
             firebaseRepository.usersRef.child(userKey).child("friends").child("approved")
 
@@ -46,13 +49,16 @@ class FriendsListViewModel @Inject constructor(
             }
         })
     }
+    fun signOut(){
+        firebaseRepository.signOut()
+    }
 
-    fun deleteFriend(userKey: String, friendKey: String) {
+    fun deleteFriend(friendKey: String) {
         firebaseRepository.usersRef.child(userKey).child("friends").child("approved")
             .child(friendKey).removeValue()
             .addOnSuccessListener {
                 Log.d("FriendsList", "Friend deleted successfully")
-                loadFriends(userKey)
+                loadFriends()
             }
             .addOnFailureListener {
                 Log.d("FriendsList", "Failed to delete friend: ${it.message}")
@@ -61,7 +67,7 @@ class FriendsListViewModel @Inject constructor(
             .child(userKey).removeValue()
             .addOnSuccessListener {
                 Log.d("FriendsList", "User was deleted from Friend`s friendlist successfully")
-                loadFriends(userKey)
+                loadFriends()
             }
             .addOnFailureListener {
                 Log.d("FriendsList", "Failed to delete user from friend`s friendlist: ${it.message}")

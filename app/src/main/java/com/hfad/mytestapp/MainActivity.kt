@@ -249,6 +249,10 @@ class MainActivity : AppCompatActivity(), com.hfad.navigation.Navigator, MenuIte
         val action = FriendRequestsFragmentDirections.actionFriendRequestToShowMediaOfFriendId(userId)
         findNavController(R.id.nav_host_fragment).navigate(action)
     }
+    override fun navigateFriendsListFragmentToSearchFragment() {
+        val action = FriendsListFragmentDirections.navigateFriendsListFragmentToSearchFragment()
+        findNavController(R.id.nav_host_fragment).navigate(action)
+    }
 
 
 

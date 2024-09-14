@@ -302,6 +302,9 @@
             android:id="@+id/navigateFriendsListFragmentToFriendRequestsFragment"
             app:destination="@id/friendRequestsFragment" />
         <action
+            android:id="@+id/navigateFriendsListFragmentToSearchFragment"
+            app:destination="@id/searchFragment" />
+        <action
             android:id="@+id/navigateFriendsListFragmentToShowMediaOfFriendId"
             app:destination="@id/showMediaOfFriendFragment">
             <argument

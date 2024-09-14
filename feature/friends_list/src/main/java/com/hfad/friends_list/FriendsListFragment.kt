@@ -4,9 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import com.google.firebase.auth.FirebaseAuth
 import com.hfad.core.BaseFragment
 import com.hfad.friends_list.databinding.FragmentFriendsListBinding
 import com.hfad.friends_list.databinding.ItemFriendListBinding
@@ -20,8 +20,7 @@ class FriendsListFragment : BaseFragment(R.layout.fragment_friends_list) {
     private val viewModel: FriendsListViewModel by viewModels()
     private var _binding: FragmentFriendsListBinding? = null
     private val binding get() = _binding!!
-    private val auth = FirebaseAuth.getInstance()
-    private val userKey = auth.currentUser?.uid ?: ""
+
 
 
     override fun onCreateView(
@@ -35,12 +34,19 @@ class FriendsListFragment : BaseFragment(R.layout.fragment_friends_list) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.loadFriends(userKey)
+        viewModel.loadFriends()
 
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.approvedFriends.collect { approvedFriends ->
                 updateFriendsList(approvedFriends)
             }
+        }
+        binding.btnLogOut.setOnClickListener{
+            viewLifecycleOwner.lifecycleScope.launch {
+                viewModel.signOut()
+            }
+            Toast.makeText(context,  context?.getResources()?.getString(R.string.toast_user_log_out), Toast.LENGTH_LONG).show()
+            (activity as com.hfad.navigation.Navigator).navigateFriendsListFragmentToSearchFragment()
         }
         binding.friendRequestsTextView.setOnClickListener {
             (activity as com.hfad.navigation.Navigator).navigateFriendsListFragmentToFriendRequestsFragment()
@@ -66,7 +72,7 @@ class FriendsListFragment : BaseFragment(R.layout.fragment_friends_list) {
             itemBinding.tvEmailOfFriend.text = friend.email
             itemBinding.btnDeleteFriend.text = getString(R.string.btn_unfriend)
             itemBinding.btnDeleteFriend.setOnClickListener {
-                viewModel.deleteFriend(userKey, friend.id)
+                viewModel.deleteFriend(friend.id)
             }
 
             itemBinding.tvEmailOfFriend.setOnClickListener {

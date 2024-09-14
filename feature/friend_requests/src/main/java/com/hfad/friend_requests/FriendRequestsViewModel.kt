@@ -67,7 +67,7 @@ class FriendRequestsViewModel @Inject constructor(
                 friendRef.child("approved").child(userKey).removeValue().addOnCompleteListener { task2 ->
                     if (task2.isSuccessful) {
                         Log.d("FriendRequest", "Request rejected successfully")
-                        loadFriendRequests(userKey)
+                        _friendRequests.value = _friendRequests.value.filterNot { it.id == friendId }
                     } else {
                         Log.e("FriendRequest", "Error rejecting request: ${task2.exception?.message}")
                     }

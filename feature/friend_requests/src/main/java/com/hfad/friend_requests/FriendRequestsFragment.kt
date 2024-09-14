@@ -23,7 +23,7 @@ class FriendRequestsFragment : BaseFragment(R.layout.fragment_friend_requests) {
     private var _binding: FragmentFriendRequestsBinding? = null
     private val binding get() =  _binding!!
     private val auth = FirebaseAuth.getInstance()
-    private val userKey = auth.currentUser?.uid ?: ""
+    internal val userKey = auth.currentUser?.uid ?: ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

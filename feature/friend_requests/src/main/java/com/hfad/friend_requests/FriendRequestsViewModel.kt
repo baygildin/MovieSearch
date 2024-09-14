@@ -64,10 +64,11 @@ class FriendRequestsViewModel @Inject constructor(
         val friendRef = firebaseRepository.usersRef.child(friendId).child("friends")
         userRef.child("requested").child(friendId).removeValue().addOnCompleteListener { task ->
             if (task.isSuccessful) {
+                _friendRequests.value = _friendRequests.value.filterNot { it.id == friendId }
                 friendRef.child("approved").child(userKey).removeValue().addOnCompleteListener { task2 ->
                     if (task2.isSuccessful) {
                         Log.d("FriendRequest", "Request rejected successfully")
-                        _friendRequests.value = _friendRequests.value.filterNot { it.id == friendId }
+
                     } else {
                         Log.e("FriendRequest", "Error rejecting request: ${task2.exception?.message}")
                     }

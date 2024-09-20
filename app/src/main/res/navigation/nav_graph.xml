@@ -39,7 +39,6 @@
         </action>
     </fragment>
 
-
     <fragment
         android:id="@+id/mediaDetailsFragment"
         android:name="com.hfad.media_details.MediaDetailsFragment"
@@ -50,7 +49,7 @@
             app:uri="android-app://com.hfad.media_details/mediaDetailsFragment" />
         <action
             android:id="@+id/navigateMediaDetailsToLiked"
-            app:destination="@id/likedFragment"></action>
+            app:destination="@id/likedFragment"/>
         <action
             android:id="@+id/actionMediaDetailsToFriendsListFragment"
             app:destination="@id/friendsListFragment" />
@@ -81,13 +80,7 @@
                 android:defaultValue="1"
                 app:argType="string" />
         </action>
-        <argument
-            android:name="id"
-            android:defaultValue="1"
-            app:argType="string" />
-
     </fragment>
-
     <fragment
         android:id="@+id/posterFragment"
         android:name="com.hfad.poster.PosterFragment"
@@ -114,10 +107,6 @@
         <deepLink
             android:id="@+id/deepLinkShowSeasonFragment"
             app:uri="android-app://com.hfad.poster/ShowSeasonFragment" />
-        <argument
-            android:name="id"
-            android:defaultValue="1"
-            app:argType="string" />
         <action
             android:id="@+id/navigateShowSeasonsToLiked"
             app:destination="@id/likedFragment" />
@@ -151,14 +140,6 @@
         <deepLink
             android:id="@+id/deepLinkShowEpisodesFragment"
             app:uri="android-app://com.hfad.poster/ShowEpisodesFragment" />
-        <argument
-            android:name="title"
-            android:defaultValue="1"
-            app:argType="string" />
-        <argument
-            android:name="seasonNumber"
-            android:defaultValue="1"
-            app:argType="string" />
         <action
             android:id="@+id/actionShowepisodestoFriendsListFragment"
             app:destination="@id/friendsListFragment" />
@@ -203,16 +184,6 @@
         <action
             android:id="@+id/actionShowEpisodetoFriendsListFragment"
             app:destination="@id/friendsListFragment" />
-        <argument
-            android:name="title"
-            app:argType="string" />
-        <argument
-            android:name="seasonNumber"
-            app:argType="string" />
-        <argument
-            android:name="episodeNumber"
-            app:argType="string" />
-
     </fragment>
 
     <fragment
@@ -324,10 +295,6 @@
         <deepLink
             android:id="@+id/deepLinkShowMediaOfFriendFragment"
             app:uri="android-app://com.hfad.liked/ShowMediaOfFriendFragment" />
-        <argument
-            android:name="friendEmail"
-            android:defaultValue="1"
-            app:argType="string" />
         <action
             android:id="@+id/action_showMediaOfFriend_to_FriendsListFragment"
             app:destination="@id/friendsListFragment" />
@@ -363,9 +330,6 @@
                 android:defaultValue="1"
                 app:argType="string" />
         </action>
-
     </fragment>
-
-
 </navigation>
 

@@ -43,7 +43,7 @@ class ShowEpisodesFragment : BaseFragment(R.layout.fragment_show_episodes) {
                         binding.episodesContainer.removeAllViews()
                         for (episode in 1..episodesInfo.episodes.size) {
                             val button = Button(requireContext()).apply {
-                                text = "${getString(R.string.txt_episode_preffix)} $episode"
+                                text = getString(R.string.txt_episode_preffix, episode)
                                 setOnClickListener {
                                     (activity as com.hfad.navigation.Navigator).navigateShowEpisodesToShowEpisode(
                                         episodesInfo.title,

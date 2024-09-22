@@ -1,3 +1,12 @@
 <resources>
     <string name="show_episodes">Show seasons</string>
+    <string name="tv_title_title">Title:</string>
+    <string name="tv_title_imdb_rating">IMDB rating:</string>
+    <string name="tv_title_year">Year:</string>
+    <string name="tv_title_director">Director:</string>
+    <string name="tv_title_actors">Actors:</string>
+    <string name="tv_title_plot">Plot:</string>
+    <string name="tv_title_awards">Awards:</string>
+    <string name="tv_title_genre">Genre:</string>
+    <string name="tv_title_title_of_item">Title</string>
 </resources>

@@ -9,7 +9,7 @@
         android:id="@+id/tvTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Title"
+        android:text="@string/tv_title_title_of_item"
         android:textStyle="bold"
         android:layout_marginEnd="4dp"/>
 

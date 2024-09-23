@@ -73,7 +73,7 @@ class LikedFragment : BaseFragment(R.layout.fragment_liked) {
             if (FirebaseAuth.getInstance().currentUser == null) {
                 (activity as com.hfad.navigation.Navigator).navigateLikedToLogin()
             } else {
-                viewModel.fetchFavouritesFromCloud(onSucces = { jsonData ->
+                viewModel.fetchFavouritesFromCloud(onSuccess = { jsonData ->
                     if (jsonData.isNotEmpty()) {
                         if (viewModel.doesUserAgreeToReplaceFromCloud) {
                             viewLifecycleOwner.lifecycleScope.launch {

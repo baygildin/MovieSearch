@@ -92,7 +92,6 @@ class MediaDetailsFragment : BaseFragment(R.layout.fragment_media_details) {
         }
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.isFavourite.collect{ it ->
-                Log.d("MediaDetailsFragment", "isFavourite:ssssss $it")
                 binding.likeButtonHeart.setImageResource(
                     if (it) R.drawable.heart_red_in_circle
                     else R.drawable.heart_black

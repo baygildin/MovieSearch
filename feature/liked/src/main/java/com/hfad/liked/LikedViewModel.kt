@@ -47,11 +47,11 @@ class LikedViewModel @Inject constructor(
 
             },
             onFailure = {
-                Log.d("s", "ddd")
+                Log.d("Network", "LikedViewModel")
             })
     }
 
-    fun fetchFavouritesFromCloud(onSucces: (String) -> Unit, onFailure: (Exception) -> Unit) {
-        firebaseRepository.fetchFavouritesFromCloud(onSucces, onFailure)
+    fun fetchFavouritesFromCloud(onSuccess: (String) -> Unit, onFailure: (Exception) -> Unit) {
+        firebaseRepository.fetchFavouritesFromCloud(onSuccess, onFailure)
     }
 }

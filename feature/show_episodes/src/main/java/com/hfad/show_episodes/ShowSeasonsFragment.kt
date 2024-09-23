@@ -47,7 +47,6 @@ class ShowSeasonsFragment : BaseFragment(R.layout.fragment_show_seasons) {
                                     )
                                 }
                             }
-                            Log.d("nowornever", "showEpisodes ${seasons.title}")
                             val layoutParams = ViewGroup.MarginLayoutParams(
                                 ViewGroup.LayoutParams.MATCH_PARENT,
                                 ViewGroup.LayoutParams.WRAP_CONTENT

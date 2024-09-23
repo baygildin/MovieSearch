@@ -1,12 +1,12 @@
 <resources>
     <string name="show_episodes">Показать сезоны</string>
-    <string name="tv_title_title">Название:</string>
-    <string name="tv_title_imdb_rating">Рейтинг IMDB:</string>
-    <string name="tv_title_year">Год:</string>
-    <string name="tv_title_director">Режиссер:</string>
-    <string name="tv_title_actors">Актеры:</string>
-    <string name="tv_title_plot">Сюжет:</string>
-    <string name="tv_title_awards">Награды:</string>
-    <string name="tv_title_genre">Жанр:</string>
+    <string name="tv_title_title">Название:\u00A0</string>
+    <string name="tv_title_imdb_rating">Рейтинг IMDB:\u00A0</string>
+    <string name="tv_title_year">Год:\u00A0</string>
+    <string name="tv_title_director">Режиссер:\u00A0</string>
+    <string name="tv_title_actors">Актеры:\u00A0</string>
+    <string name="tv_title_plot">Сюжет:\u00A0</string>
+    <string name="tv_title_awards">Награды:\u00A0</string>
+    <string name="tv_title_genre">Жанр:\u00A0</string>
     <string name="tv_title_title_of_item">Title</string>
 </resources>

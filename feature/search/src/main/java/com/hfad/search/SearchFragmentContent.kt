@@ -73,18 +73,27 @@ fun SearchFragmentContent(searchViewModel: SearchViewModel, navigateToDetails: (
             TextField(
                 value = query.value,
                 onValueChange = { newQuery ->
-                    if (newQuery.matches(Regex("^[a-zA-Z0-9 ':!?&.-]*$"))) {
-                        query.value = newQuery
-                        searchJob?.cancel()
-                        searchJob = coroutineScope.launch {
-                            delay(700)
-                            searchViewModel.searchMediaWithTitle(newQuery)
-                        }
-                    } else {
-                        showToast(context, context.getString(R.string.toast_only_eng_chars))
+                    query.value = newQuery
+                    searchJob?.cancel()
+                    searchJob = coroutineScope.launch {
+                        delay(700)
+                        searchViewModel.searchMediaWithTitle(newQuery)
                     }
-
                 },
+//                value = query.value,
+//                onValueChange = { newQuery ->
+//                    if (newQuery.matches(Regex("^[a-zA-Z0-9 ':!?&.-]*$"))) {
+//                        query.value = newQuery
+//                        searchJob?.cancel()
+//                        searchJob = coroutineScope.launch {
+//                            delay(700)
+//                            searchViewModel.searchMediaWithTitle(newQuery)
+//                        }
+//                    } else {
+//                        showToast(context, context.getString(R.string.toast_only_eng_chars))
+//                    }
+//
+//                },
                 placeholder = {
                     Text(
                         stringResource(id = R.string.message_hint),

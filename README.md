@@ -52,22 +52,22 @@
 ### Screenshots
 
 - **Search Window (Compose)**  
-  ![Search Window (Compose)](assets/1.png)
+  ![Search Window (Compose)](assets/1.jpg)
 
 - **Movie Information**  
-  ![Movie Information](assets/2.png)
+  ![Movie Information](assets/2.jpg)
 
 - **TV Show Information**  
-  ![TV Show Information](assets/3.png)
+  ![TV Show Information](assets/3.jpg)
 
 - **TV Show Seasons**  
-  ![TV Show Seasons](assets/4.png)
+  ![TV Show Seasons](assets/4.jpg)
 
 - **Friend List Management Page**  
-  ![Friend List Management Page](assets/5.png)
+  ![Friend List Management Page](assets/5.jpg)
 
 - **Ability to Share Movie Information with a Friend via Messengers**  
-  ![Share Movie Information](assets/6.png)
+  ![Share Movie Information](assets/6.jpg)
 
 ---
 
@@ -76,19 +76,19 @@
 ### Скриншоты
 
 - **Окно поиска (Compose)**  
-  ![Окно поиска (Compose)](assets/1.png)
+  ![Окно поиска (Compose)](assets/1.jpg)
 
 - **Информация о фильме**  
-  ![Информация о фильме](assets/2.png)
+  ![Информация о фильме](assets/2.jpg)
 
 - **Информация о сериале**  
-  ![Информация о сериале](assets/3.png)
+  ![Информация о сериале](assets/3.jpg)
 
 - **Сезоны сериала**  
-  ![Сезоны сериала](assets/4.png)
+  ![Сезоны сериала](assets/4.jpg)
 
 - **Страница управления списком друзей**  
-  ![Страница управления списком друзей](assets/5.png)
+  ![Страница управления списком друзей](assets/5.jpg)
 
 - **Возможность отправки информации о фильме другу через Мессенджеры**  
-  ![Возможность отправки информации о фильме другу через Мессенджеры](assets/6.png)
+  ![Возможность отправки информации о фильме другу через Мессенджеры](assets/6.jpg)

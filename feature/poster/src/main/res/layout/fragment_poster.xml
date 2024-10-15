@@ -20,4 +20,3 @@ android:layout_height="match_parent"
         app:zoomage_translatable="true"
         app:zoomage_zoomable="true" />
 </RelativeLayout>
-<!--    android:src="@drawable/logo"-->

@@ -26,7 +26,6 @@ class MediaDetailsViewModel @Inject constructor(
     private val _isFavourite = MutableStateFlow(false)
     val isFavourite: StateFlow<Boolean> get() = _isFavourite
 
-
     fun fetchMediaDetails(mediaId: String) {
         viewModelScope.launch {
             flow {
@@ -43,7 +42,8 @@ class MediaDetailsViewModel @Inject constructor(
                 }
         }
     }
-    private suspend fun checkIsMediaFavorite(mediaId: String): Boolean{
+
+    private suspend fun checkIsMediaFavorite(mediaId: String): Boolean {
         return dbRepository.checkIsMediaFavorite(mediaId)
 
     }
@@ -52,7 +52,6 @@ class MediaDetailsViewModel @Inject constructor(
         viewModelScope.launch {
 
             _isFavourite.value = dbRepository.makeItFavorite(mediaId, title, year, dateadded)
-
         }
     }
 }

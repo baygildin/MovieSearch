@@ -70,30 +70,28 @@ class ShowEpisodeFragment : BaseFragment(R.layout.fragment_show_episode) {
                     onFailure = { error ->
                         shimmerFrameLayout.stopShimmer()
                         shimmerFrameLayout.visibility = View.GONE
-                        Log.e("ShowEpisodeFragment", "Error fetching episode", error)
-
                     }
                 )
             }
         }
 
 
-            val seasonNumber = args.seasonNumber
-            val episodeNumber = args.episodeNumber
+        val seasonNumber = args.seasonNumber
+        val episodeNumber = args.episodeNumber
 
-            if (seasonNumber != null && episodeNumber != null) {
-                viewModel.fetchEpisode(args.title, seasonNumber, episodeNumber)
-            } else {
-                Log.e(
-                    "ShowEpisodeFragment",
-                    "Invalid season or episode number: ${args.seasonNumber}, ${args.episodeNumber}"
-                )
-            }
-        }
-
-        override fun onDestroyView() {
-            super.onDestroyView()
-            _binding = null
+        if (seasonNumber != null && episodeNumber != null) {
+            viewModel.fetchEpisode(args.title, seasonNumber, episodeNumber)
+        } else {
+            Log.e(
+                "ShowEpisodeFragment",
+                "Invalid season or episode number: ${args.seasonNumber}, ${args.episodeNumber}"
+            )
         }
     }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+}
 

@@ -52,7 +52,7 @@ dependencies {
     kapt "androidx.room:room-compiler:2.6.1"
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
-    implementation project(":network")
+    implementation project(':data')
     implementation project(":navigation")
     implementation project(":core")
     def nav_version = "2.7.7"
@@ -62,5 +62,9 @@ dependencies {
     implementation "com.google.dagger:hilt-android:$hilt_version"
     kapt "com.google.dagger:hilt-compiler:$hilt_version"
     implementation 'com.facebook.shimmer:shimmer:0.5.0'
+    implementation platform('com.google.firebase:firebase-bom:33.1.1')
+    implementation 'com.google.firebase:firebase-database'
+    implementation 'com.google.firebase:firebase-auth-ktx'
+
 }
 apply plugin: 'androidx.navigation.safeargs.kotlin'

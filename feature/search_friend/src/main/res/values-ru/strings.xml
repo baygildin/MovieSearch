@@ -1,0 +1,19 @@
+<resources>
+    <string name="txt_liked">Мои избранные медиа</string>
+    <string name="toast_sorted_by_date">Сортировка по дате добавления</string>
+    <string name="toast_sorted_by_title">Сортировка по названию</string>
+    <string name="toast_agree_to_send_to_cloud">Нажмите кнопку еще раз, если вы согласны заменить эти любимые медиафайлы в облаке?</string>
+    <string name="toast_agry_to_replace_from_cloud">Согласны ли вы заменить список любимых медиафайлов из облака? Если вы согласны, нажмите кнопку еще раз</string>
+    <string name="toast_sent_to_cloud">Данные отправлены в облако</string>
+    <string name="toast_empty_edit_text_value">Пожалуйста, введите адрес электронной почты вашего друга</string>
+    <string name="friend_found_with_email">Друг найден по электронной почте:\u00A0</string>
+    <string name="no_user_found_with_email">Пользователь с такой электронной почтой не найден:\u00A0</string>
+    <string name="cannot_add_yourself">Вы не можете добавить себя в друзья</string>
+    <string name="friend_request_already_sent">Запрос на добавление в друзья уже был отправлен:\u00A0</string>
+    <string name="friend_request_sent">Запрос на добавление в друзья отправлен:\u00A0</string>
+    <string name="failed_to_send_friend_request">Не удалось отправить запрос на добавление в друзья</string>
+    <string name="hint_enter_email">Введите email друга</string>
+    <string name="search_friend_button">Поиск друга</string>
+    <string name="send_connection_request_button">Отправить запрос на добавление в друзья</string>
+    <string name="tv_hello">привет</string>
+</resources>

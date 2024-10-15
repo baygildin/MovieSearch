@@ -1,9 +1,9 @@
 package com.hfad.search
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.hfad.search.model.SearchByTitle
+import com.hfad.search.network.OmdbApi
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -28,7 +28,6 @@ class SearchViewModel @Inject constructor(
             }
                 .catch { e ->
                     emit(Result.failure(e))
-                    Log.d("myerror42", "searchMediaWithTitle error", e)
                 }
                 .collect { result ->
                     _searchResults.value = result

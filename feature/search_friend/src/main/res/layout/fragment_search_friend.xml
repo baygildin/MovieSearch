@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:background="@color/background_color"
+    tools:context=".SearchFriendFragment">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp"
+        app:popupTheme="@style/AppTheme.PopupOverlay"
+        style="@style/ToolbarStyle"/>
+
+    <EditText
+        android:id="@+id/searchFriendEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:paddingTop="40dp"
+        android:hint="@string/hint_enter_email"
+        android:textColorHint="@color/main_text_color"
+        android:textColor="@color/main_text_color"
+        android:inputType="textEmailAddress" />
+
+    <Button
+        android:id="@+id/searchFriendButton"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_height="wrap_content"
+        android:textColor="@color/main_text_color"
+        android:background="@drawable/button_border"
+        android:text="@string/search_friend_button"/>
+
+    <TextView
+        android:id="@+id/friendInfoTextView"
+        android:layout_marginTop="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/main_text_color"/>
+
+    <Button
+        android:id="@+id/connectFriendButton"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_height="wrap_content"
+        android:textColor="@color/main_text_color"
+        android:background="@drawable/button_border"
+        android:text="@string/send_connection_request_button"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/tv_friendsFavouriteMediaList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/tv_hello"
+        android:textColor="@color/main_text_color"/>
+</LinearLayout>

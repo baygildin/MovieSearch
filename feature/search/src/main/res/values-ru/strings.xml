@@ -7,5 +7,6 @@
     <string name="message_hint">Введите название</string>
     <string name="poster_to_maxSize">Увеличить постер на весь экран</string>
     <string name="btn_episodes_list">Посмотреть список серий</string>
+    <string name="toast_only_eng_chars">Пожалуйста, вводите только английские символы</string>
 
 </resources>

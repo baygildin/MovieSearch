@@ -1,4 +1,10 @@
 <resources>
     <string name="txt_season_preffix">Season</string>
-    <string name="txt_episode_preffix">Episode</string>
+    <string name="txt_episode_preffix">Episode %1$d</string>
+    <string name="tv_title_title">Title:\u00A0</string>
+    <string name="tv_title_imdb_rating">IMDB rating:\u00A0</string>
+    <string name="tv_title_year">Year:\u00A0</string>
+    <string name="tv_title_director">Director:\u00A0</string>
+    <string name="tv_title_actors">Actors:\u00A0</string>
+    <string name="tv_title_plot">Plot:\u00A0</string>
 </resources>

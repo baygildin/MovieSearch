@@ -6,4 +6,9 @@
         android:icon="@drawable/baseline_bookmark_24"
         android:orderInCategory="100"
         app:showAsAction="always"/>
+    <item
+        android:id="@+id/action_friends"
+        android:icon="@drawable/outline_groups_24"
+        android:orderInCategory="100"
+        app:showAsAction="always"/>
 </menu>

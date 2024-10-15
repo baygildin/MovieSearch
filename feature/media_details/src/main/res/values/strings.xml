@@ -1,4 +1,12 @@
 <resources>
-    <string name="welcome_text">Movie Search</string>
     <string name="show_episodes">Show seasons</string>
+    <string name="tv_title_title">Title:\u00A0</string>
+    <string name="tv_title_imdb_rating">IMDB rating:\u00A0</string>
+    <string name="tv_title_year">Year:\u00A0</string>
+    <string name="tv_title_director">Director:\u00A0</string>
+    <string name="tv_title_actors">Actors:\u00A0</string>
+    <string name="tv_title_plot">Plot:\u00A0</string>
+    <string name="tv_title_awards">Awards:\u00A0</string>
+    <string name="tv_title_genre">Genre:\u00A0</string>
+    <string name="tv_title_title_of_item">Title</string>
 </resources>

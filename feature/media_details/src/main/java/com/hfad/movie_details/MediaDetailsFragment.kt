@@ -100,6 +100,7 @@ class MediaDetailsFragment : BaseFragment(R.layout.fragment_media_details) {
             val text =
                 "${binding.tvMediaInfoBodyTitle.text} ${binding.tvMediaInfoBodyYear.text}\n${binding.tvMediaInfoBodyPlot.text}"
             val imageUrl = poster
+
             Glide.with(requireContext())
                 .asBitmap()
                 .load(imageUrl)
@@ -162,4 +163,6 @@ class MediaDetailsFragment : BaseFragment(R.layout.fragment_media_details) {
         super.onDestroyView()
         _binding = null
     }
+
+
 }

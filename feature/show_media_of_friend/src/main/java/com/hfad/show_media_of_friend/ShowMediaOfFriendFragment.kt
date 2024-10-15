@@ -1,7 +1,6 @@
 package com.hfad.show_media_of_friend
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,13 +12,13 @@ import com.hfad.core.BaseFragment
 import com.hfad.show_media_of_friend.databinding.FragmentShowMediaOfFriendBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+
 @AndroidEntryPoint
 class ShowMediaOfFriendFragment : BaseFragment(R.layout.fragment_show_media_of_friend) {
     private var _binding: FragmentShowMediaOfFriendBinding? = null
     private val binding get() = _binding!!
     private val viewModel: ShowMediaOfFriendViewModel by viewModels()
     private val args: ShowMediaOfFriendFragmentArgs by navArgs()
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,7 +39,6 @@ class ShowMediaOfFriendFragment : BaseFragment(R.layout.fragment_show_media_of_f
         binding.recyclerView.adapter = adapter
         binding.recyclerView.layoutManager = LinearLayoutManager(context)
         viewLifecycleOwner.lifecycleScope.launch {
-            Log.d("28.02.24", "${args.userId}")
             viewModel.fetchMediaOfFriend(args.userId)
             viewModel.favouriteItems.collect { items ->
                 adapter.updateItems(items)

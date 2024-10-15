@@ -34,7 +34,5 @@
                 android:orientation="vertical"
                 android:visibility="visible"/>
         </LinearLayout>
-
     </ScrollView>
-
 </LinearLayout>

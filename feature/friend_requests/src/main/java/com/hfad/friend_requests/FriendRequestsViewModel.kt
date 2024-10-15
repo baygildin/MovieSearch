@@ -29,7 +29,8 @@ class FriendRequestsViewModel @Inject constructor(
     val operationStatus: SharedFlow<String> get() = _operationStatus
 
     fun loadFriendRequests(userKey: String) {
-        val requestedFriendsRef = firebaseRepository.usersRef.child(userKey).child("friends").child("requested")
+        val requestedFriendsRef =
+            firebaseRepository.usersRef.child(userKey).child("friends").child("requested")
 
         requestedFriendsRef.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -59,20 +60,25 @@ class FriendRequestsViewModel @Inject constructor(
             }
         })
     }
+
     fun rejectFriend(userKey: String, friendId: String) {
         val userRef = firebaseRepository.usersRef.child(userKey).child("friends")
         val friendRef = firebaseRepository.usersRef.child(friendId).child("friends")
         userRef.child("requested").child(friendId).removeValue().addOnCompleteListener { task ->
             if (task.isSuccessful) {
                 _friendRequests.value = _friendRequests.value.filterNot { it.id == friendId }
-                friendRef.child("approved").child(userKey).removeValue().addOnCompleteListener { task2 ->
-                    if (task2.isSuccessful) {
-                        Log.d("FriendRequest", "Request rejected successfully")
+                friendRef.child("approved").child(userKey).removeValue()
+                    .addOnCompleteListener { task2 ->
+                        if (task2.isSuccessful) {
+                            Log.d("FriendRequest", "Request rejected successfully")
 
-                    } else {
-                        Log.e("FriendRequest", "Error rejecting request: ${task2.exception?.message}")
+                        } else {
+                            Log.e(
+                                "FriendRequest",
+                                "Error rejecting request: ${task2.exception?.message}"
+                            )
+                        }
                     }
-                }
             } else {
                 Log.e("FriendRequest", "Error rejecting request: ${task.exception?.message}")
             }
@@ -86,7 +92,8 @@ class FriendRequestsViewModel @Inject constructor(
                 userRef.child("approved").child(friendId).setValue(true)
                     .addOnCompleteListener { approvalTask ->
                         if (approvalTask.isSuccessful) {
-                            _friendRequests.value = _friendRequests.value.filterNot { it.id == friendId }
+                            _friendRequests.value =
+                                _friendRequests.value.filterNot { it.id == friendId }
                             viewModelScope.launch {
                                 _operationStatus.emit("Friend request approved successfully")
                             }

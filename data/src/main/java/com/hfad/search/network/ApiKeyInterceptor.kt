@@ -4,7 +4,7 @@ import okhttp3.HttpUrl
 import okhttp3.Interceptor
 import okhttp3.Response
 
-const val API_KEY = "60b041be" // "360c2147" apikey of P
+const val API_KEY = "60b041be"
 
 class ApiKeyInterceptor : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {

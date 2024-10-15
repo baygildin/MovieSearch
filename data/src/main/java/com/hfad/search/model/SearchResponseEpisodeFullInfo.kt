@@ -1,6 +1,7 @@
 package com.hfad.search.model
 
 import com.google.gson.annotations.SerializedName
+
 data class SearchResponseEpisodeFullInfo(
     @SerializedName("Title")
     val title: String?,

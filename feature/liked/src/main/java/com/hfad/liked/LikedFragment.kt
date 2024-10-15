@@ -22,7 +22,6 @@ class LikedFragment : BaseFragment(R.layout.fragment_liked) {
     private val binding get() = _binding!!
     private var isSortedByDate = false
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -33,7 +32,6 @@ class LikedFragment : BaseFragment(R.layout.fragment_liked) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
 
         val adapter = LikedMediaAdapter(emptyList()) { item ->
             val id = item.imdbId
@@ -128,6 +126,7 @@ class LikedFragment : BaseFragment(R.layout.fragment_liked) {
             }
         }
     }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

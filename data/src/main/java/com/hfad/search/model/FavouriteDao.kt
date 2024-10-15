@@ -15,6 +15,7 @@ interface FavouriteDao {
 
     @Delete
     suspend fun removeFavourite(item: FavouriteItem)
+
     @Update
     suspend fun updateFavourite(item: FavouriteItem)
 
@@ -23,7 +24,6 @@ interface FavouriteDao {
 
     @Query("SELECT * FROM favourites WHERE imdbId = :imdbId")
     suspend fun getFavouriteByImdbId(imdbId: String): FavouriteItem
-
 
     @Query("DELETE FROM favourites")
     suspend fun clearFavourites()

@@ -26,7 +26,7 @@ class ShowSeasonsViewModel @Inject constructor(
                     val result = repository.getSeasonsByIdAndSeasons(id)
                     emit(Result.success(result))
                 } catch (e: Exception) {
-                    emit(Result.failure < SearchResponseBySeason>(e))
+                    emit(Result.failure<SearchResponseBySeason>(e))
                 }
             }
                 .collect { result ->

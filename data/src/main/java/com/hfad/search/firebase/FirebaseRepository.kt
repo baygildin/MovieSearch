@@ -24,11 +24,9 @@ class FirebaseRepository @Inject constructor() {
     val uidsRef = database.getReference("emailToUid")
     private val userKey = auth.currentUser?.uid ?: ""
 
-
     companion object {
         private const val TAG = "FirebaseRepository"
     }
-
 
     fun saveFavouritesToCloud(
         favouritesJson: String, onSuccess: () -> Unit, onFailure: (Exception) -> Unit
@@ -83,7 +81,6 @@ class FirebaseRepository @Inject constructor() {
         usersRef.child(uid).child("email").setValue(email.lowercase())
     }
 
-
     fun saveEmailToUidMapping(email: String, uid: String) {
         val emailKey = encodeEmail(email)
         uidsRef.child(emailKey).addListenerForSingleValueEvent(object : ValueEventListener {
@@ -120,7 +117,8 @@ class FirebaseRepository @Inject constructor() {
     fun getCurrentUser(): FirebaseUser? {
         return auth.currentUser
     }
-    fun signOut(){
+
+    fun signOut() {
         auth.signOut()
     }
 
@@ -167,6 +165,7 @@ class FirebaseRepository @Inject constructor() {
                 }
             }
     }
+
     fun resetPassword(email: String, onSuccess: () -> Unit, onFailure: (String) -> Unit) {
         FirebaseAuth.getInstance().sendPasswordResetEmail(email)
             .addOnCompleteListener { task ->

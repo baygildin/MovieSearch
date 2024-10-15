@@ -1,6 +1,5 @@
 package com.hfad.search
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.hfad.search.model.SearchByTitle
@@ -29,7 +28,6 @@ class SearchViewModel @Inject constructor(
             }
                 .catch { e ->
                     emit(Result.failure(e))
-                    Log.d("myerror42", "searchMediaWithTitle error", e)
                 }
                 .collect { result ->
                     _searchResults.value = result

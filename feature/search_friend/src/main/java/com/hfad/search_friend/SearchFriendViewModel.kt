@@ -14,11 +14,10 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import javax.inject.Inject
 
-
 @HiltViewModel
 class SearchFriendViewModel @Inject constructor(
     private val firebaseRepository: FirebaseRepository
-): ViewModel() {
+) : ViewModel() {
     var friendEmail = MutableStateFlow<String>("")
     private val _friendInfo = MutableStateFlow<viewmodelInfoMessage>(viewmodelInfoMessage("", ""))
     val friendInfo: StateFlow<viewmodelInfoMessage> get() = _friendInfo
@@ -41,7 +40,6 @@ class SearchFriendViewModel @Inject constructor(
         const val FRIEND_REQUEST_ALREADY_SENT = "friend_request_already_sent"
         const val FAILED_TO_SEND_FRIEND_REQUEST = "failed_to_send_friend_request"
     }
-
 
     fun searchFriend() {
         val email = friendEmail.value
@@ -76,27 +74,32 @@ class SearchFriendViewModel @Inject constructor(
             return
         }
 
-        firebaseRepository.usersRef.child(friendUid).child("friends").child("requested").child(userKey)
+        firebaseRepository.usersRef.child(friendUid).child("friends").child("requested")
+            .child(userKey)
             .addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     if (snapshot.exists()) {
-                        _friendInfo.value = viewmodelInfoMessage(FRIEND_REQUEST_ALREADY_SENT, friendEmail.value)
+                        _friendInfo.value =
+                            viewmodelInfoMessage(FRIEND_REQUEST_ALREADY_SENT, friendEmail.value)
                     } else {
-                        firebaseRepository.usersRef.child(friendUid).child("friends").child("requested").child(userKey)
+                        firebaseRepository.usersRef.child(friendUid).child("friends")
+                            .child("requested").child(userKey)
                             .setValue(true).addOnCompleteListener { task ->
                                 if (task.isSuccessful) {
-                                    firebaseRepository.usersRef.child(userKey).child("friends").child("approved")
+                                    firebaseRepository.usersRef.child(userKey).child("friends")
+                                        .child("approved")
                                         .child(friendUid).setValue(true)
-                                    _friendInfo.value = viewmodelInfoMessage(FRIEND_REQUEST_SENT, friendEmail.value)
+                                    _friendInfo.value =
+                                        viewmodelInfoMessage(FRIEND_REQUEST_SENT, friendEmail.value)
                                     isFriendAdded = true
                                 } else {
-                                    _friendInfo.value = viewmodelInfoMessage(FAILED_TO_SEND_FRIEND_REQUEST, "")
+                                    _friendInfo.value =
+                                        viewmodelInfoMessage(FAILED_TO_SEND_FRIEND_REQUEST, "")
                                     isFriendAdded = false
                                 }
                             }
                     }
                 }
-
                 override fun onCancelled(error: DatabaseError) {
                     Log.e("SearchFriend", "Database error: $error")
                 }

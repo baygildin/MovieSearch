@@ -13,21 +13,18 @@ interface OmdbApi {
     @GET("/")
     suspend fun searchOnlyOneByTitle(@Query("t") title: String): ExtendedSearchResponseByTitle
 
-
-
     @GET("/")
     suspend fun searchByTitle(@Query("s") searchText: String): SearchByTitle
 
-
     @GET("/")
     suspend fun searchById(@Query("i") movieId: String): SearchResponseById
+
     @GET("/")
     suspend fun searchByEpisode(
         @Query("t") title: String,
         @Query("Season") seasonNumber: String,
-        @Query("Episode")episodeNumber: String
+        @Query("Episode") episodeNumber: String
     ): SearchResponseEpisodeFullInfo
-
 
     @GET("/")
     suspend fun searchBySeason(

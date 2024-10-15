@@ -1,7 +1,5 @@
 package com.hfad.search
 
-import android.content.Context
-import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -26,7 +24,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
@@ -44,7 +41,6 @@ fun SearchFragmentContent(searchViewModel: SearchViewModel, navigateToDetails: (
     val searchResults = searchViewModel.searchResults.collectAsState().value
     var searchJob by remember { mutableStateOf<Job?>(null) }
     val coroutineScope = rememberCoroutineScope()
-    val context = LocalContext.current
 
     MaterialTheme(
         colors = MaterialTheme.colors.copy(
@@ -80,20 +76,6 @@ fun SearchFragmentContent(searchViewModel: SearchViewModel, navigateToDetails: (
                         searchViewModel.searchMediaWithTitle(newQuery)
                     }
                 },
-//                value = query.value,
-//                onValueChange = { newQuery ->
-//                    if (newQuery.matches(Regex("^[a-zA-Z0-9 ':!?&.-]*$"))) {
-//                        query.value = newQuery
-//                        searchJob?.cancel()
-//                        searchJob = coroutineScope.launch {
-//                            delay(700)
-//                            searchViewModel.searchMediaWithTitle(newQuery)
-//                        }
-//                    } else {
-//                        showToast(context, context.getString(R.string.toast_only_eng_chars))
-//                    }
-//
-//                },
                 placeholder = {
                     Text(
                         stringResource(id = R.string.message_hint),
@@ -135,8 +117,4 @@ fun SearchFragmentContent(searchViewModel: SearchViewModel, navigateToDetails: (
         }
 
     }
-}
-
-fun showToast(context: Context, message: String) {
-    Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
 }

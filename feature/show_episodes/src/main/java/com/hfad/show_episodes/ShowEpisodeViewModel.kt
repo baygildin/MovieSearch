@@ -1,6 +1,5 @@
 package com.hfad.show_episodes
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.hfad.search.model.SearchResponseEpisodeFullInfo

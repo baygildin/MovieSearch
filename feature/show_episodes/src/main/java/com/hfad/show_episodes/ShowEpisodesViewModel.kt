@@ -1,6 +1,5 @@
 package com.hfad.show_episodes
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.hfad.search.model.SearchResponseBySeason
@@ -27,7 +26,6 @@ class ShowEpisodesViewModel @Inject constructor(
                     emit(Result.success(result))
                 } catch (e: Exception) {
                     emit(Result.failure<SearchResponseBySeason>(e))
-                    Log.e("MyError42", "$e in catch in fetchEpisode in showepisodeVM")
                 }
             }
                 .collect { result ->

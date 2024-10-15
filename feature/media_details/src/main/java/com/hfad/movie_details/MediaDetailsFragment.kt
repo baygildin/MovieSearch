@@ -39,14 +39,12 @@ class MediaDetailsFragment : BaseFragment(R.layout.fragment_media_details) {
     ): View? {
         _binding = FragmentMediaDetailsBinding.inflate(inflater, container, false)
         val view = binding.root
-
         val shimmerFrameLayout = binding.shimmerFrame
         val realContent = binding.realContent
         val chosenMovieId = args.id
         var poster = ""
         viewModel.fetchMediaDetails(chosenMovieId)
         shimmerFrameLayout.startShimmer()
-
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.mediaDetails.collect { result ->
                 result?.fold(
@@ -84,14 +82,14 @@ class MediaDetailsFragment : BaseFragment(R.layout.fragment_media_details) {
                             View.VISIBLE
                     },
                     onFailure = {
-                        Log.e("MyError42", "$it in viewModel.mediaDetails.collect")
+                        Log.e("MediaDetailsFragment", "$it in viewModel.mediaDetails.collect")
 
                     }
                 )
             }
         }
         viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.isFavourite.collect{ it ->
+            viewModel.isFavourite.collect { it ->
                 binding.likeButtonHeart.setImageResource(
                     if (it) R.drawable.heart_red_in_circle
                     else R.drawable.heart_black
@@ -99,13 +97,17 @@ class MediaDetailsFragment : BaseFragment(R.layout.fragment_media_details) {
             }
         }
         binding.btnShareMedia.setOnClickListener {
-            val text = "${binding.tvMediaInfoBodyTitle.text} ${binding.tvMediaInfoBodyYear.text}\n${binding.tvMediaInfoBodyPlot.text}"
+            val text =
+                "${binding.tvMediaInfoBodyTitle.text} ${binding.tvMediaInfoBodyYear.text}\n${binding.tvMediaInfoBodyPlot.text}"
             val imageUrl = poster
             Glide.with(requireContext())
                 .asBitmap()
                 .load(imageUrl)
                 .into(object : CustomTarget<Bitmap>() {
-                    override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
+                    override fun onResourceReady(
+                        resource: Bitmap,
+                        transition: Transition<in Bitmap>?
+                    ) {
                         val imagePath = MediaStore.Images.Media.insertImage(
                             requireContext().contentResolver, resource, "Title", null
                         )
@@ -118,11 +120,8 @@ class MediaDetailsFragment : BaseFragment(R.layout.fragment_media_details) {
                             putExtra(Intent.EXTRA_STREAM, imageUri)
                             addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
                         }
-
-                        Log.d("ShareIntent", "Text: $text\nImage URL: $imageUrl")
                         startActivity(Intent.createChooser(shareIntent, "Share via"))
                     }
-
                     override fun onLoadCleared(placeholder: Drawable?) {
                     }
                 })
@@ -139,7 +138,7 @@ class MediaDetailsFragment : BaseFragment(R.layout.fragment_media_details) {
                 chosenMovieId
             )
         }
-        binding.likeButtonHeart.setOnClickListener{
+        binding.likeButtonHeart.setOnClickListener {
             viewLifecycleOwner.lifecycleScope.launch {
                 viewModel.mediaDetails.collect { result ->
                     result?.onSuccess {
@@ -158,6 +157,7 @@ class MediaDetailsFragment : BaseFragment(R.layout.fragment_media_details) {
         }
         return view
     }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

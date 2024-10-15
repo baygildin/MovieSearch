@@ -8,7 +8,6 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.navArgs
 import com.hfad.search.databinding.FragmentSearchBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -16,9 +15,9 @@ import dagger.hilt.android.AndroidEntryPoint
 class SearchFragment : Fragment() {
     private var _binding: FragmentSearchBinding? = null
     private val binding
-        get() = _binding ?: throw IllegalStateException("Binding in FragmentSearchBinding of SearchFragment must not be null")
+        get() = _binding
+            ?: throw IllegalStateException("Binding in FragmentSearchBinding of SearchFragment must not be null")
     private val searchViewModel: SearchViewModel by viewModels()
-    private val args: SearchFragmentArgs by navArgs<SearchFragmentArgs>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

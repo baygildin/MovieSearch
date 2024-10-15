@@ -17,14 +17,13 @@ class LikedViewModel @Inject constructor(
     private val favouriteDao: FavouriteDao,
     private val firebaseRepository: FirebaseRepository
 ) : ViewModel() {
+
     var doesUserAgreeToReplaceFromCloud = false
     var doesUserAgreeToSendToCloud = false
-
     val favouriteItems: Flow<List<FavouriteItem>> = favouriteDao.getAllFavourites()
         .map { items -> items.sortedByDescending { it.dateAdded } }
     val favouriteItemsByName: Flow<List<FavouriteItem>> = favouriteDao.getAllFavourites()
         .map { items -> items.sortedBy { it.title } }
-
 
     suspend fun getFavouritesJson(): String {
         val favouritesList = favouriteDao.getAllFavourites().first()
@@ -44,7 +43,6 @@ class LikedViewModel @Inject constructor(
     fun saveFavouritesToClouds(jsonData: String) {
         firebaseRepository.saveFavouritesToCloud(jsonData,
             onSuccess = {
-
             },
             onFailure = {
                 Log.d("Network", "LikedViewModel")

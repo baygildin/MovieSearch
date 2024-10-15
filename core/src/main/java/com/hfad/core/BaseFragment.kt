@@ -21,14 +21,11 @@ abstract class BaseFragment(layoutId: Int) : Fragment(layoutId) {
         val toolbar = binding.toolbar
         (activity as AppCompatActivity).setSupportActionBar(toolbar)
         (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.txt_app_title)
-
         toolbar.setNavigationIcon(R.drawable.arrow_back_nav)
         toolbar.setNavigationOnClickListener {
             activity?.onBackPressedDispatcher?.onBackPressed()
         }
         toolbar.setTitleTextColor(ContextCompat.getColor(requireContext(), R.color.c0eacb))
-
-
         setHasOptionsMenu(true)
     }
 
@@ -52,5 +49,4 @@ abstract class BaseFragment(layoutId: Int) : Fragment(layoutId) {
         super.onDestroyView()
         _binding = null
     }
-
 }

@@ -13,9 +13,7 @@ android {
     compileSdk 34
     buildFeatures {
         viewBinding true
-        
     }
-
     defaultConfig {
         applicationId "com.hfad.movie_search"
         minSdk 26
@@ -23,7 +21,6 @@ android {
         versionCode 2
         versionName "1.1"
         vectorDrawables.useSupportLibrary = true
-
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -56,7 +53,6 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.4'
     implementation 'androidx.fragment:fragment-ktx:1.8.2'
     implementation project(':data')
-
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
@@ -70,25 +66,19 @@ dependencies {
     implementation project(":feature:media_details")
     implementation project(":feature:poster")
     implementation project(':feature:liked')
-
     implementation project(':feature:friend_requests')
     implementation project(':feature:friends_list')
     implementation project(':feature:search_friend')
     implementation project(':feature:show_media_of_friend')
-
     implementation project(':core')
     implementation project(":navigation")
     implementation "androidx.lifecycle:lifecycle-runtime:2.6.1"
-
     def nav_version = "2.7.7"
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
-
-
     def hilt_version = "2.48"
     implementation "com.google.dagger:hilt-android:$hilt_version"
     kapt "com.google.dagger:hilt-compiler:$hilt_version"
-
     implementation platform('com.google.firebase:firebase-bom:33.1.1')
     implementation 'com.google.firebase:firebase-database'
     implementation 'com.google.firebase:firebase-auth-ktx'

@@ -21,7 +21,7 @@ import kotlinx.coroutines.launch
 class FriendRequestsFragment : BaseFragment(R.layout.fragment_friend_requests) {
     private val viewModel: FriendRequestsViewModel by viewModels()
     private var _binding: FragmentFriendRequestsBinding? = null
-    private val binding get() =  _binding!!
+    private val binding get() = _binding!!
     private val auth = FirebaseAuth.getInstance()
     internal val userKey = auth.currentUser?.uid ?: ""
 
@@ -44,7 +44,6 @@ class FriendRequestsFragment : BaseFragment(R.layout.fragment_friend_requests) {
             }
         }
 
-
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.operationStatus.collect { statusMessage ->
@@ -53,10 +52,12 @@ class FriendRequestsFragment : BaseFragment(R.layout.fragment_friend_requests) {
             }
         }
     }
+
     override fun onResume() {
         super.onResume()
         viewModel.loadFriendRequests(userKey)
     }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
@@ -65,18 +66,22 @@ class FriendRequestsFragment : BaseFragment(R.layout.fragment_friend_requests) {
     private fun updateFriendRequestsList(friends: List<Friend>) {
         binding.friendRequestsContainer.removeAllViews()
         for (friend in friends) {
-            val itemBinding = ItemFriendRequestBinding.inflate(layoutInflater, binding.friendRequestsContainer, false)
+            val itemBinding = ItemFriendRequestBinding.inflate(
+                layoutInflater,
+                binding.friendRequestsContainer,
+                false
+            )
 
-            itemBinding.tvFriendEmail.text =  friend.email
-            itemBinding.tvFriendEmail.setOnClickListener{
+            itemBinding.tvFriendEmail.text = friend.email
+            itemBinding.tvFriendEmail.setOnClickListener {
                 (activity as com.hfad.navigation.Navigator).navigateFriendRequestToShowMediaOfFriendId(
                     friend.id
                 )
             }
-            itemBinding.btnAddFriend.setOnClickListener{
+            itemBinding.btnAddFriend.setOnClickListener {
                 viewModel.approveFriend(userKey, friend.id)
             }
-            itemBinding.btnRejectFriend.setOnClickListener{
+            itemBinding.btnRejectFriend.setOnClickListener {
                 viewModel.rejectFriend(userKey, friend.id)
             }
             binding.friendRequestsContainer.addView(itemBinding.root)

@@ -49,7 +49,8 @@ class FriendsListViewModel @Inject constructor(
             }
         })
     }
-    fun signOut(){
+
+    fun signOut() {
         firebaseRepository.signOut()
     }
 
@@ -57,20 +58,20 @@ class FriendsListViewModel @Inject constructor(
         firebaseRepository.usersRef.child(userKey).child("friends").child("approved")
             .child(friendKey).removeValue()
             .addOnSuccessListener {
-                Log.d("FriendsList", "Friend deleted successfully")
                 loadFriends()
             }
             .addOnFailureListener {
-                Log.d("FriendsList", "Failed to delete friend: ${it.message}")
             }
         firebaseRepository.usersRef.child(friendKey).child("friends").child("approved")
             .child(userKey).removeValue()
             .addOnSuccessListener {
-                Log.d("FriendsList", "User was deleted from Friend`s friendlist successfully")
                 loadFriends()
             }
             .addOnFailureListener {
-                Log.d("FriendsList", "Failed to delete user from friend`s friendlist: ${it.message}")
+                Log.d(
+                    "FriendsList",
+                    "Failed to delete user from friend`s friendlist: ${it.message}"
+                )
             }
     }
 
@@ -79,12 +80,10 @@ class FriendsListViewModel @Inject constructor(
             .addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     val email = snapshot.getValue(String::class.java) ?: ""
-                    Log.d("FriendsList", "Fetched email for userId $userId: $email")
                     callback(email)
                 }
 
                 override fun onCancelled(error: DatabaseError) {
-                    Log.d("FriendsList", "Database error: $error")
                     callback("")
                 }
             })

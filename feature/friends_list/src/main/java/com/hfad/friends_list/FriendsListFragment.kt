@@ -21,8 +21,6 @@ class FriendsListFragment : BaseFragment(R.layout.fragment_friends_list) {
     private var _binding: FragmentFriendsListBinding? = null
     private val binding get() = _binding!!
 
-
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -60,7 +58,6 @@ class FriendsListFragment : BaseFragment(R.layout.fragment_friends_list) {
         _binding = null
     }
 
-
     private fun updateFriendsList(friends: List<Friend>) {
         binding.approvedFriendsContainer.removeAllViews()
         for (friend in friends) {
@@ -81,8 +78,6 @@ class FriendsListFragment : BaseFragment(R.layout.fragment_friends_list) {
                 )
             }
             binding.approvedFriendsContainer.addView(itemBinding.root)
-
-
         }
     }
 }

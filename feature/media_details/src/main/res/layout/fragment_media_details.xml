@@ -1,23 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:gravity="center_horizontal"
     android:background="@color/background_color"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
     tools:context="com.hfad.media_details.MediaDetailsFragment">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
+        style="@style/ToolbarStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?attr/colorPrimary"
         android:elevation="4dp"
-        app:popupTheme="@style/AppTheme.PopupOverlay"
-        style="@style/ToolbarStyle"/>
+        app:popupTheme="@style/AppTheme.PopupOverlay" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -28,10 +27,11 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
             android:orientation="vertical"
-            android:paddingRight="20dp"
             android:paddingLeft="20dp"
-            android:gravity="center_horizontal">
+            android:paddingRight="20dp">
+
             <com.facebook.shimmer.ShimmerFrameLayout
                 android:id="@+id/shimmer_frame"
                 android:layout_width="match_parent"
@@ -39,11 +39,12 @@
                 android:layout_gravity="center_horizontal"
                 app:shimmer_auto_start="true"
                 app:shimmer_duration="1000">
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:gravity="center_horizontal">
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
 
                     <ImageView
                         android:layout_width="200dp"
@@ -62,26 +63,31 @@
                         android:layout_height="20dp"
                         android:layout_marginTop="16dp"
                         android:background="@color/placeholder" />
+
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="20dp"
                         android:layout_marginTop="16dp"
                         android:background="@color/placeholder" />
+
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="20dp"
                         android:layout_marginTop="16dp"
                         android:background="@color/placeholder" />
+
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="20dp"
                         android:layout_marginTop="16dp"
                         android:background="@color/placeholder" />
+
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="60dp"
                         android:layout_marginTop="16dp"
                         android:background="@color/placeholder" />
+
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="20dp"
@@ -91,13 +97,15 @@
 
                 </LinearLayout>
             </com.facebook.shimmer.ShimmerFrameLayout>
+
             <LinearLayout
                 android:id="@+id/real_content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
                 android:gravity="center_horizontal"
+                android:orientation="vertical"
                 android:visibility="gone">
+
                 <ImageView
                     android:id="@+id/iv_poster"
                     android:layout_width="200dp"
@@ -129,32 +137,33 @@
                         android:layout_width="50dp"
                         android:layout_height="50dp"
                         android:layout_marginEnd="8dp"
-                        android:scaleType="centerInside"
                         android:paddingEnd="20dp"
+                        android:scaleType="centerInside"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintVertical_bias="1.0" />
+
                     <ImageView
                         android:id="@+id/btn_share_media"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
-                        android:src="@drawable/outline_share_24"
                         android:layout_marginEnd="8dp"
                         android:paddingEnd="5dp"
                         android:scaleType="centerInside"
+                        android:src="@drawable/outline_share_24"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintStart_toEndOf="@id/like_button_heart"
+                        app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintVertical_bias="1.0" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:gravity="center_horizontal">
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
@@ -166,9 +175,9 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/tv_title_title"
-                            android:textColor= "@color/main_text_color"
-                            android:textStyle="bold"
+                            android:textColor="@color/main_text_color"
                             android:textSize="20sp"
+                            android:textStyle="bold"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
@@ -193,9 +202,9 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/tv_title_imdb_rating"
-                            android:textColor = "@color/main_text_color"
-                            android:textStyle="bold"
+                            android:textColor="@color/main_text_color"
                             android:textSize="20sp"
+                            android:textStyle="bold"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
@@ -204,7 +213,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text=""
-                            android:textColor = "@color/main_text_color"
+                            android:textColor="@color/main_text_color"
                             android:textSize="20sp"
                             app:layout_constraintStart_toEndOf="@id/tv_media_Info_title_imdb"
                             app:layout_constraintTop_toTopOf="parent" />
@@ -220,9 +229,9 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/tv_title_year"
-                            android:textColor= "@color/main_text_color"
-                            android:textStyle="bold"
+                            android:textColor="@color/main_text_color"
                             android:textSize="20sp"
+                            android:textStyle="bold"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
@@ -248,8 +257,8 @@
                             android:layout_height="wrap_content"
                             android:text="@string/tv_title_director"
                             android:textColor="@color/main_text_color"
-                            android:textStyle="bold"
                             android:textSize="20sp"
+                            android:textStyle="bold"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
@@ -258,7 +267,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text=""
-                            android:textColor = "@color/main_text_color"
+                            android:textColor="@color/main_text_color"
                             android:textSize="20sp"
                             app:layout_constraintStart_toEndOf="@id/tv_media_Info_title_director"
                             app:layout_constraintTop_toTopOf="parent" />
@@ -275,8 +284,8 @@
                             android:layout_height="wrap_content"
                             android:text="@string/tv_title_actors"
                             android:textColor="@color/main_text_color"
-                            android:textStyle="bold"
                             android:textSize="20sp"
+                            android:textStyle="bold"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
@@ -287,10 +296,10 @@
                             android:text=""
                             android:textColor="@color/main_text_color"
                             android:textSize="20sp"
+                            app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toEndOf="@id/tv_media_Info_title_actors"
                             app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintWidth_default="wrap"/>
+                            app:layout_constraintWidth_default="wrap" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <androidx.constraintlayout.widget.ConstraintLayout
@@ -304,8 +313,8 @@
                             android:layout_height="wrap_content"
                             android:text="@string/tv_title_plot"
                             android:textColor="@color/main_text_color"
-                            android:textStyle="bold"
                             android:textSize="20sp"
+                            android:textStyle="bold"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
@@ -316,10 +325,10 @@
                             android:text=""
                             android:textColor="@color/main_text_color"
                             android:textSize="20sp"
+                            app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toEndOf="@id/tv_media_Info_title_plot"
                             app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintWidth_default="wrap"/>
+                            app:layout_constraintWidth_default="wrap" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <androidx.constraintlayout.widget.ConstraintLayout
@@ -333,8 +342,8 @@
                             android:layout_height="wrap_content"
                             android:text="@string/tv_title_awards"
                             android:textColor="@color/main_text_color"
-                            android:textStyle="bold"
                             android:textSize="20sp"
+                            android:textStyle="bold"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
@@ -360,8 +369,8 @@
                             android:layout_height="wrap_content"
                             android:text="@string/tv_title_genre"
                             android:textColor="@color/main_text_color"
-                            android:textStyle="bold"
                             android:textSize="20sp"
+                            android:textStyle="bold"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 

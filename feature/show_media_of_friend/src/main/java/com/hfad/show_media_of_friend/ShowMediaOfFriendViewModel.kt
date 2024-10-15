@@ -33,7 +33,7 @@ class ShowMediaOfFriendViewModel @Inject constructor(
                     _favouriteItems.value = convertJsonToFavouritesList(jsonData)
                 } else {
                     Log.d(
-                        "MyError42",
+                        "ShowMediaOfFriendViewModel",
                         "ShowMediaOfFriendViewModel fetchMediaOfFriend: No data found"
                     )
                 }
@@ -41,7 +41,7 @@ class ShowMediaOfFriendViewModel @Inject constructor(
 
             override fun onCancelled(error: DatabaseError) {
                 Log.d(
-                    "MyError42",
+                    "ShowMediaOfFriendViewModel",
                     "ShowMediaOfFriendViewModel fetchMediaOfFriend: ${error.message}"
                 )
             }

@@ -11,18 +11,18 @@ class ShowMediaOfFriendAdapter(
     var items: List<FavouriteItem>,
     private val onItemClick: (FavouriteItem) -> Unit
 ) : RecyclerView.Adapter<ShowMediaOfFriendAdapter.ShowMediaOfFriendViewHolder>() {
-    inner class ShowMediaOfFriendViewHolder(view: View) : RecyclerView.ViewHolder(view){
+    inner class ShowMediaOfFriendViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val imdbTextView: TextView = view.findViewById(R.id.imdbIdTextView)
 
         init {
-            view.setOnClickListener{
+            view.setOnClickListener {
                 onItemClick(items[adapterPosition])
             }
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ShowMediaOfFriendViewHolder {
-        val view  = LayoutInflater.from(parent.context)
+        val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.item_favourite, parent, false)
         return ShowMediaOfFriendViewHolder(view)
     }
@@ -35,6 +35,7 @@ class ShowMediaOfFriendAdapter(
     override fun getItemCount(): Int {
         return items.size
     }
+
     fun updateItems(newItems: List<FavouriteItem>) {
         items = newItems
         notifyDataSetChanged()

@@ -34,7 +34,7 @@ class ShowSeasonsFragment : BaseFragment(R.layout.fragment_show_seasons) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.seasons.collect{result->
+            viewModel.seasons.collect { result ->
                 result?.fold(
                     onSuccess = { seasons ->
                         binding.seasonsContainer.removeAllViews()
@@ -62,7 +62,10 @@ class ShowSeasonsFragment : BaseFragment(R.layout.fragment_show_seasons) {
                         }
                     },
                     onFailure = { error ->
-                        Log.e("myError42", "error in show seasons viewModel.seasons.collect $error")
+                        Log.e(
+                            "ShowSeasonsFragment",
+                            "error in show seasons viewModel.seasons.collect $error"
+                        )
                     }
 
                 )
@@ -71,6 +74,7 @@ class ShowSeasonsFragment : BaseFragment(R.layout.fragment_show_seasons) {
         val id = args.id
         viewModel.fetchSeasons(id)
     }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

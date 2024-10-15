@@ -1,6 +1,7 @@
 package com.hfad.search.model
 
 import com.google.gson.annotations.SerializedName
+
 data class SearchResponseById(
     @SerializedName("Actors")
     val actors: String,

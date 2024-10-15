@@ -10,7 +10,6 @@
         android:name="com.hfad.show_episodes.ShowSeasonsFragment"
         android:label="fragment_show_seasons"
         tools:layout="@layout/fragment_show_seasons">
-
         <argument
             android:name="id"
             app:argType="string"

@@ -9,7 +9,6 @@
     android:gravity="center_horizontal"
     android:background="@color/background_color"
     tools:context=".FriendsListFragment">
-
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
@@ -29,15 +28,12 @@
             android:textColor="@color/main_text_color"
             android:textSize="24sp"
             android:padding="8dp"/>
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="end|bottom"
             android:orientation="horizontal"
             android:padding="16dp">
-
-
             <ImageButton
                 android:id="@+id/btnLogOut"
                 android:layout_width="wrap_content"
@@ -46,9 +42,7 @@
                 android:padding="8dp"
                 android:paddingLeft="10dp"
                 android:layout_marginEnd="20dp"
-
                 android:src="@drawable/outline_logout_24" />
-
             <ImageButton
                 android:id="@+id/friendRequestsTextView"
                 android:layout_width="wrap_content"
@@ -57,7 +51,6 @@
                 android:padding="8dp"
                 android:layout_marginEnd="20dp"
                 android:src="@drawable/outline_group_add_24" />
-
             <ImageButton
                 android:id="@+id/btnSearchFriend"
                 android:layout_width="wrap_content"
@@ -68,8 +61,6 @@
                 android:src="@drawable/outline_person_search_24" />
         </LinearLayout>
     </LinearLayout>
-
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"

@@ -12,7 +12,6 @@
 
 ### Technologies used:
 - **Kotlin** for modern, efficient development.
-- **Jetpack Compose** for building some UI components.
 - **Room Database** for local storage of favorite movies and shows.
 - **Firebase Realtime Database** for real-time data synchronization with friends.
 - **Retrofit** for network requests and interaction with the OMDb API.
@@ -35,7 +34,6 @@
 
 ### Использованные технологии:
 - **Kotlin** для современного и эффективного программирования.
-- **Jetpack Compose** для построения некоторых компонентов пользовательского интерфейса.
 - **Room Database** для локального хранения избранных фильмов и сериалов.
 - **Firebase Realtime Database** для синхронизации данных с друзьями в реальном времени.
 - **Retrofit** для выполнения сетевых запросов и взаимодействия с OMDb API.

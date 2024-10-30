@@ -1,6 +1,6 @@
 # MovieSearch!
+MovieSearch! is a mobile application for movie and TV show enthusiasts that allows users to search for information using the OMDb API. The app provides features for adding movies and TV shows to favorites, viewing detailed episode information, and sharing movies with friends.
 
-**MovieSearch!** is a mobile application for movie and TV show enthusiasts that allows users to search for information using the OMDb API. The app provides features for adding movies and TV shows to favorites, viewing detailed episode information, and sharing movies with friends.
 
 ### Features:
 - **Movie and TV show search** using the OMDb API.

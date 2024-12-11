@@ -7,7 +7,7 @@
     app:startDestination="@id/posterFragment">
     <fragment
         android:id="@+id/posterFragment"
-        android:name="com.hfad.poster.PosterFragment"
+        android:name="com.sbaygildin.poster.PosterFragment"
         android:label="fragment_poster"
         tools:layout="@layout/fragment_poster">
         <argument

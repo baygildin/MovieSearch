@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace 'com.hfad.core'
+    namespace 'com.sbaygildin.core'
     compileSdk 34
 
     defaultConfig {

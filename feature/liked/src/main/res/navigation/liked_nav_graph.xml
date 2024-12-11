@@ -7,7 +7,7 @@
     app:startDestination="@id/likedFragment">
     <fragment
         android:id="@+id/likedFragment"
-        android:name="com.hfad.liked.LikedFragment"
+        android:name="com.sbaygildin.liked.LikedFragment"
         android:label="fragment_liked"
         tools:layout="@layout/fragment_liked">
     </fragment>

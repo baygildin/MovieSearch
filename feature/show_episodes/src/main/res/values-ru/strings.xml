@@ -7,4 +7,5 @@
     <string name="tv_title_director">Режиссер:\u00A0</string>
     <string name="tv_title_actors">Актеры:\u00A0</string>
     <string name="tv_title_plot">Сюжет:\u00A0</string>
+    <string name="seasons_text">(%1$s) %2$d</string>
 </resources>

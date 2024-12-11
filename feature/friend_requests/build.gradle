@@ -7,7 +7,7 @@ plugins {
 }
 
 android {
-    namespace 'com.hfad.friend_requests'
+    namespace 'com.sbaygildin.friend_requests'
     compileSdk 34
     buildFeatures {
         viewBinding true

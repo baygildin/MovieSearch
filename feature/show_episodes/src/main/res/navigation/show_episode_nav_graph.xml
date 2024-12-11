@@ -7,7 +7,7 @@
     app:startDestination="@id/showEpisodeFragment">
     <fragment
         android:id="@+id/showEpisodeFragment"
-        android:name="com.hfad.show_episodes.ShowEpisodeFragment"
+        android:name="com.sbaygildin.show_episodes.ShowEpisodeFragment"
         android:label="fragment_show_episode"
         tools:layout="@layout/fragment_show_episode">
         <argument

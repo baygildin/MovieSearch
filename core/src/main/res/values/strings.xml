@@ -2,4 +2,6 @@
 
 <resources>
     <string name="txt_app_title">"MovieSearch!"</string>
+    <string name="menu_favorites">Favorites</string>
+    <string name="menu_friends">Friends</string>
 </resources>

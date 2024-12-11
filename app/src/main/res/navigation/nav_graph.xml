@@ -20,12 +20,12 @@
 
     <fragment
         android:id="@+id/searchFragment"
-        android:name="com.hfad.search.SearchFragment"
+        android:name="com.sbaygildin.search.SearchFragment"
         android:label="fragment_search"
         tools:layout="@layout/fragment_search">
         <deepLink
             android:id="@+id/deepLinksearchFragment"
-            app:uri="android-app://com.hfad.search/searchFragment" />
+            app:uri="android-app://com.sbaygildin.search/searchFragment" />
         <action
             android:id="@+id/navigateSearchToLogin"
             app:destination="@id/loginFragment" />
@@ -41,12 +41,12 @@
 
     <fragment
         android:id="@+id/mediaDetailsFragment"
-        android:name="com.hfad.media_details.MediaDetailsFragment"
+        android:name="com.sbaygildin.media_details.MediaDetailsFragment"
         android:label="fragment_media_details"
         tools:layout="@layout/fragment_media_details">
         <deepLink
             android:id="@+id/deepLinkmediaDetailsFragment"
-            app:uri="android-app://com.hfad.media_details/mediaDetailsFragment" />
+            app:uri="android-app://com.sbaygildin.media_details/mediaDetailsFragment" />
         <action
             android:id="@+id/navigateMediaDetailsToLiked"
             app:destination="@id/likedFragment"/>
@@ -83,12 +83,12 @@
     </fragment>
     <fragment
         android:id="@+id/posterFragment"
-        android:name="com.hfad.poster.PosterFragment"
+        android:name="com.sbaygildin.poster.PosterFragment"
         android:label="fragment_poster"
         tools:layout="@layout/fragment_poster">
         <deepLink
             android:id="@+id/deepLinkPosterFragment"
-            app:uri="android-app://com.hfad.poster/PosterFragment" />
+            app:uri="android-app://com.sbaygildin.poster/PosterFragment" />
         <action
             android:id="@+id/navigatePosterToMediaDetailsWithId"
             app:destination="@id/mediaDetailsFragment">
@@ -101,12 +101,12 @@
 
     <fragment
         android:id="@+id/showSeasonsFragment"
-        android:name="com.hfad.show_episodes.ShowSeasonsFragment"
+        android:name="com.sbaygildin.show_episodes.ShowSeasonsFragment"
         android:label="Show Seasons"
         tools:layout="@layout/fragment_show_seasons">
         <deepLink
             android:id="@+id/deepLinkShowSeasonFragment"
-            app:uri="android-app://com.hfad.poster/ShowSeasonFragment" />
+            app:uri="android-app://com.sbaygildin.poster/ShowSeasonFragment" />
         <action
             android:id="@+id/navigateShowSeasonsToLiked"
             app:destination="@id/likedFragment" />
@@ -134,12 +134,12 @@
 
     <fragment
         android:id="@+id/showEpisodesFragment"
-        android:name="com.hfad.show_episodes.ShowEpisodesFragment"
+        android:name="com.sbaygildin.show_episodes.ShowEpisodesFragment"
         android:label="Show Episodes"
         tools:layout="@layout/fragment_show_episodes">
         <deepLink
             android:id="@+id/deepLinkShowEpisodesFragment"
-            app:uri="android-app://com.hfad.poster/ShowEpisodesFragment" />
+            app:uri="android-app://com.sbaygildin.poster/ShowEpisodesFragment" />
         <action
             android:id="@+id/actionShowepisodestoFriendsListFragment"
             app:destination="@id/friendsListFragment" />
@@ -169,12 +169,12 @@
 
     <fragment
         android:id="@+id/showEpisodeFragment"
-        android:name="com.hfad.show_episodes.ShowEpisodeFragment"
+        android:name="com.sbaygildin.show_episodes.ShowEpisodeFragment"
         android:label="show_episode"
         tools:layout="@layout/fragment_show_episode">
         <deepLink
             android:id="@+id/deepLinkShowEpisodeFragment"
-            app:uri="android-app://com.hfad.poster/ShowEpisodeFragment" />
+            app:uri="android-app://com.sbaygildin.poster/ShowEpisodeFragment" />
         <action
             android:id="@+id/navigateShowEpisodeToLiked"
             app:destination="@id/likedFragment" />
@@ -188,12 +188,12 @@
 
     <fragment
         android:id="@+id/likedFragment"
-        android:name="com.hfad.liked.LikedFragment"
+        android:name="com.sbaygildin.liked.LikedFragment"
         android:label="LikedFragment"
         tools:layout="@layout/fragment_liked">
         <deepLink
             android:id="@+id/deepLinkLikedFragment"
-            app:uri="android-app://com.hfad.liked/LikedFragment" />
+            app:uri="android-app://com.sbaygildin.liked/LikedFragment" />
         <action
             android:id="@+id/navigateLikedToSearchFriend"
             app:destination="@+id/searchFriendFragment" />
@@ -219,12 +219,12 @@
 
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.hfad.movie_search.LoginFragment"
+        android:name="com.sbaygildin.movie_search.LoginFragment"
         android:label="LoginFragment"
         tools:layout="@layout/fragment_login">
         <deepLink
             android:id="@+id/deepLinkLoginFragment"
-            app:uri="android-app://com.hfad.movie_search/LoginFragment" />
+            app:uri="android-app://com.sbaygildin.movie_search/LoginFragment" />
 
         <action
             android:id="@+id/actionLoginToLikedFragment"
@@ -235,7 +235,7 @@
     </fragment>
     <fragment
         android:id="@+id/searchFriendFragment"
-        android:name="com.hfad.search_friend.SearchFriendFragment"
+        android:name="com.sbaygildin.search_friend.SearchFriendFragment"
         android:label="SearchFriend"
         tools:layout="@layout/fragment_search_friend">
         <action
@@ -249,17 +249,17 @@
             app:destination="@id/loginFragment" />
         <deepLink
             android:id="@+id/deepLinkSearchFriendFragment"
-            app:uri="android-app://com.hfad.liked/SearchFriendFragment" />
+            app:uri="android-app://com.sbaygildin.liked/SearchFriendFragment" />
     </fragment>
 
     <fragment
         android:id="@+id/friendsListFragment"
-        android:name="com.hfad.friends_list.FriendsListFragment"
+        android:name="com.sbaygildin.friends_list.FriendsListFragment"
         android:label="FriendsListFragment"
         tools:layout="@layout/fragment_friends_list">
         <deepLink
             android:id="@+id/deepLinkFriendsListFragment"
-            app:uri="android-app://com.hfad.liked/FriendsListFragment" />
+            app:uri="android-app://com.sbaygildin.liked/FriendsListFragment" />
         <action
             android:id="@+id/actionFriendListToLikedFragment"
             app:destination="@id/likedFragment" />
@@ -286,7 +286,7 @@
     </fragment>
     <fragment
         android:id="@+id/showMediaOfFriendFragment"
-        android:name="com.hfad.show_media_of_friend.ShowMediaOfFriendFragment"
+        android:name="com.sbaygildin.show_media_of_friend.ShowMediaOfFriendFragment"
         android:label="ShowMediaOfFriendFragment"
         tools:layout="@layout/fragment_show_media_of_friend">
         <action
@@ -294,7 +294,7 @@
             app:destination="@id/likedFragment" />
         <deepLink
             android:id="@+id/deepLinkShowMediaOfFriendFragment"
-            app:uri="android-app://com.hfad.liked/ShowMediaOfFriendFragment" />
+            app:uri="android-app://com.sbaygildin.liked/ShowMediaOfFriendFragment" />
         <action
             android:id="@+id/action_showMediaOfFriend_to_FriendsListFragment"
             app:destination="@id/friendsListFragment" />
@@ -310,7 +310,7 @@
 
     <fragment
         android:id="@+id/friendRequestsFragment"
-        android:name="com.hfad.friend_requests.FriendRequestsFragment"
+        android:name="com.sbaygildin.friend_requests.FriendRequestsFragment"
         android:label="Friend Requests"
         tools:layout="@layout/fragment_friend_requests">
         <action

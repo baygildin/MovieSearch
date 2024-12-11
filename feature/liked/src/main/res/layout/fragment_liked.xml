@@ -8,7 +8,7 @@
     android:orientation="vertical"
     android:gravity="center_horizontal"
     android:background="@color/background_color"
-    tools:context="com.hfad.liked.LikedFragment">
+    tools:context="com.sbaygildin.liked.LikedFragment">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -38,6 +38,7 @@
                 android:layout_height="24dp"
                 android:layout_alignParentStart="true"
                 android:layout_centerVertical="true"
+                android:contentDescription="TODO"
                 android:src="@drawable/outline_arrow_downward_24"
                 app:layout_constraintEnd_toStartOf="@+id/abc_icon"
                 app:layout_constraintTop_toTopOf="parent"
@@ -48,6 +49,7 @@
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:layout_centerVertical="true"
+                android:contentDescription="TODO"
                 android:src="@drawable/baseline_abc_24"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -70,12 +72,14 @@
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_marginEnd="8dp"
+            android:contentDescription="TODO"
             android:src="@drawable/outline_cloud_upload_24" />
 
         <ImageView
             android:id="@+id/btn_download_from_cloud"
             android:layout_width="24dp"
             android:layout_height="24dp"
+            android:contentDescription="TODO"
             android:src="@drawable/outline_cloud_download_24"/>
     </LinearLayout>
 

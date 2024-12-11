@@ -9,4 +9,9 @@
     <string name="btn_unfriend">Unfriend</string>
     <string name="friends_list_title">Friends</string>
     <string name="toast_user_log_out">User logged out successfully</string>
+    <string name="button_log_out">button log out</string>
+    <string name="button_search_friend">button search friend</string>
+    <string name="friend_requests">friend requests</string>
+    <string name="no_friends_message">You have no friends added yet</string>
+    <string name="scroll_view_content_description">List of friends</string>
 </resources>

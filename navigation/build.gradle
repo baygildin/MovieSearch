@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace 'com.hfad.navigation'
+    namespace 'com.sbaygildin.navigation'
     compileSdk 34
     defaultConfig {
         minSdk 26

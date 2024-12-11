@@ -7,7 +7,7 @@ plugins {
 }
 
 android {
-    namespace 'com.hfad.search'
+    namespace 'com.sbaygildin.search'
     compileSdk 34
     buildFeatures {
         compose true

@@ -7,7 +7,7 @@
     android:background="@color/background_color"
     android:gravity="center_horizontal"
     android:orientation="vertical"
-    tools:context="com.hfad.media_details.MediaDetailsFragment">
+    tools:context="com.sbaygildin.media_details.MediaDetailsFragment">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -137,9 +137,9 @@
                         android:layout_width="50dp"
                         android:layout_height="50dp"
                         android:layout_marginEnd="8dp"
+                        android:contentDescription="TODO"
                         android:paddingEnd="20dp"
                         android:scaleType="centerInside"
-                        android:paddingEnd="20dp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent"

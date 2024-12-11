@@ -9,4 +9,9 @@
     <string name="btn_unfriend">Удалить из друзей</string>
     <string name="friends_list_title">Друзья</string>
     <string name="toast_user_log_out">Пользователь успешно вышел</string>
+    <string name="button_log_out">Кнопка выхода из аккаунта</string>
+    <string name="button_search_friend">Кнопка поиска друзей</string>
+    <string name="friend_requests">Запросы в \"друзья\"</string>
+    <string name="no_friends_message">У вас еще нет добавленных друзей</string>
+    <string name="scroll_view_content_description">Список друзей</string>
 </resources>

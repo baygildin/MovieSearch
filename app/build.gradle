@@ -9,13 +9,13 @@ plugins {
 }
 
 android {
-    namespace 'com.hfad.movie_search'
+    namespace 'com.sbaygildin.movie_search'
     compileSdk 34
     buildFeatures {
         viewBinding true
     }
     defaultConfig {
-        applicationId "com.hfad.movie_search"
+        applicationId "com.sbaygildin.movie_search"
         minSdk 26
         targetSdk 34
         versionCode 2
@@ -26,7 +26,7 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }

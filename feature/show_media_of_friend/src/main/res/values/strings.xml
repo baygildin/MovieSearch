@@ -7,5 +7,5 @@
     <string name="toast_sent_to_cloud">Data has been sent to the cloud</string>
     <string name="toast_empty_edit_text_value">Please enter your friend\'s email</string>
     <string name="txt_friend_fav_media">Friend`s favourite media</string>
-    <string name="imdb_text">%1s$s (%2$s)</string>
+    <string name="imdb_text">%1$s (%2$s)</string>
 </resources>

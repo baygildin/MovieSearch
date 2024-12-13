@@ -7,5 +7,6 @@
     <string name="toast_sent_to_cloud">Данные отправлены в облако</string>
     <string name="toast_empty_edit_text_value">Пожалуйста, введите адрес электронной почты вашего друга</string>
     <string name="txt_friend_fav_media">Любимые медиа друга</string>
-    <string name="imdb_text">%1s$s (%2$s)</string>
+    <string name="imdb_text">%1$s (%2$s)</string>
+
 </resources>

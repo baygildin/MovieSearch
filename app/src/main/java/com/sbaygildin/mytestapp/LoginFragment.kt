@@ -33,7 +33,7 @@ class LoginFragment : Fragment() {
         binding = FragmentLoginBinding.inflate(inflater, container, false)
 
         binding.loginButton.setOnClickListener {
-            val email = binding.emailEditText.text.toString().lowercase()
+            val email = binding.emailEditText.text.toString().trim().lowercase()
             val password = binding.passwordEditText.text.toString()
             if (checkIsTextBlank(email, password)) {
                 Toast.makeText(
@@ -48,7 +48,7 @@ class LoginFragment : Fragment() {
             }
         }
         binding.registerButton.setOnClickListener {
-            val email = binding.emailEditText.text.toString().lowercase()
+            val email = binding.emailEditText.text.toString().trim().lowercase()
             val password = binding.passwordEditText.text.toString()
             if (checkIsTextBlank(email, password)) {
                 Toast.makeText(
@@ -64,7 +64,7 @@ class LoginFragment : Fragment() {
         }
 
         binding.resetPasswordButton.setOnClickListener {
-            val email = binding.emailEditText.text.toString().lowercase()
+            val email = binding.emailEditText.text.toString().trim().lowercase()
             if (email.isEmpty()) {
                 Toast.makeText(
                     context,

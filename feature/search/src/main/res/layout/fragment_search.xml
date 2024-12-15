@@ -7,7 +7,7 @@
     android:orientation="vertical"
     android:gravity="center_horizontal"
     android:background="@color/background_color"
-    tools:context="com.sbaygildin.search.SearchFragment">
+    tools:context="com.baygildins.search.SearchFragment">
     <androidx.compose.ui.platform.ComposeView
         android:id="@+id/compose_view"
         android:layout_width="match_parent"

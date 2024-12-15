@@ -7,7 +7,7 @@ plugins {
 }
 
 android {
-    namespace 'com.sbaygildin.poster'
+    namespace 'com.baygildins.poster'
     compileSdk 34
     buildFeatures {
         viewBinding true

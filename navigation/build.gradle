@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace 'com.sbaygildin.navigation'
+    namespace 'com.baygildins.navigation'
     compileSdk 34
     defaultConfig {
         minSdk 26

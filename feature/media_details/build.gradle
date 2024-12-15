@@ -7,7 +7,7 @@ plugins {
 }
 
 android {
-    namespace 'com.sbaygildin.media_details'
+    namespace 'com.baygildins.media_details'
     compileSdk 34
     buildFeatures {
         viewBinding true

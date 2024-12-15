@@ -7,7 +7,7 @@
     app:startDestination="@id/ShowSeasonsFragment">
     <fragment
         android:id="@+id/ShowSeasonsFragment"
-        android:name="com.sbaygildin.show_episodes.ShowSeasonsFragment"
+        android:name="com.baygildins.show_episodes.ShowSeasonsFragment"
         android:label="fragment_show_seasons"
         tools:layout="@layout/fragment_show_seasons">
         <argument

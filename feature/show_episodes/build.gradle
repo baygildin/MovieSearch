@@ -7,7 +7,7 @@ plugins {
 }
 
 android {
-    namespace 'com.sbaygildin.show_episodes'
+    namespace 'com.baygildins.show_episodes'
     compileSdk 34
     buildFeatures {
         viewBinding true

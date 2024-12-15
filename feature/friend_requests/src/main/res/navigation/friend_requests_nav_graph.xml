@@ -7,7 +7,7 @@
     app:startDestination="@id/friendRequestsFragment">
     <fragment
         android:id="@+id/friendRequestsFragment"
-        android:name="com.sbaygildin.friend_requests.FriendRequestsFragment"
+        android:name="com.baygildins.friend_requests.FriendRequestsFragment"
         android:label="fragment_friend_requests"
         tools:layout="@layout/fragment_friend_requests">
     </fragment>

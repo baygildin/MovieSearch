@@ -7,7 +7,7 @@ plugins {
 }
 
 android {
-    namespace 'com.sbaygildin.liked'
+    namespace 'com.baygildins.liked'
     compileSdk 34
     buildFeatures {
         viewBinding true

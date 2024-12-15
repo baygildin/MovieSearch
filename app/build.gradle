@@ -9,13 +9,13 @@ plugins {
 }
 
 android {
-    namespace 'com.sbaygildin.movie_search'
+    namespace 'com.baygildins.movie_search'
     compileSdk 34
     buildFeatures {
         viewBinding true
     }
     defaultConfig {
-        applicationId "com.sbaygildin.movie_search"
+        applicationId "com.baygildins.movie_search"
         minSdk 26
         targetSdk 34
         versionCode 2

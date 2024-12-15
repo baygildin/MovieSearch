@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace 'com.sbaygildin.core'
+    namespace 'com.baygildins.core'
     compileSdk 34
 
     defaultConfig {

@@ -24,6 +24,7 @@ class MainActivity : AppCompatActivity(), com.baygildins.navigation.Navigator,
     MenuItemClickListener {
     private lateinit var auth: FirebaseAuth
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
         installSplashScreen()
         setContentView(R.layout.activity_main)

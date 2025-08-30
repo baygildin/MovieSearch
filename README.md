@@ -11,7 +11,6 @@ MovieSearch! is a mobile application for movie and TV show enthusiasts that allo
 - **Multiplatform support**: Available on Android devices.
 
 ### Technologies used:
-- **Kotlin** for modern, efficient development.
 - **Room Database** for local storage of favorite movies and shows.
 - **Firebase Realtime Database** for real-time data synchronization with friends.
 - **Retrofit** for network requests and interaction with the OMDb API.
@@ -33,7 +32,6 @@ MovieSearch! is a mobile application for movie and TV show enthusiasts that allo
 - **Поддержка Android**: Приложение доступно для устройств на Android.
 
 ### Использованные технологии:
-- **Kotlin** для современного и эффективного программирования.
 - **Room Database** для локального хранения избранных фильмов и сериалов.
 - **Firebase Realtime Database** для синхронизации данных с друзьями в реальном времени.
 - **Retrofit** для выполнения сетевых запросов и взаимодействия с OMDb API.

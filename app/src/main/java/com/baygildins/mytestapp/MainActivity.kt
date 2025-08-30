@@ -3,7 +3,6 @@ package com.baygildins.movie_search
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import androidx.core.view.WindowCompat
 import androidx.navigation.findNavController
 import com.baygildins.core.MenuItemClickListener
 import com.baygildins.friend_requests.FriendRequestsFragmentDirections
@@ -25,7 +24,6 @@ class MainActivity : AppCompatActivity(), com.baygildins.navigation.Navigator,
     MenuItemClickListener {
     private lateinit var auth: FirebaseAuth
     override fun onCreate(savedInstanceState: Bundle?) {
-        WindowCompat.setDecorFitsSystemWindows(window, true)
         super.onCreate(savedInstanceState)
         installSplashScreen()
         setContentView(R.layout.activity_main)

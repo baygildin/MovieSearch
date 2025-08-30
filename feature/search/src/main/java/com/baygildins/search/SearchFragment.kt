@@ -6,6 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.updatePadding
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.baygildins.search.databinding.FragmentSearchBinding
@@ -41,8 +44,13 @@ class SearchFragment : Fragment() {
                 }
             }
         }
-        val view = binding.root
-        return view
+        val root = binding.root
+        ViewCompat.setOnApplyWindowInsetsListener(root) { v, insets ->
+            val bars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.updatePadding(top = bars.top, bottom = bars.bottom)
+            insets
+        }
+        return root
     }
 
     override fun onDestroyView() {

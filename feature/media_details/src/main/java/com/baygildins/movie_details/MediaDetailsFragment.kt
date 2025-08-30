@@ -12,6 +12,9 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.updatePadding
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
@@ -39,6 +42,11 @@ class MediaDetailsFragment : BaseFragment(R.layout.fragment_media_details) {
     ): View? {
         _binding = FragmentMediaDetailsBinding.inflate(inflater, container, false)
         val view = binding.root
+        ViewCompat.setOnApplyWindowInsetsListener(view) { v, insets ->
+            val bars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.updatePadding(top = bars.top, bottom = bars.bottom)
+            insets
+        }
         val shimmerFrameLayout = binding.shimmerFrame
         val realContent = binding.realContent
         val chosenMovieId = args.id

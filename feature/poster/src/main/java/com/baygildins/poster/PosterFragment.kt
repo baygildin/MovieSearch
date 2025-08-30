@@ -5,6 +5,9 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.updatePadding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
@@ -31,7 +34,12 @@ class PosterFragment : Fragment() {
     ): View {
         _binding = FragmentPosterBinding.inflate(inflater, container, false)
         val view = binding.root
-        var chosenMovieId = args.id
+        ViewCompat.setOnApplyWindowInsetsListener(view) { v, insets ->
+            val bars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.updatePadding(top = bars.top, bottom = bars.bottom)
+            insets
+        }
+        val chosenMovieId = args.id
         lifecycleScope.launch {
             try {
                 val result = omdbApi.searchById(chosenMovieId)

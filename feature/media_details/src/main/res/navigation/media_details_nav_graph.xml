@@ -7,7 +7,7 @@
     app:startDestination="@id/mediaDetailsFragment">
     <fragment
         android:id="@+id/mediaDetailsFragment"
-        android:name="com.sbaygildin.media_details.MediaDetailsFragment"
+        android:name="com.baygildins.media_details.MediaDetailsFragment"
         android:label="fragment_media_details"
         tools:layout="@layout/fragment_media_details">
         <argument

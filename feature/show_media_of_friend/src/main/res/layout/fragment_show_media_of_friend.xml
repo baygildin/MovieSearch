@@ -7,7 +7,7 @@
     android:background="@color/background_color"
     android:gravity="center_horizontal"
     android:orientation="vertical"
-    tools:context="com.sbaygildin.show_media_of_friend.ShowMediaOfFriendFragment">
+    tools:context="com.baygildins.show_media_of_friend.ShowMediaOfFriendFragment">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"

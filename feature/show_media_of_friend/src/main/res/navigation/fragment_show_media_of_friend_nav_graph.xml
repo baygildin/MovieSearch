@@ -6,7 +6,7 @@
     app:startDestination="@id/ShowMediaOfFriendFragment">
     <fragment
         android:id="@+id/ShowMediaOfFriendFragment"
-        android:name="com.sbaygildin.show_media_of_friend.ShowMediaOfFriendFragment"
+        android:name="com.baygildins.show_media_of_friend.ShowMediaOfFriendFragment"
         android:label="fragment_show_media_of_friend"
         tools:layout="@layout/fragment_show_media_of_friend">
         <argument

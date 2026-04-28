@@ -1,86 +1,99 @@
 plugins {
-    id 'com.android.application'
-    id 'org.jetbrains.kotlin.android'
-    id 'kotlin-kapt'
-    id("org.jetbrains.kotlin.plugin.serialization") version "1.9.10"
-    id 'com.google.dagger.hilt.android'
-    id 'androidx.navigation.safeargs.kotlin'
-    id 'com.google.gms.google-services'
+    alias(libs.plugins.android.application)
+    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.kapt)
+    alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.navigation.safeargs)
+    alias(libs.plugins.google.services)
+    alias(libs.plugins.hilt.android)
 }
 
 android {
-    namespace 'com.baygildins.movie_search'
-    compileSdk 35
-    buildFeatures {
-        viewBinding true
-    }
+    namespace 'com.baygildins.search'
+    compileSdk libs.versions.compileSdk.get().toInteger()
+
     defaultConfig {
-        applicationId "com.baygildins.movie_search"
-        minSdk 26
-        targetSdk 35
-        versionCode 4
-        versionName "1.3"
-        vectorDrawables.useSupportLibrary = true
+        applicationId "com.baygildins.search"
+        minSdk libs.versions.minSdk.get().toInteger()
+        targetSdk libs.versions.targetSdk.get().toInteger()
+
+        // Поставь свой текущий versionCode + 1
+        versionCode 5
+        versionName "1.0.5"
+
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    buildFeatures {
+        viewBinding true
+        dataBinding true
+        compose true
+    }
+
+    // Для Kotlin 2.x это больше не нужно:
+    // composeOptions {
+    //     kotlinCompilerExtensionVersion ...
+    // }
+
     buildTypes {
         release {
-            minifyEnabled true
+            minifyEnabled false
+            shrinkResources false
+
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+
+        debug {
+            minifyEnabled false
         }
     }
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
+
     kotlinOptions {
-        jvmTarget = '1.8'
+        jvmTarget = '17'
     }
 }
-kapt {
-    correctErrorTypes true
-}
+
 dependencies {
-    implementation 'androidx.core:core-splashscreen:1.0.1'
-    implementation 'androidx.core:core-ktx:1.13.1'
-    implementation 'androidx.appcompat:appcompat:1.7.0'
-    implementation 'com.google.android.material:material:1.11.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.8.4'
-    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.4'
-    implementation 'androidx.fragment:fragment-ktx:1.8.2'
+    implementation project(':core')
     implementation project(':data')
-    testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
-    implementation 'com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:1.0.0'
-    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
-    implementation 'com.squareup.okhttp3:okhttp:4.11.0'
-    implementation 'io.coil-kt:coil-compose:2.4.0'
-    implementation 'org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.0'
-    implementation project(":feature:search")
-    implementation project(":feature:show_episodes")
-    implementation project(":feature:media_details")
-    implementation project(":feature:poster")
-    implementation project(':feature:liked')
+    implementation project(':navigation')
+
     implementation project(':feature:friend_requests')
     implementation project(':feature:friends_list')
+    implementation project(':feature:liked')
+    implementation project(':feature:media_details')
+    implementation project(':feature:poster')
     implementation project(':feature:search_friend')
+    implementation project(':feature:show_episodes')
     implementation project(':feature:show_media_of_friend')
-    implementation project(':core')
-    implementation project(":navigation")
-    implementation "androidx.lifecycle:lifecycle-runtime:2.6.1"
-    def nav_version = "2.7.7"
-    implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
-    implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
-    def hilt_version = "2.48"
-    implementation "com.google.dagger:hilt-android:$hilt_version"
-    kapt "com.google.dagger:hilt-compiler:$hilt_version"
-    implementation platform('com.google.firebase:firebase-bom:33.1.1')
-    implementation 'com.google.firebase:firebase-database'
-    implementation 'com.google.firebase:firebase-auth-ktx'
+
+    implementation libs.androidx.core.ktx
+    implementation libs.androidx.appcompat
+    implementation libs.material
+    implementation libs.constraintlayout
+
+    implementation libs.lifecycle.runtime.ktx
+    implementation libs.lifecycle.livedata.ktx
+    implementation libs.lifecycle.viewmodel.ktx
+
+    implementation libs.navigation.ui.ktx
+    implementation libs.navigation.fragment.ktx
+
+    implementation platform(libs.firebase.bom)
+    implementation libs.firebase.auth
+    implementation libs.firebase.database
+    implementation libs.firebase.messaging
+    implementation libs.firebase.analytics
+
+    implementation libs.hilt.android
+    kapt libs.hilt.compiler
+
+    testImplementation libs.junit
+    androidTestImplementation libs.androidx.test.junit
+    androidTestImplementation libs.androidx.test.espresso.core
 }
-apply plugin: 'androidx.navigation.safeargs.kotlin'

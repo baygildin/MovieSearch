@@ -8,7 +8,7 @@ plugins {
 apply plugin: 'androidx.navigation.safeargs.kotlin'
 android {
     namespace 'com.baygildins.network'
-    compileSdk 34
+    compileSdk 35
     buildFeatures {
         viewBinding true
     }

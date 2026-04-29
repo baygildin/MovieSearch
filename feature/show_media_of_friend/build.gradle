@@ -8,7 +8,7 @@ plugins {
 
 android {
     namespace 'com.baygildins.show_media_of_friend'
-    compileSdk 34
+    compileSdk 35
     buildFeatures {
         viewBinding true
         dataBinding true

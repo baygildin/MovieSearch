@@ -8,7 +8,7 @@ plugins {
 
 android {
     namespace 'com.baygildins.search'
-    compileSdk 34
+    compileSdk 35
     buildFeatures {
         compose true
         viewBinding true

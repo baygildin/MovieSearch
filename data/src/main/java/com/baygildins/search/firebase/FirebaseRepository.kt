@@ -3,13 +3,13 @@ package com.baygildins.search.firebase
 
 import android.util.Log
 import com.baygildins.search.utils.encodeEmail
+import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
-import com.google.firebase.database.ktx.database
-import com.google.firebase.ktx.Firebase
+import com.google.firebase.database.database
 import javax.inject.Inject
 import javax.inject.Singleton
 

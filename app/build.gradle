@@ -1,19 +1,20 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.kotlin.kapt)
+    alias(libs.plugins.ksp)
     alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.navigation.safeargs)
     alias(libs.plugins.google.services)
     alias(libs.plugins.hilt.android)
 }
 
 android {
-    namespace 'com.baygildins.search'
+    namespace 'com.baygildins.movie_search'
     compileSdk libs.versions.compileSdk.get().toInteger()
 
     defaultConfig {
-        applicationId "com.baygildins.search"
+        applicationId "com.baygildins.movie_search"
         minSdk libs.versions.minSdk.get().toInteger()
         targetSdk libs.versions.targetSdk.get().toInteger()
 
@@ -30,11 +31,6 @@ android {
         compose true
     }
 
-    // Для Kotlin 2.x это больше не нужно:
-    // composeOptions {
-    //     kotlinCompilerExtensionVersion ...
-    // }
-
     buildTypes {
         release {
             minifyEnabled false
@@ -49,49 +45,59 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_17
-        targetCompatibility JavaVersion.VERSION_17
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 
     kotlinOptions {
         jvmTarget = '17'
     }
 }
-
 dependencies {
-    implementation project(':core')
     implementation project(':data')
+    implementation project(':core')
     implementation project(':navigation')
 
+    implementation project(":feature:search")
+    implementation project(":feature:show_episodes")
+    implementation project(":feature:media_details")
+    implementation project(":feature:poster")
+    implementation project(':feature:liked')
     implementation project(':feature:friend_requests')
     implementation project(':feature:friends_list')
-    implementation project(':feature:liked')
-    implementation project(':feature:media_details')
-    implementation project(':feature:poster')
     implementation project(':feature:search_friend')
-    implementation project(':feature:show_episodes')
     implementation project(':feature:show_media_of_friend')
 
+    implementation libs.androidx.core.splashscreen
     implementation libs.androidx.core.ktx
     implementation libs.androidx.appcompat
     implementation libs.material
     implementation libs.constraintlayout
+    implementation libs.androidx.legacy.support.v4
 
-    implementation libs.lifecycle.runtime.ktx
     implementation libs.lifecycle.livedata.ktx
     implementation libs.lifecycle.viewmodel.ktx
+    implementation libs.lifecycle.runtime.ktx
+
+    implementation libs.androidx.fragment.ktx
 
     implementation libs.navigation.ui.ktx
     implementation libs.navigation.fragment.ktx
 
-    implementation platform(libs.firebase.bom)
-    implementation libs.firebase.auth
-    implementation libs.firebase.database
-    implementation libs.firebase.messaging
-    implementation libs.firebase.analytics
+    implementation libs.retrofit
+    implementation libs.retrofit.kotlinx.serialization.converter
+    implementation libs.okhttp
+    implementation libs.okhttp.logging
+    implementation libs.kotlinx.serialization.json
+
+    implementation libs.coil.compose
 
     implementation libs.hilt.android
-    kapt libs.hilt.compiler
+    ksp libs.hilt.compiler
+
+    implementation platform(libs.firebase.bom)
+    implementation libs.firebase.database
+    implementation libs.firebase.auth
 
     testImplementation libs.junit
     androidTestImplementation libs.androidx.test.junit
